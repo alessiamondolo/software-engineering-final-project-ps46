@@ -1,11 +1,5 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of BuildingCard.
@@ -53,30 +47,19 @@ public class BuildingCard extends Card {
 	 */
 	public Integer obtainCouncilPrivilegeFromProduction = Integer.valueOf(0);
 
-	// Start of user code (user defined attributes for BuildingCard)
-
-	// End of user code
-
 	/**
 	 * The constructor.
 	 */
 	public BuildingCard() {
-		// Start of user code constructor for BuildingCard)
 		super();
-		// End of user code
 	}
 
 	/**
 	 * Description of the method acquireCard.
 	 */
 	public void acquireCard() {
-		// Start of user code for method acquireCard
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for BuildingCard)
-
-	// End of user code
 	/**
 	 * Returns requiredResources.
 	 * @return requiredResources 

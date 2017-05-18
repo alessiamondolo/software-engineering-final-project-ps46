@@ -1,18 +1,12 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
- * Description of Casella.
+ * Description of Box.
  * 
  * @author a.mondolo
  */
-public class Casella {
+public class Box {
 	/**
 	 * Description of the property idPosition.
 	 */
@@ -27,23 +21,14 @@ public class Casella {
 	 * Description of the property avl.
 	 */
 	public Object avl;
-	
-	// Start of user code (user defined attributes for Casella)
-	
-	// End of user code
 
 	/**
 	 * The constructor.
 	 */
-	public Casella() {
-		// Start of user code constructor for Casella)
+	public Box() {
 		super();
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for Casella)
-
-	// End of user code
 	/**
 	 * Returns idPosition.
 	 * @return idPosition 

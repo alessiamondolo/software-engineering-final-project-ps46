@@ -1,13 +1,7 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 
 import java.util.HashSet;
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of Game.
@@ -85,46 +79,32 @@ public class Game extends Observable {
 	 */
 	public HashSet<Player> players = new HashSet<Player>();
 
-	// Start of user code (user defined attributes for Game)
-
-	// End of user code
 
 	/**
 	 * The constructor.
 	 */
 	public Game() {
-		// Start of user code constructor for Game)
 		super();
-		// End of user code
 	}
 
 	/**
 	 * Description of the method startGame.
 	 */
 	public void startGame() {
-		// Start of user code for method startGame
-		// End of user code
 	}
 
 	/**
 	 * Description of the method setupGame.
 	 */
 	public void setupGame() {
-		// Start of user code for method setupGame
-		// End of user code
 	}
 
 	/**
 	 * Description of the method endGame.
 	 */
 	public void endGame() {
-		// Start of user code for method endGame
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for Game)
-
-	// End of user code
 	/**
 	 * Returns idGame.
 	 * @return idGame 

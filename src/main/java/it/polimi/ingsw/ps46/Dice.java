@@ -1,11 +1,4 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of Dice.
@@ -18,17 +11,12 @@ public class Dice {
 	 */
 	private Integer Value = Integer.valueOf(0);
 
-	// Start of user code (user defined attributes for Dice)
-
-	// End of user code
 
 	/**
 	 * The constructor.
 	 */
 	public Dice() {
-		// Start of user code constructor for Dice)
 		super();
-		// End of user code
 	}
 
 	/**
@@ -44,13 +32,8 @@ public class Dice {
 	 * @param  
 	 */
 	private void changeValue(Dice newValue) {
-		// Start of user code for method changeValue
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for Dice)
-
-	// End of user code
 	/**
 	 * Returns Value.
 	 * @return Value 

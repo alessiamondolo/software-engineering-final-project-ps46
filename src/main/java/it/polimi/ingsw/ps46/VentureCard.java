@@ -1,11 +1,5 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of VentureCard.
@@ -68,38 +62,19 @@ public class VentureCard extends Card {
 	 */
 	public Integer finalVictoryPoints = Integer.valueOf(0);
 
-	// Start of user code (user defined attributes for VentureCard)
-
-	// End of user code
-
 	/**
 	 * The constructor.
 	 */
 	public VentureCard() {
-		// Start of user code constructor for VentureCard)
 		super();
-		// End of user code
 	}
 
 	/**
 	 * Description of the method acquireCard.
 	 */
 	public void acquireCard() {
-		// Start of user code for method acquireCard
-		// End of user code
 	}
 
-	/**
-	 * Description of the method Operation_2.
-	 */
-	public void Operation_2() {
-		// Start of user code for method Operation_2
-		// End of user code
-	}
-
-	// Start of user code (user defined methods for VentureCard)
-
-	// End of user code
 	/**
 	 * Returns requirementChoice.
 	 * @return requirementChoice 

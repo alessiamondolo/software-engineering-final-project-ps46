@@ -3,9 +3,6 @@ package it.polimi.ingsw.ps46;
  * 2017, All rights reserved.
  *******************************************************************************/
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of Wood.
@@ -18,22 +15,13 @@ public class Wood {
 	 */
 	private Integer wood = Integer.valueOf(0);
 
-	// Start of user code (user defined attributes for Wood)
-
-	// End of user code
-
 	/**
 	 * The constructor.
 	 */
 	public Wood() {
-		// Start of user code constructor for Wood)
 		super();
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for Wood)
-
-	// End of user code
 	/**
 	 * Returns wood.
 	 * @return wood 

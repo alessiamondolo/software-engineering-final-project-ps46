@@ -1,11 +1,5 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of Stone.
@@ -18,22 +12,13 @@ public class Stone {
 	 */
 	private Integer stone = Integer.valueOf(0);
 
-	// Start of user code (user defined attributes for Stone)
-
-	// End of user code
-
 	/**
 	 * The constructor.
 	 */
 	public Stone() {
-		// Start of user code constructor for Stone)
 		super();
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for Stone)
-
-	// End of user code
 	/**
 	 * Returns stone.
 	 * @return stone 

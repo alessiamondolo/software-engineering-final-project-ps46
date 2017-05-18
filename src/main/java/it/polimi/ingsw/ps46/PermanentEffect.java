@@ -1,13 +1,7 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 
 import java.util.HashSet;
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of PermanentEffect.
@@ -30,30 +24,19 @@ public class PermanentEffect implements Effect {
 	 */
 	public Resources recievedResources = null;
 
-	// Start of user code (user defined attributes for PermanentEffect)
-
-	// End of user code
-
 	/**
 	 * The constructor.
 	 */
 	public PermanentEffect() {
-		// Start of user code constructor for PermanentEffect)
 		super();
-		// End of user code
 	}
 
 	/**
 	 * Description of the method activateEffect.
 	 */
 	public void activateEffect() {
-		// Start of user code for method activateEffect
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for PermanentEffect)
-
-	// End of user code
 	/**
 	 * Returns giveResources.
 	 * @return giveResources 

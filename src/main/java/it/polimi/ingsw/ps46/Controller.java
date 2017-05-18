@@ -1,13 +1,6 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 
 import java.util.HashSet;
-
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of Controller.
@@ -25,22 +18,14 @@ public class Controller implements Observer {
 	 */
 	public HashSet<Game> games = new HashSet<Game>();
 
-	// Start of user code (user defined attributes for Controller)
-
-	// End of user code
 
 	/**
 	 * The constructor.
 	 */
 	public Controller() {
-		// Start of user code constructor for Controller)
 		super();
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for Controller)
-
-	// End of user code
 	/**
 	 * Returns views.
 	 * @return views 

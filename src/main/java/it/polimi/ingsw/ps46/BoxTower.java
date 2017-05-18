@@ -1,18 +1,12 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
- * Description of CasellaTorre.
+ * Description of BoxTower.
  * 
  * @author a.mondolo
  */
-public class CasellaTorre extends Casella {
+public class BoxTower extends Box {
 	/**
 	 * Description of the property card.
 	 */
@@ -27,39 +21,26 @@ public class CasellaTorre extends Casella {
 	 * Description of the property empty.
 	 */
 	public Object empty;
-	
-	// Start of user code (user defined attributes for CasellaTorre)
-	
-	// End of user code
 
 	/**
 	 * The constructor.
 	 */
-	public CasellaTorre() {
-		// Start of user code constructor for CasellaTorre)
+	public BoxTower() {
 		super();
-		// End of user code
 	}
 
 	/**
 	 * Description of the method updateIdCard.
 	 */
 	public void updateIdCard() {
-		// Start of user code for method updateIdCard
-		// End of user code
 	}
 
 	/**
 	 * Description of the method updateBonusFromFile.
 	 */
 	public void updateBonusFromFile() {
-		// Start of user code for method updateBonusFromFile
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for CasellaTorre)
-
-	// End of user code
 	/**
 	 * Returns card.
 	 * @return card 

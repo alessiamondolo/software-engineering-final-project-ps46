@@ -1,18 +1,12 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
- * Description of CasellaCreazione.
+ * Description of BoxCreation.
  * 
  * @author a.mondolo
  */
-public class CasellaCreazione extends Casella {
+public class BoxCreation extends Box {
 	/**
 	 * Description of the property type.
 	 */
@@ -23,30 +17,19 @@ public class CasellaCreazione extends Casella {
 	 */
 	public Object malus;
 	
-	// Start of user code (user defined attributes for CasellaCreazione)
-	
-	// End of user code
-
 	/**
 	 * The constructor.
 	 */
-	public CasellaCreazione() {
-		// Start of user code constructor for CasellaCreazione)
+	public BoxCreation() {
 		super();
-		// End of user code
 	}
 
 	/**
 	 * Description of the method produce.
 	 */
 	public void produce() {
-		// Start of user code for method produce
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for CasellaCreazione)
-
-	// End of user code
 	/**
 	 * Returns type.
 	 * @return type 

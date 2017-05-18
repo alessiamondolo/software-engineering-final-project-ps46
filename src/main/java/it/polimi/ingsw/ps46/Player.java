@@ -2,13 +2,6 @@ package it.polimi.ingsw.ps46;
 
 import java.util.HashSet;
 
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of Player.
@@ -55,71 +48,51 @@ public class Player {
 	 * Description of the property idPlayer.
 	 */
 	public Object idPlayer;
-	
-	// Start of user code (user defined attributes for Player)
-	
-	// End of user code
+
 
 	/**
 	 * The constructor.
 	 */
 	public Player() {
-		// Start of user code constructor for Player)
 		super();
-		// End of user code
 	}
 
 	/**
 	 * Description of the method getResources.
 	 */
 	public void getResources() {
-		// Start of user code for method getResources
-		// End of user code
 	}
 
 	/**
 	 * Description of the method getCards.
 	 */
 	public void getCards() {
-		// Start of user code for method getCards
-		// End of user code
 	}
 
 	/**
 	 * Description of the method getNeutralFamilyMember.
 	 */
 	public void getNeutralFamilyMember() {
-		// Start of user code for method getNeutralFamilyMember
-		// End of user code
 	}
 
 	/**
 	 * Description of the method getOrangeFamilyMember.
 	 */
 	public void getOrangeFamilyMember() {
-		// Start of user code for method getOrangeFamilyMember
-		// End of user code
 	}
 
 	/**
 	 * Description of the method getBlackFamilyMember.
 	 */
 	public void getBlackFamilyMember() {
-		// Start of user code for method getBlackFamilyMember
-		// End of user code
 	}
 
 	/**
 	 * Description of the method getWhiteFamilyMember.
 	 */
 	public void getWhiteFamilyMember() {
-		// Start of user code for method getWhiteFamilyMember
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for Player)
-
-	// End of user code
 	/**
 	 * Returns username.
 	 * @return username 

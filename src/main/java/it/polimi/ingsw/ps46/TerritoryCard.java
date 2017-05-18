@@ -1,11 +1,5 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of TerritoryCard.
@@ -42,31 +36,20 @@ public class TerritoryCard extends Card {
 	 * Description of the property obtainPointsFromHarvest.
 	 */
 	public Object obtainPointsFromHarvest;
-	
-	// Start of user code (user defined attributes for TerritoryCard)
-	
-	// End of user code
 
 	/**
 	 * The constructor.
 	 */
 	public TerritoryCard() {
-		// Start of user code constructor for TerritoryCard)
 		super();
-		// End of user code
 	}
 
 	/**
 	 * Description of the method acquireCard.
 	 */
 	public void acquireCard() {
-		// Start of user code for method acquireCard
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for TerritoryCard)
-
-	// End of user code
 	/**
 	 * Returns harvestCost.
 	 * @return harvestCost 

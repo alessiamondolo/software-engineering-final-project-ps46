@@ -1,13 +1,7 @@
 package it.polimi.ingsw.ps46;
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 
 import java.util.HashSet;
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of Card.
@@ -34,31 +28,20 @@ public class Card {
 	 * Description of the property type.
 	 */
 	public Object type;
-	
-	// Start of user code (user defined attributes for Card)
-	
-	// End of user code
 
 	/**
 	 * The constructor.
 	 */
 	public Card() {
-		// Start of user code constructor for Card)
 		super();
-		// End of user code
 	}
 
 	/**
 	 * Description of the method AcquireResources.
 	 */
 	public void AcquireResources() {
-		// Start of user code for method AcquireResources
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for Card)
-
-	// End of user code
 	/**
 	 * Returns effects.
 	 * @return effects 

@@ -2,10 +2,6 @@ package it.polimi.ingsw.ps46;
 
 import java.util.HashSet;
 
-// Start of user code (user defined imports)
-
-// End of user code
-
 /**
  * Description of Board.
  * 
@@ -13,9 +9,9 @@ import java.util.HashSet;
  */
 public class Board {
 	/**
-	 * Description of the property casellas.
+	 * Description of the property boxes.
 	 */
-	public HashSet<Casella> casellas = new HashSet<Casella>();
+	public HashSet<Box> boxes = new HashSet<Box>();
 
 	/**
 	 * Description of the property carteScomunica.
@@ -68,11 +64,11 @@ public class Board {
 
 	// End of user code
 	/**
-	 * Returns casellas.
-	 * @return casellas 
+	 * Returns boxes.
+	 * @return boxes 
 	 */
-	public HashSet<Casella> getCasellas() {
-		return this.casellas;
+	public HashSet<Box> getCasellas() {
+		return this.boxes;
 	}
 
 	/**
