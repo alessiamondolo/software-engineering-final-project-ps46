@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46;
 
+import java.util.HashMap;
 
 /**
  * Description of Resources.
@@ -7,12 +8,14 @@ package it.polimi.ingsw.ps46;
  * @author a.mondolo
  */
 public class Resources {
-
+	
+	private HashMap resources;
+	
 	/**
 	 * The constructor.
 	 */
 	public Resources() {
-		super();
+		resources = new HashMap();
 	}
 
 	/**
