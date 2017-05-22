@@ -1,14 +1,15 @@
 package it.polimi.ingsw.ps46.client;
 
-import it.polimi.ingsw.ps46.server.Observable;
-import it.polimi.ingsw.ps46.server.Observer;
+import java.util.Observable;
+import java.util.Observer;
+
 
 /**
- * Description of UI.
+ * Description of View.
  * 
  * @author a.mondolo
  */
-public class View extends Observable implements Observer {
+public class View extends Observable {
 
 	/**
 	 * The constructor.
@@ -16,5 +17,5 @@ public class View extends Observable implements Observer {
 	public View() {
 		super();
 	}
-
+	
 }
