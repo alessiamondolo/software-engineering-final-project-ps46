@@ -1,8 +1,10 @@
 package it.polimi.ingsw.ps46.server;
 
-import java.util.HashSet;
+import java.util.Observable;
+import java.util.Observer;
 
 import it.polimi.ingsw.ps46.client.View;
+
 
 /**
  * Description of Controller.
@@ -11,37 +13,28 @@ import it.polimi.ingsw.ps46.client.View;
  */
 public class Controller implements Observer {
 	/**
-	 * Description of the property views.
+	 * Description of the property game.
 	 */
-	public HashSet<View> views = new HashSet<View>();
-
+	private Game game;
+	
 	/**
-	 * Description of the property games.
+	 * Description of the property view.
 	 */
-	public HashSet<Game> games = new HashSet<Game>();
+	private View view;
 
 
 	/**
 	 * The constructor.
 	 */
-	public Controller() {
-		super();
+	public Controller(Game game, View view) {
+		this.game = game;
+		this.view = view;
 	}
 
-	/**
-	 * Returns views.
-	 * @return views 
-	 */
-	public HashSet<View> getViews() {
-		return this.views;
+	@Override
+	public void update(Observable o, Object arg) {
+		//WIP
 	}
-
-	/**
-	 * Returns games.
-	 * @return games 
-	 */
-	public HashSet<Game> getGames() {
-		return this.games;
-	}
+	
 
 }

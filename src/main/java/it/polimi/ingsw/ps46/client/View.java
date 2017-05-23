@@ -9,13 +9,11 @@ import java.util.Observer;
  * 
  * @author a.mondolo
  */
-public class View extends Observable {
-
-	/**
-	 * The constructor.
-	 */
-	public View() {
-		super();
-	}
+public abstract class View extends Observable implements Runnable, Observer{ 
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		//WIP
+	}	
 	
 }
