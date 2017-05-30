@@ -42,7 +42,7 @@ public class Player {
 	/**
 	 * Description of the property resourcess.
 	 */
-	public HashSet<Resources> resourcess = new HashSet<Resources>();
+	private Resources resources = new Resources();
 
 	/**
 	 * Description of the property idPlayer.
@@ -55,12 +55,6 @@ public class Player {
 	 */
 	public Player() {
 		super();
-	}
-
-	/**
-	 * Description of the method getResources.
-	 */
-	public void getResources() {
 	}
 
 	/**
@@ -182,11 +176,11 @@ public class Player {
 	}
 
 	/**
-	 * Returns resourcess.
-	 * @return resourcess 
+	 * Returns resources.
+	 * @return resources 
 	 */
-	public HashSet<Resources> getResourcess() {
-		return this.resourcess;
+	public Resources getResources() {
+		return this.resources;
 	}
 
 	/**

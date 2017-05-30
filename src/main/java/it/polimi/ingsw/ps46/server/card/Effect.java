@@ -1,5 +1,6 @@
-package it.polimi.ingsw.ps46.server;
+package it.polimi.ingsw.ps46.server.card;
 
+import it.polimi.ingsw.ps46.server.GameState;
 
 /**
  * Description of Effect.
@@ -11,6 +12,6 @@ public interface Effect {
 	/**
 	 * Description of the method activateEffect.
 	 */
-	public void activateEffect();
+	public void activateEffect(GameState gameState);
 
 }

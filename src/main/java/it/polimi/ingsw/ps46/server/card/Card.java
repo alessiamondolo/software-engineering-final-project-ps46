@@ -1,4 +1,7 @@
-package it.polimi.ingsw.ps46.server;
+package it.polimi.ingsw.ps46.server.card;
+
+import it.polimi.ingsw.ps46.server.GameState;
+import it.polimi.ingsw.ps46.server.Resources;
 
 /**
  * Card is an object that represent a single card of the game.
@@ -37,6 +40,20 @@ public abstract class Card {
 
 	public Resources getCost() {
 		return cost;
+	}
+	
+	/**
+	 * Activates the immediate effects of the card and stores the permanent effect
+	 * into the list of permanent effects of the player that uses the card.
+	 * @param game
+	 */
+	public void use(GameState game) {
+		//activates the immediate effects of the card
+		immediateEffects.activateEffect(game);
+		
+		//stores the permanent effects in the list of permanent effects of the player
+		// TODO
+		//gameState.getCurrentPlayer().addPermanentEffect(permanentEffects);
 	}
 	
 }

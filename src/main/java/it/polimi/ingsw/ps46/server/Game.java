@@ -1,6 +1,9 @@
 package it.polimi.ingsw.ps46.server;
 
 import java.util.Observable;
+
+import it.polimi.ingsw.ps46.server.card.Card;
+
 import java.util.HashSet;
 
 

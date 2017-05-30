@@ -1,4 +1,7 @@
-package it.polimi.ingsw.ps46.server;
+package it.polimi.ingsw.ps46.server.card;
+
+import it.polimi.ingsw.ps46.server.Resources;
+
 
 public class VentureCard extends Card {
 
