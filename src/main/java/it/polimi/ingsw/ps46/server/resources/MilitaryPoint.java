@@ -1,21 +1,21 @@
-package it.polimi.ingsw.ps46.server;
+package it.polimi.ingsw.ps46.server.resources;
 
 
 /**
- * Description of Servant.
+ * Description of MilitaryPoint.
  * 
  * @author a.mondolo
  */
-public class Servant {
+public class MilitaryPoint {
 	/**
 	 * Description of the property servant.
 	 */
-	private Integer servant = Integer.valueOf(0);
+	public Integer servant = Integer.valueOf(0);
 
 	/**
 	 * The constructor.
 	 */
-	public Servant() {
+	public MilitaryPoint() {
 		super();
 	}
 
@@ -35,5 +35,4 @@ public class Servant {
 		this.servant = newServant;
 	}
 
-	
 }

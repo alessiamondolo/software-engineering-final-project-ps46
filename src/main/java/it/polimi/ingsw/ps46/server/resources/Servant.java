@@ -1,22 +1,21 @@
-package it.polimi.ingsw.ps46.server;
+package it.polimi.ingsw.ps46.server.resources;
 
 
 /**
- * Description of VictoryPoint.
+ * Description of Servant.
  * 
  * @author a.mondolo
  */
-public class VictoryPoint {
+public class Servant {
 	/**
 	 * Description of the property servant.
 	 */
-	public Integer servant = Integer.valueOf(0);
-
+	private Integer servant = Integer.valueOf(0);
 
 	/**
 	 * The constructor.
 	 */
-	public VictoryPoint() {
+	public Servant() {
 		super();
 	}
 
@@ -36,4 +35,5 @@ public class VictoryPoint {
 		this.servant = newServant;
 	}
 
+	
 }

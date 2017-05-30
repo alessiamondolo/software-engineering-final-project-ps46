@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps46.server;
+package it.polimi.ingsw.ps46.server.resources;
 
 import java.util.HashMap;
 
