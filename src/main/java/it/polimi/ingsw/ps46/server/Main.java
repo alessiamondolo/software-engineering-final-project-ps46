@@ -13,12 +13,13 @@ public class Main {
 	private Game game;	
 	private View view;
 	private Controller controller;
+	private Integer numberPlayers;
 	
 	/**
 	 * The constructor.
 	 */
 	public Main() {
-		game = new Game();
+		game = new Game(numberPlayers);
 		view = new ConsoleView(System.in, System.out);
 		controller = new Controller(game, view);
 		view.addObserver(controller);

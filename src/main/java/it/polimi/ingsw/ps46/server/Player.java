@@ -54,8 +54,9 @@ public class Player {
 
 	/**
 	 * The constructor.
+	 * @param idPlayer 
 	 */
-	public Player() {
+	public Player(int idPlayer) {
 		super();
 	}
 

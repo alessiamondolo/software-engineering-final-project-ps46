@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps46.server.card;
 
-import it.polimi.ingsw.ps46.server.GameState;
+import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.Resources;
 
 /**
@@ -47,7 +47,7 @@ public abstract class Card {
 	 * into the list of permanent effects of the player that uses the card.
 	 * @param game
 	 */
-	public void use(GameState game) {
+	public void use(Game game) {
 		//activates the immediate effects of the card
 		immediateEffects.activateEffect(game);
 		

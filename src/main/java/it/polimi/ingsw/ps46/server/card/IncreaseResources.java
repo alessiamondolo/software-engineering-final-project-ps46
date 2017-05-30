@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps46.server.card;
 
-import it.polimi.ingsw.ps46.server.GameState;
+import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.Resources;
 
 
@@ -33,7 +33,7 @@ public class IncreaseResources implements Effect {
 	 * This method adds the additional resources to the resources of the current player,
 	 * who is the one that activated the card with the effect IncreaseResources.
 	 */
-	public void activateEffect(GameState game) {
+	public void activateEffect(Game game) {
 		game.getCurrentPlayer().getResources().addResources(additionalResources);
 	}
 
