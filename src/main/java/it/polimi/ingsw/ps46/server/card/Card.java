@@ -14,7 +14,7 @@ public abstract class Card {
 	private final Effect immediateEffects;
 	private final Effect permanentEffects;
 	private final Resources cost;
-	
+	 
 	/**
 	 * Build a new Card object.
 	 */
