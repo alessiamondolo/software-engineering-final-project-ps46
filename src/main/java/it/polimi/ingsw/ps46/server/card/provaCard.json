@@ -1,0 +1,16 @@
+[
+	{
+		"cardName" : "Pippo",
+		"immediateEffects" : {
+			"additionalResources": {
+			}
+		},
+		"permanentEffects" : {
+			"additionalResources": {
+				}
+		},
+		"cost" : {
+		}
+	}
+
+]
