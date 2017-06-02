@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.resources.Resources;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
 /**
@@ -12,12 +12,12 @@ import it.polimi.ingsw.ps46.server.resources.Resources;
  */
 public class IncreaseResources implements Effect {
 	
-	public final Resources additionalResources;
+	public final ResourceSet additionalResources;
 
 	/**
 	 * Build a new effect of the type IncreaseResources.
 	 */
-	public IncreaseResources(Resources additionalResources) {
+	public IncreaseResources(ResourceSet additionalResources) {
 		this.additionalResources = additionalResources;
 	}
 
@@ -25,7 +25,7 @@ public class IncreaseResources implements Effect {
 	 * Returns additionalResources.
 	 * @return additionalResources 
 	 */
-	public Resources getAdditionalResources() {
+	public ResourceSet getAdditionalResources() {
 		return this.additionalResources;
 	}
 	
@@ -34,7 +34,7 @@ public class IncreaseResources implements Effect {
 	 * who is the one that activated the card with the effect IncreaseResources.
 	 */
 	public void activateEffect(Game game) {
-		game.getCurrentPlayer().getResources().addResources(additionalResources);
+		game.getCurrentPlayer().getResources().add(additionalResources);
 	}
 
 }

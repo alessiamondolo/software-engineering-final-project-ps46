@@ -2,38 +2,17 @@ package it.polimi.ingsw.ps46.server.resources;
 
 
 /**
- * Description of Money.
+ * Money is a type of Resource.
  * 
- * @author a.mondolo
+ * @author Alessia Mondolo
  */
-public class Money {
-	/**
-	 * Description of the property coin.
-	 */
-	private Integer coin = Integer.valueOf(0);
-
-
+public class Money extends Resource {
+	
 	/**
 	 * The constructor.
 	 */
-	public Money() {
-		super();
-	}
-
-	/**
-	 * Returns coin.
-	 * @return coin 
-	 */
-	public Integer getCoin() {
-		return this.coin;
-	}
-
-	/**
-	 * Sets a value to attribute coin. 
-	 * @param newCoin 
-	 */
-	public void setCoin(Integer newCoin) {
-		this.coin = newCoin;
+	public Money(int quantity) {
+		super("Money", quantity);
 	}
 
 }

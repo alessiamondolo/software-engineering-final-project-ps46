@@ -2,9 +2,9 @@ package it.polimi.ingsw.ps46.server.resources;
 
 
 /**
- * Description of Resource.
+ * Resource can be used to represent any type of resource.
  * 
- * @author a.mondolo
+ * @author Alessia Mondolo 
  */
 public abstract class Resource {
 	
@@ -32,6 +32,7 @@ public abstract class Resource {
 	public String getId() {
 		return id;
 	}
+	
 	/**
 	 * Returns quantity.
 	 * @return quantity 
@@ -41,11 +42,19 @@ public abstract class Resource {
 	}
 	
 	/**
+	 * Sets quantity.
+	 * @return quantity 
+	 */
+	public void setQuantity(int newQuantity) { //errore se è negativo
+		quantity = newQuantity;
+	}
+	
+	/**
 	 * Increases the value of quantity by additionalQuantity. 
 	 * @param additionalQuantity 
 	 */
-	public void addQuantity(int additionalQuantity) {
-		quantity += additionalQuantity;
+	public void add(Resource moreResource) {
+		quantity += moreResource.getQuantity();
 	}
 	
 	/**
@@ -53,11 +62,15 @@ public abstract class Resource {
 	 * Otherwise, throws and exception. 
 	 * @param lessQuantity 
 	 */
-	public void removeQuantity(int lessQuantity) {
-		if(quantity >= lessQuantity)
-			quantity -= lessQuantity;
+	public void sub(Resource lessResource) {
+		if(greaterOrEqual(lessResource))
+			quantity -= lessResource.getQuantity();
 		//else 
 		//	throw new Exception()
+	}
+
+	public boolean greaterOrEqual(Resource resource) {
+		return (this.quantity >= resource.getQuantity());
 	}
 	
 }

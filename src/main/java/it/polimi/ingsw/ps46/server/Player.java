@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps46.server;
 
 import java.util.HashSet;
 
-import it.polimi.ingsw.ps46.server.resources.Resources;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
 /**
@@ -44,7 +44,7 @@ public class Player {
 	/**
 	 * Description of the property resourcess.
 	 */
-	private Resources resources = new Resources();
+	private ResourceSet resources;
 
 	/**
 	 * Description of the property idPlayer.
@@ -182,7 +182,7 @@ public class Player {
 	 * Returns resources.
 	 * @return resources 
 	 */
-	public Resources getResources() {
+	public ResourceSet getResources() {
 		return this.resources;
 	}
 
