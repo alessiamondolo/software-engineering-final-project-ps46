@@ -106,4 +106,15 @@ public class ResourceSet {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for(String key : getResourcesMap().keySet()) {
+			if(stringBuilder.length()>0)
+				stringBuilder.append(", ");
+			stringBuilder.append(resourcesMap.get(key).toString());
+		}
+		return stringBuilder.toString();
+	}
+	
 }

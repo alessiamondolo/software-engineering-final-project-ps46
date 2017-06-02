@@ -73,4 +73,9 @@ public abstract class Resource {
 		return (this.quantity >= resource.getQuantity());
 	}
 	
+	@Override
+	public String toString() {
+		return id + ": " + quantity;
+	}
+	
 }
