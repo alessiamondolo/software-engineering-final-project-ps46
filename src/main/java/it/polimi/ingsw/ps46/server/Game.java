@@ -68,7 +68,7 @@ public class Game extends Observable {
 	}
 	
 	private void configBoard() {
-		board = new Board();
+		//board = new Board();
 		//lettura di file di configurazione
 	}
 	
