@@ -19,31 +19,28 @@ public class ResourcesFactory {
 	 */
 	public Resource getResource(String resourceType, int quantity) {
 		
-		if(resourceType == null)
-			return null;
-		
-		else if(resourceType == "Wood")
+		if(resourceType.equals("Wood"))
 			return new Wood(quantity);
 		
-		else if(resourceType == "Stones")
+		else if(resourceType.equals("Stones"))
 			return new Stones(quantity);
 		
-		else if(resourceType == "Servants")
+		else if(resourceType.equals("Servants"))
 			return new Servants(quantity);
 		
-		else if(resourceType == "Money")
+		else if(resourceType.equals("Money"))
 			return new Money(quantity);
 		
-		else if(resourceType == "FaithPoints")
+		else if(resourceType.equals("FaithPoints"))
 			return new FaithPoints(quantity);
 		
-		else if(resourceType == "MilitaryPoints")
+		else if(resourceType.equals("MilitaryPoints"))
 			return new MilitaryPoints(quantity);
 		
-		else if(resourceType == "VictoryPoints")
+		else if(resourceType.equals("VictoryPoints"))
 			return new VictoryPoints(quantity);
 		
-		return null;
+		else return null;
 		
 	}
 	
