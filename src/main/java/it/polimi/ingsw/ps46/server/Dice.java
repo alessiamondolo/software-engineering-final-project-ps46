@@ -1,53 +1,94 @@
 package it.polimi.ingsw.ps46.server;
 
 /**
- * Description of Dice.
- * 
- * @author a.mondolo
+ * Description of the Class Dice
+ * This Class is used to create an object Dice used (as an int) to create a random number or to set a value usefull to compare or change the value as we prefer.
+.
+ * @author Andrea.Masi
+ *
  */
+
 public class Dice {
+	
+	private int value = 0;
+	private static final int nFaces = 6;
+	
+	
 	/**
-	 * Description of the property Value.
-	 */
-	private Integer Value = Integer.valueOf(0);
-
-
+ 	* Description of the constructor Dice.
+ 	* This constructor is used to create a new Dice element of a random value using the method throwDice();
+ 	*/
+	public Dice(){
+		throwDice();
+	};
+	
+	
+	
 	/**
-	 * The constructor.
+	 * Description of the constructor Dice(int).
+	 * This constructor is used to create a new Dice element with a preset value.
+	 * 
+	 * @param newValue
 	 */
-	public Dice() {
-		super();
+	public Dice(int newValue){
+		value = newValue;
+	}
+	
+	
+	/**
+	 * Description of the method throwDice
+	 * This method is used to create a random value between 1-6
+	 * 
+	 * @return value: _Int_ the result of the throw.
+	 * @param nFaces number of faces of the dice
+	 */
+	public void throwDice(){
+		
+		Double x = Math.ceil(Math.random()*nFaces);
+		value = x.intValue();
 	}
 
-	/**
-	 * Description of the method throwDice.
-	 */
-	public void throwDice() {
-		// Start of user code for method throwDice
-		// End of user code
-	}
 
 	/**
-	 * Description of the method changeValue.
-	 * @param  
+	 * Description of the method getValue()
+	 * 
+	 * @return value 
 	 */
-	private void changeValue(Dice newValue) {
+	public int getValue() {
+		return value;
 	}
-
+	
+	
 	/**
-	 * Returns Value.
-	 * @return Value 
+	 * Description of the method greaterOrEqual
+	 * This method compares two differents Dice
+	 * 
+	 * @param diceValue1
+	 * @param diceValue2
+	 * @return boolean 
 	 */
-	public Integer getValue() {
-		return this.Value;
+
+	public Boolean greaterOrEqual(Dice diceValue1, Dice diceValue2){
+	
+		if (diceValue1.getValue() >= diceValue2.getValue())
+		{
+			return true;
+		}
+		else 
+			return false;
 	}
-
+	
+	
 	/**
-	 * Sets a value to attribute Value. 
-	 * @param newValue 
+	 * Description of the method toString()
+	 * Print the value of the dice.
 	 */
-	public void setValue(Integer newValue) {
-		this.Value = newValue;
+	@Override
+	
+	public String toString(){
+		return toString().valueOf(value);
+		
 	}
 
 }
+

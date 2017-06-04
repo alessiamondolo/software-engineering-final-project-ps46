@@ -1,154 +1,66 @@
 package it.polimi.ingsw.ps46.server;
 
-import java.util.HashSet;
+import java.awt.Color;
+import java.util.ArrayList;
 
-/**
- * Description of Board.
- * 
- * @author a.mondolo
- */
 public class Board {
-	/**
-	 * Description of the property boxes.
-	 */
-	public HashSet<Box> boxes = new HashSet<Box>();
-
-	/**
-	 * Description of the property carteScomunica.
-	 */
-	private Object carteScomunica;
-
-	/**
-	 * Description of the property positions.
-	 */
-	private Object positions;
-
-	/**
-	 * Description of the property victoryPoints.
-	 */
-	public Object victoryPoints;
-
-	/**
-	 * Description of the property militaryPoints.
-	 */
-	public Object militaryPoints;
-
-	/**
-	 * Description of the property faithPoints.
-	 */
-	public Object faithPoints;
 	
-	// Start of user code (user defined attributes for Board)
+	private ArrayList<Tower> towers;
+	private ArrayList<ActionSpace> boardBoxes;
 	
-	// End of user code
+	/**
+	 * Description of the Class Board.
+	 * This Class is made by two lists of Tower and boardBoxes. there are 4 parameters used to set up all the board.
+	 * 
+	 * @param nOfTowers passed by configuration File
+	 * @param nOfBoardBoxes passed by configuration File
+	 * @param fourPlay 
+	 * @configurationVar xConfigurationInt; yConfigurationDice. Used to put the right values by configuration file.
+	 */
+	public Board(int nOfTowers, int nOfBoardBoxes, boolean fourPlay){
+		
+		towers = new ArrayList<Tower>();
+
+		for( int i = 0; i < nOfTowers; i++)
+		{
+			towers.add(i, new Tower(Color.yellow)); // color.yellow is just a standard color (the serial ones will be added by configuration file)
+		}
+		
+		boardBoxes = new ArrayList<ActionSpace>();
+		
+		for(int j = 0; j < nOfBoardBoxes; j++)
+		{
+			int xConfigurationInt = 7;
+			Dice yConfigurationDice = new Dice(xConfigurationInt);
+			boardBoxes.add(j,new ActionSpace(yConfigurationDice,xConfigurationInt));
+		
+		}
+		
+	}
+	
 
 	/**
-	 * The constructor.
+	 * Description of the method getTower
+	 * 
+	 * @param towerIndex
+	 * @return the same floor of the index
 	 */
-	public Board() {
-		// Start of user code constructor for Board)
-		super();
-		// End of user code
+	public Tower getTower (int towerIndex){
+		
+		return towers.get(towerIndex);
+		
 	}
+	
 
 	/**
-	 * Description of the method cardOnBoard.
-	 * @param  
+	 * Description of the method getBoardBox
+	 * 
+	 * @param boardBoxIndex
+	 * @return the same floor of the index
 	 */
-	public void cardOnBoard() {
-		// Start of user code for method cardOnBoard
-		// End of user code
+	public ActionSpace getBoardBox (int boardBoxIndex){
+		
+		return boardBoxes.get(boardBoxIndex);
+		
 	}
-
-	// Start of user code (user defined methods for Board)
-
-	// End of user code
-	/**
-	 * Returns boxes.
-	 * @return boxes 
-	 */
-	public HashSet<Box> getCasellas() {
-		return this.boxes;
-	}
-
-	/**
-	 * Returns carteScomunica.
-	 * @return carteScomunica 
-	 */
-	public Object getCarteScomunica() {
-		return this.carteScomunica;
-	}
-
-	/**
-	 * Sets a value to attribute carteScomunica. 
-	 * @param newCarteScomunica 
-	 */
-	public void setCarteScomunica(Object newCarteScomunica) {
-		this.carteScomunica = newCarteScomunica;
-	}
-
-	/**
-	 * Returns positions.
-	 * @return positions 
-	 */
-	public Object getPositions() {
-		return this.positions;
-	}
-
-	/**
-	 * Sets a value to attribute positions. 
-	 * @param newPositions 
-	 */
-	public void setPositions(Object newPositions) {
-		this.positions = newPositions;
-	}
-
-	/**
-	 * Returns victoryPoints.
-	 * @return victoryPoints 
-	 */
-	public Object getVictoryPoints() {
-		return this.victoryPoints;
-	}
-
-	/**
-	 * Sets a value to attribute victoryPoints. 
-	 * @param newVictoryPoints 
-	 */
-	public void setVictoryPoints(Object newVictoryPoints) {
-		this.victoryPoints = newVictoryPoints;
-	}
-
-	/**
-	 * Returns militaryPoints.
-	 * @return militaryPoints 
-	 */
-	public Object getMilitaryPoints() {
-		return this.militaryPoints;
-	}
-
-	/**
-	 * Sets a value to attribute militaryPoints. 
-	 * @param newMilitaryPoints 
-	 */
-	public void setMilitaryPoints(Object newMilitaryPoints) {
-		this.militaryPoints = newMilitaryPoints;
-	}
-
-	/**
-	 * Returns faithPoints.
-	 * @return faithPoints 
-	 */
-	public Object getFaithPoints() {
-		return this.faithPoints;
-	}
-
-	/**
-	 * Sets a value to attribute faithPoints. 
-	 * @param newFaithPoints 
-	 */
-	public void setFaithPoints(Object newFaithPoints) {
-		this.faithPoints = newFaithPoints;
-	}
-
 }
