@@ -81,12 +81,14 @@ public class Dice {
 	
 	/**
 	 * Description of the method toString()
-	 * Print the value of the dice.
+	 * Return the value of the dice as a string.
 	 */
+	
+	//ho fatto una correzione in quanto la toString prima chiamava ricorsivamente se stessa
 	@Override
 	
 	public String toString(){
-		return toString().valueOf(value);
+		return "" + value;
 		
 	}
 
