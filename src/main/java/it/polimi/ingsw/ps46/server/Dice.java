@@ -61,16 +61,15 @@ public class Dice {
 	
 	/**
 	 * Description of the method greaterOrEqual
-	 * This method compares two differents Dice
+	 * This method compares two different Dice
 	 * 
-	 * @param diceValue1
-	 * @param diceValue2
+	 * @param diceValue
 	 * @return boolean 
 	 */
 
-	public Boolean greaterOrEqual(Dice diceValue1, Dice diceValue2){
+	public Boolean greaterOrEqual(Dice diceValue){
 	
-		if (diceValue1.getValue() >= diceValue2.getValue())
+		if (value >= diceValue.getValue())
 		{
 			return true;
 		}

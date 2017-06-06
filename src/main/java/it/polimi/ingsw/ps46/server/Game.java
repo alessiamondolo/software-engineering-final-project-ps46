@@ -5,9 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
@@ -39,9 +41,7 @@ public class Game extends Observable {
 	private Set<BuildingCard> buildingCardsDeck;
 	private Set<CharacterCard> characterCardsDeck;
 	private Set<VentureCard> ventureCardsDeck;
-	private Dice orangeDice;
-	private Dice blackDice;
-	private Dice whiteDice;
+	private Map<String, Dice> dice;
 	
 	
 	Game(Integer numberPlayers) {
@@ -61,9 +61,15 @@ public class Game extends Observable {
 	//------------------------------//
 	
 	private void configGame() {
-		//temporaneo, poi le configurazioni verranno lette da file
+		//TODO temporaneo, poi le configurazioni verranno lette da file
 		periods = 3;
 		roundsPerPeriod = 2;
+		
+		dice = new HashMap<String, Dice>();
+		//TODO da configurare tramite File
+		dice.put("Black", new Dice());
+		dice.put("Orange", new Dice());
+		dice.put("White", new Dice());
 		
 	}
 	
@@ -172,6 +178,11 @@ public class Game extends Observable {
 	
 	public Player getCurrentPlayer() {
 		return this.currentPlayer;		
+	}
+
+
+	public Dice getDice(String color) {
+		return dice.get(color);
 	}
 
 }

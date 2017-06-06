@@ -9,6 +9,8 @@ package it.polimi.ingsw.ps46.server;
 public class ActionSpace {
 	
 	private int idActionSpaces = 0;
+	//TODO check usage of "type" attribute
+	private String type;
 	private Dice requiredFamilyMemberValue;
 	private Boolean available = true;
 	private int totalNumberOfSpot = 0;
@@ -101,6 +103,12 @@ public class ActionSpace {
 	public int GetTotalNumberOfSpot(){
 		return totalNumberOfSpot;
 		
+	}
+
+
+
+	public String getType() {
+		return type;
 	}
 	
 }
