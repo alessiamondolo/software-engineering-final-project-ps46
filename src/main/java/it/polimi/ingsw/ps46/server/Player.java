@@ -14,7 +14,7 @@ public class Player {
 	/**
 	 * Description of the property username.
 	 */
-	public Object username;
+	public String username;
 
 	/**
 	 * Description of the property territoryCards.
@@ -49,7 +49,7 @@ public class Player {
 	/**
 	 * Description of the property idPlayer.
 	 */
-	public Object idPlayer;
+	public int idPlayer;
 
 
 	/**
@@ -102,7 +102,7 @@ public class Player {
 	 * Sets a value to attribute username. 
 	 * @param newUsername 
 	 */
-	public void setUsername(Object newUsername) {
+	public void setUsername(String newUsername) {
 		this.username = newUsername;
 	}
 
@@ -190,7 +190,7 @@ public class Player {
 	 * Returns idPlayer.
 	 * @return idPlayer 
 	 */
-	public Object getIdPlayer() {
+	public int getId() {
 		return this.idPlayer;
 	}
 
@@ -198,7 +198,7 @@ public class Player {
 	 * Sets a value to attribute idPlayer. 
 	 * @param newIdPlayer 
 	 */
-	public void setIdPlayer(Object newIdPlayer) {
+	public void setIdPlayer(int newIdPlayer) {
 		this.idPlayer = newIdPlayer;
 	}
 

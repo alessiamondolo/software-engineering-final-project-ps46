@@ -97,7 +97,7 @@ public class MoveToActionSpaceAction implements Action {
 	public boolean isLegal() {
 		
 		//The player that wants to move to an action space has to be the current player
-		if (!(game.getCurrentPlayer().getIdPlayer().equals(player.getIdPlayer())))
+		if (game.getCurrentPlayer().getId() != player.getId())
 			return false;
 		//The action space has to be available
 		if(!(actionSpace.getAvailability()))

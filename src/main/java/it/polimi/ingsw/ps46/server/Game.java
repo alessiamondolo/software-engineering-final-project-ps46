@@ -30,10 +30,10 @@ import it.polimi.ingsw.ps46.server.resources.ResourcesFactory;
 
 public class Game extends Observable {
 	
-	private Integer numberPlayers; 
-	private Integer roundsPerPeriod;
-	private Integer periods;
+	private final int ROUNDS_PER_PERIOD = 2;
+	private final int PERIODS = 3;
 	
+	private int numberPlayers; 
 	private List<Player> players;
 	private Player currentPlayer;
 	private Board board;
@@ -44,46 +44,55 @@ public class Game extends Observable {
 	private Map<String, Dice> dice;
 	
 	
-	Game(Integer numberPlayers) {
+	Game(int numberPlayers) {
 		this.numberPlayers = numberPlayers;
 		//creates the players objects and adds them to the list of players
 		for(int idPlayer = 1; idPlayer<=numberPlayers; idPlayer++) {
 			players.add(new Player(idPlayer));
 		}
-		configGame();
-		configBoard();
+		configDice();
 		configDecks();
+		configBoard();
+		
 	}
 
 	
-	//------------------------------//
-	//BEGIN OF CONFIGURATION METHODS//
-	//------------------------------//
-	
-	private void configGame() {
-		//TODO temporaneo, poi le configurazioni verranno lette da file
-		periods = 3;
-		roundsPerPeriod = 2;
-		
+//--------------------------------------------------//
+//----------BEGIN OF CONFIGURATION METHODS----------//
+//--------------------------------------------------//
+	/**
+	 * Configures the dices that will be used during the game.
+	 */
+	private void configDice() {		
 		dice = new HashMap<String, Dice>();
 		//TODO da configurare tramite File
 		dice.put("Black", new Dice());
 		dice.put("Orange", new Dice());
 		dice.put("White", new Dice());
-		
 	}
+	
+	
 	
 	private void configBoard() {
 		//board = new Board();
 		//lettura di file di configurazione
 	}
 	
+	
+	
+	/**
+	 * Configures the decks of cards that will be used during the game.
+	 */
 	private void configDecks() {
-		//lettura di file di configurazione e costruzione della mappa tipologiaDiCarta-directoryFile 
+		//TODO lettura di file di configurazione e costruzione della mappa tipologiaDiCarta-directoryFile 
 		//che verrà poi utilizzata per chiamare un metodo configCards per ogni tipologia di carta
 		configTerritoryCards();
-		
+		configBuildingCards();
+		configCharacterCards();
+		configVentureCards();
 	}
+	
+	
 	
 	/**
 	 * Reads the configuration file for Territory Cards and creates the deck of territory cards.
@@ -98,9 +107,7 @@ public class Game extends Observable {
         try {
 
         	URL url = getClass().getResource("TerritoryCards.json");
-        	//URL url = Game.class.getResource("TerritoryCards.json");
         	Object obj = parser.parse(new FileReader(url.getPath()));
-        	
         	
         	JSONArray territoryCards = (JSONArray) obj;
         	Iterator iterator = territoryCards.iterator();
@@ -171,11 +178,36 @@ public class Game extends Observable {
         }
 
 	}
-	//----------------------------//
-	//END OF CONFIGURATION METHODS//
-	//----------------------------//
 	
 	
+
+	private void configVentureCards() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
+	private void configCharacterCards() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
+	private void configBuildingCards() {
+		// TODO Auto-generated method stub
+		
+	}
+//--------------------------------------------------//
+//-----------END OF CONFIGURATION METHODS-----------//
+//--------------------------------------------------//
+	
+	
+	
+//--------------------------------------------------//
+//---------------BEGIN OF GET METHODS---------------//
+//--------------------------------------------------//
 	public Player getCurrentPlayer() {
 		return this.currentPlayer;		
 	}
@@ -185,4 +217,61 @@ public class Game extends Observable {
 		return dice.get(color);
 	}
 
+
+	public Integer getROUNDS_PER_PERIOD() {
+		return ROUNDS_PER_PERIOD;
+	}
+
+
+	public Integer getPERIODS() {
+		return PERIODS;
+	}
+
+
+	public Integer getNumberPlayers() {
+		return numberPlayers;
+	}
+
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+
+	public Board getBoard() {
+		return board;
+	}
+
+
+	public Set<TerritoryCard> getTerritoryCardsDeck() {
+		return territoryCardsDeck;
+	}
+
+
+	public Set<BuildingCard> getBuildingCardsDeck() {
+		return buildingCardsDeck;
+	}
+
+
+	public Set<CharacterCard> getCharacterCardsDeck() {
+		return characterCardsDeck;
+	}
+
+
+	public Set<VentureCard> getVentureCardsDeck() {
+		return ventureCardsDeck;
+	}
+
+
+	public Map<String, Dice> getDice() {
+		return dice;
+	}
+//--------------------------------------------------//
+//----------------END OF GET METHODS----------------//
+//--------------------------------------------------//
+
+
+	public void setCurrentPlayer(Player player) {
+		currentPlayer = player;
+	}
 }
