@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  */
 public class VentureCard extends Card {
 
+
 	public VentureCard(String cardName, Effect immediateEffects, IncreaseResourcesEffect permanentEffects,
 			ResourceSet cost) {
 		super(cardName, immediateEffects, permanentEffects, cost);

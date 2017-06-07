@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps46.server.card;
 //import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
+
 /**
  * TerrytoryCard is an object that represent a single territory card of the game.
  * Territory cards have no cost, their immediate effects are of the type IncreaseResourcesEffect

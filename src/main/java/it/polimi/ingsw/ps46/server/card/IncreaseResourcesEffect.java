@@ -34,7 +34,7 @@ public class IncreaseResourcesEffect implements Effect {
 	 * who is the one that activated the card with the effect IncreaseResourcesEffect.
 	 */
 	public void activateEffect(Game game) {
-		game.getCurrentPlayer().getResources().add(additionalResources);
+		game.getCurrentPlayer().getPlayerResourceSet().add(additionalResources);
 	}
 	
 	public String toString() {

@@ -1,7 +1,8 @@
 package it.polimi.ingsw.ps46.server;
 
-import java.awt.Color;
 import java.util.ArrayList;
+
+import it.polimi.ingsw.ps46.server.card.Effect;
 
 public class Board {
 	
@@ -15,7 +16,7 @@ public class Board {
 	 * @param nOfTowers passed by configuration File
 	 * @param nOfBoardBoxes passed by configuration File
 	 * @param fourPlay 
-	 * @configurationVar xConfigurationInt; yConfigurationDice. Used to put the right values by configuration file.
+	 * @configurationParam xConfigurationInt; yConfigurationDice. Used to put the right values by configuration file.
 	 */
 	public Board(int nOfTowers, int nOfBoardBoxes, boolean fourPlay){
 		
@@ -23,7 +24,7 @@ public class Board {
 
 		for( int i = 0; i < nOfTowers; i++)
 		{
-			towers.add(i, new Tower(Color.yellow)); // color.yellow is just a standard color (the serial ones will be added by configuration file)
+			towers.add(i, new Tower(Color.YELLOW)); // color.yellow is just a standard color (the serial ones will be added by configuration file)
 		}
 		
 		boardBoxes = new ArrayList<ActionSpace>();
@@ -32,7 +33,8 @@ public class Board {
 		{
 			int xConfigurationInt = 7;
 			Dice yConfigurationDice = new Dice(xConfigurationInt);
-			boardBoxes.add(j,new ActionSpace(yConfigurationDice,xConfigurationInt));
+			//Effect zConfigurationEffect = new Effect();              // da sistemare con la classe giusta pushata da alessia.M
+		    //boardBoxes.add(j,new ActionSpace(yConfigurationDice,xConfigurationInt, zConfigurationEffect));
 		
 		}
 		

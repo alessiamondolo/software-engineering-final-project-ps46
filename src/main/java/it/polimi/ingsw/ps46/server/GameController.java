@@ -46,7 +46,7 @@ public class GameController implements Observer {
 			Player player=iterator.next();
 			game.setCurrentPlayer(player);
 			//TODO check per avere username univoco?
-			player.setUsername(view.getPlayerUserame(game.getCurrentPlayer().getId()));
+			player.setUsername(view.getPlayerUserame(game.getCurrentPlayer().getIdPlayer()));
 		}
 		
 	}

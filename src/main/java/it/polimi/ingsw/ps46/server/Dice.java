@@ -11,7 +11,7 @@ package it.polimi.ingsw.ps46.server;
 public class Dice {
 	
 	private int value = 0;
-	private static final int nFaces = 6;
+	private static final int NFACES = 6;
 	
 	
 	/**
@@ -44,7 +44,7 @@ public class Dice {
 	 */
 	public void throwDice(){
 		
-		Double x = Math.ceil(Math.random()*nFaces);
+		Double x = Math.ceil(Math.random()*NFACES);
 		value = x.intValue();
 	}
 
@@ -80,13 +80,13 @@ public class Dice {
 	
 	/**
 	 * Description of the method toString()
-	 * Print the value of the dice.
+	 * Return the value of the dice as a string.
 	 */
-	@Override
 	
+	
+	@Override
 	public String toString(){
-		return toString().valueOf(value);
-		
+		return Integer.toString(value);
 	}
 
 }
