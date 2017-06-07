@@ -1,7 +1,8 @@
 package it.polimi.ingsw.ps46.server;
 
-import java.awt.Color;
 import java.util.ArrayList;
+
+import it.polimi.ingsw.ps46.server.card.Effect;
 
 /**
  * Description of the class Tower.
@@ -22,7 +23,7 @@ public class Tower {
 	 * This constructor uses the parametric value towerColor and some variables used to put the right value by configuration file.
 	 * 
 	 * @param towerColor
-	 * @configuration  var  xConfigurationInt; yConfigurationActionSpace; zConfigurationDice. Used to put the right values by configuration file.
+	 * @configurationParam xConfigurationInt; yConfigurationActionSpace; zConfigurationDice. Used to put the right values by configuration file.
 	 */
 	public Tower (Color towerColor)
 	{
@@ -33,8 +34,9 @@ public class Tower {
 		{
 			int xConfigurationInt = 7; 
 			Dice zConfigurationDice = new Dice(xConfigurationInt);
-			ActionSpace yConfigurationActionSpace = new ActionSpace(zConfigurationDice, xConfigurationInt);
-			floors.add(i, new TowerFloor(xConfigurationInt, yConfigurationActionSpace));
+			//Effect wConfigurationEffect = new Effect();                        //da sistemare con la classe Effect pushata da alessia.M
+	     	//ActionSpace yConfigurationActionSpace = new ActionSpace(zConfigurationDice, xConfigurationInt, wConfigurationEffect);
+			//floors.add(i, new TowerFloor(xConfigurationInt, yConfigurationActionSpace));
 		}	
 	}
 	

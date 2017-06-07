@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.resources.Resources;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
  * Card is an object that represent a single card of the game.
@@ -13,12 +13,12 @@ public abstract class Card {
 	private final String cardName;
 	private final Effect immediateEffects;
 	private final Effect permanentEffects;
-	private final Resources cost;
+	private final ResourceSet cost;
 	 
 	/**
 	 * Build a new Card object.
 	 */
-	public Card(String cardName, Effect immediateEffects, Effect permanentEffects, Resources cost) {
+	public Card(String cardName, Effect immediateEffects, Effect permanentEffects, ResourceSet cost) {
 		this.cardName = cardName;
 		this.immediateEffects = immediateEffects;
 		this.permanentEffects = permanentEffects;
@@ -38,7 +38,7 @@ public abstract class Card {
 		return permanentEffects;
 	}
 
-	public Resources getCost() {
+	public ResourceSet getCost() {
 		return cost;
 	}
 	

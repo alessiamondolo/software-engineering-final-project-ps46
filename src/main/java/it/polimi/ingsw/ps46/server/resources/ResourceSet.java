@@ -7,14 +7,14 @@ import java.util.HashMap;
  * 
  * @author a.mondolo
  */
-public class Resources {
+public class ResourceSet {
 	
 	private HashMap resources;
 	
 	/**
 	 * The constructor.
 	 */
-	public Resources() {
+	public ResourceSet() {
 		resources = new HashMap();
 	}
 
@@ -28,14 +28,14 @@ public class Resources {
 	 * Description of the method addResources.
 	 * @param  
 	 */
-	public void addResources(Resources resources) {
+	public void addResources(ResourceSet resources) {
 	}
 
 	/**
 	 * Description of the method removeResources.
 	 * @param  
 	 */
-	public void removeResources(Resources resources) {
+	public void removeResources(ResourceSet resources) {
 	}
 
 }

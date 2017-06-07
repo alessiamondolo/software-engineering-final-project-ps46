@@ -11,7 +11,7 @@ package it.polimi.ingsw.ps46.server;
 public class Dice {
 	
 	private int value = 0;
-	private static final int nFaces = 6;
+	private static final int NFACES = 6;
 	
 	
 	/**
@@ -44,7 +44,7 @@ public class Dice {
 	 */
 	public void throwDice(){
 		
-		Double x = Math.ceil(Math.random()*nFaces);
+		Double x = Math.ceil(Math.random()*NFACES);
 		value = x.intValue();
 	}
 
@@ -68,9 +68,9 @@ public class Dice {
 	 * @return boolean 
 	 */
 
-	public Boolean greaterOrEqual(Dice diceValue1, Dice diceValue2){
+	public Boolean greaterOrEqual(Dice diceValue){
 	
-		if (diceValue1.getValue() >= diceValue2.getValue())
+		if (value >= diceValue.getValue())
 		{
 			return true;
 		}
@@ -86,7 +86,7 @@ public class Dice {
 	@Override
 	
 	public String toString(){
-		return toString().valueOf(value);
+		return Integer.toString(value);
 		
 	}
 

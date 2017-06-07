@@ -1,205 +1,182 @@
 package it.polimi.ingsw.ps46.server;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import it.polimi.ingsw.ps46.server.resources.Resources;
-
+import it.polimi.ingsw.ps46.server.card.BuildingCard;
+import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.card.CharacterCard;
+import it.polimi.ingsw.ps46.server.card.TerritoryCard;
+import it.polimi.ingsw.ps46.server.card.VentureCard;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
- * Description of Player.
+ * Description of the Class Player.
+ * This Class 
  * 
- * @author a.mondolo
+ * @author Andrea.Masi
  */
+
 public class Player {
-	/**
-	 * Description of the property username.
-	 */
-	public Object username;
 
-	/**
-	 * Description of the property territoryCards.
-	 */
-	public Object territoryCards;
+	private int idPlayer;
+	private String username;
+	private ResourceSet playerResources;
 
-	/**
-	 * Description of the property ventureCards.
-	 */
-	public Object ventureCards;
-
-	/**
-	 * Description of the property familyMembers.
-	 */
-	public HashSet<FamilyMember> familyMembers = new HashSet<FamilyMember>();
-
-	/**
-	 * Description of the property buildingCards.
-	 */
-	public Object buildingCards;
-
-	/**
-	 * Description of the property characterCards.
-	 */
-	public Object characterCards;
-
-	/**
-	 * Description of the property resourcess.
-	 */
-	private Resources resources = new Resources();
-
-	/**
-	 * Description of the property idPlayer.
-	 */
-	public Object idPlayer;
+	private ArrayList<TerritoryCard> territoryCards = null;
+	private ArrayList<VentureCard> ventureCards = null;
+	private ArrayList<BuildingCard> buildingCards = null;
+	private ArrayList<CharacterCard> characterCards = null;
+	
+	private Map <String,FamilyMember> familyMembers;
+	
+	private final static int MAXOFFAMILYMEMBERS = 4;
+	private final static int MAXNUMBEROFCARDS = 6;
 
 
+	
 	/**
 	 * The constructor.
-	 * @param idPlayer 
+	 * 
+	 * @param idPlayer
+	 * @configurationParam xConfigurationColorOftheFamilyMember, yConfigurationFamilyMember. Used to put the right values by configuration file.
 	 */
+	
 	public Player(int idPlayer) {
-		super();
+		//userName come parametro o settato dopo?
+		this.idPlayer = idPlayer;
+		playerResources = new ResourceSet(); // occhio che non ho ancora la classe resourceSet settata!
+		
+		
+		familyMembers = new HashMap<String,FamilyMember>(familyMembers);
+		for (int i = 0; i < MAXOFFAMILYMEMBERS; i++)
+		{
+			String xConfigurationColorOftheFamilyMember= "WHITE FAMILY MEMBER";
+			FamilyMember yConfigurationFamilyMember = new FamilyMember();
+			familyMembers.put(xConfigurationColorOftheFamilyMember, yConfigurationFamilyMember);
+		}
 	}
-
+	
+	
 	/**
-	 * Description of the method getCards.
+	 * Description of the method getIdPlayer.
+	 * @return idPlayer 
 	 */
-	public void getCards() {
+	public int getIdPlayer() {
+		return idPlayer;
 	}
 
-	/**
-	 * Description of the method getNeutralFamilyMember.
-	 */
-	public void getNeutralFamilyMember() {
-	}
-
-	/**
-	 * Description of the method getOrangeFamilyMember.
-	 */
-	public void getOrangeFamilyMember() {
-	}
-
-	/**
-	 * Description of the method getBlackFamilyMember.
-	 */
-	public void getBlackFamilyMember() {
-	}
-
-	/**
-	 * Description of the method getWhiteFamilyMember.
-	 */
-	public void getWhiteFamilyMember() {
-	}
-
-	/**
-	 * Returns username.
-	 * @return username 
-	 */
-	public Object getUsername() {
-		return this.username;
-	}
-
-	/**
-	 * Sets a value to attribute username. 
-	 * @param newUsername 
-	 */
-	public void setUsername(Object newUsername) {
-		this.username = newUsername;
-	}
-
-	/**
-	 * Returns territoryCards.
-	 * @return territoryCards 
-	 */
-	public Object getTerritoryCards() {
-		return this.territoryCards;
-	}
-
+	
+	
 	/**
 	 * Sets a value to attribute territoryCards. 
 	 * @param newTerritoryCards 
 	 */
-	public void setTerritoryCards(Object newTerritoryCards) {
-		this.territoryCards = newTerritoryCards;
+	public void putTerritoryCardInPlayerSet(TerritoryCard newTerritoryCard) { //eccezione?!
+		if (territoryCards.size() < MAXNUMBEROFCARDS)
+		{
+			territoryCards.add(newTerritoryCard);
+		}
+		//else ECCEZIONE?! return -1 ?boh	
+			
 	}
+	
+	public void putCharacterCardInPlayerSet(CharacterCard newCharacterCard) { //eccezione?!
+		if (characterCards.size() < MAXNUMBEROFCARDS)
+		{
+			characterCards.add(newCharacterCard);
+		}
+		// else ECCEZIONE?! return -1 ?boh	
+			
+	}
+		
+	public void putVentureCardInPlayerSet(VentureCard newVentureCard) { //eccezione?!
+		if (ventureCards.size() < MAXNUMBEROFCARDS)
+		{
+			ventureCards.add(newVentureCard);
+		}
+		//else ECCEZIONE?! return -1 ?boh	
+			
+	}
+	
+	
+	public void putBuildingCardInPlayerSet(BuildingCard newBuildingCard) { //eccezione?!
+		if (buildingCards.size() < MAXNUMBEROFCARDS)
+		{
+			buildingCards.add(newBuildingCard);
+		}
+		// else ECCEZIONE?! return -1 ?boh	
+			
+	}
+	
+	/**
+	 * Returns territoryCards.
+	 * @return territoryCards 
+	 */
+	public  TerritoryCard getTerritoryCards(int index) {
+		return territoryCards.get(index);
+		
+	}
+
 
 	/**
 	 * Returns ventureCards.
 	 * @return ventureCards 
 	 */
-	public Object getVentureCards() {
-		return this.ventureCards;
+	public VentureCard getVentureCards(int index) {
+		return ventureCards.get(index);
+		
 	}
 
-	/**
-	 * Sets a value to attribute ventureCards. 
-	 * @param newVentureCards 
-	 */
-	public void setVentureCards(Object newVentureCards) {
-		this.ventureCards = newVentureCards;
-	}
-
-	/**
-	 * Returns familyMembers.
-	 * @return familyMembers 
-	 */
-	public HashSet<FamilyMember> getFamilyMembers() {
-		return this.familyMembers;
-	}
-
+	
 	/**
 	 * Returns buildingCards.
 	 * @return buildingCards 
 	 */
-	public Object getBuildingCards() {
-		return this.buildingCards;
+	public BuildingCard getBuildingCards(int index) {
+		return buildingCards.get(index);
 	}
 
-	/**
-	 * Sets a value to attribute buildingCards. 
-	 * @param newBuildingCards 
-	 */
-	public void setBuildingCards(Object newBuildingCards) {
-		this.buildingCards = newBuildingCards;
-	}
-
+	
 	/**
 	 * Returns characterCards.
 	 * @return characterCards 
 	 */
-	public Object getCharacterCards() {
-		return this.characterCards;
+	public CharacterCard getCharacterCards(int index) {
+		return characterCards.get(index);
 	}
 
-	/**
-	 * Sets a value to attribute characterCards. 
-	 * @param newCharacterCards 
-	 */
-	public void setCharacterCards(Object newCharacterCards) {
-		this.characterCards = newCharacterCards;
-	}
 
 	/**
 	 * Returns resources.
 	 * @return resources 
 	 */
-	public Resources getResources() {
-		return this.resources;
+	public ResourceSet getPlayerResourceSet() {
+		return playerResources;
 	}
 
+	
+	
 	/**
-	 * Returns idPlayer.
-	 * @return idPlayer 
+	 * Description of the method getFamilyMembers.
+	 * This method returns a selected familyMember by colorKey (String).
+	 * 
+	 * @return selectfamilyMember 
 	 */
-	public Object getIdPlayer() {
-		return this.idPlayer;
+	public FamilyMember getFamilyMember(String colorKey) {
+		return familyMembers.get(colorKey);
+		
 	}
 
-	/**
-	 * Sets a value to attribute idPlayer. 
-	 * @param newIdPlayer 
-	 */
-	public void setIdPlayer(Object newIdPlayer) {
-		this.idPlayer = newIdPlayer;
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }
