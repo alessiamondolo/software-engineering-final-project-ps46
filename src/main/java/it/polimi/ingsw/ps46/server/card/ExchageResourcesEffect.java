@@ -17,14 +17,14 @@ public class ExchageResourcesEffect implements Effect {
 
 	public void activateEffect(Game game) {
 		if(canBeActivated(game)) {
-			game.getCurrentPlayer().getResources().sub(requiredResources);
-			game.getCurrentPlayer().getResources().add(gainedResources);
+			game.getCurrentPlayer().getPlayerResourceSet().sub(requiredResources);
+			game.getCurrentPlayer().getPlayerResourceSet().add(gainedResources);
 		}
 		//else throw exception - NotActivableEffect
 	}
 	
 	public boolean canBeActivated(Game game) {
-		return(game.getCurrentPlayer().getResources().greaterOrEqual(requiredResources));
+		return(game.getCurrentPlayer().getPlayerResourceSet().greaterOrEqual(requiredResources));
 	}
 
 }
