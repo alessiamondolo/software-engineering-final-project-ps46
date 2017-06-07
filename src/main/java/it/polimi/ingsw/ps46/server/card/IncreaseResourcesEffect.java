@@ -5,19 +5,19 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
 /**
- * IncreaseResources is an object that represent an effect that increases
+ * IncreaseResourcesEffect is an object that represent an effect that increases
  * the resources of a player.
  * 
  * @author Alessia Mondolo
  */
-public class IncreaseResources implements Effect {
+public class IncreaseResourcesEffect implements Effect {
 	
-	public final ResourceSet additionalResources;
+	public ResourceSet additionalResources;
 
 	/**
-	 * Build a new effect of the type IncreaseResources.
+	 * Build a new effect of the type IncreaseResourcesEffect.
 	 */
-	public IncreaseResources(ResourceSet additionalResources) {
+	public IncreaseResourcesEffect(ResourceSet additionalResources) {
 		this.additionalResources = additionalResources;
 	}
 
@@ -31,10 +31,14 @@ public class IncreaseResources implements Effect {
 	
 	/**
 	 * This method adds the additional resources to the resources of the current player,
-	 * who is the one that activated the card with the effect IncreaseResources.
+	 * who is the one that activated the card with the effect IncreaseResourcesEffect.
 	 */
 	public void activateEffect(Game game) {
-		game.getCurrentPlayer().getResources().addResources(additionalResources);
+		game.getCurrentPlayer().getResources().add(additionalResources);
+	}
+	
+	public String toString() {
+		return additionalResources.toString();
 	}
 
 }

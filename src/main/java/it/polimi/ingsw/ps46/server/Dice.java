@@ -81,13 +81,13 @@ public class Dice {
 	
 	/**
 	 * Description of the method toString()
-	 * Print the value of the dice.
+	 * Return the value of the dice as a string.
 	 */
-	@Override
 	
+	
+	@Override
 	public String toString(){
 		return Integer.toString(value);
-		
 	}
 
 }

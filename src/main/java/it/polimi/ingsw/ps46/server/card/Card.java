@@ -16,6 +16,7 @@ public abstract class Card {
 	private final ResourceSet cost;
 	 
 	/**
+	 * 
 	 * Build a new Card object.
 	 */
 	public Card(String cardName, Effect immediateEffects, Effect permanentEffects, ResourceSet cost) {
@@ -54,6 +55,14 @@ public abstract class Card {
 		//stores the permanent effects in the list of permanent effects of the player
 		// TODO
 		//gameState.getCurrentPlayer().addPermanentEffect(permanentEffects);
+	}
+	
+	@Override
+	public String toString() {
+		return "Card name: " + cardName + "\n" + 
+				"Immediate effects: " + immediateEffects + "\n" +
+				"Permanent effects: " + permanentEffects + "\n" +
+				"Cost: " + cost;
 	}
 	
 }

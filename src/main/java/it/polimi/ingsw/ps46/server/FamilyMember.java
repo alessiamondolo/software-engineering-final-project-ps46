@@ -91,5 +91,5 @@ public class FamilyMember {
 	public int getPositionOfFamilyMember() {
 		return positionOfFamilyMember;
 	}
-	
 }
+	

@@ -1,0 +1,218 @@
+[
+	{
+		"cardName" : "Commercial Hub",
+	
+				"immediateEffects" : {
+					"additionalResources": [
+												{
+													"id" : "Wood",
+													"quantity" : 3
+												},
+												{
+													"id" : "Stones",
+													"quantity" : 0
+												},
+												{
+													"id" : "Servants",
+													"quantity" : 0
+												},
+												{
+													"id" : "Money",
+													"quantity" : 0
+												},
+												{
+													"id" : "FaithPoints",
+													"quantity" : 0
+												},
+												{
+													"id" : "MilitaryPoints",
+													"quantity" : 0
+												},
+												{
+													"id" : "VictoryPoints",
+													"quantity" : 0
+												}
+											]
+						
+						
+				
+			},
+		
+				"permanentEffects" : {
+					"additionalResources": [
+												{
+													"id" : "Wood",
+													"quantity" : 4
+												},
+												{
+													"id" : "Stones",
+													"quantity" : 0
+												},
+												{
+													"id" : "Servants",
+													"quantity" : 0
+												},
+												{
+													"id" : "Money",
+													"quantity" : 0
+												},
+												{
+													"id" : "FaithPoints",
+													"quantity" : 0
+												},
+												{
+													"id" : "MilitaryPoints",
+													"quantity" : 0
+												},
+												{
+													"id" : "VictoryPoints",
+													"quantity" : 0
+												}
+											]
+						
+						
+				
+			},
+
+			"cost": [
+						{
+							"id" : "Wood",
+							"quantity" : 1
+						},
+						{
+							"id" : "Stones",
+							"quantity" : 0
+						},
+						{
+							"id" : "Servants",
+							"quantity" : 0
+						},
+						{
+							"id" : "Money",
+							"quantity" : 0
+						},
+						{
+							"id" : "FaithPoints",
+							"quantity" : 0
+						},
+						{
+							"id" : "MilitaryPoints",
+							"quantity" : 0
+						},
+						{
+							"id" : "VictoryPoints",
+							"quantity" : 0
+						}
+					]
+					
+	},
+	{
+		"cardName" : "Prova",
+	
+				"immediateEffects" : {
+					"additionalResources": [
+												{
+													"id" : "Wood",
+													"quantity" : 3
+												},
+												{
+													"id" : "Stones",
+													"quantity" : 2
+												},
+												{
+													"id" : "Servants",
+													"quantity" : 0
+												},
+												{
+													"id" : "Money",
+													"quantity" : 0
+												},
+												{
+													"id" : "FaithPoints",
+													"quantity" : 0
+												},
+												{
+													"id" : "MilitaryPoints",
+													"quantity" : 0
+												},
+												{
+													"id" : "VictoryPoints",
+													"quantity" : 0
+												}
+											]
+						
+						
+				
+			},
+		
+				"permanentEffects" : {
+					"additionalResources": [
+												{
+													"id" : "Wood",
+													"quantity" : 4
+												},
+												{
+													"id" : "Stones",
+													"quantity" : 3
+												},
+												{
+													"id" : "Servants",
+													"quantity" : 0
+												},
+												{
+													"id" : "Money",
+													"quantity" : 0
+												},
+												{
+													"id" : "FaithPoints",
+													"quantity" : 0
+												},
+												{
+													"id" : "MilitaryPoints",
+													"quantity" : 0
+												},
+												{
+													"id" : "VictoryPoints",
+													"quantity" : 0
+												}
+											]
+						
+						
+				
+			},
+
+			"cost": [
+						{
+							"id" : "Wood",
+							"quantity" : 1
+						},
+						{
+							"id" : "Stones",
+							"quantity" : 4
+						},
+						{
+							"id" : "Servants",
+							"quantity" : 0
+						},
+						{
+							"id" : "Money",
+							"quantity" : 0
+						},
+						{
+							"id" : "FaithPoints",
+							"quantity" : 0
+						},
+						{
+							"id" : "MilitaryPoints",
+							"quantity" : 0
+						},
+						{
+							"id" : "VictoryPoints",
+							"quantity" : 0
+						}
+					]
+					
+	}
+]
+
+	

@@ -1,8 +1,14 @@
 package it.polimi.ingsw.ps46.server;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+=======
+import java.util.HashSet;
+
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
+>>>>>>> b13333cdf5a33a61a8d43cd2f0d038d618a2cbbc
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
@@ -33,7 +39,6 @@ public class Player {
 	
 	private final static int MAXOFFAMILYMEMBERS = 4;
 	private final static int MAXNUMBEROFCARDS = 6;
-
 
 	
 	/**
