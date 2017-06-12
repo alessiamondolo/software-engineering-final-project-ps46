@@ -1,0 +1,114 @@
+[
+	{
+		"type" : "Market",
+		"minPlayers" : 2,
+		"requiredFamilyMemberValue" : 
+		{
+			"value" : 1
+		},
+		"maxOnePlayer" : true,
+		"effectOfActionSpace" : 
+		{
+			"additionalResources": 
+			[
+				{
+					"id" : "Money",
+					"quantity" : 5
+				}
+			]
+		}
+	},
+	{
+		"type" : "Market",
+		"minPlayers" : 2,
+		"requiredFamilyMemberValue" : 
+		{
+			"value" : 1
+		},
+		"maxOnePlayer" : true,
+		"effectOfActionSpace" : 
+		{
+			"additionalResources": 
+			[
+				{
+					"id" : "Servants",
+					"quantity" : 5
+				}
+			]
+		}
+	},
+	{
+		"type" : "Market",
+		"minPlayers" : 4,
+		"requiredFamilyMemberValue" : 
+		{
+			"value" : 1
+		},
+		"maxOnePlayer" : true,
+		"effectOfActionSpace" : 
+		{
+			"additionalResources": 
+			[
+				{
+					"id" : "Money",
+					"quantity" : 2
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 3
+				}
+			]
+		}
+	},
+	{
+		"type" : "Market",
+		"minPlayers" : 4,
+		"requiredFamilyMemberValue" : 
+		{
+			"value" : 1
+		},
+		"maxOnePlayer" : true,
+		"effectOfActionSpace" : 
+		{
+			"additionalResources": 
+			[
+				{
+					"id" : "CounsilPrivilege",
+					"quantity" : 2
+				}
+			]
+		}
+	},
+	{
+		"type" : "Production",
+		"minPlayers" : 2,
+		"requiredFamilyMemberValue" : 
+		{
+			"value" : 1
+		},
+		"maxOnePlayer" : false,
+		"effectOfActionSpace" : 
+		{
+			"additionalResources": 
+			[
+
+			]
+		}
+	},
+	{
+		"type" : "Production",
+		"minPlayers" : 3,
+		"requiredFamilyMemberValue" : 
+		{
+			"value" : 1
+		},
+		"maxOnePlayer" : false,
+		"effectOfActionSpace" : 
+		{
+			"additionalResources": 
+			[
+
+			]
+		}
+	}
+]

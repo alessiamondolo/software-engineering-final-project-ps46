@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.validator.PublicClassValidator;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
@@ -22,7 +21,7 @@ public class Player {
 
 	private int idPlayer;
 	private String username;
-	private ResourceSet playerResources;
+	private ResourceSet playerResources = null;
 
 	private ArrayList<TerritoryCard> territoryCards = null;
 	
@@ -44,18 +43,18 @@ public class Player {
 	 */
 	
 	public Player(int idPlayer) {
-		//userName come parametro o settato dopo?
-		this.idPlayer = idPlayer;
-		//playerResources = new ResourceSet(); // occhio che non ho ancora la classe resourceSet settata!
 		
+		this.idPlayer = idPlayer; 
 		
-		familyMembers = new HashMap<String,FamilyMember>(familyMembers);
+		familyMembers = new HashMap<String,FamilyMember>();
+		/*
 		for (int i = 0; i < MAXOFFAMILYMEMBERS; i++)
 		{
 			String xConfigurationColorOftheFamilyMember= "WHITE FAMILY MEMBER";
 			FamilyMember yConfigurationFamilyMember = new FamilyMember();
 			familyMembers.put(xConfigurationColorOftheFamilyMember, yConfigurationFamilyMember);
 		}
+		*/
 	}
 	
 	

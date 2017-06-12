@@ -1,0 +1,139 @@
+[
+	{
+		"player" : 1,
+		"initialResources": 
+		[
+			{
+				"id" : "Wood",
+				"quantity" : 2
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 2
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 3
+			},
+			{
+				"id" : "Money",
+				"quantity" : 5
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		]
+	},
+	{
+		"player" : 2,
+		"initialResources": 
+		[
+			{
+				"id" : "Wood",
+				"quantity" : 2
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 2
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 3
+			},
+			{
+				"id" : "Money",
+				"quantity" : 6
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		]
+	},
+	{
+		"player" : 3,
+		"initialResources": 
+		[
+			{
+				"id" : "Wood",
+				"quantity" : 2
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 2
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 3
+			},
+			{
+				"id" : "Money",
+				"quantity" : 7
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		]
+	},
+	{
+		"player" : 4,
+		"initialResources": 
+		[
+			{
+				"id" : "Wood",
+				"quantity" : 2
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 2
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 3
+			},
+			{
+				"id" : "Money",
+				"quantity" : 8
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		]
+	}
+]
+

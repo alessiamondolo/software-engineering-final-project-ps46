@@ -43,7 +43,7 @@ public class MoveToActionSpaceAction implements Action {
 		if(isLegal()) {
 			//Sets the action space as not available
 			//TODO check modifications to this method
-			actionSpace.updateNumberOfSpotsAvailable();
+			actionSpace.updateAvailability ();
 			//TODO set the family member as used			
 			switch(actionSpace.getType()) {
 				case "TowerActionSpace" : {
