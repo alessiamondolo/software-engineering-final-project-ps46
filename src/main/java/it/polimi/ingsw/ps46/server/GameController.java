@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
@@ -37,6 +39,7 @@ public class GameController implements Observer {
 	private void setupGame() {
 		view.welcomeMessage();
 		setupPlayers();
+		setupInitialOrder();
 		
 	}
 
@@ -51,5 +54,14 @@ public class GameController implements Observer {
 		
 	}
 	
+	private void setupInitialOrder() {
+		game.setInitialOrder();
+		List<String> initialOrder = new ArrayList<String>();
+		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
+			Player player=iterator.next();
+			initialOrder.add(player.getUsername());
+		}
+		view.showInitialOrder(initialOrder);
+	}
 
 }

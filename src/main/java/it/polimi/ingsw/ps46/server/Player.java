@@ -1,15 +1,23 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
+import it.polimi.ingsw.ps46.utils.MyJSONParser;
 
 /**
  * Description of the Class Player.
@@ -21,7 +29,7 @@ public class Player {
 
 	private int idPlayer;
 	private String username;
-	private ResourceSet playerResources;
+	private ResourceSet playerResources = null;
 
 	private ArrayList<TerritoryCard> territoryCards = null;
 	private ArrayList<VentureCard> ventureCards = null;
@@ -42,18 +50,18 @@ public class Player {
 	 */
 	
 	public Player(int idPlayer) {
-		//userName come parametro o settato dopo?
-		this.idPlayer = idPlayer;
-		//playerResources = new ResourceSet(); // occhio che non ho ancora la classe resourceSet settata!
 		
+		this.idPlayer = idPlayer; 
 		
-		familyMembers = new HashMap<String,FamilyMember>(familyMembers);
+		familyMembers = new HashMap<String,FamilyMember>();
+		/*
 		for (int i = 0; i < MAXOFFAMILYMEMBERS; i++)
 		{
 			String xConfigurationColorOftheFamilyMember= "WHITE FAMILY MEMBER";
 			FamilyMember yConfigurationFamilyMember = new FamilyMember();
 			familyMembers.put(xConfigurationColorOftheFamilyMember, yConfigurationFamilyMember);
 		}
+		*/
 	}
 	
 	

@@ -15,9 +15,8 @@ public class ActionSpace {
 	private String type;
 	private Effect effectOfActionSpace;
 	private Dice requiredFamilyMemberValue;
-	private Boolean available = true;
-	private int totalNumberOfSpot = 0;
-	private int numberFamilyMemberOnTheActionSpace = 0;
+	private boolean available = true;
+	private Boolean maxOnePlayer;
 
 	
 	/** 
@@ -28,40 +27,32 @@ public class ActionSpace {
 	 * @param totNumberSpot 
 	 */
 	
-	public ActionSpace(Dice FamilyMembervalue, int totNumberSpot, Effect effectOfActionSpace) {
+	public ActionSpace(Dice familyMembervalue, Boolean maxOnePlayer, Effect effectOfActionSpace) {
 		
 		setIdLocalActionSpaces(IDACTIONSPACE);
 		IDACTIONSPACE ++;
-		FamilyMembervalue = new Dice();
+		familyMembervalue = new Dice();
 		this.effectOfActionSpace = effectOfActionSpace;
-		requiredFamilyMemberValue = FamilyMembervalue;
-		totalNumberOfSpot = totNumberSpot; 
+		requiredFamilyMemberValue = familyMembervalue;
+		this.maxOnePlayer = maxOnePlayer; 
 	}
 
 
 	
 	/**
-	 * Description of the method updateNumberOfSpotsAvailable().
-	 * Make a double check (on availability & number of free spots of an actionSpace) if is it possible to put a family member on a box. 
+	 * Description of the method updateAvailability().
+	 * If the action space is available and there is the limitation of maximum one player,
+	 * sets available as false.
 	 */
 
-	public void updateNumberOfSpotsAvailable(){
-		if ( (available == true) && (numberFamilyMemberOnTheActionSpace < totalNumberOfSpot) )
-		{
-			numberFamilyMemberOnTheActionSpace++;
-		}
-		else if ((available == true) && (numberFamilyMemberOnTheActionSpace == totalNumberOfSpot))
-		{
+	public void updateAvailability(){
+		if ((available == true) && (maxOnePlayer)) {
 			available = false;
 		}
 	}
 	
-	public void clearNumberOfSpotsAvailable(){
-		if (available = false)
-		{
-			numberFamilyMemberOnTheActionSpace = 0;
+	public void setAsAvailable() {
 			available = true;
-		}
 	}
 
 	
@@ -98,24 +89,14 @@ public class ActionSpace {
 	}
 	
 	
-	/**
-	 * Description of the method getNumberOfMembersOnTheSpot
-	 * @return numberFamilyMemberOnTheActionSpace
-	 */
-	public int getNumberOfMembersOnTheSpot()
-	{
-		return numberFamilyMemberOnTheActionSpace;
-
-	}
-	
 	
 	/**
 	 * Description of the method GetTotalNumberOfSpot.
 	 * 
 	 * @return totalNumberOfSpot
 	 */
-	public int GetTotalNumberOfSpot(){
-		return totalNumberOfSpot;
+	public boolean isMaxOnePlayer(){
+		return maxOnePlayer;
 		
 	}
 

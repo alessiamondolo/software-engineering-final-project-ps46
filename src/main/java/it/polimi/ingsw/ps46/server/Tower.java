@@ -16,7 +16,7 @@ import it.polimi.ingsw.ps46.server.card.Effect;
 public class Tower {
 	private ArrayList<TowerFloor> floors;
 	private static final int numberOfFloors = 4;
-	private Color colorOfTheTower;
+	private String colorOfTheTower;
 
 	
 	/**Description of the constructor Tower.
@@ -25,10 +25,10 @@ public class Tower {
 	 * @param towerColor
 	 * @configurationParam xConfigurationInt; yConfigurationActionSpace; zConfigurationDice. Used to put the right values by configuration file.
 	 */
-	public Tower (Color towerColor)
+	public Tower (String towerColor, ArrayList<TowerFloor> floors)
 	{
 		colorOfTheTower = towerColor;
-		floors = new ArrayList<TowerFloor>();
+		this.floors = floors;
 		
 		for(int i = 0; i< numberOfFloors; i++)
 		{
@@ -50,7 +50,7 @@ public class Tower {
 	
 	public Boolean sameColor(Color colorOfTheCard){
 		
-		if(colorOfTheTower == colorOfTheCard)
+		if(colorOfTheTower.equals(colorOfTheCard))
 			return true;
 		
 		else
