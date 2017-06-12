@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.validator.PublicClassValidator;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
@@ -24,6 +25,7 @@ public class Player {
 	private ResourceSet playerResources;
 
 	private ArrayList<TerritoryCard> territoryCards = null;
+	
 	private ArrayList<VentureCard> ventureCards = null;
 	private ArrayList<BuildingCard> buildingCards = null;
 	private ArrayList<CharacterCard> characterCards = null;
@@ -116,6 +118,12 @@ public class Player {
 		return territoryCards.get(index);
 		
 	}
+	
+	public ArrayList<TerritoryCard> getTerritoryDeck()
+	{
+		return territoryCards;
+		
+	}
 
 
 	/**
@@ -127,6 +135,10 @@ public class Player {
 		
 	}
 
+	public ArrayList<VentureCard> getVentureDeck()
+	{
+		return ventureCards;
+	}
 	
 	/**
 	 * Returns buildingCards.
@@ -136,6 +148,11 @@ public class Player {
 		return buildingCards.get(index);
 	}
 
+	public ArrayList<BuildingCard> getBuildingDeck()
+	{
+		return buildingCards;
+		
+	}
 	
 	/**
 	 * Returns characterCards.
@@ -143,6 +160,12 @@ public class Player {
 	 */
 	public CharacterCard getCharacterCards(int index) {
 		return characterCards.get(index);
+	}
+	
+	public ArrayList<CharacterCard> getCharacterDeck()
+	{
+		return characterCards;
+		
 	}
 
 

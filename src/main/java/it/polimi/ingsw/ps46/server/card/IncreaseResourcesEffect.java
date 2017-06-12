@@ -12,7 +12,7 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  */
 public class IncreaseResourcesEffect implements Effect {
 	
-	public ResourceSet additionalResources;
+	protected ResourceSet additionalResources; //cambiato l'attributo da public a private
 
 	/**
 	 * Build a new effect of the type IncreaseResourcesEffect.

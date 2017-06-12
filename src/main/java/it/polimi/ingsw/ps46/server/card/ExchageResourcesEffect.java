@@ -4,10 +4,10 @@ import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
-public class ExchageResourcesEffect implements Effect {
+public class ExchageResourcesEffect implements Effect { // ho cambiato gli attributi da public a private 
 
-	public ResourceSet requiredResources;
-	public ResourceSet gainedResources;
+	private ResourceSet requiredResources;
+	private ResourceSet gainedResources;
 
 	
 	public ExchageResourcesEffect(ResourceSet requiredResources, ResourceSet gainedResources) {

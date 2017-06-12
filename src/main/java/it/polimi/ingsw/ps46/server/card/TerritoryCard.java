@@ -17,9 +17,9 @@ public class TerritoryCard extends Card {
 	//private static final ResourceSet cost = null;
 	//private Dice harvestValue;
 
-	public TerritoryCard(String cardName, IncreaseResourcesEffect immediateEffects, IncreaseResourcesEffect permanentEffects,
+	public TerritoryCard(String cardName,int cardEra, IncreaseResourcesEffect immediateEffects, IncreaseResourcesEffect permanentEffects,
 			ResourceSet cost) {
-		super(cardName, immediateEffects, permanentEffects, cost);
+		super(cardName,cardEra, immediateEffects, permanentEffects, cost);
 		//this.harvestValue = harvestValue;
 	}
 	
