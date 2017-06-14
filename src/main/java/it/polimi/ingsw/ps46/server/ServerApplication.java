@@ -27,7 +27,15 @@ public class ServerApplication {
 	 */
 	public ServerApplication(int numberPlayers) {
 		game = new Game(numberPlayers);
-		view = new ConsoleView(System.out);
+		printStream.println("Do you want to play with the CLI or with the GUI?");
+		printStream.println("1. CLI");
+		printStream.println("2. GUI");
+		int UI = readInput.IntegerFromConsole(1, 2);
+		if(UI == 1)
+			view = new ConsoleView(System.out);
+		else
+			//TODO da cambiare mettendo GUIView
+			view = new ConsoleView(System.out);
 		controller = new GameController(game, view);
 	}
 

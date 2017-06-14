@@ -8,26 +8,38 @@ import java.util.Observer;
 /**
  * Description of View.
  * 
- * @author a.mondolo
+ * @author Alessia Mondolo
  */
-public abstract class View extends Observable implements Runnable, Observer{ 
-	
-	@Override
-	public void update(Observable o, Object arg) {
-		//WIP
-	}
+public abstract class View extends Observable implements Observer{ 
 
 	public void welcomeMessage() {		
 	}
 
 	public String getPlayerUserame(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void showInitialOrder(List<String> initialOrder) {
-		// TODO Auto-generated method stub
-		
+	public void showInitialOrder(List<String> initialOrder) {		
+	}
+
+	public String getPlayerColor(String username, List<String> colors) {
+		return null;
 	}	
+	
+	public void rollDice() {
+	}
+	
+	public void printBoard(List<Integer> dice) {
+	}
+
+	public ActionSpaceName getPlayerAction() {
+		return null;		
+	}
+
+	public void printPlayerStatus(String username) {		
+	}
+
+	public void updateRoundInfo(int period, int round) {
+	}
 	
 }

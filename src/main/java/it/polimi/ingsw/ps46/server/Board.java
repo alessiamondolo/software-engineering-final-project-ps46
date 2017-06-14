@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps46.server;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps46.server.card.Effect;
 
 public class Board {
 	

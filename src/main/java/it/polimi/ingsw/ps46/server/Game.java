@@ -1,5 +1,9 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,12 +11,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
- 
+
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
 import it.polimi.ingsw.ps46.server.card.FactoryCards;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
+import it.polimi.ingsw.ps46.utils.MyJSONParser;
 
 
 public class Game extends Observable {
@@ -42,9 +52,12 @@ public class Game extends Observable {
 		configDice();
 		configDecks();
 		configBoard();
-		
 	}
 
+	private void newState(Object newStateMessage) {
+		setChanged();
+		notifyObservers(newStateMessage);
+	}
 	
 //--------------------------------------------------//
 //----------BEGIN OF CONFIGURATION METHODS----------//
@@ -81,6 +94,10 @@ public class Game extends Observable {
 		characterCardsDeck = factoryCards.createCharacterCards("CharacterCards.json");
 		ventureCardsDeck = factoryCards.createVentureCards("VentureCards.json");
 		
+	}
+	
+	public void startGame() {
+		newState(NewStateMessage.SETUP_GAME);
 	}
 //--------------------------------------------------//
 //-----------END OF CONFIGURATION METHODS-----------//
@@ -169,6 +186,26 @@ public class Game extends Observable {
 	
 	public void setInitialOrder() {
 		Collections.shuffle(players);
+	}
+	
+	public void giveInitialResources(Player player) {
+		ResourceSet initialResources = null;
+		JSONParser parser = new JSONParser();
+		MyJSONParser myJSONParser = new MyJSONParser();
+		try {
+        	URL url = getClass().getResource("SetupResources.json");
+        	Object obj = parser.parse(new FileReader(url.getPath()));
+        	JSONArray resourcesJSON = (JSONArray) obj;
+        	initialResources = myJSONParser.buildResourceSet(resourcesJSON);
+		} catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+		player.setResources(initialResources);
+		newState(NewStateMessage.UPDATE_CURRENT_PLAYER_STATE);
 	}
 
 }

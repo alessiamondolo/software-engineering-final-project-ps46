@@ -1,23 +1,15 @@
 package it.polimi.ingsw.ps46.server;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
-import it.polimi.ingsw.ps46.utils.MyJSONParser;
+
 
 /**
  * Description of the Class Player.
@@ -29,6 +21,7 @@ public class Player {
 
 	private int idPlayer;
 	private String username;
+	private String color;
 	private ResourceSet playerResources = null;
 
 	private ArrayList<TerritoryCard> territoryCards = null;
@@ -38,7 +31,7 @@ public class Player {
 	
 	private Map <String,FamilyMember> familyMembers;
 	
-	private final static int MAXOFFAMILYMEMBERS = 4;
+	//private final static int MAXOFFAMILYMEMBERS = 4;
 	private final static int MAXNUMBEROFCARDS = 6;
 
 	
@@ -179,10 +172,24 @@ public class Player {
 	public String getUsername() {
 		return username;
 	}
+	
+	
+	public String getColor() {
+		return color;
+	}
 
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+
+	public void setColor(String color) {
+		this.color = color;		
+	}
+	
+	public void setResources(ResourceSet resources) {
+		playerResources = resources;
 	}
 
 }
