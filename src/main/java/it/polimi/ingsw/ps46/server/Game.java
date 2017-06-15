@@ -13,6 +13,7 @@ import java.util.Observable;
 import java.util.Set;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -41,6 +42,8 @@ public class Game extends Observable {
 	private Set<VentureCard> ventureCardsDeck;
 	private Map<String, Dice> dice;
 	
+	private GameState gameState;
+	
 	
 	Game(int numberPlayers) {
 		this.numberPlayers = numberPlayers;
@@ -54,9 +57,9 @@ public class Game extends Observable {
 		configBoard();
 	}
 
-	private void newState(Object newStateMessage) {
+	private void newState(Object event) {
 		setChanged();
-		notifyObservers(newStateMessage);
+		notifyObservers(event);
 	}
 	
 //--------------------------------------------------//
@@ -94,10 +97,6 @@ public class Game extends Observable {
 		characterCardsDeck = factoryCards.createCharacterCards("CharacterCards.json");
 		ventureCardsDeck = factoryCards.createVentureCards("VentureCards.json");
 		
-	}
-	
-	public void startGame() {
-		newState(NewStateMessage.SETUP_GAME);
 	}
 //--------------------------------------------------//
 //-----------END OF CONFIGURATION METHODS-----------//
@@ -175,6 +174,11 @@ public class Game extends Observable {
 //----------------END OF GET METHODS----------------//
 //--------------------------------------------------//
 
+	public void startGame() {
+		newState(new EventMessage(NewStateMessage.SETUP_GAME));
+	}
+	
+	
 	public void setNextTurnOrder(ArrayList<Player> nextTurnOrder) {
 		this.nextTurnOrder = nextTurnOrder;
 	}
@@ -182,6 +186,9 @@ public class Game extends Observable {
 
 	public void setCurrentPlayer(Player player) {
 		currentPlayer = player;
+		JSONObject obj = new JSONObject();
+		obj.put("PlayerID", currentPlayer.getIdPlayer());
+		newState(new EventMV(gameState, obj));
 	}
 	
 	public void setInitialOrder() {
@@ -206,6 +213,11 @@ public class Game extends Observable {
 	    }
 		player.setResources(initialResources);
 		newState(NewStateMessage.UPDATE_CURRENT_PLAYER_STATE);
+	}
+
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+		//newState(new EventMV(gameState, currentPlayer));
 	}
 
 }

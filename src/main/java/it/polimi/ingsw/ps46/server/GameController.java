@@ -13,10 +13,11 @@ import java.util.Observer;
  * 
  * @author Alessia Mondolo
  */
-public class GameController implements Observer {
+public class GameController implements Observer, EventVisitor {
 
 	private Game game;
 	private View view;
+	private boolean go = false;
 
 
 	/**
@@ -28,9 +29,25 @@ public class GameController implements Observer {
 	}
 
 	
-	@Override
-	public void update(Observable o, Object arg) {
-		//WIP
+	
+	public void update(Observable o, Object obj) {
+		((EventAcceptor) obj).accept(this);
+		/*
+		String username = (String) arg;
+		game.getCurrentPlayer().setUsername(username);
+		go = true;*/
+	}
+	
+	
+	public void visit(EventStringInput eventStringInput) {
+		switch(eventStringInput.getType()) {
+		case PLAYER_USERNAME :
+			game.getCurrentPlayer().setUsername(eventStringInput.getString());
+			go = true;
+			break;
+		default:
+			break;
+		}
 	}
 
 	
@@ -77,12 +94,17 @@ public class GameController implements Observer {
 	 * Iterates through the list of players, asking each player through the view the username that they want to use during the game.
 	 */
 	private void setupPlayers() {
+		game.setGameState(GameState.SETUP_PLAYERS_USERNAME);
 		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
 			Player player=iterator.next();
 			game.setCurrentPlayer(player);
+			while(!go);
+			go = false;
 			//TODO check per avere username univoco?
-			player.setUsername(view.getPlayerUserame(game.getCurrentPlayer().getIdPlayer()));
+			//aspetto che mi arrivi la notifica dalla view;
+			//player.setUsername(view.getPlayerUserame(game.getCurrentPlayer().getIdPlayer()));
 		}
+		game.setGameState(GameState.SETUP_INITIAL_ORDER); 
 	}
 	
 	
@@ -173,6 +195,22 @@ public class GameController implements Observer {
 	 */
 	private void endRound() {
 		// TODO Auto-generated method stub
+	}
+
+
+
+	@Override
+	public void visit(EventMessage eventMessage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void visit(EventMV eventMV) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

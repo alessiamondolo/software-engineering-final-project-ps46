@@ -10,13 +10,12 @@ import java.util.Observer;
  * 
  * @author Alessia Mondolo
  */
-public abstract class View extends Observable implements Observer{ 
+public abstract class View extends Observable implements Observer, EventVisitor { 
 
 	public void welcomeMessage() {		
 	}
 
-	public String getPlayerUserame(int id) {
-		return null;
+	public void getPlayerUserame(int id) {
 	}
 
 	public void showInitialOrder(List<String> initialOrder) {		

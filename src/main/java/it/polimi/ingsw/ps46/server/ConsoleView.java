@@ -21,15 +21,31 @@ public class ConsoleView extends View {
 	
 	
 	public void update(Observable obs, Object obj) {
-		NewStateMessage gameState = (NewStateMessage) obj;
-		switch(gameState) {
+		((EventAcceptor) obj).accept(this);
+	}
+	
+	
+	public void visit(EventMessage eventMessage) {
+		switch(eventMessage.getMessage()) {
 		case SETUP_GAME :
 			welcomeMessage();
-			//getPlayerUsername()
 			break;
 		default:
 			break;
-			
+		}
+	}
+
+
+	
+	public void visit(EventMV eventMV) {
+		switch(eventMV.getState()) {
+		case SETUP_PLAYERS_USERNAME :
+			//getPlayerUserame(eventMV.getPlayer().getIdPlayer());
+			break;
+		case SETUP_INITIAL_ORDER : 
+			//showInitialOrder(eventMV.getInitialOrder());
+		default:
+			break;
 		}
 	}
 	
@@ -41,11 +57,13 @@ public class ConsoleView extends View {
 	
 	
 	
-	public String getPlayerUserame(int id) {
+	public void getPlayerUserame(int id) {
 		
 		output.println("Player " + id + ": what is your username?");
 		String username = input.stringFromConsole();
-		return username;
+		
+		setChanged();
+		notifyObservers(new EventStringInput(username, InputType.PLAYER_USERNAME));
 	}
 	
 	

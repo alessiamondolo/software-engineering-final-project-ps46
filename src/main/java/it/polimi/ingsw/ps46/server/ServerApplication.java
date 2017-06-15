@@ -60,7 +60,7 @@ public class ServerApplication {
 	
 	public void run() {
 		view.addObserver(controller);
-		game.addObserver(controller);
+		//game.addObserver(controller);
 		game.addObserver(view);
 		controller.run();
 	}
