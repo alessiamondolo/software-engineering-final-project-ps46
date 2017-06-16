@@ -1,5 +1,1063 @@
 [
+	{
+			"cardName" : "Warlord",
+			"cardEra" : 1,
+			
+			"immediateEffects" : 
+			{
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 3
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+				]
+			},
+						
+			"permanentEffects":
+			{
+				"effectType": "DiceBonusEffect",
+				
+				"type": "TerritoryCards",
+				"bonus": {
+							"value": 2
+						 }
+			},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 2
+					}
+				]
+	},
+	{
+			"cardName" : "Stonemason",
+			"cardEra" : 1,
+			
+			"immediateEffects" : {},
+			
+			"permanentEffects":
+			{
+				"effectType": "DiceBonusEffectDiscounted",
+				
+				"type": "BuildingCards",
+				"bonus": {
+							"value": 2
+						 },
+			
+				"resourcesDiscounted": [
+					{
+						"id" : "Wood",
+						"quantity" : 1
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 1
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					}
+				],
+			
+				"doubleChoise": true
+			
+			},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 4
+					}
+				]			
+	},
+	{
+			"cardName" : "Dame",
+			"cardEra" : 1,
+			
+			"immediateEffects" : {},
+			
+			"permanentEffects":
+			{
+				"effectType": "DiceBonusEffectDiscounted",
+				
+				"type": "CharacterCards",
+				"bonus": {
+							"value": 2
+						 },
+			
+				"resourcesDiscounted": [
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 1
+					}
+				],
+			
+				"doubleChoise": false
+			
+			},		
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 4
+					}
+				]			
+	},
+	{
+			"cardName" : "Knight",
+			"cardEra" : 1,
+			
+			"immediateEffects" : 
+			{
+			
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 1
+					}
+				]
+			
+			},
+			
+			"permanentEffects":
+			{
+				"effectType": "DiceBonusEffect",
+				
+				"type": "VentureCards",
+				"bonus": {
+							"value": 2
+						 }
+			},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 2
+					}
+				]			
+	},	
+	{
+			"cardName" : "Farmer",
+			"cardEra" : 1,
+			
+			"immediateEffects" : {},
+			
+			"permanentEffects":
+			{
+				"effectType": "DiceBonusEffect",
+				
+				"type": "HarvestAction",
+				"bonus": {
+							"value": 2
+						 }
+			},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 3
+					}
+				]			
+	},
+	{
+			"cardName" : "Artisan",
+			"cardEra" : 1,
+			
+			"immediateEffects" : {},
+			
+			"permanentEffects":
+			{
+				"effectType": "DiceBonusEffect",
+				
+				"type": "ProductionAction",
+				"bonus": {
+							"value": 2
+						 }
+			},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 3
+					}
+				]			
+	},	
+	{
+			"cardName" : "Preacher",
+			"cardEra" : 1,
+			
+			"immediateEffects" : 
+			{
+			
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 4
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+				]
+			
+			},
+			
+			"permanentEffects":
+			{
+				"effectType": "PreacherEffect",
+				"malusEffect": true
 
+			},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 2
+					}
+				]			
+	},	
+	{
+			"cardName" : "Abess",
+			"cardEra" : 1,
+			
+			"immediateEffects" : 
+			{
+				"effectType": "ExtraMoveEffect",
+				"extraMoveType" : "MoveToActionSpaceAction",
+				"whichActionSpace": "AllTowers",
+				"extraMoveValue": 4,
+				"resourcesDiscounted" : false,
+				"additionalResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 1
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+			]
+		},
+			
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 3
+					}
+				]			
+	},	
+	{
+			"cardName" : "Captain",
+			"cardEra" : 2,
+			
+			"immediateEffects" : 
+			{
+				"effectType": "ExtraMoveEffect",
+				"extraMoveType" : "MoveToActionSpaceAction",
+				"whichActionSpace": "GreenTower",
+				"extraMoveValue": 6,
+				"resourcesDiscounted" : false,
+				"additionalResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 2
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+			]
+		},
+			
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 4
+					}
+				]			
+	},
+	{
+			"cardName" : "Architect",
+			"cardEra" : 2,
+			
+			"immediateEffects" : 
+			{
+				"effectType": "ExtraMoveEffect",
+				"extraMoveType" : "MoveToActionSpaceAction",
+				"whichActionSpace": "YellowTower",
+				"extraMoveValue": 6,
+				"resourcesDiscounted" : true,
+				"additionalResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 1
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 1
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+			]
+		},
+			
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 4
+					}
+				]			
+	},
+	{
+			"cardName" : "Patron",
+			"cardEra" : 2,
+			
+			"immediateEffects" : 
+			{
+				"effectType": "ExtraMoveEffect",
+				"extraMoveType" : "MoveToActionSpaceAction",
+				"whichActionSpace": "BlueTower",
+				"extraMoveValue": 6,
+				"resourcesDiscounted" : true,
+				"additionalResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 2
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+			]
+		},
+			
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 3
+					}
+				]			
+	},
+	{
+			"cardName" : "Hero",
+			"cardEra" : 2,
+			
+			"immediateEffects" : 
+			{
+				"effectType": "ExtraMoveEffect",
+				"extraMoveType" : "MoveToActionSpaceAction",
+				"whichActionSpace": "PurpleTower",
+				"extraMoveValue": 6,
+				"resourcesDiscounted" : false,
+				"additionalResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 1
+					}
+			]
+		},
+			
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 4
+					}
+				]			
+	},
+	{
+			"cardName" : "Peasant",
+			"cardEra" : 2,
+			
+			"immediateEffects" : {},
+			
+			"permanentEffects":
+			{
+				"effectType": "DiceBonusEffect",
+				
+				"type": "HarvestAction",
+				"bonus": {
+							"value": 3
+						 }
+			},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 4
+					}
+				]			
+	},	
+	{
+			"cardName" : "Sholar",
+			"cardEra" : 2,
+			
+			"immediateEffects" : {},
+			
+			"permanentEffects":
+			{
+				"effectType": "DiceBonusEffect",
+				
+				"type": "ProductionAction",
+				"bonus": {
+							"value": 3
+						 }
+			},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 4
+					}
+				]			
+	},
+	{
+			"cardName" : "Papal Messenger",
+			"cardEra" : 2,
+			
+			"immediateEffects" : 
+			{
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 3
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+				]
+			},
+						
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 5
+					}
+				]
+	},
+	{
+			"cardName" : "Royal Messenger",
+			"cardEra" : 2,
+			
+			"immediateEffects" : 
+			{
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 3
+					}
+				]
+			},
+						
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 5
+					}
+				]
+	},
+	{
+		"cardName" : "Noble",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesByElementsEffect",
+			"additionalResources": [
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 2
+				}
+			],
+			
+			"type":  	"TerritoryCards"
+			
+		},
+					
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 6
+					}
+				]
+	},
+	{
+		"cardName" : "Governor",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesByElementsEffect",
+			"additionalResources": [
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 2
+				}
+			],
+			
+			"type":  	"BuildingCards"
+			
+		},
+					
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 6
+					}
+				]
+	},
+	{
+		"cardName" : "Paramour",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesByElementsEffect",
+			"additionalResources": [
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 2
+				}
+			],
+			
+			"type":  	"CharacterCards"
+			
+		},
+					
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 7
+					}
+				]
+	},
+	{
+		"cardName" : "Herald",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesByElementsEffect",
+			"additionalResources": [
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 2
+				}
+			],
+			
+			"type":  	"VentureCards"
+			
+		},
+					
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 6
+					}
+				]
+	},
+	{
+			"cardName" : "Cardinal",
+			"cardEra" : 3,
+			
+			"immediateEffects" : 
+			{
+				"effectType": "ExtraMoveEffect",
+				"extraMoveType" : "ActivateHarvestAction",
+				"whichActionSpace": "",
+				"extraMoveValue": 4,
+				"resourcesDiscounted" : false,
+				"additionalResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 2
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+			]
+		},
+			
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 4
+					}
+				]			
+	},
+	{
+			"cardName" : "Bishop",
+			"cardEra" : 3,
+			
+			"immediateEffects" : 
+			{
+				"effectType": "ExtraMoveEffect",
+				"extraMoveType" : "ActivateProductionAction",
+				"whichActionSpace": "",
+				"extraMoveValue": 4,
+				"resourcesDiscounted" : false,
+				"additionalResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 1
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+			]
+		},
+			
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 5
+					}
+				]			
+	},
+	{
+		"cardName" : "General",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesByElementsEffect",
+			"additionalResources": [
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 1
+				}
+			],
+			
+			"type":  	"MilitaryPoints"
+			
+		},
+					
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 5
+					}
+				]
+	},
+	{
+			"cardName" : "Ambassador",
+			"cardEra" : 3,
+			
+			"immediateEffects" : 
+			{
+				"effectType": "ExtraMoveEffect",
+				"extraMoveType" : "MoveToActionSpaceAction",
+				"whichActionSpace": "AllTowers",
+				"extraMoveValue": 7,
+				"resourcesDiscounted" : false,
+				"additionalResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 1
+					}
+			]
+		},
+			
+			"permanentEffects": {},
+						
+			"cost": [
+					{
+						"id" : "Money",
+						"quantity" : 6
+					}
+				]			
+	}
 ]
-
-	

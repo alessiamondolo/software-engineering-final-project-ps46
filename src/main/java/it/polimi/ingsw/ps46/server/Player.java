@@ -13,7 +13,7 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
  * Description of the Class Player.
- * This Class 
+ * This Class is used to create a single instance of player with his ID, Username, Decks, Set of resources, Family members, Bonus and discounts.
  * 
  * @author Andrea.Masi
  */
@@ -31,8 +31,13 @@ public class Player {
 	
 	private Map <String,FamilyMember> familyMembers;
 	
-	private final static int MAXOFFAMILYMEMBERS = 4;
+	//private final static int MAXOFFAMILYMEMBERS = 4;
 	private final static int MAXNUMBEROFCARDS = 6;
+
+	private Map<String, Dice> bonus;
+	private Map<String, ResourceSet> discount;
+	private Map<String, ResourceSet> optionalDiscount;
+	private boolean preacherEffect = false;
 
 	
 	/**
@@ -55,8 +60,20 @@ public class Player {
 			familyMembers.put(xConfigurationColorOftheFamilyMember, yConfigurationFamilyMember);
 		}
 		*/
+		int init = 0;
+		Dice initializationDice = new Dice(init);
+		bonus = new HashMap<>();
+		bonus.put("VentureCards", initializationDice);
+		bonus.put("BuildingCards", initializationDice);
+		bonus.put("VentureCards", initializationDice);
+		bonus.put("CharactersCards", initializationDice);
+		bonus.put("ProductionActions", initializationDice);
+		bonus.put("HarvestActions", initializationDice);
+		
+		
+		discount = new HashMap<>();
+		
 	}
-	
 	
 	/**
 	 * Description of the method getIdPlayer.
@@ -198,5 +215,128 @@ public class Player {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+
+	public Map<String, Dice> getBonusMap() {
+		return bonus;
+	}
+	
+	public Dice getBonus(String bonusName) {
+		
+		return bonus.get(bonusName);
+		
+	}
+
+	/**
+	 * Description of the method updateBonus.
+	 * 
+	 * This Method is used to upDate the bonus Map.
+	 * @param bonusName
+	 * @param updateValue
+	 */
+	public void updateBonus(String bonusName, Dice updateValue) {
+		int current = 0;
+		Dice currentValue = new Dice(current);
+		currentValue = bonus.get(bonusName);
+		currentValue.sumDice(updateValue);
+		
+		bonus.put(bonusName, currentValue);
+	}
+
+	/** 
+	 * Description of the method getDiscount.
+	 * 
+	 * This Method is used to get the entire Map.
+	 * @return Discount
+	 */
+
+	public Map<String, ResourceSet> getDiscount() {
+		return discount;
+	}
+	
+	/** 
+	 * Description of the method getDiscountByKey.
+	 * 
+	 * This Method is used to get the resourceSet (using the key discountKey)
+	 * @return discount.get(discountKey)
+	 */
+	
+	public ResourceSet getDiscountByKey(String discountKey) {
+		return discount.get(discountKey);
+		
+	}
+
+	
+	/**
+	 * Description of the method updateDiscount.
+	 * 
+	 * This Method is used to update the map of discounts (previously initialized to NULL)
+	 * it puts a new value if the key is not contained OR
+	 * it updates the exists key (using the sum between resourceSet)
+	 * @param discountKey
+	 * @param valueDiscount
+	 */
+
+	public void updateDiscount(String discountKey, ResourceSet valueDiscount) {
+		
+		if (discount.containsKey(discountKey) == true)
+		{
+			discount.get(discountKey).add(valueDiscount);
+		}
+		else {
+			
+			discount.put(discountKey, valueDiscount);
+
+		}
+	
+	}
+	
+	
+	/** 
+	 * Description of the method getOptionalDiscountsMap.
+	 * 
+	 * This Method is used to get the entire Map
+	 * @return optionalDiscount
+	 */
+	public Map<String, ResourceSet> getOptionalDiscountsMap() {
+		return optionalDiscount;
+	}
+	
+	
+	/**
+	 * Description of the method getOptionalDiscountsListByKey.
+	 * 
+	 * This Method is used to get the list of resourceSet
+	 * @param discountKey
+	 * @return optionalDiscount.get(discountKey)
+	 */
+	public ResourceSet getOptionalDiscountsKey(String discountKey) {
+		return optionalDiscount.get(discountKey);
+		
+	}
+
+	
+	/**
+	 * Description of the method setOptionalDiscount.
+	 * 
+	 * This Method is used to set the single resourceSetList into the map, it's formed by differents options of resourceSet.
+	 * @param discountKey
+	 * @param valuesOptionalDiscount
+	 */	
+	public void setOptionalDiscount(String discountKey, ResourceSet  valuesOptionalDiscount) {
+	
+			optionalDiscount.put(discountKey, valuesOptionalDiscount);
+			//da risistemare
+		}
+
+	public boolean isPreacherEffect() {
+		return preacherEffect;
+	}
+
+	public void setPreacherEffect(boolean preacherEffect) {
+		this.preacherEffect = preacherEffect;
+	}
+	
+
 
 }

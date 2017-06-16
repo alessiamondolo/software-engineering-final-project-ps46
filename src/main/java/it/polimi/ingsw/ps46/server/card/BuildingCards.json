@@ -2,10 +2,10 @@
 	{
 		"cardName" : "Mint",
 		"cardEra" : 1,
-		"effectType": "IncreaseResourcesByCardsEffect",
 		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -17,6 +17,25 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "IncreaseResourcesByElementsEffect",
+			"additionalResources": [
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+			
+			"type":  	"BuildingCards"
+			
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -52,35 +71,16 @@
 		"productionValue" : 
 		{
 			"value" : 5
-		},
+		}
 		
-		"CountingCardsForResources" : 
-		{
-			"resourceForCard": [
-				
-				{
-					"id" : "Money",
-					"quantity" : 1
-				},
-				
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"type":  	"BuildingCards"
 	},
-	
 	{
-	
 		"cardName" : "Tax Office",
 		"cardEra" : 1,
-		"effectType": "IncreaseResourcesByCardsEffect",
 		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -92,6 +92,25 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "IncreaseResourcesByElementsEffect",
+			"additionalResources": [
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+			
+			"type":  	"TerritoryCards"
+			
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -127,33 +146,16 @@
 		"productionValue" : 
 		{
 			"value" : 5
-		},
+		}
 		
-		"CountingCardsForResources" : 
-		{
-			"resourceForCard": [
-				
-				{
-					"id" : "Money",
-					"quantity" : 1
-				},
-				
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"type":  	"TerritoryCards"
 	},
 	{
 		"cardName" : "Triumphal Arch",
 		"cardEra" : 1,
-		"effectType": "IncreaseResourcesByCardsEffect",
 		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -165,6 +167,25 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "IncreaseResourcesByElementsEffect",
+			"additionalResources": [
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 1
+				}
+			],
+			
+			"type":  	"VentureCards"
+			
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -200,33 +221,16 @@
 		"productionValue" : 
 		{
 			"value" : 6
-		},
+		}
 		
-		"CountingCardsForResources" : 
-		{
-			"resourceForCard": [
-				
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 1
-				}
-			]
-		},
-		
-		"type":  	"VentureCards"
 	},
 	{
 		"cardName" : "Theater",
 		"cardEra" : 1,
-		"effectType": "IncreaseResourcesByCardsEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -238,6 +242,25 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "IncreaseResourcesByElementsEffect",
+			"additionalResources": [
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 1
+				}
+			],
+			
+			"type":  	"CharacterCards"
+			
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -273,34 +296,16 @@
 		"productionValue" : 
 		{
 			"value" : 6
-		},
+		}
 		
-		
-		"CountingCardsForResources" : 
-		{
-			"resourceForCard": [
-				
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 1
-				}
-			]
-		},
-		
-		"type":  	"CharacterCards"
 	},
 	{
 		"cardName" : "Carpenter's Shop",
 		"cardEra" : 1,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -311,6 +316,147 @@
 					"quantity" : 3
 				}
 			]
+		},
+		"doubleChoice": true,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo":
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 2
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 5
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
 		},
 		
 		"cost": [
@@ -343,15 +489,35 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 4
-		},
+		}
+			
+	},
+	{
+		"cardName" : "Carpenter's Shop",
+		"cardEra" : 1,
 		
-		"doubleChoise"	 : 	true,
-		
-		"permanentEffects" : 
+		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 3
+				}
+			]
+		},
+		"doubleChoice": true,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
 			"requiredResources": [
 				{
 					"id" : "Wood",
@@ -380,13 +546,9 @@
 				{
 					"id" : "VictoryPoints",
 					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
 				}
+		
 			],
-			
 			"gainedResources": [
 				{
 					"id" : "Wood",
@@ -421,10 +583,11 @@
 					"quantity" : 0
 				}
 			]
-		},
 		
-		"permanentEffectsTwo" : 
+		},
+		"permanentEffectsTwo":
 		{
+			"effectType": "ExchageResourcesEffect",
 			"requiredResources": [
 				{
 					"id" : "Wood",
@@ -453,13 +616,9 @@
 				{
 					"id" : "VictoryPoints",
 					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
 				}
+		
 			],
-			
 			"gainedResources": [
 				{
 					"id" : "Wood",
@@ -494,16 +653,53 @@
 					"quantity" : 0
 				}
 			]
-			
+		
+		},
+		
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 2
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 1
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		
+		"productionValue" : 
+		{
+			"value" : 4
 		}
+			
 	},
 	{
-		"cardName" : "Stonemasons's Shop",
+		"cardName" : "Stonemason's Shop",
 		"cardEra" : 1,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -514,6 +710,147 @@
 					"quantity" : 2
 				}
 			]
+		},
+		"doubleChoice": true,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 1
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo":
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 2
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 5
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
 		},
 		
 		"cost": [
@@ -546,166 +883,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 3
-		},
-		
-		"doubleChoise"	 : 	true,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 1
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 3
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 2
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 5
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
 		"cardName" : "Chapel",
 		"cardEra" : 1,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -717,6 +908,78 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -748,166 +1011,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 2
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 1
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 1
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
 		"cardName" : "Residence",
 		"cardEra" : 1,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -919,6 +1036,78 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 1
+				}
+			]
+		
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -950,166 +1139,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 1
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 1
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 1
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
 		"cardName" : "Marketplace",
 		"cardEra" : 2,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -1120,6 +1163,147 @@
 					"quantity" : 3
 				}
 			]
+		},
+		"doubleChoice": true,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 2
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo":
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 2
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
 		},
 		
 		"cost": [
@@ -1152,166 +1336,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 3
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 3
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 2
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 2
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
 		"cardName" : "Treasury",
 		"cardEra" : 2,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -1322,6 +1360,147 @@
 					"quantity" : 4
 				}
 			]
+		},
+		"doubleChoice": true,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo":
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 2
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 5
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
 		},
 		
 		"cost": [
@@ -1354,166 +1533,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 3
-		},
-		
-		"doubleChoise"	 : 	true,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 1
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 3
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 2
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 5
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
-		"cardName" : "Painters' Guild",
+		"cardName" : "Painters' Shop",
 		"cardEra" : 2,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -1525,46 +1558,10 @@
 				}
 			]
 		},
-		
-		"cost": [
-			{
-				"id" : "Wood",
-				"quantity" : 4
-			},
-			{
-				"id" : "Stones",
-				"quantity" : 0
-			},
-			{
-				"id" : "Servants",
-				"quantity" : 0
-			},
-			{
-				"id" : "Money",
-				"quantity" : 0
-			},
-			{
-				"id" : "FaithPoints",
-				"quantity" : 0
-			},
-			{
-				"id" : "MilitaryPoints",
-				"quantity" : 0
-			},
-			{
-				"id" : "VictoryPoints",
-				"quantity" : 0
-			}
-		],
-		"productionValue" : 
+		"doubleChoice": true,
+		"permanentEffects": 
 		{
-			"value" : 4
-		},
-		
-		"doubleChoise"	 : 	true,
-		
-		"permanentEffects" : 
-		{
+			"effectType": "ExchageResourcesEffect",
 			"requiredResources": [
 				{
 					"id" : "Wood",
@@ -1593,13 +1590,9 @@
 				{
 					"id" : "VictoryPoints",
 					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
 				}
+		
 			],
-			
 			"gainedResources": [
 				{
 					"id" : "Wood",
@@ -1634,10 +1627,11 @@
 					"quantity" : 0
 				}
 			]
-		},
 		
-		"permanentEffectsTwo" : 
+		},
+		"permanentEffectsTwo":
 		{
+			"effectType": "ExchageResourcesEffect",
 			"requiredResources": [
 				{
 					"id" : "Wood",
@@ -1666,13 +1660,9 @@
 				{
 					"id" : "VictoryPoints",
 					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
 				}
+		
 			],
-			
 			"gainedResources": [
 				{
 					"id" : "Wood",
@@ -1707,15 +1697,53 @@
 					"quantity" : 0
 				}
 			]
+		
+		},
+		
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 7
+			}
+		],
+		
+		"productionValue" : 
+		{
+			"value" : 4
 		}
+			
 	},
 	{
-		"cardName" : "Sculptors' Guild",
+		"cardName" : "Sculptors' Shop",
 		"cardEra" : 2,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -1727,46 +1755,10 @@
 				}
 			]
 		},
-		
-		"cost": [
-			{
-				"id" : "Wood",
-				"quantity" : 0
-			},
-			{
-				"id" : "Stones",
-				"quantity" : 4
-			},
-			{
-				"id" : "Servants",
-				"quantity" : 0
-			},
-			{
-				"id" : "Money",
-				"quantity" : 0
-			},
-			{
-				"id" : "FaithPoints",
-				"quantity" : 0
-			},
-			{
-				"id" : "MilitaryPoints",
-				"quantity" : 0
-			},
-			{
-				"id" : "VictoryPoints",
-				"quantity" : 0
-			}
-		],
-		"productionValue" : 
+		"doubleChoice": true,
+		"permanentEffects": 
 		{
-			"value" : 5
-		},
-		
-		"doubleChoise"	 : 	true,
-		
-		"permanentEffects" : 
-		{
+			"effectType": "ExchageResourcesEffect",
 			"requiredResources": [
 				{
 					"id" : "Wood",
@@ -1795,13 +1787,9 @@
 				{
 					"id" : "VictoryPoints",
 					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
 				}
+		
 			],
-			
 			"gainedResources": [
 				{
 					"id" : "Wood",
@@ -1821,7 +1809,7 @@
 				},
 				{
 					"id" : "FaithPoints",
-					"quantity" : 1
+					"quantity" : 0
 				},
 				{
 					"id" : "MilitaryPoints",
@@ -1836,10 +1824,11 @@
 					"quantity" : 0
 				}
 			]
-		},
 		
-		"permanentEffectsTwo" : 
+		},
+		"permanentEffectsTwo":
 		{
+			"effectType": "ExchageResourcesEffect",
 			"requiredResources": [
 				{
 					"id" : "Wood",
@@ -1868,13 +1857,9 @@
 				{
 					"id" : "VictoryPoints",
 					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
 				}
+		
 			],
-			
 			"gainedResources": [
 				{
 					"id" : "Wood",
@@ -1909,15 +1894,53 @@
 					"quantity" : 0
 				}
 			]
+		
+		},
+		
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 4
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		
+		"productionValue" : 
+		{
+			"value" : 5
 		}
+			
 	},
 	{
-		"cardName" : "Stonemasons' Guild",
+		"cardName" : "Stonemason's Guild",
 		"cardEra" : 2,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -1929,6 +1952,78 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 1
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 1
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 6
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -1960,166 +2055,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 4
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 1
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 1
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 1
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 6
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
 		"cardName" : "Baptistery",
 		"cardEra" : 2,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -2131,6 +2080,78 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 2
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -2162,166 +2183,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 2
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 1
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 2
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 2
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
 		"cardName" : "Barracks",
 		"cardEra" : 2,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -2333,6 +2208,78 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 1
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -2364,166 +2311,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 1
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 1
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 3
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
 		"cardName" : "Stronghold",
 		"cardEra" : 2,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -2535,6 +2336,78 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -2566,166 +2439,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 6
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 2
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 2
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
 		"cardName" : "Bank",
 		"cardEra" : 3,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -2737,46 +2464,10 @@
 				}
 			]
 		},
-		
-		"cost": [
-			{
-				"id" : "Wood",
-				"quantity" : 1
-			},
-			{
-				"id" : "Stones",
-				"quantity" : 3
-			},
-			{
-				"id" : "Servants",
-				"quantity" : 0
-			},
-			{
-				"id" : "Money",
-				"quantity" : 3
-			},
-			{
-				"id" : "FaithPoints",
-				"quantity" : 0
-			},
-			{
-				"id" : "MilitaryPoints",
-				"quantity" : 0
-			},
-			{
-				"id" : "VictoryPoints",
-				"quantity" : 0
-			}
-		],
-		"productionValue" : 
+		"doubleChoice": false,
+		"permanentEffects": 
 		{
-			"value" : 2
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
+			"effectType": "ExchageResourcesEffect",
 			"requiredResources": [
 				{
 					"id" : "Wood",
@@ -2805,13 +2496,9 @@
 				{
 					"id" : "VictoryPoints",
 					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
 				}
+		
 			],
-			
 			"gainedResources": [
 				{
 					"id" : "Wood",
@@ -2846,10 +2533,69 @@
 					"quantity" : 0
 				}
 			]
-		},
 		
-		"permanentEffectsTwo" : 
+		},
+		"permanentEffectsTwo": {},
+		
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 1
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 3
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 3
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		
+		"productionValue" : 
 		{
+			"value" : 2
+		}
+			
+	},
+	{
+		"cardName" : "Fair",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 8
+				}
+			]
+		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
 			"requiredResources": [
 				{
 					"id" : "Wood",
@@ -2865,7 +2611,7 @@
 				},
 				{
 					"id" : "Money",
-					"quantity" : 0
+					"quantity" : 4
 				},
 				{
 					"id" : "FaithPoints",
@@ -2878,21 +2624,17 @@
 				{
 					"id" : "VictoryPoints",
 					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
 				}
+		
 			],
-			
 			"gainedResources": [
 				{
 					"id" : "Wood",
-					"quantity" : 0
+					"quantity" : 3
 				},
 				{
 					"id" : "Stones",
-					"quantity" : 0
+					"quantity" : 3
 				},
 				{
 					"id" : "Servants",
@@ -2919,26 +2661,9 @@
 					"quantity" : 0
 				}
 			]
-		}
-	},
-	{
-		"cardName" : "Fair",
-		"cardEra" : 3,
-		"effectType": "ExchageResourcesEffect",
-	
-		"immediateEffects" : 
-		{
-			"additionalResources": [
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 8
-				}
-			]
+		
 		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -2970,166 +2695,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 4
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 4
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 3
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 3
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
 		"cardName" : "Garden",
 		"cardEra" : 3,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -3141,46 +2720,10 @@
 				}
 			]
 		},
-		
-		"cost": [
-			{
-				"id" : "Wood",
-				"quantity" : 4
-			},
-			{
-				"id" : "Stones",
-				"quantity" : 2
-			},
-			{
-				"id" : "Servants",
-				"quantity" : 2
-			},
-			{
-				"id" : "Money",
-				"quantity" : 0
-			},
-			{
-				"id" : "FaithPoints",
-				"quantity" : 0
-			},
-			{
-				"id" : "MilitaryPoints",
-				"quantity" : 0
-			},
-			{
-				"id" : "VictoryPoints",
-				"quantity" : 0
-			}
-		],
-		"productionValue" : 
+		"doubleChoice": false,
+		"permanentEffects": 
 		{
-			"value" : 1
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
+			"effectType": "ExchageResourcesEffect",
 			"requiredResources": [
 				{
 					"id" : "Wood",
@@ -3209,13 +2752,9 @@
 				{
 					"id" : "VictoryPoints",
 					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
 				}
+		
 			],
-			
 			"gainedResources": [
 				{
 					"id" : "Wood",
@@ -3250,116 +2789,26 @@
 					"quantity" : 0
 				}
 			]
-		},
 		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		}
-	},
-	{
-		"cardName" : "Fortress",
-		"cardEra" : 3,
-		"effectType": "ExchageResourcesEffect",
-	
-		"immediateEffects" : 
-		{
-			"additionalResources": [
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 9
-				}
-			]
 		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
 				"id" : "Wood",
-				"quantity" : 2
-			},
-			{
-				"id" : "Stones",
 				"quantity" : 4
 			},
 			{
+				"id" : "Stones",
+				"quantity" : 2
+			},
+			{
 				"id" : "Servants",
-				"quantity" : 0
+				"quantity" : 2
 			},
 			{
 				"id" : "Money",
-				"quantity" : 2
+				"quantity" : 0
 			},
 			{
 				"id" : "FaithPoints",
@@ -3374,15 +2823,35 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
-			"value" : 5
-		},
+			"value" : 1
+		}
+			
+	},
+	{
+		"cardName" : "Fortress",
+		"cardEra" : 3,
 		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
+		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 9
+				}
+			]
+		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
 			"requiredResources": [
 				{
 					"id" : "Wood",
@@ -3411,13 +2880,9 @@
 				{
 					"id" : "VictoryPoints",
 					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
 				}
+		
 			],
-			
 			"gainedResources": [
 				{
 					"id" : "Wood",
@@ -3452,108 +2917,18 @@
 					"quantity" : 1
 				}
 			]
-		},
 		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		}
-	},
-	{
-		"cardName" : "Palace",
-		"cardEra" : 3,
-		"effectType": "ExchageResourcesEffect",
-	
-		"immediateEffects" : 
-		{
-			"additionalResources": [
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 9
-				}
-			]
 		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
 				"id" : "Wood",
-				"quantity" : 3
+				"quantity" : 2
 			},
 			{
 				"id" : "Stones",
-				"quantity" : 1
+				"quantity" : 4
 			},
 			{
 				"id" : "Servants",
@@ -3561,7 +2936,7 @@
 			},
 			{
 				"id" : "Money",
-				"quantity" : 3
+				"quantity" : 2
 			},
 			{
 				"id" : "FaithPoints",
@@ -3576,15 +2951,35 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
-			"value" : 6
-		},
+			"value" : 5
+		}
+			
+	},
+	{
+		"cardName" : "Palace",
+		"cardEra" : 3,
 		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
+		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 9
+				}
+			]
+		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
 			"requiredResources": [
 				{
 					"id" : "Wood",
@@ -3613,13 +3008,9 @@
 				{
 					"id" : "VictoryPoints",
 					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
 				}
+		
 			],
-			
 			"gainedResources": [
 				{
 					"id" : "Wood",
@@ -3654,88 +3045,54 @@
 					"quantity" : 0
 				}
 			]
-		},
 		
-		"permanentEffectsTwo" : 
+		},
+		"permanentEffectsTwo": {},
+		
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 3
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 1
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 3
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		
+		"productionValue" : 
 		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
+			"value" : 6
 		}
+			
 	},
 	{
 		"cardName" : "Church",
 		"cardEra" : 3,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -3747,6 +3104,147 @@
 				}
 			]
 		},
+		"doubleChoice": true,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 1
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo":
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
 		
 		"cost": [
 			{
@@ -3778,166 +3276,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 1
-		},
-		
-		"doubleChoise"	 : 	true,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 1
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 2
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 1
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 2
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
 		"cardName" : "Military Academy",
 		"cardEra" : 3,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -3949,6 +3301,78 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 1
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -3980,166 +3404,20 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 3
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 1
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 3
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 1
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	},
 	{
-		"cardName" : "Cathedral",
+		"cardName" : "Stonemason's Guild",
 		"cardEra" : 3,
-		"effectType": "ExchageResourcesEffect",
-	
+		
 		"immediateEffects" : 
 		{
+			"effectType": "IncreaseResourcesEffect",
 			"additionalResources": [
 				{
 					"id" : "FaithPoints",
@@ -4151,6 +3429,78 @@
 				}
 			]
 		},
+		"doubleChoice": false,
+		"permanentEffects": 
+		{
+			"effectType": "ExchageResourcesEffect",
+			"requiredResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+		
+			],
+			"gainedResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		
+		},
+		"permanentEffectsTwo": {},
 		
 		"cost": [
 			{
@@ -4182,157 +3532,11 @@
 				"quantity" : 0
 			}
 		],
+		
 		"productionValue" : 
 		{
 			"value" : 2
-		},
-		
-		"doubleChoise"	 : 	false,
-		
-		"permanentEffects" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 1
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
-		},
-		
-		"permanentEffectsTwo" : 
-		{
-			"requiredResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			],
-			
-			"gainedResources": [
-				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilage",
-					"quantity" : 0
-				}
-			]
 		}
+			
 	}
 ]

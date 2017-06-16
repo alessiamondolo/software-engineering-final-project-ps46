@@ -8,24 +8,21 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  * Their immediate effects are of the type IncreaseResourcesEffect and their permanent effects 
  * are production effects of the type ExchangeResourcesEffect or IncreaseResourcesEffect.
  * 
- * @author Alessia Mondolo, Andrea.Masi
+ * @author Andrea.Masi
  */
 public class BuildingCard extends Card {
 	
 	private Dice productionValue;
 	private ExchageResourcesEffect permanentEffectsTwo;
-	private IncreaseResourcesByCardsEffect CountingCardsForResources;
-	private Boolean doubleChoise = false;
+	private Boolean doubleChoice = false;
 
-	public BuildingCard(String cardName, int cardEra, IncreaseResourcesEffect immediateEffects, Boolean doubleChoise, 
-			ExchageResourcesEffect permanentEffects, ExchageResourcesEffect permanentEffectsTwo, 
-			IncreaseResourcesByCardsEffect CountingCardsForResources, ResourceSet cost, Dice productionValue)
+	public BuildingCard(String cardName, int cardEra, IncreaseResourcesEffect immediateEffects, Boolean doubleChoice, Effect permanentEffects, 
+			ExchageResourcesEffect permanentEffectsTwo, ResourceSet cost, Dice productionValue)
 	{
 		super(cardName,cardEra, immediateEffects, permanentEffects, cost);
 		this.productionValue = productionValue;
-		this.doubleChoise = doubleChoise ;
+		this.doubleChoice = doubleChoice ;
 		this.permanentEffectsTwo = permanentEffectsTwo;
-		this.CountingCardsForResources = CountingCardsForResources;
 	}
 
 	public Dice getProductionValue() {
@@ -37,13 +34,9 @@ public class BuildingCard extends Card {
 	}
 
 
-	public IncreaseResourcesByCardsEffect getCountingCardsForResources() {
-		return CountingCardsForResources;
-	}
-
 
 	public Boolean getDoubleChoise() {
-		return doubleChoise;
+		return doubleChoice;
 	}
 
 }
