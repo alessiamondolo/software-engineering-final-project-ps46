@@ -43,15 +43,24 @@ public class DiceBonusEffect implements Effect {
 	
 	}
 
+	
+	
 
 	public Dice getBonus() {
 		return bonus;
 	}
 
 
+	public int getBonusValue(){
+		
+		return bonus.getValue();
+	}
+	
 	public String getType() {
 		return type;
 	}	
+	
+	
 	
 
 }

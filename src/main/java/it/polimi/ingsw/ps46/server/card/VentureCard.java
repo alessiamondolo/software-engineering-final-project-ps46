@@ -13,23 +13,23 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  * @author Andrea.Masi
  */
 public class VentureCard extends Card {
-	boolean doubleCostChoise = false;
+	boolean doubleCostChoice = false;
 	ResourceSet costTwo;
 
 
 	public VentureCard(String cardName, int cardEra, Effect immediateEffects, 
 			IncreaseResourcesEffect permanentEffects, ResourceSet cost, 
-			Boolean doubleCostChoise, ResourceSet costTwo, ResourceSet requiredResource) {
+			Boolean doubleCostChoice, ResourceSet costTwo, ResourceSet requiredResource) {
 		super(cardName, cardEra, immediateEffects, permanentEffects, cost);
 		
-		this.doubleCostChoise = doubleCostChoise;
+		this.doubleCostChoice = doubleCostChoice;
 		this.costTwo = costTwo;
 		
 	}
 	
-	public boolean getdoubleCostChoise(){
+	public boolean getdoubleCostChoice(){
 		
-		return getdoubleCostChoise();
+		return getdoubleCostChoice();
 	}
 	
 	public ResourceSet costTwo(){

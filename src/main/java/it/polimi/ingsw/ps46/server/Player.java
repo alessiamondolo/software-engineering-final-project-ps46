@@ -7,6 +7,12 @@ import java.util.Map;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
+import it.polimi.ingsw.ps46.server.card.DecreaseResourcesAtFinalMalus;
+import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
+import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
+import it.polimi.ingsw.ps46.server.card.GenericMalusEffect;
+import it.polimi.ingsw.ps46.server.card.LeaderCard;
+import it.polimi.ingsw.ps46.server.card.MalusEffect;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
@@ -24,10 +30,13 @@ public class Player {
 	private ResourceSet playerResources = null;
 
 	private ArrayList<TerritoryCard> territoryCards = null;
-	
 	private ArrayList<VentureCard> ventureCards = null;
 	private ArrayList<BuildingCard> buildingCards = null;
 	private ArrayList<CharacterCard> characterCards = null;
+	
+	private ArrayList<LeaderCard> leaderCards = null;  //TODO completare tutta la lista delle carte i suoi effetti ecc ecc
+	
+	private PersonalBoard playerPersonaBoard;
 	
 	private Map <String,FamilyMember> familyMembers;
 	
@@ -37,7 +46,11 @@ public class Player {
 	private Map<String, Dice> bonus;
 	private Map<String, ResourceSet> discount;
 	private Map<String, ResourceSet> optionalDiscount;
-	private boolean preacherEffect = false;
+	
+	private boolean preacherEffect = false; // da usare come malus e magari come parametro il numero di torre!
+	
+	private Map <String, MalusEffect> excommunicationMalus;
+
 
 	
 	/**
@@ -62,7 +75,7 @@ public class Player {
 		*/
 		int init = 0;
 		Dice initializationDice = new Dice(init);
-		bonus = new HashMap<>();
+		bonus = new HashMap<String, Dice>();
 		bonus.put("VentureCards", initializationDice);
 		bonus.put("BuildingCards", initializationDice);
 		bonus.put("VentureCards", initializationDice);
@@ -71,8 +84,28 @@ public class Player {
 		bonus.put("HarvestActions", initializationDice);
 		
 		
-		discount = new HashMap<>();
+		discount = new HashMap<String, ResourceSet>();
 		
+		optionalDiscount = new HashMap<String, ResourceSet>();
+
+		
+		excommunicationMalus = new HashMap<String, MalusEffect>();
+		
+		// excommunicationMalus of the first era.
+		excommunicationMalus.put("DecreaseResourcesMalus", new DecreaseResourcesMalus() );
+		excommunicationMalus.put("DiceMalusEffect", new DiceMalusEffect() );
+		
+		// excommunicationMalus of the second era.
+		excommunicationMalus.put("DiceMalusEffectForCards", new DiceMalusEffect() );
+		excommunicationMalus.put("noMoveToMarketSpace", new GenericMalusEffect() );
+		excommunicationMalus.put("doubleServantsCost", new GenericMalusEffect() );
+		excommunicationMalus.put("passYourFirstMove", new GenericMalusEffect() );
+		
+		// excommunicationMalus of the third era.
+		excommunicationMalus.put("notCountingVictoryPointsFromCards", new GenericMalusEffect() );
+		excommunicationMalus.put("loseOneVictoryPointEveryXResource", new DecreaseResourcesMalus() );
+		excommunicationMalus.put("loseOneVictoryPointEveryXResource", new DecreaseResourcesAtFinalMalus() );
+
 	}
 	
 	/**
@@ -326,7 +359,6 @@ public class Player {
 	public void setOptionalDiscount(String discountKey, ResourceSet  valuesOptionalDiscount) {
 	
 			optionalDiscount.put(discountKey, valuesOptionalDiscount);
-			//da risistemare
 		}
 
 	public boolean isPreacherEffect() {
@@ -336,7 +368,50 @@ public class Player {
 	public void setPreacherEffect(boolean preacherEffect) {
 		this.preacherEffect = preacherEffect;
 	}
-	
 
+	
+	public PersonalBoard getPlayerPersonaBoard() {
+		return playerPersonaBoard;
+	}
+
+	public void setPlayerPersonaBoard(PersonalBoard playerPersonaBoard) {
+		this.playerPersonaBoard = playerPersonaBoard;
+	}
+	
+	/**
+	 * Getter and Setter of the attribute leaderCards.
+	 * 
+	 * @return leaderCards
+	 */
+	
+	public ArrayList<LeaderCard> getLeaderCards() {
+		return leaderCards;
+	}
+
+	public void setLeaderCards(LeaderCard leaderCard) {
+		leaderCards.add(leaderCard);
+	}
+
+
+	/**
+	 * Getter of the Map excommunicationMalus.
+	 * 
+	 * @return excommunicationMalus
+	 */
+	public Map <String, MalusEffect> getExcommunicationMap() {
+		return excommunicationMalus;
+	}
+	
+	/**
+	 * Getter of the Malus excommunicationMalus.
+	 * 
+	 * @return excommunicationMalus.get(type)
+	 */
+	
+	public MalusEffect getExcommunicationMalus(String type){
+		
+		return excommunicationMalus.get(type);
+		
+	}
 
 }

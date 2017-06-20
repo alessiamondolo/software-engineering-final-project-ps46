@@ -84,7 +84,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -176,7 +176,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -268,7 +268,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -360,7 +360,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -452,7 +452,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -550,7 +550,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -642,7 +642,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -740,7 +740,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : true,
+		"doubleCostChoice" : true,
 		
 		"costTwo" : [
 			
@@ -843,7 +843,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -934,7 +934,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -1025,7 +1025,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -1116,7 +1116,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -1185,7 +1185,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -1276,7 +1276,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -1367,7 +1367,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -1464,7 +1464,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : true,
+		"doubleCostChoice" : true,
 		
 		"costTwo" : [
 			
@@ -1567,7 +1567,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -1663,7 +1663,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -1755,7 +1755,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -1847,7 +1847,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -1939,7 +1939,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -2009,7 +2009,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -2101,7 +2101,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : false,
+		"doubleCostChoice" : false,
 		
 		"costTwo" : [],
 		
@@ -2199,7 +2199,7 @@
 				}
 			],
 		
-		"doubleCostChoise" : true,
+		"doubleCostChoice" : true,
 		
 		"costTwo" : [
 			

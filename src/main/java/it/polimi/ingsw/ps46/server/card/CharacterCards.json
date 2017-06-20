@@ -89,7 +89,7 @@
 					}
 				],
 			
-				"doubleChoise": true
+				"doubleChoice": true
 			
 			},
 						
@@ -130,7 +130,7 @@
 					}
 				],
 			
-				"doubleChoise": false
+				"doubleChoice": false
 			
 			},		
 			"cost": [

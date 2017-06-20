@@ -9,8 +9,5 @@ public class LeaderCard {
 	private String leaderCard;
 	private Map<String,Integer> requiredCards; 
 	private ResourceSet requiredResources;
-	private boolean isActivable = false;
 	
-	
-
 }

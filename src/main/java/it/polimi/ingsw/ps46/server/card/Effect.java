@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps46.server.Game;
 /**
  * Description of Effect.
  * 
- * @author a.mondolo
+ * @author Alessia Mondolo
  */
 public interface Effect {
 

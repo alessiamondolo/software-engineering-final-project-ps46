@@ -1,0 +1,544 @@
+[
+	{		
+			
+			"Era" : 1,
+			"permanentMalus" : 
+			{
+				"malusType": "DecreaseResourcesMalus",
+				"doublechoice": false,
+				
+				"name" : "DecreaseResourcesMalus",
+				"decreasedResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 1
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+				]
+			}
+	},
+	{		
+			
+			"Era" : 1,
+			"permanentMalus" : 
+			{
+				"malusType": "DecreaseResourcesMalus",
+				"doublechoice": false,
+				
+				"name" : "DecreaseResourcesMalus",
+				"decreasedResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 1
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+				]
+			}
+	},
+	{		
+			"Era" : 1,
+			"permanentMalus" : 
+			{
+				"malusType": "DecreaseResourcesMalus",
+				"doublechoice": false,
+				
+				"name" : "DecreaseResourcesMalus",
+				"decreasedResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 1
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+				]
+			}
+	},
+	{		
+			
+			"Era" : 1,
+			"permanentMalus" : 
+			{
+				"malusType": "DecreaseResourcesMalus",
+				"doubleChoice": true,
+				
+				"name" : "DecreaseResourcesMalus",
+				"decreasedResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 1
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 1
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+				]
+			}
+	},
+	{		
+
+			"Era" : 1,
+			"permanentMalus" : 
+			{
+				"malusType": "DiceMalusEffect",
+				
+				"name": "DiceMalusEffect",
+				
+				"type": "HarvestAction",
+				"malus": {
+							"value": 3
+						 }
+			}
+	},
+	{		
+
+			"Era" : 1,
+			"permanentMalus" : 
+			{
+				"malusType": "DiceMalusEffect",
+				
+				"name": "DiceMalusEffect",
+				
+				"type": "ProductionAction",
+				"malus": {
+							"value": 3
+						 }
+			}
+	},
+	{		
+
+			"Era" : 1,
+			"permanentMalus" : 
+			{
+				"malusType": "DiceMalusEffect",
+				
+				"name": "DiceMalusEffect",
+				
+				"type": "MoveToActionSpaceAction",
+				"malus": {
+							"value": 1
+						 }
+			}
+	},
+	{		
+
+			"Era" : 2,
+			"permanentMalus" : 
+			{
+				"malusType": "DiceMalusEffectForCards",
+				
+				"name": "DiceMalusEffectForCards",
+				
+				"type": "TerritoryCards",
+				"malus": {
+							"value": 4
+						 }
+			}
+	},
+	{		
+
+			"Era" : 2,
+			"permanentMalus" : 
+			{
+				"malusType": "DiceMalusEffectForCards",
+				
+				"name": "DiceMalusEffectForCards",
+				
+				"type": "BuildingCards",
+				"malus": {
+							"value": 4
+						 }
+			}
+	},
+	{		
+
+			"Era" : 2,
+			"permanentMalus" : 
+			{
+				"malusType": "DiceMalusEffectForCards",
+				
+				"name": "DiceMalusEffectForCards",
+				
+				"type": "CharacterCards",
+				"malus": {
+							"value": 4
+						 }
+			}
+	},
+	{		
+
+			"Era" : 2,
+			"permanentMalus" : 
+			{
+				"malusType": "DiceMalusEffectForCards",
+				
+				"name": "DiceMalusEffectForCards",
+				
+				"type": "VentureCards",
+				"malus": {
+							"value": 4
+						 }
+			}
+	},
+	{		
+
+			"Era" : 2,
+			"permanentMalus" : 
+			{
+				"malusType": "GenericMalusEffect",
+				
+				"name": "noMoveToMarketSpace",
+				"type": ""
+			}
+			
+	},
+	{		
+
+			"Era" : 2,
+			"permanentMalus" : 
+			{
+				"malusType": "GenericMalusEffect",
+				
+				"name": "doubleServantsCost",
+				"type": ""
+			}
+			
+	},
+	{		
+
+			"Era" : 2,
+			"permanentMalus" : 
+			{
+				"malusType": "GenericMalusEffect",
+				
+				"name": "passYourFirstMove",
+				"type": ""
+			}
+			
+	},
+	{		
+
+			"Era" : 3,
+			"permanentMalus" : 
+			{
+				"malusType": "GenericMalusEffect",
+				
+				"name": "notCountingVictoryPointsFromCards",
+				"type": "CharacterCards"
+			}
+			
+	},
+	{		
+
+			"Era" : 3,
+			"permanentMalus" : 
+			{
+				"malusType": "GenericMalusEffect",
+				
+				"name": "notCountingVictoryPointsFromCards",
+				"type": "VentureCards"
+			}
+			
+	},
+	{		
+
+			"Era" : 3,
+			"permanentMalus" : 
+			{
+				"malusType": "GenericMalusEffect",
+				
+				"name": "notCountingVictoryPointsFromCards",
+				"type": "TerritoryCards"
+			}
+			
+	},
+	{		
+
+			"Era" : 3,
+			"permanentMalus" : 
+			{
+				"malusType": "DecreaseResourcesMalus",
+				"doublechoice": false,
+				
+				"name" : "DecreaseResourcesMalus",
+				"decreasedResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 5
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+				]
+			}
+	},
+	{		
+	
+			"Era" : 3,
+			"permanentMalus" : 
+			{
+				"malusType": "DecreaseResourcesMalus",
+				"doublechoice": false,
+				
+				"name" : "DecreaseResourcesMalus",
+				"decreasedResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 1
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+				]
+			}
+	},
+	{		
+
+			"Era" : 3,
+			"permanentMalus" : 
+			{
+				"malusType": "DecreaseResourcesAtFinalMalus",
+				"doublechoice": false,
+				
+				"name" : "DecreaseResourcesAtFinalMalus",
+				"decreasedResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 1
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 1
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+				],
+				"type" : "BuildingCards"
+				
+			}
+			
+	},
+	{		
+		
+			"Era" : 3,
+			"permanentMalus" : 
+			{
+				"malusType": "DecreaseResourcesAtFinalMalus",
+				"doublechoice": false,
+				
+				"name" : "DecreaseResourcesAtFinalMalus",
+				"decreasedResources": [	
+					{
+						"id" : "Wood",
+						"quantity" : 1
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 1
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 1
+					},
+					{
+						"id" : "Money",
+						"quantity" : 1
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilage",
+						"quantity" : 0
+					}
+				],
+				"type" : "PlayerResourceSet"
+				
+			}		
+	}
+
+]

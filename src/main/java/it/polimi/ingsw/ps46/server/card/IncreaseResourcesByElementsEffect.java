@@ -62,14 +62,8 @@ public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 	}
 	
 	
-	
 	public String getType() {
 		return type;
 	}
-
-	
-	
-	
-
 
 }
