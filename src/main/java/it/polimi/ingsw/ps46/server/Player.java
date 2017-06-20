@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps46.server;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
@@ -46,7 +46,11 @@ public class Player {
 		
 		this.idPlayer = idPlayer; 
 		
-		familyMembers = new HashMap<String,FamilyMember>();
+		familyMembers = new LinkedHashMap<String,FamilyMember>();
+		familyMembers.put("White", new FamilyMember("White"));
+		familyMembers.put("Black", new FamilyMember("Black"));
+		familyMembers.put("Orange", new FamilyMember("Orange"));
+		familyMembers.put("Neutral", new FamilyMember("Neutral"));
 		/*
 		for (int i = 0; i < MAXOFFAMILYMEMBERS; i++)
 		{
@@ -166,6 +170,10 @@ public class Player {
 	public FamilyMember getFamilyMember(String colorKey) {
 		return familyMembers.get(colorKey);
 		
+	}
+	
+	public Map<String, FamilyMember> getFamilyMembers() {
+		return familyMembers;
 	}
 
 

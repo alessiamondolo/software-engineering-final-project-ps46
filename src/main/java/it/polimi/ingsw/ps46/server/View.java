@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps46.server;
 
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -18,17 +17,14 @@ public abstract class View extends Observable implements Observer, EventVisitor 
 	public void getPlayerUserame(int id) {
 	}
 
-	public void showInitialOrder(List<String> initialOrder) {		
+	public void showInitialOrder() {		
 	}
 
-	public String getPlayerColor(String username, List<String> colors) {
+	public String getPlayerColor(String username) {
 		return null;
-	}	
-	
-	public void rollDice() {
 	}
 	
-	public void printBoard(List<Integer> dice) {
+	public void printBoard() {
 	}
 
 	public ActionSpaceName getPlayerAction() {
@@ -38,7 +34,7 @@ public abstract class View extends Observable implements Observer, EventVisitor 
 	public void printPlayerStatus(String username) {		
 	}
 
-	public void updateRoundInfo(int period, int round) {
+	public void updateRoundInfo() {
 	}
 	
 }

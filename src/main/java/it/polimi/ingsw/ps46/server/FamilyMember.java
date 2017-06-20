@@ -18,7 +18,8 @@ public class FamilyMember {
 	 * Description of the constructor FamilyMember.
 	 * 
 	 */
-	public FamilyMember(){
+	public FamilyMember(String color){
+		this.color = color;
 	}
 	
 	

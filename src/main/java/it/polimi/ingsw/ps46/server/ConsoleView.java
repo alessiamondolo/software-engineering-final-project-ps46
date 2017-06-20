@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps46.server;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Observable;
@@ -13,10 +14,20 @@ public class ConsoleView extends View {
 	
 	private ReadInput input;
 	private PrintStream output;
+	private int i = 1;
+	private List<String> colors = new ArrayList<String>();
 	
-	public ConsoleView(OutputStream output) {
+	private Game game;
+	
+	public ConsoleView(Game game, OutputStream output) {
+		this.game = game;
 		this.output = new PrintStream(output);
 		input = new ReadInput();
+		
+		colors.add("Red");
+		colors.add("Yellow");
+		colors.add("Blue");
+		colors.add("Green");
 	}
 	
 	
@@ -26,10 +37,45 @@ public class ConsoleView extends View {
 	
 	
 	public void visit(EventMessage eventMessage) {
+		//output.println("Game state: " + game.getGameState().toString());
+		//output.println("Message: " + eventMessage.getMessage().toString());
 		switch(eventMessage.getMessage()) {
-		case SETUP_GAME :
+		case START_GAME :
 			welcomeMessage();
 			break;
+		case CHANGED_CURRENT_PLAYER :
+			GameState gameState = game.getGameState();
+			switch(gameState) {
+			case SETUP_PLAYERS_USERNAME :
+				getPlayerUsername(game.getCurrentPlayer().getIdPlayer());
+				break;
+			case SETUP_PLAYERS_COLOR :
+				getPlayerColor(game.getCurrentPlayer().getUsername());
+				break;
+			case GET_PLAYER_ACTION : 
+				printPlayerStatus();
+				String action = getPlayerAction().toString();
+				setChanged();
+				notifyObservers(new EventStringInput(action, InputType.PLAYER_ACTION));
+				getFamilyMember();
+				getServants();
+				break;
+			default:
+				break;
+			}
+			break;
+		case SET_INITIAL_ORDER :
+			showInitialOrder();
+			break;
+		case UPDATE_ROUND_INFO : 
+			updateRoundInfo();
+			break;
+		case THROWN_DICE :
+			printBoard();
+			break;
+			/*
+		case UPDATE_CURRENT_PLAYER_STATE :
+			printPlayerStatus();*/
 		default:
 			break;
 		}
@@ -38,50 +84,56 @@ public class ConsoleView extends View {
 
 	
 	public void visit(EventMV eventMV) {
-		switch(eventMV.getState()) {
-		case SETUP_PLAYERS_USERNAME :
-			//getPlayerUserame(eventMV.getPlayer().getIdPlayer());
-			break;
-		case SETUP_INITIAL_ORDER : 
-			//showInitialOrder(eventMV.getInitialOrder());
-		default:
-			break;
-		}
+	}
+	
+	
+	public void setGame(Game game) {
+		this.game = game;
 	}
 	
 	
 	
 	public void welcomeMessage() {
 		output.println("Welcome to the game Lorenzo Il Magnifico!");
+		setChanged();
+		notifyObservers(new EventMessage(NewStateMessage.GAME_STARTED));
 	}
 	
 	
 	
-	public void getPlayerUserame(int id) {
+	public void getPlayerUsername(int id) {
 		
 		output.println("Player " + id + ": what is your username?");
 		String username = input.stringFromConsole();
 		
 		setChanged();
 		notifyObservers(new EventStringInput(username, InputType.PLAYER_USERNAME));
+		
 	}
 	
 	
 	
-	public void showInitialOrder(List<String> initialOrder) {
-		output.println("The initial game order will be:");
+	public void showInitialOrder() {
+		
+		output.println("The initial game order will be:" + i);
+		i++;
 		int position = 1;
-		for(ListIterator<String> iterator=initialOrder.listIterator(); iterator.hasNext();){
-			String username =iterator.next();
-			output.println(position + ". " + username);
+		
+		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
+			Player player=iterator.next();
+			output.println(position + ". " + player.getUsername());
 			position++;
 		}
+		
 		output.println("\n");
+		
+		setChanged();
+		notifyObservers(new EventMessage(NewStateMessage.SET_INITIAL_ORDER));
 	}
 	
 	
 	
-	public String getPlayerColor(String username, List<String> colors) {
+	public String getPlayerColor(String username) {
 		output.println(username + ": which color do you want?");
 		int index = 1;
 		for(ListIterator<String> iterator=colors.listIterator(); iterator.hasNext();){
@@ -91,16 +143,13 @@ public class ConsoleView extends View {
 		}
 		int color = input.IntegerFromConsole(1, colors.size()) - 1;
 		output.println("Your color will be " + colors.get(color) + ".\n");
+		colors.remove(color);
 		return colors.get(color);
 	}
 	
 	
 	
-	public void rollDice() {
-		output.println("The dice for this round are:");
-	}
-	
-	public void printBoard(List<Integer> dice) {
+	public void printBoard() {
 		output.println("THIS IS THE BOARD OF LORENZO IL MAGNIFICO:");
 		output.println(" ________________________________________________________________________ ");
 		output.println("|                                                                        |");
@@ -183,8 +232,8 @@ public class ConsoleView extends View {
 		output.println("|           COUNSIL SPACE                            DICE                |");
 		output.println("|    ______________________________         _____    _____    _____      |");
 		output.println("|   |         |                    |       |     |  |     |  |     |     |");
-		output.println("|   |  Cost:  | Bonus: 1 counsil   |       |  " + dice.get(0).intValue() +
-				"  |  |  " + dice.get(1).intValue() + "  |  |  " + dice.get(2).intValue() + "  |     |");
+		output.println("|   |  Cost:  | Bonus: 1 counsil   |       |  " + game.getDice().get("Black").getValue() +
+				"  |  |  " + game.getDice().get("White").getValue() + "  |  |  " + game.getDice().get("Orange").getValue() + "  |     |");
 		output.println("|   |    1    | privilege, 1 money |       |_____|  |_____|  |_____|     |");
 		output.println("|   |_________|____________________|        black    white   orange      |");
 		output.println("|                                                                        |");
@@ -298,16 +347,59 @@ public class ConsoleView extends View {
 		return null;
 	}
 	
-	public void printPlayerStatus(String username) {
-		output.println(username + ": it's now your turn.");
-		output.println("This is what you have:");
-		output.println("\n");
-		//TODO print resources and cards
+	
+	public void getFamilyMember() {
+		output.println("Which family member do you want to use?");
+		int index = 1;
+		for(String key : game.getCurrentPlayer().getFamilyMembers().keySet()) {
+			if(!game.getCurrentPlayer().getFamilyMembers().get(key).isUsed()) {
+				output.println(index + ". " + key);
+				index++;
+			}
+		}
+		
+		int choice = input.IntegerFromConsole(1, game.getCurrentPlayer().getFamilyMembers().size());
+		index = 1;
+		String color = null;
+		for(String key : game.getCurrentPlayer().getFamilyMembers().keySet()) {
+			if(index == choice) {
+				color = key;
+				break;
+			}
+			else
+				index++;
+		}
+		
+		output.println("You chose the " + color + " family member.");
+		setChanged();
+		notifyObservers(new EventStringInput(color, InputType.FAMILY_MEMBER_CHOICE));
 	}
 	
-	public void updateRoundInfo(int period, int round) {
+	public void getServants() {
+		output.println("How many servants do you want to add to your family member?");
+		int servants = input.IntegerFromConsole(0, 50);
+		Integer aux = new Integer(servants);
+		
+		setChanged();
+		notifyObservers(new EventStringInput(aux.toString(), InputType.SERVANTS_USED));
+		
+		setChanged();
+		notifyObservers(new EventMessage(NewStateMessage.ACTION_SENT));
+		
+	}
+	
+	public void printPlayerStatus() {
+		Player player = game.getCurrentPlayer();
+		output.println(player.getUsername() + ": it's now your turn.");
+		output.println("This is what you have:");
+		output.println(game.getCurrentPlayer().getPlayerResourceSet().toString());
+		output.println("\n");
+		//TODO print cards
+	}
+	
+	public void updateRoundInfo() {
 		output.println("==========================================================================");
-		output.println("We are now playing round " + round + " of period " + period + ".");
+		output.println("We are now playing round " + game.getCurrentRound() + " of period " + game.getCurrentPeriod() + ".");
 		output.println("\n");
 	}
 	

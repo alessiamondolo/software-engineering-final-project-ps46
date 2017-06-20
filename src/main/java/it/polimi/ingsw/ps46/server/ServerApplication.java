@@ -32,10 +32,10 @@ public class ServerApplication {
 		printStream.println("2. GUI");
 		int UI = readInput.IntegerFromConsole(1, 2);
 		if(UI == 1)
-			view = new ConsoleView(System.out);
+			view = new ConsoleView(game, System.out);
 		else
 			//TODO da cambiare mettendo GUIView
-			view = new ConsoleView(System.out);
+			view = new ConsoleView(game, System.out);
 		controller = new GameController(game, view);
 	}
 

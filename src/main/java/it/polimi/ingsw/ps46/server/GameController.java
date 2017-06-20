@@ -1,11 +1,11 @@
 package it.polimi.ingsw.ps46.server;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ListIterator;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+
+import it.polimi.ingsw.ps46.server.action.Action;
+import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
 
 
 /**
@@ -13,11 +13,14 @@ import java.util.Observer;
  * 
  * @author Alessia Mondolo
  */
-public class GameController implements Observer, EventVisitor {
+public class GameController implements Observer, ViewEventVisitor {
 
 	private Game game;
 	private View view;
-	private boolean go = false;
+	
+	private String actionName = null;
+	private String familyMemberName = null;
+	private int servants = 0;
 
 
 	/**
@@ -31,11 +34,18 @@ public class GameController implements Observer, EventVisitor {
 	
 	
 	public void update(Observable o, Object obj) {
-		((EventAcceptor) obj).accept(this);
-		/*
-		String username = (String) arg;
-		game.getCurrentPlayer().setUsername(username);
-		go = true;*/
+		((ViewEventAcceptor) obj).accept(this);
+	}
+	
+	
+	public void visit(EventMessage eventMessage) {
+		switch(eventMessage.getMessage()) {
+		case ACTION_SENT :
+			startAction();
+		default:
+			break; 
+			
+		}
 	}
 	
 	
@@ -43,8 +53,18 @@ public class GameController implements Observer, EventVisitor {
 		switch(eventStringInput.getType()) {
 		case PLAYER_USERNAME :
 			game.getCurrentPlayer().setUsername(eventStringInput.getString());
-			go = true;
 			break;
+		case PLAYER_COLOR : 
+			game.getCurrentPlayer().setColor(eventStringInput.getString());
+			break;
+		case PLAYER_ACTION :
+			actionName = eventStringInput.getString();
+			break;
+		case FAMILY_MEMBER_CHOICE :
+			familyMemberName = eventStringInput.getString();
+			break;
+		case SERVANTS_USED : 
+			servants = 1;
 		default:
 			break;
 		}
@@ -56,23 +76,24 @@ public class GameController implements Observer, EventVisitor {
 	 * Main method that controls all the game logic, from the setup of the game until the end of the game.
 	 */
 	public void run() {
+		
 		setupGame();
 		
-		for(int period = 1; period <= game.getPERIODS(); period++) {
-			for(int round = 1; round <= game.getROUNDS_PER_PERIOD(); round++) {
-				roundSetup(period, round);
-				for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
-					Player player=iterator.next();
-					game.setCurrentPlayer(player);
-					view.printPlayerStatus(game.getCurrentPlayer().getUsername());
-					playerActions();
-				}
-				if(round == game.getROUNDS_PER_PERIOD())
-					vaticanReport();
-				endRound();
+		while((game.getCurrentPeriod() < game.getPERIODS()) || (game.getCurrentRound() < game.getROUNDS_PER_PERIOD())) {
+			
+			roundSetup();
+			
+			game.setGameState(GameState.GET_PLAYER_ACTION);
+			for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
+				Player player=iterator.next();
+				game.setCurrentPlayer(player);
+				playerActions();
 			}
+			if(game.getCurrentRound() == game.getROUNDS_PER_PERIOD())
+				vaticanReport();
+			endRound();
 		}
-		
+				
 	}
 
 	
@@ -82,10 +103,12 @@ public class GameController implements Observer, EventVisitor {
 	 * select a random initial order for the game and ask the players which color they want to use.
 	 */
 	private void setupGame() {
+		game.setGameState(GameState.SETUP_GAME);
 		game.startGame();
 		setupPlayers();
 		setupInitialOrder();
 		setupPlayersColor();
+		setupInitialResources();
 	}
 
 	
@@ -98,13 +121,8 @@ public class GameController implements Observer, EventVisitor {
 		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
 			Player player=iterator.next();
 			game.setCurrentPlayer(player);
-			while(!go);
-			go = false;
 			//TODO check per avere username univoco?
-			//aspetto che mi arrivi la notifica dalla view;
-			//player.setUsername(view.getPlayerUserame(game.getCurrentPlayer().getIdPlayer()));
 		}
-		game.setGameState(GameState.SETUP_INITIAL_ORDER); 
 	}
 	
 	
@@ -113,14 +131,8 @@ public class GameController implements Observer, EventVisitor {
 	 * Chooses a random order for the first turn of the game and shows the order to the players through the view.
 	 */
 	private void setupInitialOrder() {
+		game.setGameState(GameState.SETUP_INITIAL_ORDER); 
 		game.setInitialOrder();
-		List<String> initialOrder = new ArrayList<String>();
-		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
-			Player player=iterator.next();
-			game.setCurrentPlayer(player);
-			initialOrder.add(player.getUsername());
-		}
-		view.showInitialOrder(initialOrder);
 	}
 	
 	
@@ -129,18 +141,23 @@ public class GameController implements Observer, EventVisitor {
 	 * Asks the players through the view the color that they want to use during the game.
 	 */
 	private void setupPlayersColor() {
-		List<String> colors = new ArrayList<String>();
-		colors.add("Red");
-		colors.add("Yellow");
-		colors.add("Blue");
-		colors.add("Green");
+		game.setGameState(GameState.SETUP_PLAYERS_COLOR);
 		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
 			Player player=iterator.next();
-			game.setCurrentPlayer(player);
-			String color = view.getPlayerColor(game.getCurrentPlayer().getUsername(), colors);
-			player.setColor(color);
-			colors.remove(color);
+			game.setCurrentPlayer(player);			
 		}
+	}
+	
+	
+	
+	private void setupInitialResources() {
+		game.setGameState(GameState.SETUP_INITIAL_RESOURCES);/*
+		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
+			Player player=iterator.next();
+			game.setCurrentPlayer(player);			
+		}
+		*/
+		game.giveInitialResources();
 	}
 	
 	
@@ -150,22 +167,23 @@ public class GameController implements Observer, EventVisitor {
 	 * @param period 
 	 * 
 	 */
-	private void roundSetup(int period, int round) {
-		view.updateRoundInfo(period, round);
+	private void roundSetup() {
+		game.setGameState(GameState.SETUP_ROUND);
+		if(game.getCurrentRound() == game.getROUNDS_PER_PERIOD()) {
+			int period = game.getCurrentPeriod() + 1;
+			game.setCurrentPeriod(period);
+			game.setCurrentRound(1);
+		}
+		else {
+			int round = game.getCurrentRound() + 1;
+			game.setCurrentRound(round);
+		}
+		
 		//Girare le carte associate a quel periodo nelle torri
 		
 		//Throw dice and update board in the view
-		Map<String, Dice> diceMap = game.getDice();
-		for(String key : diceMap.keySet())
-			diceMap.get(key).throwDice();
-		List<Integer> dice = new ArrayList<Integer>();
-		Dice die = game.getDice("Black");
-		dice.add(Integer.valueOf(die.getValue()));
-		die = game.getDice("White");
-		dice.add(Integer.valueOf(die.getValue()));
-		die = game.getDice("Orange");
-		dice.add(Integer.valueOf(die.getValue()));
-		view.printBoard(dice);
+		game.throwDice();
+		
 	}
 	
 	
@@ -175,7 +193,35 @@ public class GameController implements Observer, EventVisitor {
 	 */
 	private void playerActions() {
 		//ActionSpaceName move = 
-				view.getPlayerAction();
+				//view.getPlayerAction();
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	private void startAction() {
+		FamilyMember familyMember = game.getCurrentPlayer().getFamilyMember(familyMemberName);
+		ActionSpace actionSpace = null;
+		switch(actionName) {
+		case "GREEN_TOWER_FLOOR_1" : 
+			actionSpace = game.getBoard().getTower(1).getTowerFloor(1).getActionSpace();
+			break;
+		case "GREEN_TOWER_FLOOR_2" : 
+			actionSpace = game.getBoard().getTower(1).getTowerFloor(2).getActionSpace();
+			break;
+		case "GREEN_TOWER_FLOOR_3" : 
+			actionSpace = game.getBoard().getTower(1).getTowerFloor(3).getActionSpace();
+			break;
+		case "GREEN_TOWER_FLOOR_4" : 
+			actionSpace = game.getBoard().getTower(1).getTowerFloor(4).getActionSpace();
+			break;
+		
+		}
+		
+		Action action = new MoveToActionSpaceAction(game, game.getCurrentPlayer(), familyMember, servants, actionSpace);
+		action.execute();
 	}
 	
 	
@@ -195,22 +241,6 @@ public class GameController implements Observer, EventVisitor {
 	 */
 	private void endRound() {
 		// TODO Auto-generated method stub
-	}
-
-
-
-	@Override
-	public void visit(EventMessage eventMessage) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void visit(EventMV eventMV) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
