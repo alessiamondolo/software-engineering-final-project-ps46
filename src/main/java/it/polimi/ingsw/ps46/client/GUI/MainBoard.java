@@ -38,18 +38,24 @@ public class MainBoard extends JPanel  {
 		
 		// Aggiungo immagine pannello di sfondo
 		// this.setPreferredSize(new Dimension (500, 1000));
-		this.add(createGrid());
+		this.add(createGrid(new CentralPiece(), new MilitaryTower()));
 		
 		// this.getComponent(n)
 	}
 	
-	private JPanel createGrid() {
+	// Returns a panel that represents the entire board which is 
+	// composed of a Central Piece, a Military Tower and and external
+	// Grid that is made through this function. Instead Central Piece 
+	// and Military Tower objects are passed as parameters.
+	
+	private JPanel createGrid(CentralPiece centralPiece, MilitaryTower militaryTower) {
 		int x = 20;
 		int y = 2;
 		int width = 36;
 		int height = 40; 
 		JPanel panel = new JPanel();
 		//JLabel background = new JLabel();
+		
 		
 		//panel.add(background);
 		//panel.setPreferredSize(new Dimension(600, 700));
@@ -70,7 +76,8 @@ public class MainBoard extends JPanel  {
 				gbc.gridheight = 2;
 				gbc.weightx = 1;
 				gbc.weighty = 1;
-			
+				
+				gbc.ipadx = 10;
 				gbc.gridx = 0;
 				gbc.gridy = 0;
 				JLabel l = new JLabel();
@@ -102,6 +109,7 @@ public class MainBoard extends JPanel  {
 					gbc.gridwidth = 2;
 					gbc.gridheight = 2;
 					gbc.weightx = 1;
+					gbc.ipadx = 10;
 					
 					gbc.weighty = 1;
 					gbc.gridx = 21;
@@ -217,8 +225,32 @@ public class MainBoard extends JPanel  {
 			l.setText(String.valueOf(i));
 			panel.add(l, gbc);*/
 			
-			 
-			 
+		gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;  
+		gbc.gridwidth = 16;
+		gbc.gridheight = 29;
+		gbc.ipadx = 10;
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		gbc.gridx = 2;
+		gbc.gridy = 2;	 
+		panel.add(centralPiece, gbc);
+		
+		//posizione military tower da specificare
+		
+		// la faccio larga di due colonne e poi gioco con gli insets per spostare
+		// a destra il JPanel con il BoxLayout in modo che mi combaci
+		
+		gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;  
+		gbc.gridwidth = 2;
+		gbc.gridheight = 29;
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		gbc.gridx = 18;
+		gbc.gridy = 2;	 
+		panel.add(militaryTower, gbc);
+		
 		JLabel board = new JLabel();
 		board.setPreferredSize(new Dimension(600, 700));
 		//board.setIcon(returnBoardImage());
@@ -232,7 +264,7 @@ public class MainBoard extends JPanel  {
 		gbc.gridy = 0;
 		panel.add(board, gbc);
 		
-		
+
 		//To show the background picture of the board
 		//background.setOpaque(false);
 		
@@ -240,12 +272,13 @@ public class MainBoard extends JPanel  {
 		return panel;
 	}
 	
-/*
-	private ImageIcon returnBoardImage() {
+
+	//da risolvere problemi legati alla visualizzazione dei file immagini
+	/*private ImageIcon returnBoardImage() {
 		
 		 BufferedImage image = null;
 			try {
-				image = ImageIO.read(getClass().getResource("/ps46/images/gameboard.png"));
+				image = ImageIO.read(getClass().getResource("gameboard.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
