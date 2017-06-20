@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps46.server.card.Effect;
 
 /**
- * Description of the class Tower.
  * This Class contains towerFloors memorized into a list of  <TowerFloor> + nMax of floors = 4 + the color of each floor.
  * There are 3 parameters used to set up all the tower with differents values.
 
@@ -48,7 +47,7 @@ public class Tower {
 	 * @return boolean
 	 */
 	
-	public Boolean sameColor(Color colorOfTheCard){
+	public Boolean sameColor(String colorOfTheCard){
 		
 		if(colorOfTheTower.equals(colorOfTheCard))
 			return true;

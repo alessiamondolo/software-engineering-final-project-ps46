@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps46.server;
 
 /**
- * Description of the Class FamilyMember.
  * This Class creates an object family member formed by its id ( set in the Class Player for a MAX of 4) Availability and its value.
  * 
  * @author Andrea.Masi

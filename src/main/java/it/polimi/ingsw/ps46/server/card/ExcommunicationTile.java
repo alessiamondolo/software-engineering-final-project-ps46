@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps46.server.card;
 
 
 /**
- * Description of the Class ExcommunicationTile.
  * This Class is used to create a single object of ExcommunicationTile, with its permanent Malus effect.
  * 
  * @author Andrea.Masi

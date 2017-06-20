@@ -488,7 +488,7 @@
 						"quantity" : 0
 					}
 				],
-				"type" : "BuildingCards"
+				"from" : "BuildingCards"
 				
 			}
 			
@@ -536,7 +536,7 @@
 						"quantity" : 0
 					}
 				],
-				"type" : "PlayerResourceSet"
+				"from" : "PlayerResourceSet"
 				
 			}		
 	}

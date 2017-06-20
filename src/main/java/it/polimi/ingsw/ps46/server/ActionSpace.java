@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps46.server;
 import it.polimi.ingsw.ps46.server.card.Effect;
 
 /**
- * Description of the Class ActionSpace.
  * This Class represents the structure of all the boxes of the board, it's called actionSpace because is the space where you can put your family member..
  * 
  * @author Andrea.Masi

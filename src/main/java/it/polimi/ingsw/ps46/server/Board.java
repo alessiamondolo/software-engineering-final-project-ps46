@@ -10,7 +10,6 @@ public class Board {
 	private ArrayList<ActionSpace> boardBoxes;
 	
 	/**
-	 * Description of the Class Board.
 	 * This Class is made by two lists of Tower and boardBoxes. 
 	 */
 	public Board(ArrayList<Tower> towers, ArrayList<ActionSpace> boardBoxes){

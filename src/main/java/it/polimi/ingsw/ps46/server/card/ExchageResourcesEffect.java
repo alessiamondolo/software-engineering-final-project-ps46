@@ -3,7 +3,11 @@ package it.polimi.ingsw.ps46.server.card;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
-
+/**
+ * 
+ * 
+ * @author Alessia Mondolo
+ */
 public class ExchageResourcesEffect implements Effect { // ho cambiato gli attributi da public a private 
 
 	private ResourceSet requiredResources;

@@ -6,9 +6,7 @@ import it.polimi.ingsw.ps46.server.action.ActivateHarvestAction;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
-/**
- * Description of the Class ExtraMove.
- * 
+/** 
  * ExtraMove implements Effect, ... TODO activateEffect
  * 
  * @author Andrea.Masi

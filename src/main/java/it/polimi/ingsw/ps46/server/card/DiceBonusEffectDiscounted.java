@@ -6,9 +6,7 @@ import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
-/**
- * Description of the Class DiceBonusEffectDiscounted.
- * 
+/** 
  * This Class extends the class DiceBonusEffect and it's used to update player's attributes optionalDiscount, after the action "collectCard" used on some particular character cards.
  * These particulars card have a permanent effect which give you some bonus effect (when you want to collect a BuildingCards or a CharactersCards) + one or two (optional) discounts.
  * 

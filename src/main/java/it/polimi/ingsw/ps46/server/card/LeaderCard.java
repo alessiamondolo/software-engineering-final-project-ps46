@@ -12,6 +12,5 @@ public class LeaderCard {
 	private String leaderCard;
 	private Map<String,Integer> requiredCards; 
 	private ResourceSet requiredResources;
-	
 }
 	

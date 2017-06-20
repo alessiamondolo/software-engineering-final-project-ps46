@@ -1,7 +1,9 @@
 package it.polimi.ingsw.ps46.server.card;
 
+
 /**
- * Description of the Class GenericMalusEffect.
+ * This Class extends MalusEffect.
+ * Used to implement the most generic MalusEffects of the ExcommunicationTales.
  * 
  * @author Andrea.Masi
  */
@@ -15,6 +17,13 @@ public class GenericMalusEffect extends MalusEffect{
 		type = null;	
 	}
 	
+	/**
+	 * This Constructor creates a new object GenericMalusEffect.
+	 * Built by .json file.	 
+	 * 
+	 * @param name
+	 * @param type
+	 */
 	public GenericMalusEffect(String name, String type){
 		this.name = name;
 		this.type = type;

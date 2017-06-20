@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps46.server;
 import it.polimi.ingsw.ps46.server.card.Card;
 
 /**
- * Description of Class TowerFloor.
  * This Class is used to create a single floor of a tower 
  * 
  * @author Andrea.Masi

@@ -1,12 +1,9 @@
 package it.polimi.ingsw.ps46.server;
 
-import org.omg.CORBA.Current;
-import org.omg.CORBA.portable.ValueInputStream;
 
 /**
- * Description of the Class Dice
- * This Class is used to create an object Dice used (as an int) to create a random number or to set a value usefull to compare or change the value as we prefer.
-.
+ * This Class is used to create an object Dice used (as an int) 
+ * to create a random number or to set a value usefull to compare or change the value as we prefer.
  * @author Andrea.Masi
  *
  */

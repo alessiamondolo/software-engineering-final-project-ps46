@@ -20,6 +20,12 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 import it.polimi.ingsw.ps46.server.resources.ResourcesFactory;
 import it.polimi.ingsw.ps46.utils.MyJSONParser;
 
+/**
+ * 
+ * 
+ * @author Alessia Mondolo
+ */
+
 public class FactoryCards {
 	
 	private static FactoryCards factoryCards = null;

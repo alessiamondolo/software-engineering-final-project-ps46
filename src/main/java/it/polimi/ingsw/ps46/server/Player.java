@@ -18,7 +18,6 @@ import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
- * Description of the Class Player.
  * This Class is used to create a single instance of player with his ID, Username, Decks, Set of resources, Family members, Bonus and discounts.
  * 
  * @author Andrea.Masi

@@ -5,9 +5,10 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
 /**
- * 
- * @author Andrea.Masi
+ * This Class extends IncreaseResourcesEffect. Its use to counting the number of a specific kind of cards or military points of the current player 
+ * and give the same number of a resource. 
  *
+ * @author Andrea.Masi
  */
 
 public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
@@ -21,6 +22,12 @@ public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 		this.type = type;	
 	}
 
+	/**
+	 * This method adds the additional resources to the resources of the current player,
+	 * who is the one that activated the card with the effect IncreaseResourcesByElementsEffect.
+	 */
+	
+	
 	public void activateEffect(Game game) {
 		int numberOfElements = 0;
 		

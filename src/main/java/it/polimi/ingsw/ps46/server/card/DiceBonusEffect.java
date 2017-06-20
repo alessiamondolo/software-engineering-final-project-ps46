@@ -4,8 +4,6 @@ import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Game;
 
 /**
- * Description of the Class DiceBonusEffect.
- * 
  * This class implements the class Effect, adding the DiceBonusEffect value to the attribute bonus in the class Player.
  * 
  * @author Andrea.Masi
@@ -32,8 +30,6 @@ public class DiceBonusEffect implements Effect {
 	
 	
 	/**
-	 * Description of the Method activateEffect.
-	 * 
 	 * This Method updates the attribute bonus of the current player after the action "CollectCard" on a CharacterCard 
 	 * These cards have a Dice bonus if you collect a particular kind of cards ("type").
 	 */
@@ -45,7 +41,6 @@ public class DiceBonusEffect implements Effect {
 
 	
 	
-
 	public Dice getBonus() {
 		return bonus;
 	}
