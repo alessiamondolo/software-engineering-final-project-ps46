@@ -1,24 +1,38 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
- 
+
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
 import it.polimi.ingsw.ps46.server.card.FactoryCards;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
+import it.polimi.ingsw.ps46.utils.MyJSONParser;
 
 
 public class Game extends Observable {
 	
 	private final int ROUNDS_PER_PERIOD = 2;
 	private final int PERIODS = 3;
+	private int currentRound = 0;
+	private int currentPeriod = 1;
 	
 	private int numberPlayers; 
 	private List<Player> players;
@@ -31,6 +45,8 @@ public class Game extends Observable {
 	private Set<VentureCard> ventureCardsDeck;
 	private Map<String, Dice> dice;
 	
+	private GameState gameState;
+	
 	
 	Game(int numberPlayers) {
 		this.numberPlayers = numberPlayers;
@@ -42,9 +58,12 @@ public class Game extends Observable {
 		configDice();
 		configDecks();
 		configBoard();
-		
 	}
 
+	private void newState(Object event) {
+		setChanged();
+		notifyObservers(event);
+	}
 	
 //--------------------------------------------------//
 //----------BEGIN OF CONFIGURATION METHODS----------//
@@ -92,9 +111,16 @@ public class Game extends Observable {
 //---------------BEGIN OF GET METHODS---------------//
 //--------------------------------------------------//
 	public Player getCurrentPlayer() {
-		return this.currentPlayer;		
+		return currentPlayer;		
 	}
 
+	public int getCurrentPeriod() {
+		return currentPeriod;
+	}
+	
+	public int getCurrentRound() {
+		return currentRound;
+	}
 
 	public Dice getDice(String color) {
 		return dice.get(color);
@@ -158,6 +184,11 @@ public class Game extends Observable {
 //----------------END OF GET METHODS----------------//
 //--------------------------------------------------//
 
+	public void startGame() {
+		newState(new EventMessage(NewStateMessage.START_GAME));
+	}
+	
+	
 	public void setNextTurnOrder(ArrayList<Player> nextTurnOrder) {
 		this.nextTurnOrder = nextTurnOrder;
 	}
@@ -165,10 +196,62 @@ public class Game extends Observable {
 
 	public void setCurrentPlayer(Player player) {
 		currentPlayer = player;
+		newState(new EventMessage(NewStateMessage.CHANGED_CURRENT_PLAYER));
 	}
 	
 	public void setInitialOrder() {
 		Collections.shuffle(players);
+		newState(new EventMessage(NewStateMessage.SET_INITIAL_ORDER));
+	}
+	
+	public void giveInitialResources() {
+		ResourceSet initialResources = null;
+		JSONParser parser = new JSONParser();
+		MyJSONParser myJSONParser = new MyJSONParser();
+		try {
+        	URL url = getClass().getResource("SetupResources.json");
+        	Object obj = parser.parse(new FileReader(url.getPath()));
+        	JSONArray resourcesJSON = (JSONArray) obj;        	
+        	
+            Iterator resourcesIterator = resourcesJSON.iterator();
+            ListIterator<Player> playersIterator = getPlayers().listIterator();
+            while (resourcesIterator.hasNext() && playersIterator.hasNext()) {
+            	JSONArray resourceSetJSON = (JSONArray) resourcesIterator.next();
+                initialResources = myJSONParser.buildResourceSet(resourceSetJSON);
+                Player currentPlayer = playersIterator.next();
+                currentPlayer.setResources(initialResources);
+            }
+            
+		} catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public void setCurrentRound(int newRound) {
+		currentRound = newRound;
+		newState(new EventMessage(NewStateMessage.UPDATE_ROUND_INFO));
+	}
+	
+	public void setCurrentPeriod(int newPeriod) {
+		currentPeriod = newPeriod;
+	}
+	
+	public void throwDice() {
+		for(String key : dice.keySet())
+			dice.get(key).throwDice();
+		newState(new EventMessage(NewStateMessage.THROWN_DICE));
+	}
+
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+	}
+	
+	public GameState getGameState() {
+		return gameState;
 	}
 
 }

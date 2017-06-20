@@ -16,13 +16,15 @@ public class MoveToActionSpaceAction implements Action {
 	private Game game;
 	private Player player;
 	private FamilyMember familyMember;
+	private int servants;
 	private ActionSpace actionSpace;
 	
 	
-	public void MoveToActionSpace(Game game, Player player, FamilyMember familyMember, ActionSpace actionSpace) {
+	public MoveToActionSpaceAction(Game game, Player player, FamilyMember familyMember, int servants, ActionSpace actionSpace) {
 		this.game = game;
 		this.player = player;
 		this.familyMember = familyMember;
+		this.servants = servants;
 		this.actionSpace = actionSpace;
 	}
 	
@@ -40,6 +42,8 @@ public class MoveToActionSpaceAction implements Action {
 	 */
 	public void execute() {
 		
+		System.out.println("I'm inside the action with " + servants + " servants.");
+		/*
 		if(isLegal()) {
 			//Sets the action space as not available
 			//TODO check modifications to this method
@@ -74,12 +78,11 @@ public class MoveToActionSpaceAction implements Action {
 				}
 				default : //throw new Exception: notExistingActionSpace
 					break;				
-			}	
-			
+			}
 		}
 		else {
 			//throw Exception illigal action
-		}
+		}*/
 
 	}
 

@@ -2,8 +2,8 @@ package it.polimi.ingsw.ps46.server;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
@@ -17,6 +17,7 @@ import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
+
 /**
  * This Class is used to create a single instance of player with his ID, Username, Decks, Set of resources, Family members, Bonus and discounts.
  * 
@@ -26,6 +27,7 @@ public class Player {
 
 	private int idPlayer;
 	private String username;
+	private String color;
 	private ResourceSet playerResources = null;
 
 	private ArrayList<TerritoryCard> territoryCards = null;
@@ -63,7 +65,11 @@ public class Player {
 		
 		this.idPlayer = idPlayer; 
 		
-		familyMembers = new HashMap<String,FamilyMember>();
+		familyMembers = new LinkedHashMap<String,FamilyMember>();
+		familyMembers.put("White", new FamilyMember("White"));
+		familyMembers.put("Black", new FamilyMember("Black"));
+		familyMembers.put("Orange", new FamilyMember("Orange"));
+		familyMembers.put("Neutral", new FamilyMember("Neutral"));
 		/*
 		for (int i = 0; i < MAXOFFAMILYMEMBERS; i++)
 		{
@@ -84,7 +90,6 @@ public class Player {
 		
 		
 		discount = new HashMap<String, ResourceSet>();
-		
 		optionalDiscount = new HashMap<String, ResourceSet>();
 
 		
@@ -93,6 +98,7 @@ public class Player {
 		// excommunicationMalus of the first era.
 		excommunicationMalus.put("DecreaseResourcesMalus", new DecreaseResourcesMalus() );
 		excommunicationMalus.put("DiceMalusEffect", new DiceMalusEffect() );
+
 		
 		// excommunicationMalus of the second era.
 		excommunicationMalus.put("DiceMalusEffectForCards", new DiceMalusEffect() );
@@ -237,10 +243,19 @@ public class Player {
 		return familyMembers.get(colorKey);
 		
 	}
+	
+	public Map<String, FamilyMember> getFamilyMembers() {
+		return familyMembers;
+	}
 
 
 	public String getUsername() {
 		return username;
+	}
+	
+	
+	public String getColor() {
+		return color;
 	}
 
 
@@ -411,6 +426,14 @@ public class Player {
 		
 		return excommunicationMalus.get(type);
 		
+	}
+
+	public void setColor(String color) {
+		this.color = color;		
+	}
+	
+	public void setResources(ResourceSet resources) {
+		playerResources = resources;
 	}
 
 }

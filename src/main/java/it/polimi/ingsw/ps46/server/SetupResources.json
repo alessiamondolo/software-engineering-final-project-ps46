@@ -1,7 +1,4 @@
 [
-	{
-		"player" : 1,
-		"initialResources": 
 		[
 			{
 				"id" : "Wood",
@@ -31,11 +28,7 @@
 				"id" : "VictoryPoints",
 				"quantity" : 0
 			}
-		]
-	},
-	{
-		"player" : 2,
-		"initialResources": 
+		],
 		[
 			{
 				"id" : "Wood",
@@ -65,11 +58,7 @@
 				"id" : "VictoryPoints",
 				"quantity" : 0
 			}
-		]
-	},
-	{
-		"player" : 3,
-		"initialResources": 
+		],
 		[
 			{
 				"id" : "Wood",
@@ -99,11 +88,7 @@
 				"id" : "VictoryPoints",
 				"quantity" : 0
 			}
-		]
-	},
-	{
-		"player" : 4,
-		"initialResources": 
+		],
 		[
 			{
 				"id" : "Wood",
@@ -134,6 +119,5 @@
 				"quantity" : 0
 			}
 		]
-	}
 ]
 
