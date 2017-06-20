@@ -1,218 +1,2717 @@
 [
 	{
 		"cardName" : "Commercial Hub",
+		"cardEra" : 1,
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 1
+		}			
+	},
 	
-				"immediateEffects" : {
-					"additionalResources": [
-												{
-													"id" : "Wood",
-													"quantity" : 3
-												},
-												{
-													"id" : "Stones",
-													"quantity" : 0
-												},
-												{
-													"id" : "Servants",
-													"quantity" : 0
-												},
-												{
-													"id" : "Money",
-													"quantity" : 0
-												},
-												{
-													"id" : "FaithPoints",
-													"quantity" : 0
-												},
-												{
-													"id" : "MilitaryPoints",
-													"quantity" : 0
-												},
-												{
-													"id" : "VictoryPoints",
-													"quantity" : 0
-												}
-											]
-						
-						
-				
-			},
+	{
+		"cardName" : "Woods",
+		"cardEra" : 1,
 		
-				"permanentEffects" : {
-					"additionalResources": [
-												{
-													"id" : "Wood",
-													"quantity" : 4
-												},
-												{
-													"id" : "Stones",
-													"quantity" : 0
-												},
-												{
-													"id" : "Servants",
-													"quantity" : 0
-												},
-												{
-													"id" : "Money",
-													"quantity" : 0
-												},
-												{
-													"id" : "FaithPoints",
-													"quantity" : 0
-												},
-												{
-													"id" : "MilitaryPoints",
-													"quantity" : 0
-												},
-												{
-													"id" : "VictoryPoints",
-													"quantity" : 0
-												}
-											]
-						
-						
-				
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
 			},
-
-			"cost": [
-						{
-							"id" : "Wood",
-							"quantity" : 1
-						},
-						{
-							"id" : "Stones",
-							"quantity" : 0
-						},
-						{
-							"id" : "Servants",
-							"quantity" : 0
-						},
-						{
-							"id" : "Money",
-							"quantity" : 0
-						},
-						{
-							"id" : "FaithPoints",
-							"quantity" : 0
-						},
-						{
-							"id" : "MilitaryPoints",
-							"quantity" : 0
-						},
-						{
-							"id" : "VictoryPoints",
-							"quantity" : 0
-						}
-					]
-					
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 2
+		}	
+	},
+	
+	{
+		"cardName" : "Village",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 1
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 3
+		}	
+	},
+	
+	{
+		"cardName" : "Gravel Pit",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 2
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 2
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 4
+		}	
+	},
+	
+	{
+		"cardName" : "Forest",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 3
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 1
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 5
+		}	
 	},
 	{
-		"cardName" : "Prova",
-	
-				"immediateEffects" : {
-					"additionalResources": [
-												{
-													"id" : "Wood",
-													"quantity" : 3
-												},
-												{
-													"id" : "Stones",
-													"quantity" : 2
-												},
-												{
-													"id" : "Servants",
-													"quantity" : 0
-												},
-												{
-													"id" : "Money",
-													"quantity" : 0
-												},
-												{
-													"id" : "FaithPoints",
-													"quantity" : 0
-												},
-												{
-													"id" : "MilitaryPoints",
-													"quantity" : 0
-												},
-												{
-													"id" : "VictoryPoints",
-													"quantity" : 0
-												}
-											]
-						
-						
-				
-			},
+		"cardName" : "Monastery",
+		"cardEra" : 1,
 		
-				"permanentEffects" : {
-					"additionalResources": [
-												{
-													"id" : "Wood",
-													"quantity" : 4
-												},
-												{
-													"id" : "Stones",
-													"quantity" : 3
-												},
-												{
-													"id" : "Servants",
-													"quantity" : 0
-												},
-												{
-													"id" : "Money",
-													"quantity" : 0
-												},
-												{
-													"id" : "FaithPoints",
-													"quantity" : 0
-												},
-												{
-													"id" : "MilitaryPoints",
-													"quantity" : 0
-												},
-												{
-													"id" : "VictoryPoints",
-													"quantity" : 0
-												}
-											]
-						
-						
-				
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 1
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 1
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
 			},
-
-			"cost": [
-						{
-							"id" : "Wood",
-							"quantity" : 1
-						},
-						{
-							"id" : "Stones",
-							"quantity" : 4
-						},
-						{
-							"id" : "Servants",
-							"quantity" : 0
-						},
-						{
-							"id" : "Money",
-							"quantity" : 0
-						},
-						{
-							"id" : "FaithPoints",
-							"quantity" : 0
-						},
-						{
-							"id" : "MilitaryPoints",
-							"quantity" : 0
-						},
-						{
-							"id" : "VictoryPoints",
-							"quantity" : 0
-						}
-					]
-					
-	}
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 6
+		}	
+	},
+	{
+		"cardName" : "Citadel",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 1
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 2
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 5
+		}	
+	},
+	{
+		"cardName" : "City",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 1
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 6
+		}	
+	},
+	{
+			"cardName" : "Gold Mine",
+			"cardEra" : 2,
+			
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 1
+		}	
+	},
+	{
+		"cardName" : "Mountain Town",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 1
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 2
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 1
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 3
+		}
+	},
+	{
+		"cardName" : "Mining Town",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 1
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 2
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 2
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 1
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 4
+		}
+	},
+	{
+		"cardName" : "Rock Pit",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 3
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 3
+		}
+	},
+	{
+		"cardName" : "Estate",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 2
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 2
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 4
+		}	
+	},
+	{
+		"cardName" : "Hermitage",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 2
+		}
+	},
+	{
+		"cardName" : "Menor House",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 2
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 5
+		}
+	},
+	{
+		"cardName" : "Dukedom",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 4
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 2
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 1
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 6
+		}
+	},
+	{
+		"cardName" : "Trading Town",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 1
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 1
+		}
+	},
+	{
+		"cardName" : "Farm",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 2
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 3
+		}	
+	},
+	{
+		"cardName" : "Colony",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 4
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 5
+		}
+	},
+	{
+		"cardName" : "Marble Pit",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 2
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 2
+		}
+	},
+	{
+		"cardName" : "Province",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 1
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 1
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 1
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 4
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 6
+		}
+	},
+	{
+		"cardName" : "Sanctuary",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 1
+		}
+	},
+	{
+		"cardName" : "Castle",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 2
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 1
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 4
+		}
+	},
+	{
+		"cardName" : "Fortified Town",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 1
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"additionalResources": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 2
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+		],
+		"harvestValue" : 
+		{
+			"value" : 2
+		}
+	}	
 ]
-
-	

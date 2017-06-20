@@ -1,5 +1,2220 @@
 [
+	{
+		"cardName" : "Hiring Recruits",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 5
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
 
-]
-
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 4
+				}
+			]
+		},
+		
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 4
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
 	
+	{
+		"cardName" : "Repairing the Church",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 5
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 1
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	
+	{
+		"cardName" : "Building the Walls",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 1
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 3
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 3
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	
+	{
+		"cardName" : "Raising a Staute",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 2
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 4
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 2
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 2
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	
+	{
+		"cardName" : "Military Campaign",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 5
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : [
+		
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 3
+			}
+		]
+	},
+	
+	{
+		"cardName" : "Hosting Panhandlers",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 4
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 4
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 3
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	
+	{
+		"cardName" : "Fighting Heresies",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 5
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : [
+		
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 5
+			}
+		]
+	},
+	
+	{
+		"cardName" : "Support to the Bishop",
+		"cardEra" : 1,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 1
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 1
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 1
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 2
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : true,
+		
+		"costTwo" : [
+			
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 2
+			}
+		],
+		
+		"requiredResource" : [
+		
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 4
+			}
+		]
+	},
+	{
+		"cardName" : "Hiring Soldiers",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 6
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 5
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 6
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	{
+		"cardName" : "Repairing the Abbey",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 6
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 2
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 2
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 2
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	{
+		"cardName" : "Building the Bastions",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 1
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 2
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 4
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	{
+		"cardName" : "Support to the King",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 5
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 1
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 3
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : [
+		
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 6
+			}
+		]
+	},
+	{
+		"cardName" : "Improving the Canals",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "ExtraMoveEffect",
+			"extraMoveType" : "ActivateHarvestAction",
+			"whichActionSpace": "",
+			"extraMoveValue": 4,
+			"resourcesDiscounted" : false,
+			"additionalResources": []
+		},
+		
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 5
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 2
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	{
+		"cardName" : "Hosting Foreigners",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 5
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 4
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 4
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	{
+		"cardName" : "Crusade",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 5
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 5
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 4
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : [
+		
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 8
+			}
+		]
+	},
+	{
+		"cardName" : "Support to the Cardinal",
+		"cardEra" : 2,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 4
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 2
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 2
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : true,
+		
+		"costTwo" : [
+			
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 4
+			}
+		],
+		
+		"requiredResource" : [
+		
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 7
+			}
+		]
+	},
+	{
+		"cardName" : "Hiring Mercenaries",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 7
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 6
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 8
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	{
+		"cardName" : "Repairing the Cathedral",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "ExtraMoveEffect",
+			"extraMoveType" : "MoveToActionSpaceAction",
+			"whichActionSpace": "AllTowers",
+			"extraMoveValue": 7,
+			"resourcesDiscounted" : false,
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 1
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 5
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 3
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 3
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	
+	{
+		"cardName" : "Building the Towers",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 4
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 1
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 4
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 6
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	
+	{
+		"cardName" : "Promotiong Sacred Art",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 3
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 3
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 6
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	
+	{
+		"cardName" : "Military Conquest",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 3
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 3
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 3
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 7
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 6
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : [
+		
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 12
+			}
+		]
+	},
+	
+	{
+		"cardName" : "Improving the Roads",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "ExtraMoveEffect",
+			"extraMoveType" : "MoveToActionSpaceAction",
+			"whichActionSpace": "",
+			"extraMoveValue": 3,
+			"resourcesDiscounted" : false,
+			"additionalResources": []
+		},
+		
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 5
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 3
+				},
+				{
+					"id" : "Money",
+					"quantity" : 4
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : []
+	},
+	
+	{
+		"cardName" : "Sacred War",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 4
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 8
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 6
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 8
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : false,
+		
+		"costTwo" : [],
+		
+		"requiredResource" : [
+		
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 15
+			}
+		]
+	},
+	
+	{
+		"cardName" : "Support to the Pope",
+		"cardEra" : 3,
+		
+		"immediateEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [	
+				{
+					"id" : "Wood",
+					"quantity" : 0
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 0
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 0
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 2
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "CounsilPrivilage",
+					"quantity" : 0
+				}
+			]
+		},
+		"permanentEffects" : 
+		{
+			"effectType": "IncreaseResourcesEffect",
+			"additionalResources": [
+
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 10
+				}
+			]
+		},
+	
+		"cost": [
+				{
+					"id" : "Wood",
+					"quantity" : 3
+				},
+				{
+					"id" : "Stones",
+					"quantity" : 3
+				},
+				{
+					"id" : "Servants",
+					"quantity" : 0
+				},
+				{
+					"id" : "Money",
+					"quantity" : 4
+				},
+				{
+					"id" : "FaithPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "MilitaryPoints",
+					"quantity" : 0
+				},
+				{
+					"id" : "VictoryPoints",
+					"quantity" : 0
+				}
+			],
+		
+		"doubleCostChoise" : true,
+		
+		"costTwo" : [
+			
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 5
+			}
+		],
+		
+		"requiredResource" : [
+		
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 10
+			}
+		]
+	}
+]

@@ -27,7 +27,7 @@ public class CollectCardAction implements Action {
 			
 		}
 		else {
-			//throw Exception illigal action
+			//throw Exception illegal action
 		}
 	}
 

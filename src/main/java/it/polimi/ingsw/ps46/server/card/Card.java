@@ -11,6 +11,7 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 public abstract class Card {
 	
 	private final String cardName;
+	private final int cardEra;
 	private final Effect immediateEffects;
 	private final Effect permanentEffects;
 	private final ResourceSet cost;
@@ -19,8 +20,9 @@ public abstract class Card {
 	 * 
 	 * Build a new Card object.
 	 */
-	public Card(String cardName, Effect immediateEffects, Effect permanentEffects, ResourceSet cost) {
+	public Card(String cardName,int cardEra, Effect immediateEffects, Effect permanentEffects, ResourceSet cost) {
 		this.cardName = cardName;
+		this.cardEra = cardEra;
 		this.immediateEffects = immediateEffects;
 		this.permanentEffects = permanentEffects;
 		this.cost = cost;
@@ -31,6 +33,10 @@ public abstract class Card {
 		return cardName;
 	}
 
+	public int getCardEra() {
+		return cardEra;
+	}
+	
 	public Effect getImmediateEffects() {
 		return immediateEffects;
 	}
@@ -64,5 +70,5 @@ public abstract class Card {
 				"Permanent effects: " + permanentEffects + "\n" +
 				"Cost: " + cost;
 	}
-	
+
 }

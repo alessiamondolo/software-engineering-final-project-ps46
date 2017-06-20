@@ -31,7 +31,7 @@ public class ResourceSet {
 		
 	}
 	
-	private Map<String, Resource> getResourcesMap() {
+	public Map<String, Resource> getResourcesMap() {
 		return resourcesMap;
 	}
 
