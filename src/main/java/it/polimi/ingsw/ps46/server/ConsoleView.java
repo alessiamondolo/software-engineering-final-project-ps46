@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Observable;
 
+import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.utils.ReadInput;
 
 
@@ -94,6 +95,8 @@ public class ConsoleView extends View {
 	
 	
 	public void welcomeMessage() {
+		output.println("==========================================================================");
+		output.println("==========================================================================");
 		output.println("Welcome to the game Lorenzo Il Magnifico!");
 		setChanged();
 		notifyObservers(new EventMessage(NewStateMessage.GAME_STARTED));
@@ -103,6 +106,7 @@ public class ConsoleView extends View {
 	
 	public void getPlayerUsername(int id) {
 		
+		output.println("==========================================================================");
 		output.println("Player " + id + ": what is your username?");
 		String username = input.stringFromConsole();
 		
@@ -115,6 +119,7 @@ public class ConsoleView extends View {
 	
 	public void showInitialOrder() {
 		
+		output.println("==========================================================================");
 		output.println("The initial game order will be:" + i);
 		i++;
 		int position = 1;
@@ -125,8 +130,6 @@ public class ConsoleView extends View {
 			position++;
 		}
 		
-		output.println("\n");
-		
 		setChanged();
 		notifyObservers(new EventMessage(NewStateMessage.SET_INITIAL_ORDER));
 	}
@@ -134,6 +137,7 @@ public class ConsoleView extends View {
 	
 	
 	public String getPlayerColor(String username) {
+		output.println("==========================================================================");
 		output.println(username + ": which color do you want?");
 		int index = 1;
 		for(ListIterator<String> iterator=colors.listIterator(); iterator.hasNext();){
@@ -142,7 +146,7 @@ public class ConsoleView extends View {
 			index++;
 		}
 		int color = input.IntegerFromConsole(1, colors.size()) - 1;
-		output.println("Your color will be " + colors.get(color) + ".\n");
+		output.println("Your color will be " + colors.get(color));
 		colors.remove(color);
 		return colors.get(color);
 	}
@@ -150,6 +154,83 @@ public class ConsoleView extends View {
 	
 	
 	public void printBoard() {
+		int quantity;
+		int cost;
+		String name;
+		String color;
+
+		int[][] towersBonusQuantity = new int[game.getBoard().getNumberOfTowers()][game.getBoard().getTower(0).getNumberOfFloors()];
+		String[][] towersBonusName = new String[game.getBoard().getNumberOfTowers()][game.getBoard().getTower(0).getNumberOfFloors()];
+		int[][] towersCost = new int[game.getBoard().getNumberOfTowers()][game.getBoard().getTower(0).getNumberOfFloors()];
+		String[][] towersPlayers = new String[game.getBoard().getNumberOfTowers()][game.getBoard().getTower(0).getNumberOfFloors()];
+		
+		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
+			for (int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
+				
+				if(!game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().getEffectOfActionSpace().getAdditionalResources().getResourcesMap().isEmpty()) {
+					quantity = game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().getEffectOfActionSpace().getAdditionalResources().toArray().get(0).getQuantity();
+				}
+				else 
+					quantity = 0;
+				towersBonusQuantity[tower][floor] = quantity;
+				
+				
+				if(!game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().getEffectOfActionSpace().getAdditionalResources().getResourcesMap().isEmpty()) {
+					name = game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().getEffectOfActionSpace().getAdditionalResources().toArray().get(0).getId();
+					switch(name) {
+					case "Wood" :
+						towersBonusName[tower][floor] = "|     wood    |";
+						break;
+					case "Stones" :
+						towersBonusName[tower][floor] = "|   stones    |";
+						break;
+					case "Money" :
+						towersBonusName[tower][floor] = "|    money    |";
+						break;
+					case "Servants" :
+						towersBonusName[tower][floor] = "|  servants   |";
+						break;
+					case "MilitaryPoints" :
+						towersBonusName[tower][floor] = "| military pt.|";
+						break;
+					case "VictoryPoints" :
+						towersBonusName[tower][floor] = "| victory pt. |";
+						break;
+					case "FaithPoints" :
+						towersBonusName[tower][floor] = "|  faith pt.  |";
+						break;
+					};
+				}
+				else 
+					towersBonusName[tower][floor] = "|             |";
+				 
+				
+				cost = game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().getRequiredFamilyMemberValue().getValue();
+				towersCost[tower][floor] = cost;
+				
+				
+				color = game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().getPlayerColor();
+				switch(color) {
+				case "Yellow" :
+					towersPlayers[tower][floor] = "|   yellow    |";
+					break;
+				case "Red" :
+					towersPlayers[tower][floor] = "|     red     |";
+					break;
+				case "Blue" :
+					towersPlayers[tower][floor] = "|    blue     |";
+					break;
+				case "Green" :
+					towersPlayers[tower][floor] = "|   green     |";
+					break;
+				case "" :
+					towersPlayers[tower][floor] = "|      -      |";
+					break;
+				};
+				
+			}
+		}
+		
 		output.println("THIS IS THE BOARD OF LORENZO IL MAGNIFICO:");
 		output.println(" ________________________________________________________________________ ");
 		output.println("|                                                                        |");
@@ -157,55 +238,60 @@ public class ConsoleView extends View {
 		output.println("|    _____________    _____________    _____________    _____________    |");
 		output.println("|   |   FLOOR 4   |  |   FLOOR 4   |  |   FLOOR 4   |  |   FLOOR 4   |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
-		output.println("|   |   Bonus: 2  |  |   Bonus: 2  |  |   Bonus: 2  |  |   Bonus: 2  |   |");
-		output.println("|   |     wood    |  |    stone    |  | military pt.|  |    money    |   |");
+		output.printf("|   |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |   |\n",
+				towersBonusQuantity[0][3], towersBonusQuantity[1][3], towersBonusQuantity[2][3], towersBonusQuantity[3][3]);
+		output.printf("|   %s  %s  %s  %s   |\n", towersBonusName[0][3], towersBonusName[1][3], towersBonusName[2][3], towersBonusName[3][3]);
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
-		output.println("|   |   Cost: 7   |  |   Cost: 7   |  |   Cost: 7   |  |   Cost: 7   |   |");
+		output.printf("|   |   Cost: %d   |  |   Cost: %d   |  |   Cost: %d   |  |   Cost: %d   |   |\n",
+				towersCost[0][3], towersCost[1][3], towersCost[2][3], towersCost[3][3]);
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |    Card:    |  |    Card:    |  |    Card:    |  |    Card:    |   |");
-		output.println("|   |      -      |  |      -      |  |      -      |  |      -      |   |");
+		output.println("|   |      4      |  |      8      |  |     12      |  |     16      |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
-		output.println("|   |   yellow    |  |   green     |  |     red     |  |    blue     |   |");
+		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][3], towersPlayers[1][3], towersPlayers[2][3], towersPlayers[3][3]);
 		output.println("|   |=============|  |=============|  |=============|  |=============|   |");
 		output.println("|   |   FLOOR 3   |  |   FLOOR 3   |  |   FLOOR 3   |  |   FLOOR 3   |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
-		output.println("|   |   Bonus: 1  |  |   Bonus: 1  |  |   Bonus: 1  |  |   Bonus: 1  |   |");
-		output.println("|   |     wood    |  |    stone    |  | military pt.|  |    money    |   |");
+		output.printf("|   |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |   |\n",
+				towersBonusQuantity[0][2], towersBonusQuantity[1][2], towersBonusQuantity[2][2], towersBonusQuantity[3][2]);
+		output.printf("|   %s  %s  %s  %s   |\n", towersBonusName[0][2], towersBonusName[1][2], towersBonusName[2][2], towersBonusName[3][2]);
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Cost: 5   |  |   Cost: 5   |  |   Cost: 5   |  |   Cost: 5   |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |    Card:    |  |    Card:    |  |    Card:    |  |    Card:    |   |");
-		output.println("|   |      -      |  |      -      |  |      -      |  |      -      |   |");
+		output.println("|   |      3      |  |      7      |  |     11      |  |     15      |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
-		output.println("|   |      -      |  |      -      |  |      -      |  |      -      |   |");
+		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][3], towersPlayers[1][3], towersPlayers[2][3], towersPlayers[3][3]);
 		output.println("|   |=============|  |=============|  |=============|  |=============|   |");
 		output.println("|   |   FLOOR 2   |  |   FLOOR 2   |  |   FLOOR 2   |  |   FLOOR 2   |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
-		output.println("|   |    Bonus:   |  |    Bonus:   |  |    Bonus:   |  |    Bonus:   |   |");
-		output.println("|   |      -      |  |      -      |  |      -      |  |      -      |   |");
+		output.printf("|   |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |   |\n",
+				towersBonusQuantity[0][1], towersBonusQuantity[1][1], towersBonusQuantity[2][1], towersBonusQuantity[3][1]);
+		output.printf("|   %s  %s  %s  %s   |\n", towersBonusName[0][1], towersBonusName[1][1], towersBonusName[2][1], towersBonusName[3][1]);
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Cost: 3   |  |   Cost: 3   |  |   Cost: 3   |  |   Cost: 3   |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |    Card:    |  |    Card:    |  |    Card:    |  |    Card:    |   |");
-		output.println("|   |      -      |  |      -      |  |      -      |  |      -      |   |");
+		output.println("|   |      2      |  |      6      |  |     10      |  |     14      |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
-		output.println("|   |      -      |  |      -      |  |      -      |  |      -      |   |");
+		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][3], towersPlayers[1][3], towersPlayers[2][3], towersPlayers[3][3]);
 		output.println("|   |=============|  |=============|  |=============|  |=============|   |");
 		output.println("|   |   FLOOR 1   |  |   FLOOR 1   |  |   FLOOR 1   |  |   FLOOR 1   |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
-		output.println("|   |    Bonus:   |  |    Bonus:   |  |    Bonus:   |  |    Bonus:   |   |");
-		output.println("|   |      -      |  |      -      |  |      -      |  |      -      |   |");
+		output.printf("|   |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |   |\n",
+				towersBonusQuantity[0][0], towersBonusQuantity[1][0], towersBonusQuantity[2][0], towersBonusQuantity[3][0]);
+		output.printf("|   %s  %s  %s  %s   |\n", towersBonusName[0][0], towersBonusName[1][0], towersBonusName[2][0], towersBonusName[3][0]);
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Cost: 1   |  |   Cost: 1   |  |   Cost: 1   |  |   Cost: 1   |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |    Card:    |  |    Card:    |  |    Card:    |  |    Card:    |   |");
-		output.println("|   |      -      |  |      -      |  |      -      |  |      -      |   |");
+		output.println("|   |      1      |  |      5      |  |      9      |  |     13      |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
-		output.println("|   |      -      |  |      -      |  |      -      |  |      -      |   |");
+		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][3], towersPlayers[1][3], towersPlayers[2][3], towersPlayers[3][3]);
 		output.println("|   |_____________|  |_____________|  |_____________|  |_____________|   |");
 		output.println("|                                                                        |");
 		output.println("|------------------------------------------------------------------------|");
@@ -239,6 +325,20 @@ public class ConsoleView extends View {
 		output.println("|                                                                        |");
 		output.println("|________________________________________________________________________|");
 		output.println("\n");
+		
+		output.println("These are the cards available on the board:");
+		int cardNumber = 1;
+		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
+			for (int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
+				output.println(cardNumber + ". Tower " + (tower+1) + ", floor " + (floor+1));
+				Card card = game.getBoard().getTower(tower).getTowerFloor(floor).getCard();
+				if(card != null)
+					output.println(card);
+				else
+					output.println("This card has already been taken!");
+				cardNumber++;
+			}
+		}		
 	}
 	
 	public ActionSpaceName getPlayerAction() {
@@ -390,6 +490,7 @@ public class ConsoleView extends View {
 	
 	public void printPlayerStatus() {
 		Player player = game.getCurrentPlayer();
+		output.println("==========================================================================");
 		output.println(player.getUsername() + ": it's now your turn.");
 		output.println("This is what you have:");
 		output.println(game.getCurrentPlayer().getPlayerResourceSet().toString());

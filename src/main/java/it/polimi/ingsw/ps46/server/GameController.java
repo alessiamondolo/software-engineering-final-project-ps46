@@ -184,20 +184,18 @@ public class GameController implements Observer, ViewEventVisitor {
 					card = game.getTerritoryCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
 					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
 					break;
-				//TODO da scommentare quando il parsing di tutte le carte funziona
-				/*
 				case 1 : //Second Tower
 					card = game.getCharacterCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
 					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
-					break; */
+					break; 
 				case 2 : //Third tower
 					card = game.getBuildingCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
 					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
-					break;/*
+					break;
 				case 3 : //Fourth tower
 					card = game.getVentureCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
 					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
-					break;*/
+					break;
 				}
 			}
 			

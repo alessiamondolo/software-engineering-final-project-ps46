@@ -1,8 +1,8 @@
 package it.polimi.ingsw.ps46.server.resources;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * ResourceSet is a container of objects of the type Resource.
@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class ResourceSet {
 	
-	private Map<String, Resource> resourcesMap;
+	private LinkedHashMap<String, Resource> resourcesMap;
 	
 	/**
 	 * Creates a new ResourceSet object by reading a list of Resource objects and filling the hashmap
@@ -23,7 +23,7 @@ public class ResourceSet {
 	 */
 	public ResourceSet(List<Resource> resourcesList) {
 		
-		resourcesMap = new HashMap<String, Resource>();
+		resourcesMap = new LinkedHashMap<String, Resource>();
 		
 		for(Resource resource : resourcesList) {
 			resourcesMap.put(resource.getId(), resource);
@@ -31,7 +31,7 @@ public class ResourceSet {
 		
 	}
 	
-	public Map<String, Resource> getResourcesMap() {
+	public LinkedHashMap<String, Resource> getResourcesMap() {
 		return resourcesMap;
 	}
 
@@ -104,6 +104,13 @@ public class ResourceSet {
 				return false;
 		}
 		return true;
+	}
+	
+	public ArrayList<Resource> toArray() {
+		ArrayList<Resource> array = new ArrayList<Resource>();
+		for(String key : getResourcesMap().keySet())
+			array.add(resourcesMap.get(key));
+		return array;
 	}
 	
 	@Override
