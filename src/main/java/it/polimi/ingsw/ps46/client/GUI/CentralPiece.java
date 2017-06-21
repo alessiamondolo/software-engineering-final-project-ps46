@@ -9,39 +9,43 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+/**
+ * The central part of the Board which is then again structured in two subpanels:
+ * an @UpperPiece and a @LowerPiece
+ * @author lorenzo
+ *
+ */
+
 public class CentralPiece extends JPanel {
 
-	//Questo lavoro di composizione usa design pattern?
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -5672600042329800625L;
 
-	public CentralPiece() {
+	public CentralPiece(double widthSmall, double heightSmall) {
 		
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
-		//teoricamente qui dovrei chiamare il costruttore con super?
-		this.setPreferredSize(new Dimension (380,580) );
+		super(new FlowLayout(FlowLayout.LEFT));
+		
+		this.setPreferredSize(new Dimension ((int) widthSmall*17, (int) heightSmall*29));
 		
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
 		this.setBorder(border);
 		this.setOpaque(false);
-		Dimension a = this.getSize();
-		System.out.println("Width" + String.valueOf(a.getWidth()));
-		System.out.println("Height" + String.valueOf(a.getHeight()));
 		
-		composeCentralPiece();
+		composeCentralPiece(widthSmall, heightSmall);
 	}
 
-	private void composeCentralPiece() {
+	private void composeCentralPiece(double widthSmall, double heightSmall) {
 		// TODO Auto-generated method stub
 		
-		UpperPiece upperPiece = new UpperPiece(); 
-		LowerPiece lowerPiece = new LowerPiece();
+		UpperPiece upperPiece = new UpperPiece(widthSmall, heightSmall); 
 		
-		upperPiece.setPreferredSize(new Dimension(430, 335));
-		lowerPiece.setPreferredSize(new Dimension (430, 270));
+		LowerPiece lowerPiece = new LowerPiece(widthSmall, heightSmall);
+		
+		//lowerPiece.setPreferredSize(new Dimension (425, 260));
+		
+		
+	
 		upperPiece.setOpaque(false);
 		lowerPiece.setOpaque(false);
 		Border border = BorderFactory.createLineBorder(Color.YELLOW, 1);
@@ -53,12 +57,6 @@ public class CentralPiece extends JPanel {
 		this.add(lowerPiece);
 		
 		
-	}
-	
-	
-	@Override
-	public Dimension getSize() {
-		return (super.getSize());
 	}
 	
 }
