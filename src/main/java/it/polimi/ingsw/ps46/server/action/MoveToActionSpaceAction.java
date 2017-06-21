@@ -43,6 +43,7 @@ public class MoveToActionSpaceAction implements Action {
 	public void execute() {
 		
 		System.out.println("I'm inside the action with " + servants + " servants.");
+		
 		/*
 		if(isLegal()) {
 			//Sets the action space as not available

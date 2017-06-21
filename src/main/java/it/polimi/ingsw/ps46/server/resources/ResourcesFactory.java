@@ -40,6 +40,9 @@ public class ResourcesFactory {
 		else if(resourceType.equals("VictoryPoints"))
 			return new VictoryPoints(quantity);
 		
+		else if(resourceType.equals("CounsilPrivilege"))
+			return new CounsilPrivilege(quantity);
+		
 		else return null;
 		
 	}

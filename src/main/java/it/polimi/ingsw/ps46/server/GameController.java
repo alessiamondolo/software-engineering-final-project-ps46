@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import it.polimi.ingsw.ps46.server.action.Action;
 import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
+import it.polimi.ingsw.ps46.server.card.Card;
 
 
 /**
@@ -16,7 +17,6 @@ import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
 public class GameController implements Observer, ViewEventVisitor {
 
 	private Game game;
-	private View view;
 	
 	private String actionName = null;
 	private String familyMemberName = null;
@@ -26,9 +26,8 @@ public class GameController implements Observer, ViewEventVisitor {
 	/**
 	 * Creates a new GameController object.
 	 */
-	public GameController(Game game, View view) {
+	public GameController(Game game) {
 		this.game = game;
-		this.view = view;
 	}
 
 	
@@ -64,7 +63,9 @@ public class GameController implements Observer, ViewEventVisitor {
 			familyMemberName = eventStringInput.getString();
 			break;
 		case SERVANTS_USED : 
+			//TODO temporaneo
 			servants = 1;
+			break;
 		default:
 			break;
 		}
@@ -151,12 +152,7 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	
 	private void setupInitialResources() {
-		game.setGameState(GameState.SETUP_INITIAL_RESOURCES);/*
-		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
-			Player player=iterator.next();
-			game.setCurrentPlayer(player);			
-		}
-		*/
+		game.setGameState(GameState.SETUP_INITIAL_RESOURCES);
 		game.giveInitialResources();
 	}
 	
@@ -180,6 +176,33 @@ public class GameController implements Observer, ViewEventVisitor {
 		}
 		
 		//Girare le carte associate a quel periodo nelle torri
+		Card card;
+		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
+			for(int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
+				switch(tower) {
+				case 0 : //First tower
+					card = game.getTerritoryCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
+					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
+					break;
+				//TODO da scommentare quando il parsing di tutte le carte funziona
+				/*
+				case 1 : //Second Tower
+					card = game.getCharacterCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
+					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
+					break; */
+				case 2 : //Third tower
+					card = game.getBuildingCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
+					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
+					break;/*
+				case 3 : //Fourth tower
+					card = game.getVentureCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
+					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
+					break;*/
+				}
+			}
+			
+		}
+		
 		
 		//Throw dice and update board in the view
 		game.throwDice();

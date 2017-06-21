@@ -64,4 +64,8 @@ public class TowerFloor {
 	
 	}
 	
+	public int getFloor() {
+		return floor;
+	}
+	
 }

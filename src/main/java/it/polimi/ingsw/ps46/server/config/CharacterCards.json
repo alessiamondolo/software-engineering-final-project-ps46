@@ -36,7 +36,7 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 0
 					}
 				]
@@ -63,7 +63,10 @@
 			"cardName" : "Stonemason",
 			"cardEra" : 1,
 			
-			"immediateEffects" : {},
+			"immediateEffects" : 
+			{
+				"effectType" : ""
+			},
 			
 			"permanentEffects":
 			{
@@ -104,7 +107,10 @@
 			"cardName" : "Dame",
 			"cardEra" : 1,
 			
-			"immediateEffects" : {},
+			"immediateEffects" : 
+			{
+				"effectType" : ""
+			},
 			
 			"permanentEffects":
 			{
@@ -178,7 +184,7 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 1
 					}
 				]
@@ -206,7 +212,10 @@
 			"cardName" : "Farmer",
 			"cardEra" : 1,
 			
-			"immediateEffects" : {},
+			"immediateEffects" : 
+			{
+				"effectType" : ""
+			},
 			
 			"permanentEffects":
 			{
@@ -229,7 +238,10 @@
 			"cardName" : "Artisan",
 			"cardEra" : 1,
 			
-			"immediateEffects" : {},
+			"immediateEffects" : 
+			{
+				"effectType" : ""
+			},
 			
 			"permanentEffects":
 			{
@@ -286,7 +298,7 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 0
 					}
 				]
@@ -316,7 +328,10 @@
 				"effectType": "ExtraMoveEffect",
 				"extraMoveType" : "MoveToActionSpaceAction",
 				"whichActionSpace": "AllTowers",
-				"extraMoveValue": 4,
+				"extraMoveValue": 
+				{
+					"value" : 4
+				},
 				"resourcesDiscounted" : false,
 				"additionalResources": [	
 					{
@@ -348,13 +363,16 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 0
 					}
 			]
 		},
 			
-			"permanentEffects": {},
+			"permanentEffects": 
+			{
+				"effectType" : ""
+			},
 						
 			"cost": [
 					{
@@ -372,7 +390,10 @@
 				"effectType": "ExtraMoveEffect",
 				"extraMoveType" : "MoveToActionSpaceAction",
 				"whichActionSpace": "GreenTower",
-				"extraMoveValue": 6,
+				"extraMoveValue": 
+				{
+					"value" : 6
+				},
 				"resourcesDiscounted" : false,
 				"additionalResources": [	
 					{
@@ -404,13 +425,16 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 0
 					}
 			]
 		},
 			
-			"permanentEffects": {},
+			"permanentEffects": 
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -428,7 +452,10 @@
 				"effectType": "ExtraMoveEffect",
 				"extraMoveType" : "MoveToActionSpaceAction",
 				"whichActionSpace": "YellowTower",
-				"extraMoveValue": 6,
+				"extraMoveValue": 
+				{
+					"value" : 6
+				},
 				"resourcesDiscounted" : true,
 				"additionalResources": [	
 					{
@@ -460,13 +487,16 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 0
 					}
 			]
 		},
 			
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -484,7 +514,10 @@
 				"effectType": "ExtraMoveEffect",
 				"extraMoveType" : "MoveToActionSpaceAction",
 				"whichActionSpace": "BlueTower",
-				"extraMoveValue": 6,
+				"extraMoveValue": 
+				{
+					"value" : 6
+				},
 				"resourcesDiscounted" : true,
 				"additionalResources": [	
 					{
@@ -516,13 +549,16 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 0
 					}
 			]
 		},
 			
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -540,7 +576,10 @@
 				"effectType": "ExtraMoveEffect",
 				"extraMoveType" : "MoveToActionSpaceAction",
 				"whichActionSpace": "PurpleTower",
-				"extraMoveValue": 6,
+				"extraMoveValue":  
+				{
+					"value" : 6
+				},
 				"resourcesDiscounted" : false,
 				"additionalResources": [	
 					{
@@ -572,13 +611,16 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 1
 					}
 			]
 		},
 			
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -591,7 +633,10 @@
 			"cardName" : "Peasant",
 			"cardEra" : 2,
 			
-			"immediateEffects" : {},
+			"immediateEffects" : 
+			{
+				"effectType" : ""
+			},
 			
 			"permanentEffects":
 			{
@@ -614,7 +659,10 @@
 			"cardName" : "Sholar",
 			"cardEra" : 2,
 			
-			"immediateEffects" : {},
+			"immediateEffects" : 
+			{
+				"effectType" : ""
+			},
 			
 			"permanentEffects":
 			{
@@ -670,13 +718,16 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 0
 					}
 				]
 			},
 						
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -722,13 +773,16 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 3
 					}
 				]
 			},
 						
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -759,7 +813,10 @@
 			
 		},
 					
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -790,7 +847,10 @@
 			
 		},
 					
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -821,7 +881,10 @@
 			
 		},
 					
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -852,7 +915,10 @@
 			
 		},
 					
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -870,7 +936,10 @@
 				"effectType": "ExtraMoveEffect",
 				"extraMoveType" : "ActivateHarvestAction",
 				"whichActionSpace": "",
-				"extraMoveValue": 4,
+				"extraMoveValue":  
+				{
+					"value" : 4
+				},
 				"resourcesDiscounted" : false,
 				"additionalResources": [	
 					{
@@ -902,13 +971,16 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 0
 					}
 			]
 		},
 			
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -926,7 +998,10 @@
 				"effectType": "ExtraMoveEffect",
 				"extraMoveType" : "ActivateProductionAction",
 				"whichActionSpace": "",
-				"extraMoveValue": 4,
+				"extraMoveValue":  
+				{
+					"value" : 4
+				},
 				"resourcesDiscounted" : false,
 				"additionalResources": [	
 					{
@@ -958,13 +1033,16 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 0
 					}
 			]
 		},
 			
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -995,7 +1073,10 @@
 			
 		},
 					
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{
@@ -1013,7 +1094,10 @@
 				"effectType": "ExtraMoveEffect",
 				"extraMoveType" : "MoveToActionSpaceAction",
 				"whichActionSpace": "AllTowers",
-				"extraMoveValue": 7,
+				"extraMoveValue":  
+				{
+					"value" : 7
+				},
 				"resourcesDiscounted" : false,
 				"additionalResources": [	
 					{
@@ -1045,13 +1129,16 @@
 						"quantity" : 0
 					},
 					{
-						"id" : "CounsilPrivilage",
+						"id" : "CounsilPrivilege",
 						"quantity" : 1
 					}
 			]
 		},
 			
-			"permanentEffects": {},
+			"permanentEffects":  
+			{
+				"effectType": ""
+			},
 						
 			"cost": [
 					{

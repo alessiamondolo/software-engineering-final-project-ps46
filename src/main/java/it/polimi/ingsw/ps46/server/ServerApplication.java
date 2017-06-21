@@ -36,7 +36,7 @@ public class ServerApplication {
 		else
 			//TODO da cambiare mettendo GUIView
 			view = new ConsoleView(game, System.out);
-		controller = new GameController(game, view);
+		controller = new GameController(game);
 	}
 
 	/**

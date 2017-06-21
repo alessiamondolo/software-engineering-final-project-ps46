@@ -10,6 +10,8 @@ import java.util.ArrayList;
  */
 
 public class Tower {
+	
+	private int numberOfFloors;
 	private ArrayList<TowerFloor> floors;
 	private String colorOfTheTower;
 
@@ -20,6 +22,8 @@ public class Tower {
 	public Tower (String towerColor, ArrayList<TowerFloor> floors){
 		colorOfTheTower = towerColor;
 		this.floors = floors;
+		if(floors != null)
+		numberOfFloors = floors.size();
 	}
 	
 	
@@ -50,6 +54,11 @@ public class Tower {
 		
 		return floors.get(floorTowerIndex);
 		
+	}
+
+
+	public int getNumberOfFloors() {
+		return numberOfFloors;
 	}
 	
 }

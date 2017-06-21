@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Board {
 	
+	private int numberOfTowers;
 	private ArrayList<Tower> towers;
 	private ArrayList<ActionSpace> boardBoxes;
 	
@@ -15,6 +16,8 @@ public class Board {
 		
 		this.towers = towers;
 		this.boardBoxes = boardBoxes;
+		if(boardBoxes != null)
+			numberOfTowers = towers.size();
 		
 	}
 	
@@ -42,5 +45,10 @@ public class Board {
 		
 		return boardBoxes.get(boardBoxIndex);
 		
+	}
+
+
+	public int getNumberOfTowers() {
+		return numberOfTowers;
 	}
 }

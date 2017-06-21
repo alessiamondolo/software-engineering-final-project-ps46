@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps46.server;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -17,6 +16,7 @@ import it.polimi.ingsw.ps46.utils.MyJSONParser;
 public class FactoryBoard {
 	
 private static FactoryBoard factoryBoard = null;
+private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/config/";
 	
 	
 	private FactoryBoard() {
@@ -47,14 +47,13 @@ private static FactoryBoard factoryBoard = null;
 
 		//BEGIN OF TOWERS PARSER
 		try {
-
-        	URL url = getClass().getResource(towersConfigFile);
-        	Object obj = parser.parse(new FileReader(url.getPath()));
+			
+			Object obj = parser.parse(new FileReader(configFilesPath + towersConfigFile));
         	
         	//BEGIN of parsing of tower field
         	JSONArray towersJSON = (JSONArray) obj;
         	ArrayList<Tower> towers = new ArrayList<Tower>();
-        	Iterator iterator = towersJSON.iterator();
+        	Iterator<?> iterator = towersJSON.iterator();
         	while (iterator.hasNext()) {
         		
         		JSONObject towerJSON = (JSONObject) iterator.next();
@@ -67,8 +66,7 @@ private static FactoryBoard factoryBoard = null;
         	
         	
         	//BEGIN OF ACTION SPACES PARSER
-        	url = getClass().getResource(actionSpacesConfigFile);
-        	obj = parser.parse(new FileReader(url.getPath()));
+        	obj = parser.parse(new FileReader(configFilesPath + actionSpacesConfigFile));
         	
         	JSONArray actionSpacesJSON = (JSONArray) obj;
         	ArrayList<ActionSpace> boardBoxes = new ArrayList<ActionSpace>();
@@ -96,7 +94,7 @@ private static FactoryBoard factoryBoard = null;
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+		
 		return board;
 	}
 	

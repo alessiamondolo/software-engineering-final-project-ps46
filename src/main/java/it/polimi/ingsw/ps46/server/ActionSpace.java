@@ -107,6 +107,10 @@ public class ActionSpace {
 	public int getIdLocalActionSpaces() {
 		return idLocalActionSpaces;
 	}
+	
+	public Effect getEffectOfActionSpace() {
+		return effectOfActionSpace;
+	}
 
 	public void setIdLocalActionSpaces(int idLocalActionSpaces) {
 		this.idLocalActionSpaces = idLocalActionSpaces;

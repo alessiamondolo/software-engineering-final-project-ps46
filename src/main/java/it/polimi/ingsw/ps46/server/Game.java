@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps46.server;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Observable;
-import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
@@ -39,13 +37,14 @@ public class Game extends Observable {
 	private List<Player> nextTurnOrder = new ArrayList<Player>();
 	private Player currentPlayer;
 	private Board board;
-	private Set<TerritoryCard> territoryCardsDeck;
-	private Set<BuildingCard> buildingCardsDeck;
-	private Set<CharacterCard> characterCardsDeck;
-	private Set<VentureCard> ventureCardsDeck;
+	private ArrayList<TerritoryCard> territoryCardsDeck;
+	private ArrayList<BuildingCard> buildingCardsDeck;
+	private ArrayList<CharacterCard> characterCardsDeck;
+	private ArrayList<VentureCard> ventureCardsDeck;
 	private Map<String, Dice> dice;
 	
 	private GameState gameState;
+	private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/config/";
 	
 	
 	Game(int numberPlayers) {
@@ -89,16 +88,36 @@ public class Game extends Observable {
 	
 	
 	/**
-	 * Configures the decks of cards that will be used during the game.
+	 * Configures the decks of cards that will be used during the game and shuffles the decks,
+	 * maintaining all the cards of the same periods all together (cards of a minor period are always
+	 * before cards of successive periods, even if they are shuffled).
 	 */
 	private void configDecks() {
-		//TODO lettura di file di configurazione e costruzione della mappa tipologiaDiCarta-directoryFile 
-		//che verrà poi utilizzata per chiamare un metodo createCards per ogni tipologia di carta
+
 		FactoryCards factoryCards = FactoryCards.getFactoryCards();
 		territoryCardsDeck = factoryCards.createTerritoryCards("TerritoryCards.json");
+		for(int period = 1; period <= PERIODS; period++) {
+			Collections.shuffle(territoryCardsDeck.subList((territoryCardsDeck.size()/PERIODS)*(period-1), 
+					(territoryCardsDeck.size()/PERIODS)*period));
+		}
+		
 		buildingCardsDeck = factoryCards.createBuildingCards("BuildingCards.json");
+		for(int period = 1; period <= PERIODS; period++) {
+			Collections.shuffle(buildingCardsDeck.subList((buildingCardsDeck.size()/PERIODS)*(period-1), 
+					(buildingCardsDeck.size()/PERIODS)*period));
+		}
+		
 		characterCardsDeck = factoryCards.createCharacterCards("CharacterCards.json");
+		for(int period = 1; period <= PERIODS; period++) {
+			Collections.shuffle(characterCardsDeck.subList((characterCardsDeck.size()/PERIODS)*(period-1), 
+					(characterCardsDeck.size()/PERIODS)*period));
+		}
+		
 		ventureCardsDeck = factoryCards.createVentureCards("VentureCards.json");
+		for(int period = 1; period <= PERIODS; period++) {
+			Collections.shuffle(ventureCardsDeck.subList((ventureCardsDeck.size()/PERIODS)*(period-1), 
+					(ventureCardsDeck.size()/PERIODS)*period));
+		}
 		
 	}
 //--------------------------------------------------//
@@ -152,22 +171,22 @@ public class Game extends Observable {
 	}
 
 
-	public Set<TerritoryCard> getTerritoryCardsDeck() {
+	public ArrayList<TerritoryCard> getTerritoryCardsDeck() {
 		return territoryCardsDeck;
 	}
 
 
-	public Set<BuildingCard> getBuildingCardsDeck() {
+	public ArrayList<BuildingCard> getBuildingCardsDeck() {
 		return buildingCardsDeck;
 	}
 
 
-	public Set<CharacterCard> getCharacterCardsDeck() {
+	public ArrayList<CharacterCard> getCharacterCardsDeck() {
 		return characterCardsDeck;
 	}
 
 
-	public Set<VentureCard> getVentureCardsDeck() {
+	public ArrayList<VentureCard> getVentureCardsDeck() {
 		return ventureCardsDeck;
 	}
 
@@ -209,11 +228,10 @@ public class Game extends Observable {
 		JSONParser parser = new JSONParser();
 		MyJSONParser myJSONParser = new MyJSONParser();
 		try {
-        	URL url = getClass().getResource("SetupResources.json");
-        	Object obj = parser.parse(new FileReader(url.getPath()));
+        	Object obj = parser.parse(new FileReader(configFilesPath + "SetupResources.json"));
         	JSONArray resourcesJSON = (JSONArray) obj;        	
         	
-            Iterator resourcesIterator = resourcesJSON.iterator();
+            Iterator<?> resourcesIterator = resourcesJSON.iterator();
             ListIterator<Player> playersIterator = getPlayers().listIterator();
             while (resourcesIterator.hasNext() && playersIterator.hasNext()) {
             	JSONArray resourceSetJSON = (JSONArray) resourcesIterator.next();

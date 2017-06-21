@@ -15,7 +15,7 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 public class DiceBonusEffectDiscounted extends DiceBonusEffect {
 	private ResourceSet  resourcesDiscounted;
-	private boolean doubleChoise;
+	private boolean doubleChoice;
 
 	
 	
@@ -28,11 +28,11 @@ public class DiceBonusEffectDiscounted extends DiceBonusEffect {
 	 * @param optionalResourcesDiscounted
 	 * @param doubleChoise
 	 */
-	public DiceBonusEffectDiscounted(Dice bonus, String type, ResourceSet resourcesDiscounted, boolean doubleChoise) {
+	public DiceBonusEffectDiscounted(Dice bonus, String type, ResourceSet resourcesDiscounted, boolean doubleChoice) {
 		
 		super(bonus, type);
 		
-		this.doubleChoise = doubleChoise ;
+		this.doubleChoice = doubleChoice ;
 		this.resourcesDiscounted = resourcesDiscounted ;
 		
 	}
@@ -41,7 +41,7 @@ public class DiceBonusEffectDiscounted extends DiceBonusEffect {
 	/**
 	 * Description of the Method activateEffect.
 	 * 
-	 * This Method extends the same method of the class DiceBonusEffect but setting two differents kinds of discounts 
+	 * This Method extends the same method of the class DiceBonusEffect but setting two different kinds of discounts 
 	 * between the normal discount or the optional one (using the boolean attribute "doubleChoise").
 	 * 
 	 */
@@ -50,7 +50,7 @@ public class DiceBonusEffectDiscounted extends DiceBonusEffect {
 		
 		game.getCurrentPlayer().updateBonus(type, bonus);
 
-		if (doubleChoise == false)
+		if (doubleChoice == false)
 			game.getCurrentPlayer().updateDiscount(type, resourcesDiscounted);
 		
 		else
@@ -59,7 +59,7 @@ public class DiceBonusEffectDiscounted extends DiceBonusEffect {
 	}
 
 	public boolean isDoubleChoise() {
-		return doubleChoise;
+		return doubleChoice;
 	}
 
 	public ResourceSet getResourcesDiscounted() {

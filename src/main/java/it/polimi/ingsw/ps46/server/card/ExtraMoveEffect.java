@@ -11,7 +11,7 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  * 
  * @author Andrea.Masi
  */
-public class ExtraMove implements Effect {
+public class ExtraMoveEffect implements Effect {
 	private String extraMoveType;
 	private String whichActionSpace;
 	private Dice extraMoveValue;
@@ -21,7 +21,7 @@ public class ExtraMove implements Effect {
 	/**
 	 * The constructor.
 	 */
-	public ExtraMove(String extraMoveType, String whichActionSpace, Dice extraMoveValue, boolean resourcesDiscounted, ResourceSet additionalResources) {
+	public ExtraMoveEffect(String extraMoveType, String whichActionSpace, Dice extraMoveValue, boolean resourcesDiscounted, ResourceSet additionalResources) {
 		super();
 		this.extraMoveType = extraMoveType;
 		this.whichActionSpace = whichActionSpace; // per capire se è possibile far fare al giocatore un'azione su una torre in particolare o in tutti i tipi di torre.
@@ -38,6 +38,7 @@ public class ExtraMove implements Effect {
 		switch (extraMoveType) {
 		case "ActivateHarvestAction":
 			ActivateHarvestAction newHarvestAction = new ActivateHarvestAction(); //del valore di value (un dado)
+			newHarvestAction.execute();
 			//ATTENDENDO ALESSIA per completare questa classe
 			//#SpacMan
 			
