@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -20,227 +21,136 @@ import javax.swing.border.Border;
 
 /**
  * MainBoard class displays the board through a top-bottom approach:
- * a board is composed by a background picture and two central layout, a GridBagLayout
- * and 
+ * a board is composed by a background picture, a @CentralPiece and a GridBagLayout 
+ * to map the Victory Points cells.
+ * 
  * @author lorenzo
  *
  */
 
 public class MainBoard extends JPanel  {
-	
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6546742554971391289L;
 
 	public MainBoard() {
 		
-		// Aggiungo immagine pannello di sfondo
-		// this.setPreferredSize(new Dimension (500, 1000));
-		this.add(createGrid(new CentralPiece(), new MilitaryTower()));
+		this.add(createBoard());
 		
-		// this.getComponent(n)
 	}
 	
-	// Returns a panel that represents the entire board which is 
-	// composed of a Central Piece, a Military Tower and and external
-	// Grid that is made through this function. Instead Central Piece 
-	// and Military Tower objects are passed as parameters.
+	/**
+	 * Insert external grid, background image and central piece of the board.
+	 * Dimensions for the board are chosen based on the resolution (1808, 2493) of 
+	 * the image gameboard.png, a default dimension for displaying the image is chosen
+	 * and then the right values for the others parameters are calculated via proportions.
+	 * To build the external grid the method takes into account also pixel that ...
+	 * @return
+	 */
 	
-	private JPanel createGrid(CentralPiece centralPiece, MilitaryTower militaryTower) {
-		int x = 20;
-		int y = 2;
-		int width = 36;
-		int height = 40; 
+	private JPanel createBoard() {
+		
+		Dimension boardDimension =  new Dimension (600, 700); //(512, 700) proporzioni corrette per non distorcere originale
+		
+		double widthBig = 180.0*((int)boardDimension.getWidth())/1808;
+		double heightBig = 180.0*((int)boardDimension.getHeight())/2493;
+		
+		double widthSmall = (boardDimension.getWidth() - widthBig * 2) / 19;
+		double heightSmall = (boardDimension.getHeight() - heightBig * 2) / 29;
+		
 		JPanel panel = new JPanel();
-		//JLabel background = new JLabel();
-		
-		
-		//panel.add(background);
-		//panel.setPreferredSize(new Dimension(600, 700));
+
 		panel.setLayout(new GridBagLayout());
 		
 		
 		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;  
+		gbc.ipadx = 0;
+		gbc.ipady = 0;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+	
+		double accX = 0;
+		double accY = 0;
 		
 		for (int i = 0; i < 100; i++) {
 			
-		
-			
-			
+			JLabel l = new JLabel();
+			Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
+			l.setBorder(border);
+			// l.setBackground(Color.BLUE);
+			l.setText(String.valueOf(i));
 			
 			if (i == 0) {	
-				gbc.fill = GridBagConstraints.BOTH;  
-				gbc.gridwidth = 2;
-				gbc.gridheight = 2;
-				gbc.weightx = 1;
-				gbc.weighty = 1;
-				
-				gbc.ipadx = 10;
 				gbc.gridx = 0;
 				gbc.gridy = 0;
-				JLabel l = new JLabel();
-				l.setPreferredSize(new Dimension(width, height));
-				Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
-				l.setBorder(border);
-				l.setText(String.valueOf(i));
-				panel.add(l, gbc);
-			} else
-				if (1 <= i && i < 20) {
-					gbc = new GridBagConstraints();
-					gbc.fill = GridBagConstraints.BOTH;  
-					gbc.gridwidth = 1;
-					gbc.gridheight = 2;
-					gbc.weightx = 1;
-					gbc.weighty = 1;
-					gbc.gridx = i + 1;
-					gbc.gridy = 0;
-					JLabel l = new JLabel();
-					l.setPreferredSize(new Dimension(width/2, height));
-					Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
-					l.setBorder(border);
-					l.setText(String.valueOf(i));
-					panel.add(l, gbc);
-				} else 
-					if (i == 20) {
-					gbc = new GridBagConstraints();
-					gbc.fill = GridBagConstraints.BOTH;  
-					gbc.gridwidth = 2;
-					gbc.gridheight = 2;
-					gbc.weightx = 1;
-					gbc.ipadx = 10;
-					
-					gbc.weighty = 1;
-					gbc.gridx = 21;
-					gbc.gridy = 0;
-					JLabel l = new JLabel();
-					l.setPreferredSize(new Dimension(width, height));
-					Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
-					l.setBorder(border);
-					l.setText(String.valueOf(i));
-					panel.add(l, gbc);
+				l.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+			} else if (1 <= i && i < 20) {
+				gbc.gridx = i;
+				gbc.gridy = 0;
+				accX += widthSmall - (int)widthSmall;
+				if (accX >= 1.0) {
+					l.setPreferredSize(new Dimension((int)widthSmall+1, (int)heightBig));		
+					accX -= 1.0;
 				} else
-					if (20 < i && i < 50) {
-					gbc = new GridBagConstraints();
-					gbc.gridx = 21;
-					gbc.gridy = y;
-					gbc.fill = GridBagConstraints.BOTH;  
-					gbc.gridwidth = 2;
-					gbc.gridheight = 1;
-					gbc.weightx = 1;
-					gbc.weighty = 1;
-					JLabel l = new JLabel();
-					l.setPreferredSize(new Dimension(width, height/2));
-					Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
-					l.setBorder(border);
-					l.setText(String.valueOf(i));
-					panel.add(l, gbc);
-					y ++;
-					} else
-						if (i == 50) {
-							gbc = new GridBagConstraints();
-							gbc.fill = GridBagConstraints.BOTH;  
-							gbc.gridwidth = 2;
-							gbc.gridheight = 2;
-							gbc.weightx = 1;
-							gbc.weighty = 1;
-							gbc.gridx = 21;
-							gbc.gridy = y;
-							JLabel l = new JLabel();
-							l.setPreferredSize(new Dimension(width, height));
-							Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
-							l.setBorder(border);
-							l.setText(String.valueOf(i));
-							panel.add(l, gbc);
-						} else 
-							if (50 < i && i < 70) {
-							gbc = new GridBagConstraints();
-							gbc.fill = GridBagConstraints.BOTH;  
-							gbc.gridwidth = 1;
-							gbc.gridheight = 2;
-							gbc.weightx = 1;
-							gbc.weighty = 1;
-							gbc.gridx = x;
-							gbc.gridy = y;
-							JLabel l = new JLabel();
-							l.setPreferredSize(new Dimension(width/2, height));
-							Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
-							l.setBorder(border);
-							l.setText(String.valueOf(i));
-							panel.add(l, gbc);
-							x --;
-						} else
-							if (i == 70) {
-								gbc = new GridBagConstraints();
-								gbc.fill = GridBagConstraints.BOTH;  
-								gbc.gridwidth = 2;
-								gbc.gridheight = 2;
-								gbc.weightx = 1;
-								gbc.weighty = 1;
-								gbc.gridx = 0;
-								gbc.gridy = y;
-								JLabel l = new JLabel();
-								l.setPreferredSize(new Dimension(width, height));
-								Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
-								l.setBorder(border);
-								l.setText(String.valueOf(i));
-								panel.add(l, gbc);
-								y --;
-							} else
-							if (70 < i && i < 100) {
-								gbc = new GridBagConstraints();
-								gbc.fill = GridBagConstraints.BOTH;  
-								gbc.gridwidth = 2;
-								gbc.gridheight = 1;
-								gbc.weightx = 1;
-								gbc.weighty = 1;
-								gbc.gridx = 0;
-								gbc.gridy = y;
-								JLabel l = new JLabel();
-								l.setPreferredSize(new Dimension(width, height/2));
-								Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
-								l.setBorder(border);
-								l.setText(String.valueOf(i));
-								panel.add(l, gbc);
-								y --;
-							}
-	
+					l.setPreferredSize(new Dimension((int)widthSmall, (int)heightBig));
+			} else if (i == 20) {
+				gbc.gridx = 20;
+				gbc.gridy = 0;
+				l.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+			} else if (20 < i && i < 50) {
+				gbc.gridx = 20;
+				gbc.gridy = i-20;
+				accY += heightSmall - (int)heightSmall;
+				if (accY >= 1.0) {
+					l.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall+1));		
+					accY -= 1.0;
+				} else
+					l.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall));		
+			} else if (i == 50) {
+				gbc.gridx = 20;
+				gbc.gridy = 30;
+				l.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+			} else if (50 < i && i < 70) {
+				gbc.gridx = 70-i; // 20 - (i-50)
+				gbc.gridy = 30;
+				if (accX >= 1.0) {
+					l.setPreferredSize(new Dimension((int)widthSmall+1, (int)heightBig));		
+					accX -= 1.0;
+				} else
+					l.setPreferredSize(new Dimension((int)widthSmall, (int)heightBig));
+			} else if (i == 70) {
+				gbc.gridx = 0;
+				gbc.gridy = 30;
+				l.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+			} else if (70 < i && i < 100) {
+				gbc.gridx = 0;
+				gbc.gridy = 100-i;
+				accY += heightSmall - (int)heightSmall;
+				if (accY >= 1.0) {
+					l.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall+1));		
+					accY -= 1.0;
+				} else
+					l.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall));		
 			}
+				
+			panel.add(l, gbc);
 			
-		/*	if ((i == 0) || ( 20 <= i && i <= 50) || ( 70 <= i && i <= 100 )) 
-				gbc.gridwidth = 2;
-			else
-				gbc.gridwidth = 1;
+		}
 			
-			if (( 0 <= i && i <= 20 ) || ( 50 <= i && i <= 70 ))
-				gbc.gridheight = 2;
-			else
-				gbc.gridheight = 1;
-			
-			gbc.fill = GridBagConstraints.BOTH;
-			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
-			
-			l.setText(String.valueOf(i));
-			panel.add(l, gbc);*/
-			
+		CentralPiece centralPiece = new CentralPiece((widthSmall), (heightSmall));
 		gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.BOTH;  
-		gbc.gridwidth = 16;
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridwidth = 17;
 		gbc.gridheight = 29;
-		gbc.ipadx = 10;
 		gbc.weightx = 1;
 		gbc.weighty = 1;
-		gbc.gridx = 2;
-		gbc.gridy = 2;	 
+		gbc.gridx = 1;
+		gbc.gridy = 1;	 
 		panel.add(centralPiece, gbc);
 		
-		//posizione military tower da specificare
-		
-		// la faccio larga di due colonne e poi gioco con gli insets per spostare
-		// a destra il JPanel con il BoxLayout in modo che mi combaci
-		
+		MilitaryTower militaryTower = new MilitaryTower();
 		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;  
 		gbc.gridwidth = 2;
@@ -248,12 +158,12 @@ public class MainBoard extends JPanel  {
 		gbc.weightx = 1;
 		gbc.weighty = 1;
 		gbc.gridx = 18;
-		gbc.gridy = 2;	 
+		gbc.gridy = 1;	 
 		panel.add(militaryTower, gbc);
 		
 		JLabel board = new JLabel();
-		board.setPreferredSize(new Dimension(600, 700));
-		//board.setIcon(returnBoardImage());
+		board.setPreferredSize(boardDimension);
+		//board.setIcon(returnBoardImage(boardDimension));
 		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;  
 		gbc.gridwidth = 23;
@@ -263,29 +173,33 @@ public class MainBoard extends JPanel  {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		panel.add(board, gbc);
-		
-
-		//To show the background picture of the board
-		//background.setOpaque(false);
-		
-		
+			
 		return panel;
 	}
 	
 
-	//da risolvere problemi legati alla visualizzazione dei file immagini
-	/*private ImageIcon returnBoardImage() {
+	/**
+	 * Obtain the background board image
+	 * @param boardDimension
+	 * @return imageIcon
+	 */
+	
+/*	private ImageIcon returnBoardImage(Dimension boardDimension) {
 		
 		 BufferedImage image = null;
-			try {
-				image = ImageIO.read(getClass().getResource("gameboard.png"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		Image img = image.getScaledInstance(600, 700, Image.SCALE_SMOOTH);
-	    ImageIcon imageIcon = new ImageIcon(img);
+		try {
+			image = ImageIO.read(getClass().getResource("gameboard.png"));
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		Image img = image.getScaledInstance((int) boardDimension.getWidth(), (int) boardDimension.getHeight(), Image.SCALE_SMOOTH);
+		//Image img = image.getScaledInstance(471, 650, Image.SCALE_SMOOTH);
 		
+		ImageIcon imageIcon = new ImageIcon(img);
+	    String path = this.getClass().getClassLoader().getResource("gameboard.png").toExternalForm();
+		System.out.println(path);
+	    
 		return imageIcon;
 		
 	}*/

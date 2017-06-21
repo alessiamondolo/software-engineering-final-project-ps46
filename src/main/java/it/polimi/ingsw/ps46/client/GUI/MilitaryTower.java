@@ -1,4 +1,5 @@
 package it.polimi.ingsw.ps46.client.GUI;
+
 import java.awt.Color;
 
 import javax.swing.BorderFactory;

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -21,66 +20,59 @@ import javax.swing.border.EmptyBorder;
 
 public class UpperPiece extends JPanel {
 	
-	public UpperPiece() {
+	public UpperPiece(double widthSmall, double heightSmall) {
 		
-	//	BoxLayout bl = new BoxLayout(this, BoxLayout.X_AXIS);
-	//	this.setLayout(bl);
-		setActionTowers();
+		this.setPreferredSize(new Dimension((int) widthSmall*17, (int) (heightSmall*16-heightSmall/5)));
+		setActionTowers(widthSmall, heightSmall);
 		
 	}
 
-	private void setActionTowers() {
+	private void setActionTowers(double widthSmall, double heightSmall) {
 		
 		BoxLayout bl = new BoxLayout(this, BoxLayout.X_AXIS);
 		this.setLayout(bl);
 		
-		ActionTower greenTower = new ActionTower();
-		ActionTower azureTower = new ActionTower();
-		ActionTower yellowTower = new ActionTower();
-		ActionTower violetTower = new ActionTower();
+		ActionTower greenTower = new ActionTower(widthSmall, heightSmall);
+		ActionTower azureTower = new ActionTower(widthSmall, heightSmall);
+		ActionTower yellowTower = new ActionTower(widthSmall, heightSmall);
+		ActionTower violetTower = new ActionTower(widthSmall, heightSmall);
 		
 		
 		//da scrivere meglio con magari una lista per rendere più veloci istruzioni
 		JPanel toGreenTower = new JPanel();
-		toGreenTower.setPreferredSize(new Dimension(20, 320));
+		toGreenTower.setPreferredSize(new Dimension((int) widthSmall/2, (int) (heightSmall*16-heightSmall/5)));
 		JPanel toAzureTower = new JPanel();
-		toAzureTower.setPreferredSize(new Dimension(20, 320));
+		toAzureTower.setPreferredSize(new Dimension((int) widthSmall/2, (int) (heightSmall*16-heightSmall/5)));
 		JPanel toYellowTower = new JPanel();
-		toYellowTower.setPreferredSize(new Dimension(20, 320));
+		toYellowTower.setPreferredSize(new Dimension((int) widthSmall/2, (int) (heightSmall*16-heightSmall/5)));
 		JPanel toVioletTower = new JPanel();
-		toVioletTower.setPreferredSize(new Dimension(20, 320));
+		toVioletTower.setPreferredSize(new Dimension((int) widthSmall/2, (int) (heightSmall*16-heightSmall/5)));
 		
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
-		toGreenTower.setBorder(border);
+		/*toGreenTower.setBorder(border);
 		toAzureTower.setBorder(border);
 		toYellowTower.setBorder(border);
-		toVioletTower.setBorder(border);
+		toVioletTower.setBorder(border);*/
 		toGreenTower.setOpaque(false);
 		toAzureTower.setOpaque(false);
 		toYellowTower.setOpaque(false);
 		toVioletTower.setOpaque(false);
 		
-	
-		this.add(new Box.Filler(new Dimension(5, 5), new Dimension(5, 5), new Dimension(5, 5)));
-		
+
 		this.add(greenTower);
 		this.add(toGreenTower);
 		
 		this.add(azureTower);
 		this.add(toAzureTower);
 		
-		
 		this.add(yellowTower);
-		
-		
 		this.add(toYellowTower);
 		
+		this.add(new Box.Filler(new Dimension(5, 5), new Dimension(5, 5), new Dimension(5, 5)));
 		
 		this.add(violetTower);
-		
 		this.add(toVioletTower);
-		this.add(new Box.Filler(new Dimension(5, 5), new Dimension(5, 5), new Dimension(5, 5)));
 		
 	}
 
