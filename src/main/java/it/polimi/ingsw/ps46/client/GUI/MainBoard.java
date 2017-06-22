@@ -32,9 +32,9 @@ public class MainBoard extends JPanel  {
 
 	private static final long serialVersionUID = 6546742554971391289L;
 
-	public MainBoard() {
+	public MainBoard(Dimension boardDimension) {
 		
-		this.add(createBoard());
+		this.add(createBoard(boardDimension));
 		
 	}
 	
@@ -47,9 +47,9 @@ public class MainBoard extends JPanel  {
 	 * @return
 	 */
 	
-	private JPanel createBoard() {
+	private JPanel createBoard(Dimension boardDimension) {
 		
-		Dimension boardDimension =  new Dimension (600, 700); //(512, 700) proporzioni corrette per non distorcere originale
+		//Dimension boardDimension =  new Dimension (dimension); //(512, 700) proporzioni corrette per non distorcere originale
 		
 		double widthBig = 180.0*((int)boardDimension.getWidth())/1808;
 		double heightBig = 180.0*((int)boardDimension.getHeight())/2493;
