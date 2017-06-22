@@ -43,6 +43,7 @@ public class ConsoleView extends View {
 		switch(eventMessage.getMessage()) {
 		case START_GAME :
 			welcomeMessage();
+			getGameMode();
 			break;
 		case CHANGED_CURRENT_PLAYER :
 			GameState gameState = game.getGameState();
@@ -108,6 +109,22 @@ public class ConsoleView extends View {
 	
 	
 	
+	public void getGameMode() {
+		
+		output.println("==========================================================================");
+		output.println("In which game mode do you want to play?");
+		output.println("1. Basic");
+		output.println("2. Advanced");
+		int gameMode = input.IntegerFromConsole(1, 2);
+		if (gameMode == 2) {
+			setChanged();
+			notifyObservers(new EventMessage(NewStateMessage.ADVANCED_GAME_MODE));
+		}
+		
+	}
+	
+	
+	
 	public void getPlayerUsername(int id) {
 		
 		output.println("==========================================================================");
@@ -124,8 +141,7 @@ public class ConsoleView extends View {
 	public void showInitialOrder() {
 		
 		output.println("==========================================================================");
-		output.println("The initial game order will be:" + i);
-		i++;
+		output.println("The initial game order will be:");
 		int position = 1;
 		
 		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
@@ -498,27 +514,27 @@ public class ConsoleView extends View {
 		output.println(player.getUsername() + ": it's now your turn.");
 		output.println("This is what you have:");
 		output.println("1. Resources:");
-		output.println(game.getCurrentPlayer().getPlayerResourceSet().toString());
+		output.println(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString());
 		output.println("2. Territory Cards:");
-		if(game.getCurrentPlayer().getTerritoryDeck().isEmpty())
+		if(game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().isEmpty())
 			output.println("You don't have territory cards for now.");
 		else
-			output.println(game.getCurrentPlayer().getTerritoryDeck());
+			output.println(game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck());
 		output.println("3. Character Cards:");
-		if(game.getCurrentPlayer().getCharacterDeck().isEmpty())
+		if(game.getCurrentPlayer().getPersonalBoard().getCharacterDeck().isEmpty())
 			output.println("You don't have character cards for now.");
 		else
-			output.println(game.getCurrentPlayer().getCharacterDeck());
+			output.println(game.getCurrentPlayer().getPersonalBoard().getCharacterDeck());
 		output.println("4. Building Cards:");
-		if(game.getCurrentPlayer().getBuildingDeck().isEmpty())
+		if(game.getCurrentPlayer().getPersonalBoard().getBuildingDeck().isEmpty())
 			output.println("You don't have building cards for now.");
 		else
-			output.println(game.getCurrentPlayer().getBuildingDeck());
+			output.println(game.getCurrentPlayer().getPersonalBoard().getBuildingDeck());
 		output.println("5. Venture Cards:");
-		if(game.getCurrentPlayer().getVentureDeck().isEmpty())
+		if(game.getCurrentPlayer().getPersonalBoard().getVentureDeck().isEmpty())
 			output.println("You don't have venture cards for now.");
 		else
-			output.println(game.getCurrentPlayer().getVentureDeck());
+			output.println(game.getCurrentPlayer().getPersonalBoard().getVentureDeck());
 		output.println("\n");
 		//TODO print cards
 	}

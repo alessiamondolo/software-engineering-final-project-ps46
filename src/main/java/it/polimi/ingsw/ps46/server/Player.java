@@ -5,16 +5,12 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import it.polimi.ingsw.ps46.server.card.BuildingCard;
-import it.polimi.ingsw.ps46.server.card.CharacterCard;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesAtFinalMalus;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
 import it.polimi.ingsw.ps46.server.card.GenericMalusEffect;
 import it.polimi.ingsw.ps46.server.card.LeaderCard;
 import it.polimi.ingsw.ps46.server.card.MalusEffect;
-import it.polimi.ingsw.ps46.server.card.TerritoryCard;
-import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
@@ -28,22 +24,12 @@ public class Player {
 	private int idPlayer;
 	private String username;
 	private String color;
-	private ResourceSet playerResources = null;
-
-	private ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
-	private ArrayList<VentureCard> ventureCards = new ArrayList<VentureCard>();
-	private ArrayList<BuildingCard> buildingCards = new ArrayList<BuildingCard>();
-	private ArrayList<CharacterCard> characterCards = new ArrayList<CharacterCard>();
 	
 	private ArrayList<LeaderCard> leaderCards = null;  //TODO completare tutta la lista delle carte i suoi effetti ecc ecc
 	
-	private PersonalBoard playerPersonaBoard;
+	private PersonalBoard personalBoard;
 	
 	private Map <String,FamilyMember> familyMembers;
-	
-	//private final static int MAXOFFAMILYMEMBERS = 4;
-	private final static int MAXNUMBEROFCARDS = 6;
-
 	private Map<String, Dice> bonus;
 	private Map<String, ResourceSet> discount;
 	private Map<String, ResourceSet> optionalDiscount;
@@ -70,14 +56,11 @@ public class Player {
 		familyMembers.put("Black", new FamilyMember("Black"));
 		familyMembers.put("Orange", new FamilyMember("Orange"));
 		familyMembers.put("Neutral", new FamilyMember("Neutral"));
-		/*
-		for (int i = 0; i < MAXOFFAMILYMEMBERS; i++)
-		{
-			String xConfigurationColorOftheFamilyMember= "WHITE FAMILY MEMBER";
-			FamilyMember yConfigurationFamilyMember = new FamilyMember();
-			familyMembers.put(xConfigurationColorOftheFamilyMember, yConfigurationFamilyMember);
-		}
-		*/
+		
+		//TODO parsing del file personalboard
+		FactoryBoard factoryBoard = FactoryBoard.getFactoryBoard();
+		personalBoard = factoryBoard.createPersonalBoard("PersonalBoard.json");
+		
 		int init = 0;
 		Dice initializationDice = new Dice(init);
 		bonus = new HashMap<String, Dice>();
@@ -122,117 +105,7 @@ public class Player {
 	}
 
 	
-	
-	/**
-	 * Sets a value to attribute territoryCards. 
-	 * @param newTerritoryCards 
-	 */
-	public void putTerritoryCardInPlayerSet(TerritoryCard newTerritoryCard) { //eccezione?!
-		if (territoryCards.size() < MAXNUMBEROFCARDS)
-		{
-			territoryCards.add(newTerritoryCard);
-		}
-		//else ECCEZIONE?! return -1 ?boh	
-			
-	}
-	
-	public void putCharacterCardInPlayerSet(CharacterCard newCharacterCard) { //eccezione?!
-		if (characterCards.size() < MAXNUMBEROFCARDS)
-		{
-			characterCards.add(newCharacterCard);
-		}
-		// else ECCEZIONE?! return -1 ?boh	
-			
-	}
-		
-	public void putVentureCardInPlayerSet(VentureCard newVentureCard) { //eccezione?!
-		if (ventureCards.size() < MAXNUMBEROFCARDS)
-		{
-			ventureCards.add(newVentureCard);
-		}
-		//else ECCEZIONE?! return -1 ?boh	
-			
-	}
-	
-	
-	public void putBuildingCardInPlayerSet(BuildingCard newBuildingCard) { //eccezione?!
-		if (buildingCards.size() < MAXNUMBEROFCARDS)
-		{
-			buildingCards.add(newBuildingCard);
-		}
-		// else ECCEZIONE?! return -1 ?boh	
-			
-	}
 
-	/**
-	 * Returns territoryCards.
-	 * @return territoryCards 
-	 */
-	public  TerritoryCard getTerritoryCards(int index) {
-		return territoryCards.get(index);
-		
-	}
-	
-	public ArrayList<TerritoryCard> getTerritoryDeck()
-	{
-		return territoryCards;
-		
-	}
-
-
-	/**
-	 * Returns ventureCards.
-	 * @return ventureCards 
-	 */
-	public VentureCard getVentureCards(int index) {
-		return ventureCards.get(index);
-		
-	}
-
-	public ArrayList<VentureCard> getVentureDeck()
-	{
-		return ventureCards;
-	}
-	
-	/**
-	 * Returns buildingCards.
-	 * @return buildingCards 
-	 */
-	public BuildingCard getBuildingCards(int index) {
-		return buildingCards.get(index);
-	}
-
-	public ArrayList<BuildingCard> getBuildingDeck()
-	{
-		return buildingCards;
-		
-	}
-	
-	/**
-	 * Returns characterCards.
-	 * @return characterCards 
-	 */
-	public CharacterCard getCharacterCards(int index) {
-		return characterCards.get(index);
-	}
-	
-	public ArrayList<CharacterCard> getCharacterDeck()
-	{
-		return characterCards;
-		
-	}
-
-
-	/**
-	 * Returns resources.
-	 * @return resources 
-	 */
-	public ResourceSet getPlayerResourceSet() {
-		return playerResources;
-	}
-
-	
-	
 	/**
 	 * Description of the method getFamilyMembers.
 	 * This method returns a selected familyMember by colorKey (String).
@@ -384,12 +257,12 @@ public class Player {
 	}
 
 	
-	public PersonalBoard getPlayerPersonaBoard() {
-		return playerPersonaBoard;
+	public PersonalBoard getPersonalBoard() {
+		return personalBoard;
 	}
 
-	public void setPlayerPersonaBoard(PersonalBoard playerPersonaBoard) {
-		this.playerPersonaBoard = playerPersonaBoard;
+	public void setPersonalBoard(PersonalBoard personalBoard) {
+		this.personalBoard = personalBoard;
 	}
 	
 	/**
@@ -430,10 +303,6 @@ public class Player {
 
 	public void setColor(String color) {
 		this.color = color;		
-	}
-	
-	public void setResources(ResourceSet resources) {
-		playerResources = resources;
 	}
 
 }

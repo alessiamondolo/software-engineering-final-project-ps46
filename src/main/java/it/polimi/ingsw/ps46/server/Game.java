@@ -32,6 +32,8 @@ public class Game extends Observable {
 	private int currentRound = 0;
 	private int currentPeriod = 1;
 	
+	private boolean advancedMode = false;
+	
 	private int numberPlayers; 
 	private ArrayList<Player> players;
 	private ArrayList<Player> councilPalaceOrder = new ArrayList<Player>();
@@ -140,6 +142,10 @@ public class Game extends Observable {
 	public int getCurrentRound() {
 		return currentRound;
 	}
+	
+	public boolean getAdvancedMode() {
+		return advancedMode;
+	}
 
 	public Dice getDice(String color) {
 		return dice.get(color);
@@ -203,10 +209,14 @@ public class Game extends Observable {
 //----------------END OF GET METHODS----------------//
 //--------------------------------------------------//
 
+	
 	public void startGame() {
 		newState(new EventMessage(NewStateMessage.START_GAME));
 	}
 	
+	public void setAdvancedMode() {
+		advancedMode = true;
+	}
 	
 	public void setNextTurnOrder(ArrayList<Player> nextTurnOrder) {
 		players = nextTurnOrder;
@@ -238,7 +248,7 @@ public class Game extends Observable {
             	JSONArray resourceSetJSON = (JSONArray) resourcesIterator.next();
                 initialResources = myJSONParser.buildResourceSet(resourceSetJSON);
                 Player currentPlayer = playersIterator.next();
-                currentPlayer.setResources(initialResources);
+                currentPlayer.getPersonalBoard().setResources(initialResources);
             }
             
 		} catch (FileNotFoundException e) {
