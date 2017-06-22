@@ -30,10 +30,10 @@ public class Player {
 	private String color;
 	private ResourceSet playerResources = null;
 
-	private ArrayList<TerritoryCard> territoryCards = null;
-	private ArrayList<VentureCard> ventureCards = null;
-	private ArrayList<BuildingCard> buildingCards = null;
-	private ArrayList<CharacterCard> characterCards = null;
+	private ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
+	private ArrayList<VentureCard> ventureCards = new ArrayList<VentureCard>();
+	private ArrayList<BuildingCard> buildingCards = new ArrayList<BuildingCard>();
+	private ArrayList<CharacterCard> characterCards = new ArrayList<CharacterCard>();
 	
 	private ArrayList<LeaderCard> leaderCards = null;  //TODO completare tutta la lista delle carte i suoi effetti ecc ecc
 	

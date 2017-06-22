@@ -74,6 +74,9 @@ public class ConsoleView extends View {
 		case THROWN_DICE :
 			printBoard();
 			break;
+		case SET_NEXT_TURN_ORDER :
+			showNextTurnOrder();
+			break;
 			/*
 		case UPDATE_CURRENT_PLAYER_STATE :
 			printPlayerStatus();*/
@@ -83,7 +86,8 @@ public class ConsoleView extends View {
 	}
 
 
-	
+
+
 	public void visit(EventMV eventMV) {
 	}
 	
@@ -493,7 +497,28 @@ public class ConsoleView extends View {
 		output.println("==========================================================================");
 		output.println(player.getUsername() + ": it's now your turn.");
 		output.println("This is what you have:");
+		output.println("1. Resources:");
 		output.println(game.getCurrentPlayer().getPlayerResourceSet().toString());
+		output.println("2. Territory Cards:");
+		if(game.getCurrentPlayer().getTerritoryDeck().isEmpty())
+			output.println("You don't have territory cards for now.");
+		else
+			output.println(game.getCurrentPlayer().getTerritoryDeck());
+		output.println("3. Character Cards:");
+		if(game.getCurrentPlayer().getCharacterDeck().isEmpty())
+			output.println("You don't have character cards for now.");
+		else
+			output.println(game.getCurrentPlayer().getCharacterDeck());
+		output.println("4. Building Cards:");
+		if(game.getCurrentPlayer().getBuildingDeck().isEmpty())
+			output.println("You don't have building cards for now.");
+		else
+			output.println(game.getCurrentPlayer().getBuildingDeck());
+		output.println("5. Venture Cards:");
+		if(game.getCurrentPlayer().getVentureDeck().isEmpty())
+			output.println("You don't have venture cards for now.");
+		else
+			output.println(game.getCurrentPlayer().getVentureDeck());
 		output.println("\n");
 		//TODO print cards
 	}
@@ -502,6 +527,24 @@ public class ConsoleView extends View {
 		output.println("==========================================================================");
 		output.println("We are now playing round " + game.getCurrentRound() + " of period " + game.getCurrentPeriod() + ".");
 		output.println("\n");
+	}
+	
+	
+	private void showNextTurnOrder() {
+		output.println("==========================================================================");
+		output.println("The game order for the next round will be:" + i);
+		i++;
+		int position = 1;
+		
+		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
+			Player player=iterator.next();
+			output.println(position + ". " + player.getUsername());
+			position++;
+		}
+		
+		setChanged();
+		notifyObservers(new EventMessage(NewStateMessage.SET_NEXT_TURN_ORDER));
+		
 	}
 	
 }

@@ -33,8 +33,8 @@ public class Game extends Observable {
 	private int currentPeriod = 1;
 	
 	private int numberPlayers; 
-	private List<Player> players;
-	private List<Player> nextTurnOrder = new ArrayList<Player>();
+	private ArrayList<Player> players;
+	private ArrayList<Player> councilPalaceOrder = new ArrayList<Player>();
 	private Player currentPlayer;
 	private Board board;
 	private ArrayList<TerritoryCard> territoryCardsDeck;
@@ -196,8 +196,8 @@ public class Game extends Observable {
 	}
 	
 
-	public List<Player> getNextTurnOrder() {
-		return nextTurnOrder;
+	public ArrayList<Player> getCouncilPalaceOrder() {
+		return councilPalaceOrder;
 	}
 //--------------------------------------------------//
 //----------------END OF GET METHODS----------------//
@@ -209,7 +209,8 @@ public class Game extends Observable {
 	
 	
 	public void setNextTurnOrder(ArrayList<Player> nextTurnOrder) {
-		this.nextTurnOrder = nextTurnOrder;
+		players = nextTurnOrder;
+		newState(new EventMessage(NewStateMessage.SET_NEXT_TURN_ORDER));
 	}
 
 
@@ -262,6 +263,10 @@ public class Game extends Observable {
 		for(String key : dice.keySet())
 			dice.get(key).throwDice();
 		newState(new EventMessage(NewStateMessage.THROWN_DICE));
+	}
+	
+	public void addToCouncilPalaceOrder(Player player) {
+		councilPalaceOrder.add(player);
 	}
 
 	public void setGameState(GameState gameState) {

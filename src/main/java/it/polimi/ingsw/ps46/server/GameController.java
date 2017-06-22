@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
@@ -261,7 +262,21 @@ public class GameController implements Observer, ViewEventVisitor {
 	 * 
 	 */
 	private void endRound() {
-		// TODO Auto-generated method stub
+		//Remove all the all the faceup Development Cards from the board
+		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
+			for (int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
+				game.getBoard().getTower(tower).getTowerFloor(floor).setCard(null);
+			}
+		}
+		
+		//Change the Turn Order following the order of the Family Members placed in the Council Palace.
+		ArrayList<Player> councilPalaceOrder = game.getCouncilPalaceOrder();
+		if(councilPalaceOrder.size() < game.getNumberPlayers())
+			for(Player player : game.getPlayers()) {
+				if(!councilPalaceOrder.contains(player))
+					councilPalaceOrder.add(player);
+			}
+		game.setNextTurnOrder(councilPalaceOrder);
 	}
 
 }
