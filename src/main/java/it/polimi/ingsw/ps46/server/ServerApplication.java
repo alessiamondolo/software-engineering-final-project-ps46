@@ -22,6 +22,7 @@ public class ServerApplication {
 	private GameController controller;
 	private static int numberPlayers;
 	
+	
 	/**
 	 * The constructor.
 	 */
@@ -55,6 +56,10 @@ public class ServerApplication {
 		}
 		else {
 			//TODO setup of RMI and Socket connection for online game
+			SocketManager socketManager = new SocketManager();
+			Thread socketThread = new Thread(socketManager);
+			socketThread.start();
+			
 		}
 	}
 	

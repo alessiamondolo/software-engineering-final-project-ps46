@@ -42,7 +42,6 @@ public class GameController implements Observer, ViewEventVisitor {
 		switch(eventMessage.getMessage()) {
 		case ADVANCED_GAME_MODE :
 			game.setAdvancedMode();
-			System.out.println("Advanced game mode");
 			break;
 		case ACTION_SENT :
 			startAction();
