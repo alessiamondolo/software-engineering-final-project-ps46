@@ -161,9 +161,9 @@ public class MainBoard extends JPanel  {
 		gbc.gridy = 1;	 
 		panel.add(militaryTower, gbc);
 		
-		JLabel board = new JLabel();
-		board.setPreferredSize(boardDimension);
-		//board.setIcon(returnBoardImage(boardDimension));
+		JLabel boardImage = new JLabel();
+		boardImage.setPreferredSize(boardDimension);
+		//boardImage.setIcon(returnBoardImage(boardDimension));
 		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;  
 		gbc.gridwidth = 23;
@@ -172,7 +172,7 @@ public class MainBoard extends JPanel  {
 		gbc.weighty = 1;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		panel.add(board, gbc);
+		panel.add(boardImage, gbc);
 			
 		return panel;
 	}

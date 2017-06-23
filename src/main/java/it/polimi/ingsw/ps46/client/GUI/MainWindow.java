@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 /**
- * MainWindow Class is the GUI root Container for the main game screen, here are placed all 
- * the various sub-layers and sub-containers, starting with four PlayerDashboard placed
- * on the left and a MainBoard on the right.
+ * MainWindow Class is the GUI root Container for the main game screen. 
+ * The main window shows two main areas, on the left a PlayerArea and on the right
+ * the game's board. These two areas contains their own sub-containers.
  * @author lorenzo
  *
  */
@@ -34,14 +34,14 @@ public class MainWindow extends JFrame {
 		int mainWindowHeight = 900;
 		int boardWidth = (mainWindowWidth * 6)/ 14;
 		int boardHeight = (mainWindowHeight * 7) / 9;
-		int dashboardAreaWidth = (mainWindowWidth * 65)/ 140;
+		int playerAreaWidth = (mainWindowWidth * 65)/ 140;
 		
-		Dimension dashboardAreaDimension = new Dimension(dashboardAreaWidth, boardHeight);
+		Dimension playerAreaDimension = new Dimension(playerAreaWidth, boardHeight);
 		Dimension boardDimension = new Dimension(boardWidth, boardHeight);
 		
 		this.setTitle("Lorenzo il Magnifico");
 		this.setPreferredSize(new Dimension(mainWindowWidth, mainWindowHeight));
-		this.add(createDashboardArea(dashboardAreaDimension), BorderLayout.WEST);
+		this.add(createplayerArea(playerAreaDimension), BorderLayout.WEST);
 		this.add(createBoardArea(boardDimension));
 		
 		  //parametri che dovrebbero essere calcolati in base alla risoluzione dello schermo su cui il programma gira
@@ -53,31 +53,10 @@ public class MainWindow extends JFrame {
 
 	}
 	
-	private JPanel createDashboardArea(Dimension dashboardAreaDimension)  {
+	private PlayerArea createplayerArea(Dimension playerAreaDimension)  {
 		
-		JPanel dashboardArea = new JPanel();
-		
-		PlayerDashboard player1Dash = new PlayerDashboard(); 
-		PlayerDashboard player2Dash = new PlayerDashboard();
-		PlayerDashboard player3Dash = new PlayerDashboard();
-		PlayerDashboard player4Dash = new PlayerDashboard();
-		
-		dashboardArea.setPreferredSize(dashboardAreaDimension);
-		Border border = BorderFactory.createLineBorder(Color.RED, 1);
-		dashboardArea.setBorder(border);
-		
-		dashboardArea.setLayout(new BorderLayout());
-		BoxLayout l = new BoxLayout(dashboardArea, BoxLayout.Y_AXIS);
-		dashboardArea.setLayout(l);
-			
-		dashboardArea.add(player1Dash);
-		dashboardArea.add(player1Dash);
-		dashboardArea.add(player1Dash);
-		dashboardArea.add(player1Dash);
-
-		
-		
-		return dashboardArea;
+		PlayerArea playerArea = new PlayerArea(playerAreaDimension);
+		return playerArea;
 
 	}
 	
@@ -88,17 +67,6 @@ public class MainWindow extends JFrame {
 	
 	}
 	
-
-	
-		/*PlayerDashboard player1Dash = new PlayerDashboard(); 
-		PlayerDashboard player2Dash = new PlayerDashboard();
-		PlayerDashboard player3Dash = new PlayerDashboard();
-		PlayerDashboard player4Dash = new PlayerDashboard();
-		
-		dashboardArea.add(player1Dash);
-		dashboardArea.add(player1Dash);
-		dashboardArea.add(player1Dash);
-		dashboardArea.add(player1Dash);*/
 	
 	
 }
