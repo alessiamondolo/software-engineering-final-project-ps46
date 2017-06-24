@@ -55,11 +55,7 @@ public class Player {
 		
 		/*playerResources = new ResourceSet();
 
-		territoryCards = new ArrayList<TerritoryCard>();
-		ventureCards = new ArrayList<VentureCard>();
-		buildingCards = new ArrayList<BuildingCard>();
-		characterCards = new ArrayList<CharacterCard>();
-		leaderCards = new ArrayList<LeaderCard>();
+		
 		*/
 		
 		familyMembers = new LinkedHashMap<String,FamilyMember>();

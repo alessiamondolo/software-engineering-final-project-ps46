@@ -1,19 +1,13 @@
 package it.polimi.ingsw.ps46.server.action;
 
 
-import java.util.Iterator;
-
 import it.polimi.ingsw.ps46.server.ActionSpace;
-import it.polimi.ingsw.ps46.server.Board;
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
-import it.polimi.ingsw.ps46.server.card.MalusEffect;
-import it.polimi.ingsw.ps46.server.card.TerritoryCard;
-import it.polimi.ingsw.ps46.server.resources.ResourceSet;
+
 
 /**
  * TODO commentare
@@ -55,7 +49,7 @@ public class ActivateProductionAction implements Action {
 		 *  - * Se con malus -1 ... fare in modo che ogni carta venga vista come una sorgente e togliere -1 della risorsa X.
 		 */
 		if (isLegal() == true){
-			for (BuildingCard buildingCard : game.getCurrentPlayer().getBuildingDeck()) {
+			for (BuildingCard buildingCard : game.getCurrentPlayer().getPersonalBoard().getBuildingDeck()) {
 				
 				if(familyMemberValue.greaterOrEqual(buildingCard.getProductionValue())){
 					buildingCard.getPermanentEffects().activateEffect(game);	
@@ -105,7 +99,7 @@ public class ActivateProductionAction implements Action {
 				
 		//TODO RICHIEDERE AL CONTROLLER SE SI VUOLE AUMENTARE IL VALORE DEL DADO BRUCIANDO DEI SERVI
 		
-		for (BuildingCard buildingCard : game.getCurrentPlayer().getBuildingDeck()) {
+		for (BuildingCard buildingCard : game.getCurrentPlayer().getPersonalBoard().getBuildingDeck()) {
 		
 			if(temporaryDice.greaterOrEqual(buildingCard.getProductionValue())){
 				familyMemberValue = temporaryDice;	
@@ -113,7 +107,7 @@ public class ActivateProductionAction implements Action {
 			}
 		}
 		
-		if(temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPlayerPersonaBoard().getProductionHarvestValue())){
+		if(temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getProductionValue())){
 			familyMemberValue = temporaryDice;	
 			return true;
 		}
