@@ -1,12 +1,15 @@
 package it.polimi.ingsw.ps46.server.resources;
 
+import java.io.Serializable;
 
 /**
  * Resource can be used to represent any type of resource.
  * 
  * @author Alessia Mondolo 
  */
-public abstract class Resource {
+public abstract class Resource implements Serializable {
+	
+	private static final long serialVersionUID = -2185596359494356372L;
 	
 	/**
 	 * Stores the id  that identifies the type of resource.

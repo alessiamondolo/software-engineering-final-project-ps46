@@ -9,6 +9,8 @@ package it.polimi.ingsw.ps46.server.card;
 
 public class DecreaseResourcesAtFinalMalus extends DecreaseResourcesMalus{
 	
+	private static final long serialVersionUID = 4638592999712222217L;
+	
 	String from;
 	
 	

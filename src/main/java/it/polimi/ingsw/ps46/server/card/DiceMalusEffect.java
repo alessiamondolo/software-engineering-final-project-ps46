@@ -12,6 +12,8 @@ import it.polimi.ingsw.ps46.server.Dice;
 
 public class DiceMalusEffect extends MalusEffect {
 	
+	private static final long serialVersionUID = 2766283436360709364L;
+	
 	private String type;
 	private Dice malus;
 	

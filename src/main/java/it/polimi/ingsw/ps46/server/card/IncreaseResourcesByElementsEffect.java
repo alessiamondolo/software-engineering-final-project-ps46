@@ -13,6 +13,8 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 
+	private static final long serialVersionUID = -1009062813515858649L;
+	
 	private String type;
 	
 	public IncreaseResourcesByElementsEffect(ResourceSet additionalResources, String type) {

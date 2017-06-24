@@ -8,6 +8,8 @@ package it.polimi.ingsw.ps46.server.resources;
  */
 public class Wood extends Resource {
 	
+	private static final long serialVersionUID = -4380517635662947467L;
+
 	/**
 	 * The constructor.
 	 */

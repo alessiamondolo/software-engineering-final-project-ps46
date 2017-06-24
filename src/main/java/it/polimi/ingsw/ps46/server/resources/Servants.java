@@ -8,6 +8,8 @@ package it.polimi.ingsw.ps46.server.resources;
  */
 public class Servants extends Resource {
 	
+	private static final long serialVersionUID = -6476767182374515225L;
+
 	/**
 	 * The constructor.
 	 */

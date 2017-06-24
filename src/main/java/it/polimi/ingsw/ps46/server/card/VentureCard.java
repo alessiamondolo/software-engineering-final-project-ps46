@@ -11,6 +11,9 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  * @author Andrea.Masi
  */
 public class VentureCard extends Card {
+	
+	private static final long serialVersionUID = 1821348715129955902L;
+	
 	boolean doubleCostChoice = false;
 	ResourceSet costTwo;
 	ResourceSet requiredResource;

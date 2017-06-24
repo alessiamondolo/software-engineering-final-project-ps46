@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps46.client;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ListIterator;
 
 import it.polimi.ingsw.ps46.server.ActionSpaceName;
@@ -18,7 +17,6 @@ public class ConsoleView implements View {
 	private ReadInput input;
 	private PrintStream output;
 	private int i = 1;
-	private List<String> colors = new ArrayList<String>();
 	
 	private Game game;
 	
@@ -26,11 +24,6 @@ public class ConsoleView implements View {
 		this.game = game;
 		this.output = new PrintStream(output);
 		input = new ReadInput();
-		
-		colors.add("Red");
-		colors.add("Yellow");
-		colors.add("Blue");
-		colors.add("Green");
 	}
 	
 	
@@ -63,10 +56,10 @@ public class ConsoleView implements View {
 	
 	
 	
-	public String getPlayerUserame(int id) {
+	public String getPlayerUserame() {
 		
 		output.println("==========================================================================");
-		output.println("Player " + id + ": what is your username?");
+		output.println("What is your username?");
 		String username = input.stringFromConsole();	
 		return username;
 	}
@@ -79,8 +72,7 @@ public class ConsoleView implements View {
 		output.println("The initial game order will be:");
 		int position = 1;
 		
-		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
-			Player player=iterator.next();
+		for(Player player : game.getPlayers()){
 			output.println(position + ". " + player.getUsername());
 			position++;
 		}
@@ -88,18 +80,16 @@ public class ConsoleView implements View {
 	
 	
 	
-	public String getPlayerColor(String username) {
+	public String getPlayerColor(ArrayList<String> colors) {
 		output.println("==========================================================================");
-		output.println(username + ": which color do you want?");
+		output.println("Which color do you want?");
 		int index = 1;
-		for(ListIterator<String> iterator=colors.listIterator(); iterator.hasNext();){
-			String color =iterator.next();
+		for(String color : colors){
 			output.println(index + ". " + color);
 			index++;
 		}
 		int color = input.IntegerFromConsole(1, colors.size()) - 1;
 		output.println("Your color will be " + colors.get(color));
-		colors.remove(color);
 		return colors.get(color);
 	}
 	

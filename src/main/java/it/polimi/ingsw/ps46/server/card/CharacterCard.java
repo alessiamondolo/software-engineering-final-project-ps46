@@ -10,7 +10,8 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  */
 
 public class CharacterCard extends Card {
-		
+	
+	private static final long serialVersionUID = -7181349811096100892L;
 
 	public CharacterCard(String cardName,int cardEra, Effect immediateEffects, Effect permanentEffects, 
 		 ResourceSet cost) {

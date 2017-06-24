@@ -11,6 +11,8 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  */
 public class DecreaseResourcesMalus extends MalusEffect {
 
+	private static final long serialVersionUID = -6258564858523810922L;
+	
 	private ResourceSet decreasedResources;
 	
 	

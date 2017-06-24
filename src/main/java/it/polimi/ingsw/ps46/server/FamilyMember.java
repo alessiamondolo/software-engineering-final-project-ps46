@@ -1,12 +1,16 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.Serializable;
+
 /**
  * This Class creates an object family member formed by its id ( set in the Class Player for a MAX of 4) Availability and its value.
  * 
  * @author Andrea.Masi
  */
 
-public class FamilyMember {
+public class FamilyMember implements Serializable {
+	
+	private static final long serialVersionUID = -6382000537229373852L;
 	
 	private boolean isUsed = false;
 	private Dice value = null;

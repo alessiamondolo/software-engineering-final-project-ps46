@@ -8,6 +8,8 @@ package it.polimi.ingsw.ps46.server.resources;
  */
 public class Money extends Resource {
 	
+	private static final long serialVersionUID = 6426072209737422602L;
+
 	/**
 	 * The constructor.
 	 */

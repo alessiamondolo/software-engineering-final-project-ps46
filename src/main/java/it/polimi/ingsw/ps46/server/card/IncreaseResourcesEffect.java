@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -10,7 +12,9 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  * 
  * @author Alessia Mondolo
  */
-public class IncreaseResourcesEffect implements Effect {
+public class IncreaseResourcesEffect implements Effect, Serializable {
+	
+	private static final long serialVersionUID = -1551290615939150028L;
 	
 	protected ResourceSet additionalResources; 
 

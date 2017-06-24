@@ -1,9 +1,12 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Board {
+public class Board implements Serializable {
+	
+	private static final long serialVersionUID = -5261619069411649403L;
 	
 	private int numberOfTowers;
 	private ArrayList<Tower> towers;

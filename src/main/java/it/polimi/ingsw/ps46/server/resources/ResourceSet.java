@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server.resources;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,7 +12,9 @@ import java.util.List;
  * 
  * @author Alessia Mondolo
  */
-public class ResourceSet {
+public class ResourceSet implements Serializable {
+	
+	private static final long serialVersionUID = 786707586186550634L;
 	
 	private LinkedHashMap<String, Resource> resourcesMap;
 	

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps46.server;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,14 +9,14 @@ import java.util.HashMap;
 public class GameCreator implements Runnable {
 
 	private ArrayList<Socket> clients;
-	private HashMap<Socket, BufferedWriter> writers;
-	private HashMap<Socket, BufferedReader> readers;
+	private HashMap<Socket, ObjectOutputStream> writers;
+	private HashMap<Socket, ObjectInputStream> readers;
 	
 	private Game game;	
 	private View view;
 	private GameController controller;
 	
-	public GameCreator(ArrayList<Socket> clients, HashMap<Socket, BufferedWriter> writers, HashMap<Socket, BufferedReader> readers) {
+	public GameCreator(ArrayList<Socket> clients, HashMap<Socket, ObjectOutputStream> writers, HashMap<Socket, ObjectInputStream> readers) {
 		this.clients = clients;
 		this.writers = writers;
 		this.readers = readers;
@@ -26,7 +26,7 @@ public class GameCreator implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		game = new Game(clients.size());
-		view = new VirtualView(clients, writers, readers);
+		view = new VirtualView(clients, writers, readers, game);
 		controller = new GameController(game);
 		
 		view.addObserver(controller);

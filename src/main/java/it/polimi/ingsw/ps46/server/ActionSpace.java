@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps46.server.card.IncreaseResourcesEffect;
 
 /**
@@ -7,7 +9,9 @@ import it.polimi.ingsw.ps46.server.card.IncreaseResourcesEffect;
  * 
  * @author Andrea.Masi
  */
-public class ActionSpace {
+public class ActionSpace implements Serializable {
+	
+	private static final long serialVersionUID = -3813912382960678889L;
 	
 	private static int IDACTIONSPACE = 0;
 	private int idLocalActionSpaces = 0;

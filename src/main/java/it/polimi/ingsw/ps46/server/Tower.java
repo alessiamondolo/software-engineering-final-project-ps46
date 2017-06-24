@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -9,7 +10,9 @@ import java.util.ArrayList;
  * @author Andrea.Masi
  */
 
-public class Tower {
+public class Tower implements Serializable {
+	
+	private static final long serialVersionUID = 988637687619263552L;
 	
 	private int numberOfFloors;
 	private ArrayList<TowerFloor> floors;

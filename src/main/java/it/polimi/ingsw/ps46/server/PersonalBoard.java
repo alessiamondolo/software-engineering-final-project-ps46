@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -9,8 +10,9 @@ import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
-public class PersonalBoard {
+public class PersonalBoard implements Serializable {
 	
+	private static final long serialVersionUID = -2644034889315743722L;
 
 	private final static int MAX_NUMBER_OF_CARDS = 6;
 	

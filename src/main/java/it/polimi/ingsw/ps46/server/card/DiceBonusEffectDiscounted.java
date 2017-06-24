@@ -14,6 +14,9 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  */
 
 public class DiceBonusEffectDiscounted extends DiceBonusEffect {
+	
+	private static final long serialVersionUID = -133005720776307937L;
+	
 	private ResourceSet  resourcesDiscounted;
 	private boolean doubleChoice;
 

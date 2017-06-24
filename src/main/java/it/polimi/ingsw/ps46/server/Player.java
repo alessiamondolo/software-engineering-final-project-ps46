@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -19,8 +20,10 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  * 
  * @author Andrea.Masi
  */
-public class Player {
+public class Player implements Serializable {
 
+	private static final long serialVersionUID = -7052325730099632561L;
+	
 	private int idPlayer;
 	private String username;
 	private String color;

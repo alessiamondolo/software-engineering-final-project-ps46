@@ -8,6 +8,8 @@ package it.polimi.ingsw.ps46.server.resources;
  */
 public class FaithPoints extends Resource {
 	
+	private static final long serialVersionUID = -2214115230289013436L;
+
 	/**
 	 * The constructor.
 	 */

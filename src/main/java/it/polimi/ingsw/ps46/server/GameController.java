@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps46.server;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -90,8 +89,7 @@ public class GameController implements Observer, ViewEventVisitor {
 			roundSetup();
 			
 			game.setGameState(GameState.GET_PLAYER_ACTION);
-			for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
-				Player player=iterator.next();
+			for(Player player : game.getPlayers()) {
 				game.setCurrentPlayer(player);
 				playerActions();
 			}
@@ -124,11 +122,8 @@ public class GameController implements Observer, ViewEventVisitor {
 	 */
 	private void setupPlayers() {
 		game.setGameState(GameState.SETUP_PLAYERS_USERNAME);
-		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
-			Player player=iterator.next();
+		for(Player player : game.getPlayers())
 			game.setCurrentPlayer(player);
-			//TODO check per avere username univoco?
-		}
 	}
 	
 	
@@ -148,10 +143,8 @@ public class GameController implements Observer, ViewEventVisitor {
 	 */
 	private void setupPlayersColor() {
 		game.setGameState(GameState.SETUP_PLAYERS_COLOR);
-		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
-			Player player=iterator.next();
-			game.setCurrentPlayer(player);			
-		}
+		for(Player player : game.getPlayers())
+			game.setCurrentPlayer(player);
 	}
 	
 	
