@@ -47,13 +47,16 @@ public class Game extends Observable {
 	private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/config/";
 	
 	
-	Game(int numberPlayers) {
+	public Game(int numberPlayers) { // DA RIMETTERE SENZA IL PUBLIC//
 		this.numberPlayers = numberPlayers;
 		players = new ArrayList<Player>();
 		//creates the players objects and adds them to the list of players
 		for(int idPlayer = 1; idPlayer<=numberPlayers; idPlayer++) {
 			players.add(new Player(idPlayer));
 		}
+		///
+		currentPlayer = new Player(1); // AGGIUNTO PER IL TESTING DA TOGLIERE//
+		///
 		configDice();
 		configDecks();
 		configBoard();

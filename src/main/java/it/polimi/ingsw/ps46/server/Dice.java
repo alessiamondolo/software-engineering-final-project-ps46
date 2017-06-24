@@ -82,12 +82,28 @@ public class Dice {
 	 * This method sum the value of two dice
 	 * 
 	 * @param dice2
-	 * @return summedDice
 	 */
 	
 	public void sumDice(Dice dice2){
 		value =+ dice2.getValue();
 		}
+	
+	
+	/**
+	 * Description of the method subDice
+	 * This method sub the value of two dice, it's avoid having the resultant dice with a negative value (0 is the minimum)
+	 * 
+	 * @param dice2
+	 */
+	public void subDice(Dice dice2){
+		
+		value =- dice2.getValue();
+		
+		if (value < 0)
+		{
+			value = 0;
+		}
+	}
 	
 	
 	/**

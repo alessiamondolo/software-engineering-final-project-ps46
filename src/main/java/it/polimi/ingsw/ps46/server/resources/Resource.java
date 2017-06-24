@@ -63,14 +63,20 @@ public abstract class Resource {
 	 * @param lessQuantity 
 	 */
 	public void sub(Resource lessResource) {
-		if(greaterOrEqual(lessResource))
+		if(greaterOrEqual(lessResource)) // così non fa nulla se sto togliendo più risorse di quelle che ho.
 			quantity -= lessResource.getQuantity();
 		//else 
+		//	quantity = 0;
 		//	throw new Exception()
 	}
 
 	public boolean greaterOrEqual(Resource resource) {
 		return (this.quantity >= resource.getQuantity());
+	}
+	
+	public boolean minor(Resource resource) {
+		return (this.quantity < resource.getQuantity());
+		
 	}
 	
 	@Override

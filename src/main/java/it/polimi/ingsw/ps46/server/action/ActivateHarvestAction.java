@@ -1,5 +1,11 @@
 package it.polimi.ingsw.ps46.server.action;
 
+/**
+ * TODO commentare
+ * 
+ * @author Andrea.Masi
+ */
+
 public class ActivateHarvestAction implements Action {
 
 	@Override

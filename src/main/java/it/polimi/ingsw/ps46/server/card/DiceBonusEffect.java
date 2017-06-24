@@ -17,7 +17,6 @@ public class DiceBonusEffect implements Effect {
 	
 	/**
 	 * The constructor of DiceBonusEffect.
-	 * 
 	 * @param bonus
 	 * @param type
 	 */

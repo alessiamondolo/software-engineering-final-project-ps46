@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server.card;
 
+import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
@@ -32,6 +33,13 @@ public class DecreaseResourcesMalus extends MalusEffect {
 		
 		this.name = name;
 		this.decreasedResources = decreasedResources;
+	}
+	
+
+	@Override
+	public void activationMalus(Game game){
+		
+		game.getCurrentPlayer().getDecreaseResourcesMalus().add(this);
 	}
 	
 	/**

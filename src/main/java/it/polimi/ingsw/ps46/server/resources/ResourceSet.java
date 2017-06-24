@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server.resources;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Map;
 public class ResourceSet {
 	
 	private Map<String, Resource> resourcesMap;
+	private static final int CONSTANT = 0;
 	
 	/**
 	 * Creates a new ResourceSet object by reading a list of Resource objects and filling the hashmap
@@ -29,6 +31,32 @@ public class ResourceSet {
 			resourcesMap.put(resource.getId(), resource);
 		}
 		
+	}
+	
+	
+	/**
+	 * Creates a new ResourceSet object filling the hashmap with the value of zero for every resource
+	 * with the ID of the resource as Key and the resource itself as value.
+	 * 
+	 * @param List<Resource>
+	 */
+	public ResourceSet() {
+		
+		ArrayList<Resource> resourcesList = new ArrayList<>();
+		
+		resourcesList.add(new Resource("Wood", CONSTANT){});
+		resourcesList.add(new Resource("Stones", CONSTANT){});
+		resourcesList.add(new Resource("Servants", CONSTANT){});
+		resourcesList.add(new Resource("Money", CONSTANT){});
+		resourcesList.add(new Resource("FaithPoints", CONSTANT){});
+		resourcesList.add(new Resource("MilitaryPoints", CONSTANT){});
+		resourcesList.add(new Resource("VictoryPoints", CONSTANT){});
+		resourcesList.add(new Resource("CounsilPrivilege", CONSTANT){});
+		
+		resourcesMap = new HashMap<String, Resource>(); 
+		for(Resource resource : resourcesList) {
+			resourcesMap.put(resource.getId(), resource);
+		}	
 	}
 	
 	public Map<String, Resource> getResourcesMap() {
@@ -49,9 +77,9 @@ public class ResourceSet {
 	 * 
 	 * @param Resource
 	 */
-	public void sub(Resource lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource>myResource
+	public void sub(Resource lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource > myResource
 		resourcesMap.get(lessResources.getId()).sub(lessResources);
-	}
+		}
 	
 	/**
 	 * Returns true if the the value of the resource of the ResourceSet that has the same ID as the resource received as parameter 
@@ -81,13 +109,19 @@ public class ResourceSet {
 	 * Decreases the value of the resources of the ResourceSet that has the same ID as the resources in the ResourceSet 
 	 * received as parameter.
 	 * 
-	 * @param Resource
+	 * @param lessResources
 	 */
-	public void sub(ResourceSet lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource>myResource
-		for(String key : lessResources.getResourcesMap().keySet())
+	public void sub(ResourceSet lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource > myResource
+		
+		for(String key : lessResources.getResourcesMap().keySet()){
 			//gets the resource of this resourceSet with the same key of the resource received by parameter
-			//and increases it by the resource received by parameter
+			//and decreases it by the resource received by parameter
+			/*if (!resourcesMap.get(key).greaterOrEqual(lessResources.getResourcesMap().get(key))){
+				//le risorse che devo sottrarre sono maggiori di quelle del giocatore?
+				System.out.println("\n Sono dentro al metodo SUB e il risultato è:" + !resourcesMap.get(key).greaterOrEqual(lessResources.getResourcesMap().get(key)));
+			}*/
 			resourcesMap.get(key).sub(lessResources.getResourcesMap().get(key));
+		}
 	}
 	
 	/**

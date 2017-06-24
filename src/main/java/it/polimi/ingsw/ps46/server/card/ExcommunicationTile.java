@@ -22,6 +22,12 @@ public class ExcommunicationTile {
 	}
 	
 	
+	public ExcommunicationTile() {
+		era = 0;
+		permanentMalus = null;
+	}
+
+
 	public int getEra() {
 		return era;
 	}
