@@ -32,9 +32,9 @@ public class MainBoard extends JPanel  {
 
 	private static final long serialVersionUID = 6546742554971391289L;
 
-	public MainBoard() {
+	public MainBoard(Dimension boardDimension) {
 		
-		this.add(createBoard());
+		this.add(createBoard(boardDimension));
 		
 	}
 	
@@ -47,9 +47,9 @@ public class MainBoard extends JPanel  {
 	 * @return
 	 */
 	
-	private JPanel createBoard() {
+	private JPanel createBoard(Dimension boardDimension) {
 		
-		Dimension boardDimension =  new Dimension (600, 700); //(512, 700) proporzioni corrette per non distorcere originale
+		//Dimension boardDimension =  new Dimension (dimension); //(512, 700) proporzioni corrette per non distorcere originale
 		
 		double widthBig = 180.0*((int)boardDimension.getWidth())/1808;
 		double heightBig = 180.0*((int)boardDimension.getHeight())/2493;
@@ -161,9 +161,9 @@ public class MainBoard extends JPanel  {
 		gbc.gridy = 1;	 
 		panel.add(militaryTower, gbc);
 		
-		JLabel board = new JLabel();
-		board.setPreferredSize(boardDimension);
-		//board.setIcon(returnBoardImage(boardDimension));
+		JLabel boardImage = new JLabel();
+		boardImage.setPreferredSize(boardDimension);
+		//boardImage.setIcon(returnBoardImage(boardDimension));
 		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;  
 		gbc.gridwidth = 23;
@@ -172,7 +172,7 @@ public class MainBoard extends JPanel  {
 		gbc.weighty = 1;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		panel.add(board, gbc);
+		panel.add(boardImage, gbc);
 			
 		return panel;
 	}
