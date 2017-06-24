@@ -49,9 +49,22 @@ public class Client {
 	}
 	
 	private void init() {
+		
+		View view = null;
+		
+		switch(userInterfaceType) {
+		case "CLI" :
+			view = new ConsoleView(System.out);
+			break;
+		case "GUI" :
+			//TODO sostituire con costruttore della GUI
+			view = new ConsoleView(System.out);
+			break;
+		}
+		
 		switch(connectionType) {
 		case "Sockets" :
-			SocketClient socketClient = new SocketClient(SERVER_IP, SERVER_PORT);
+			SocketClient socketClient = new SocketClient(SERVER_IP, SERVER_PORT, view);
 			Thread clientThread = new Thread(socketClient);
 			clientThread.start();
 			break;

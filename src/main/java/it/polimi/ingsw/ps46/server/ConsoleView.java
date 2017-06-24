@@ -15,7 +15,6 @@ public class ConsoleView extends View {
 	
 	private ReadInput input;
 	private PrintStream output;
-	private int i = 1;
 	private List<String> colors = new ArrayList<String>();
 	
 	private Game game;
@@ -165,10 +164,11 @@ public class ConsoleView extends View {
 			output.println(index + ". " + color);
 			index++;
 		}
-		int color = input.IntegerFromConsole(1, colors.size()) - 1;
-		output.println("Your color will be " + colors.get(color));
+		int choice = input.IntegerFromConsole(1, colors.size()) - 1;
+		String color = colors.get(choice);
 		colors.remove(color);
-		return colors.get(color);
+		output.println("Your color will be " + color);
+		return color;
 	}
 	
 	
@@ -548,8 +548,7 @@ public class ConsoleView extends View {
 	
 	private void showNextTurnOrder() {
 		output.println("==========================================================================");
-		output.println("The game order for the next round will be:" + i);
-		i++;
+		output.println("The game order for the next round will be:");
 		int position = 1;
 		
 		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){

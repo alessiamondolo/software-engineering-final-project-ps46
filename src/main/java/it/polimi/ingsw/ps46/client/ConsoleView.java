@@ -12,27 +12,57 @@ import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.utils.ReadInput;
 
 
+/**
+ * This class implements the Command Line User Interface for the game.
+ * 
+ * @author Alessia Mondolo
+ * @version 1.1
+ */
 public class ConsoleView implements View {
 	
 	private ReadInput input;
 	private PrintStream output;
-	private int i = 1;
 	
-	private Game game;
+	private Game game = null;
 	
-	public ConsoleView(Game game, OutputStream output) {
-		this.game = game;
+	
+	/**
+	 * Creates a new ConsoleView object.
+	 * 
+	 * @param output : the output stream that the view will use to print the outputs.
+	 */
+	public ConsoleView(OutputStream output) {
 		this.output = new PrintStream(output);
 		input = new ReadInput();
 	}
 	
 	
+	
+	/**
+	 * Sets a new value for the attribute game.
+	 * 
+	 * @param game : the new game object that we want to assign to the attribute game.
+	 */
 	public void setGame(Game game) {
 		this.game = game;
 	}
 	
 	
 	
+	/**
+	 * Prints the message received as parameter
+	 * 
+	 * @param message : the message that has to be print.
+	 */
+	public void printMessage(String message) {
+		output.println(message);
+	}
+	
+	
+	
+	/**
+	 * Prints on the output stream a welcome message for the client.
+	 */
 	public void welcomeMessage() {
 		output.println("==========================================================================");
 		output.println("==========================================================================");
@@ -41,8 +71,17 @@ public class ConsoleView implements View {
 	
 	
 	
+	/**
+	 * Gets the game mode in which the client wants to play the game.
+	 * The client can choose between:
+	 * <ul>
+	 * <li>Basic game mode</li>
+	 * <li>Advanced game mode</li>
+	 * </ul>
+	 * 
+	 * @return a string containing the game mode chosen by the client.
+	 */
 	public String getGameMode() {
-		
 		output.println("==========================================================================");
 		output.println("In which game mode do you want to play?");
 		output.println("1. Basic");
@@ -56,8 +95,12 @@ public class ConsoleView implements View {
 	
 	
 	
+	/**
+	 * Gets the username that the client wants to use for the game.
+	 * 
+	 * @return username : the username received by input from the client.
+	 */
 	public String getPlayerUserame() {
-		
 		output.println("==========================================================================");
 		output.println("What is your username?");
 		String username = input.stringFromConsole();	
@@ -66,8 +109,10 @@ public class ConsoleView implements View {
 	
 	
 	
+	/**
+	 * Prints on the output stream the game oder that will be used during the first round of the game.
+	 */
 	public void showInitialOrder() {
-		
 		output.println("==========================================================================");
 		output.println("The initial game order will be:");
 		int position = 1;
@@ -80,6 +125,13 @@ public class ConsoleView implements View {
 	
 	
 	
+	/**
+	 * Gets the color that the client wants to use for the game. The color can be chosen from a list of colors
+	 * that is received as parameter.
+	 * 
+	 * @param colors : a list of colors from which the client can choose his color.
+	 * @return color : the color received by input from the client.
+	 */
 	public String getPlayerColor(ArrayList<String> colors) {
 		output.println("==========================================================================");
 		output.println("Which color do you want?");
@@ -417,8 +469,8 @@ public class ConsoleView implements View {
 	
 	public void getServants() {
 		output.println("How many servants do you want to add to your family member?");
-		int servants = input.IntegerFromConsole(0, 50);
-		Integer aux = new Integer(servants);		
+		//int servants = input.IntegerFromConsole(0, 50);
+		//Integer aux = new Integer(servants);		
 	}
 	
 	public void printPlayerStatus() {
@@ -461,8 +513,7 @@ public class ConsoleView implements View {
 	
 	public void showNextTurnOrder() {
 		output.println("==========================================================================");
-		output.println("The game order for the next round will be:" + i);
-		i++;
+		output.println("The game order for the next round will be:");
 		int position = 1;
 		
 		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){

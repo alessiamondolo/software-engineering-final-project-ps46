@@ -7,7 +7,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Observable;
 
 public class VirtualView extends View {
@@ -114,6 +113,10 @@ public class VirtualView extends View {
 				writer.flush();
 				try {
 					String gameMode = (String) reader.readObject();
+					if(gameMode == "ADVANCED_GAME_MODE") {
+						setChanged();
+						notifyObservers(new EventMessage(NewStateMessage.ADVANCED_GAME_MODE));
+					}
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
