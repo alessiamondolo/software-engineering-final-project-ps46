@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps46.server;
 
-import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.card.IncreaseResourcesEffect;
 
 /**
  * This Class represents the structure of all the boxes of the board, it's called actionSpace because is the space where you can put your family member..
@@ -12,10 +12,11 @@ public class ActionSpace {
 	private static int IDACTIONSPACE = 0;
 	private int idLocalActionSpaces = 0;
 	private String type;
-	private Effect effectOfActionSpace;
+	private IncreaseResourcesEffect effectOfActionSpace;
 	private Dice requiredFamilyMemberValue;
 	private boolean available = true;
 	private Boolean maxOnePlayer;
+	private String playerColor = "";
 
 	
 	/** 
@@ -26,11 +27,10 @@ public class ActionSpace {
 	 * @param totNumberSpot 
 	 */
 	
-	public ActionSpace(Dice familyMembervalue, Boolean maxOnePlayer, Effect effectOfActionSpace) {
+	public ActionSpace(Dice familyMembervalue, Boolean maxOnePlayer, IncreaseResourcesEffect effectOfActionSpace) {
 		
 		setIdLocalActionSpaces(IDACTIONSPACE);
 		IDACTIONSPACE ++;
-		familyMembervalue = new Dice();
 		this.effectOfActionSpace = effectOfActionSpace;
 		requiredFamilyMemberValue = familyMembervalue;
 		this.maxOnePlayer = maxOnePlayer; 
@@ -108,12 +108,24 @@ public class ActionSpace {
 		return idLocalActionSpaces;
 	}
 	
-	public Effect getEffectOfActionSpace() {
+	public IncreaseResourcesEffect getEffectOfActionSpace() {
 		return effectOfActionSpace;
 	}
 
 	public void setIdLocalActionSpaces(int idLocalActionSpaces) {
 		this.idLocalActionSpaces = idLocalActionSpaces;
+	}
+
+
+
+	public String getPlayerColor() {
+		return playerColor;
+	}
+
+
+
+	public void setPlayerColor(String playerColor) {
+		this.playerColor = playerColor;
 	}
 	
 }

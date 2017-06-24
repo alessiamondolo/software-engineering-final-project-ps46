@@ -32,9 +32,11 @@ public class Game extends Observable {
 	private int currentRound = 0;
 	private int currentPeriod = 1;
 	
+	private boolean advancedMode = false;
+	
 	private int numberPlayers; 
-	private List<Player> players;
-	private List<Player> nextTurnOrder = new ArrayList<Player>();
+	private ArrayList<Player> players;
+	private ArrayList<Player> councilPalaceOrder = new ArrayList<Player>();
 	private Player currentPlayer;
 	private Board board;
 	private ArrayList<TerritoryCard> territoryCardsDeck;
@@ -143,6 +145,10 @@ public class Game extends Observable {
 	public int getCurrentRound() {
 		return currentRound;
 	}
+	
+	public boolean getAdvancedMode() {
+		return advancedMode;
+	}
 
 	public Dice getDice(String color) {
 		return dice.get(color);
@@ -199,20 +205,25 @@ public class Game extends Observable {
 	}
 	
 
-	public List<Player> getNextTurnOrder() {
-		return nextTurnOrder;
+	public ArrayList<Player> getCouncilPalaceOrder() {
+		return councilPalaceOrder;
 	}
 //--------------------------------------------------//
 //----------------END OF GET METHODS----------------//
 //--------------------------------------------------//
 
+	
 	public void startGame() {
 		newState(new EventMessage(NewStateMessage.START_GAME));
 	}
 	
+	public void setAdvancedMode() {
+		advancedMode = true;
+	}
 	
 	public void setNextTurnOrder(ArrayList<Player> nextTurnOrder) {
-		this.nextTurnOrder = nextTurnOrder;
+		players = nextTurnOrder;
+		newState(new EventMessage(NewStateMessage.SET_NEXT_TURN_ORDER));
 	}
 
 
@@ -240,7 +251,7 @@ public class Game extends Observable {
             	JSONArray resourceSetJSON = (JSONArray) resourcesIterator.next();
                 initialResources = myJSONParser.buildResourceSet(resourceSetJSON);
                 Player currentPlayer = playersIterator.next();
-                currentPlayer.setResources(initialResources);
+                currentPlayer.getPersonalBoard().setResources(initialResources);
             }
             
 		} catch (FileNotFoundException e) {
@@ -265,6 +276,10 @@ public class Game extends Observable {
 		for(String key : dice.keySet())
 			dice.get(key).throwDice();
 		newState(new EventMessage(NewStateMessage.THROWN_DICE));
+	}
+	
+	public void addToCouncilPalaceOrder(Player player) {
+		councilPalaceOrder.add(player);
 	}
 
 	public void setGameState(GameState gameState) {

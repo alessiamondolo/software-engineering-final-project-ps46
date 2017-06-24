@@ -1,17 +1,19 @@
-package it.polimi.ingsw.ps46.server;
+package it.polimi.ingsw.ps46.client;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Observable;
 
+import it.polimi.ingsw.ps46.server.ActionSpaceName;
+import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.utils.ReadInput;
 
 
-public class ConsoleView extends View {
+public class ConsoleView implements View {
 	
 	private ReadInput input;
 	private PrintStream output;
@@ -32,67 +34,6 @@ public class ConsoleView extends View {
 	}
 	
 	
-	public void update(Observable obs, Object obj) {
-		((EventAcceptor) obj).accept(this);
-	}
-	
-	
-	public void visit(EventMessage eventMessage) {
-		//output.println("Game state: " + game.getGameState().toString());
-		//output.println("Message: " + eventMessage.getMessage().toString());
-		switch(eventMessage.getMessage()) {
-		case START_GAME :
-			welcomeMessage();
-			getGameMode();
-			break;
-		case CHANGED_CURRENT_PLAYER :
-			GameState gameState = game.getGameState();
-			switch(gameState) {
-			case SETUP_PLAYERS_USERNAME :
-				getPlayerUsername(game.getCurrentPlayer().getIdPlayer());
-				break;
-			case SETUP_PLAYERS_COLOR :
-				getPlayerColor(game.getCurrentPlayer().getUsername());
-				break;
-			case GET_PLAYER_ACTION : 
-				printPlayerStatus();
-				String action = getPlayerAction().toString();
-				setChanged();
-				notifyObservers(new EventStringInput(action, InputType.PLAYER_ACTION));
-				getFamilyMember();
-				getServants();
-				break;
-			default:
-				break;
-			}
-			break;
-		case SET_INITIAL_ORDER :
-			showInitialOrder();
-			break;
-		case UPDATE_ROUND_INFO : 
-			updateRoundInfo();
-			break;
-		case THROWN_DICE :
-			printBoard();
-			break;
-		case SET_NEXT_TURN_ORDER :
-			showNextTurnOrder();
-			break;
-			/*
-		case UPDATE_CURRENT_PLAYER_STATE :
-			printPlayerStatus();*/
-		default:
-			break;
-		}
-	}
-
-
-
-
-	public void visit(EventMV eventMV) {
-	}
-	
-	
 	public void setGame(Game game) {
 		this.game = game;
 	}
@@ -103,37 +44,31 @@ public class ConsoleView extends View {
 		output.println("==========================================================================");
 		output.println("==========================================================================");
 		output.println("Welcome to the game Lorenzo Il Magnifico!");
-		setChanged();
-		notifyObservers(new EventMessage(NewStateMessage.GAME_STARTED));
 	}
 	
 	
 	
-	public void getGameMode() {
+	public String getGameMode() {
 		
 		output.println("==========================================================================");
 		output.println("In which game mode do you want to play?");
 		output.println("1. Basic");
 		output.println("2. Advanced");
 		int gameMode = input.IntegerFromConsole(1, 2);
-		if (gameMode == 2) {
-			setChanged();
-			notifyObservers(new EventMessage(NewStateMessage.ADVANCED_GAME_MODE));
-		}
-		
+		if (gameMode == 1)
+			return "BASIC_GAME_MODE";
+		else
+			return "ADVANCED_GAME_MODE";
 	}
 	
 	
 	
-	public void getPlayerUsername(int id) {
+	public String getPlayerUserame(int id) {
 		
 		output.println("==========================================================================");
 		output.println("Player " + id + ": what is your username?");
-		String username = input.stringFromConsole();
-		
-		setChanged();
-		notifyObservers(new EventStringInput(username, InputType.PLAYER_USERNAME));
-		
+		String username = input.stringFromConsole();	
+		return username;
 	}
 	
 	
@@ -149,9 +84,6 @@ public class ConsoleView extends View {
 			output.println(position + ". " + player.getUsername());
 			position++;
 		}
-		
-		setChanged();
-		notifyObservers(new EventMessage(NewStateMessage.SET_INITIAL_ORDER));
 	}
 	
 	
@@ -471,17 +403,17 @@ public class ConsoleView extends View {
 	public void getFamilyMember() {
 		output.println("Which family member do you want to use?");
 		int index = 1;
-		for(String key : game.getCurrentPlayer().getFamilyMembersMap().keySet()) {
-			if(!game.getCurrentPlayer().getFamilyMembersMap().get(key).isUsed()) {
+		for(String key : game.getCurrentPlayer().getFamilyMembers().keySet()) {
+			if(!game.getCurrentPlayer().getFamilyMembers().get(key).isUsed()) {
 				output.println(index + ". " + key);
 				index++;
 			}
 		}
 		
-		int choice = input.IntegerFromConsole(1, game.getCurrentPlayer().getFamilyMembersMap().size());
+		int choice = input.IntegerFromConsole(1, game.getCurrentPlayer().getFamilyMembers().size());
 		index = 1;
 		String color = null;
-		for(String key : game.getCurrentPlayer().getFamilyMembersMap().keySet()) {
+		for(String key : game.getCurrentPlayer().getFamilyMembers().keySet()) {
 			if(index == choice) {
 				color = key;
 				break;
@@ -491,21 +423,12 @@ public class ConsoleView extends View {
 		}
 		
 		output.println("You chose the " + color + " family member.");
-		setChanged();
-		notifyObservers(new EventStringInput(color, InputType.FAMILY_MEMBER_CHOICE));
 	}
 	
 	public void getServants() {
 		output.println("How many servants do you want to add to your family member?");
 		int servants = input.IntegerFromConsole(0, 50);
-		Integer aux = new Integer(servants);
-		
-		setChanged();
-		notifyObservers(new EventStringInput(aux.toString(), InputType.SERVANTS_USED));
-		
-		setChanged();
-		notifyObservers(new EventMessage(NewStateMessage.ACTION_SENT));
-		
+		Integer aux = new Integer(servants);		
 	}
 	
 	public void printPlayerStatus() {
@@ -546,7 +469,7 @@ public class ConsoleView extends View {
 	}
 	
 	
-	private void showNextTurnOrder() {
+	public void showNextTurnOrder() {
 		output.println("==========================================================================");
 		output.println("The game order for the next round will be:" + i);
 		i++;
@@ -556,11 +479,7 @@ public class ConsoleView extends View {
 			Player player=iterator.next();
 			output.println(position + ". " + player.getUsername());
 			position++;
-		}
-		
-		setChanged();
-		notifyObservers(new EventMessage(NewStateMessage.SET_NEXT_TURN_ORDER));
-		
+		}		
 	}
-	
+
 }

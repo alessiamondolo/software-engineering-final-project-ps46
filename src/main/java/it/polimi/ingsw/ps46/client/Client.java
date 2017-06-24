@@ -1,56 +1,61 @@
 package it.polimi.ingsw.ps46.client;
 
-import java.util.Scanner;
+import java.io.PrintStream;
+
+import it.polimi.ingsw.ps46.utils.ReadInput;
 
 public class Client {
 
-	private String serverIP;
-	private Integer serverPort;
-	private String connectionType;
-	private String userInterfaceType;
+	private static PrintStream printStream = System.out;
+	private static ReadInput readInput = new ReadInput();
+	private static final String SERVER_IP = "127.0.0.1";
+	private static final int SERVER_PORT = 1025;
+	private static String connectionType;
+	private static String userInterfaceType;
 	
 
-	public Client(String ip, int port, String connectionType, String userInterfaceType) {
-		serverIP = ip;
-		serverPort = port;
-		this.connectionType = connectionType;
-		this.userInterfaceType = userInterfaceType;
-		
-	}
-	
 	public static void main(String[] args) {
 		
-		//We assume that the user already knows the IP and port of the server, that will be passed as arguments for the main
-		if (args.length != 2){
-			throw new IllegalArgumentException("You need to input the IP address and Port number of the server.");
+		printStream.println("How do you want to connect to the server?");
+		printStream.println("1. Sockets");
+		printStream.println("2. RMI");
+		int networkTechnology = readInput.IntegerFromConsole(1, 2);
+		switch(networkTechnology) {
+		case 1:
+			connectionType = "Sockets";
+			break;
+		case 2 :
+			connectionType = "RMI";
+			break;
 		}
 		
-		//First, we ask the user which type of connection he prefers
-		System.out.println("Do you want to connect to the server with Sockets or RMI?");
-		Scanner in = new Scanner(System.in);
-		String connectionType = in.nextLine();
-		while(!connectionType.equals("Sockets") || !connectionType.equals("RMI")) {
-			System.err.println("The answer is not valid, please try again.");
-			connectionType = in.nextLine();
-		}
 		
-		//Second, we ask the user which type of User Interface he wants
-		System.out.println("Do you want to play the game with the GUI or through the CLI?");
-		String userInterfaceType = in.nextLine();
-		while(!userInterfaceType.equals("GUI") || !userInterfaceType.equals("CLI")) {
-			System.err.println("The answer is not valid, please try again.");
-			connectionType = in.nextLine();
+		printStream.println("Do you want to play with the CLI or with the GUI?");
+		printStream.println("1. CLI");
+		printStream.println("2. GUI");
+		int UI = readInput.IntegerFromConsole(1, 2);
+		switch(UI) {
+		case 1:
+			userInterfaceType = "CLI";
+			break;
+		case 2 :
+			userInterfaceType = "GUI";
+			break;
 		}
-        in.close();
         
-		Client client = new Client(args[0], Integer.parseInt(args[1]), connectionType, userInterfaceType);
-		
+		Client client = new Client();
 		client.init();
 
 	}
 	
 	private void init() {
-		
+		switch(connectionType) {
+		case "Sockets" :
+			SocketClient socketClient = new SocketClient(SERVER_IP, SERVER_PORT);
+			Thread clientThread = new Thread(socketClient);
+			clientThread.start();
+			break;
+		}
 	}
 
 }

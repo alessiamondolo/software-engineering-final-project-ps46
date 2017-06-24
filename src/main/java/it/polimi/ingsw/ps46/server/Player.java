@@ -5,15 +5,12 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import it.polimi.ingsw.ps46.server.card.BuildingCard;
-import it.polimi.ingsw.ps46.server.card.CharacterCard;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesAtFinalMalus;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
 import it.polimi.ingsw.ps46.server.card.GenericMalusEffect;
-import it.polimi.ingsw.ps46.server.card.LeaderCard;
-import it.polimi.ingsw.ps46.server.card.TerritoryCard;
-import it.polimi.ingsw.ps46.server.card.VentureCard;
+//import it.polimi.ingsw.ps46.server.card.LeaderCard;
+
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
@@ -27,22 +24,12 @@ public class Player {
 	private int idPlayer;
 	private String username;
 	private String color;
-	private ResourceSet playerResources;
-
-	private ArrayList<TerritoryCard> territoryCards;
-	private ArrayList<VentureCard> ventureCards;
-	private ArrayList<BuildingCard> buildingCards;
-	private ArrayList<CharacterCard> characterCards;
 	
-	private ArrayList<LeaderCard> leaderCards;  //TODO completare tutta la lista delle carte i suoi effetti ecc ecc
+	// private ArrayList<LeaderCard> leaderCards;  //TODO completare tutta la lista delle carte i suoi effetti ecc ecc
 	
-	private PersonalBoard playerPersonaBoard;
+	private PersonalBoard personalBoard;
 	
 	private Map <String,FamilyMember> familyMembers;
-	
-	//private final static int MAXOFFAMILYMEMBERS = 4;
-	private final static int MAXNUMBEROFCARDS = 6;
-
 	private Map<String, Dice> bonus;
 	private Map<String, ResourceSet> discount;
 	private Map<String, ResourceSet> optionalDiscount;
@@ -66,28 +53,25 @@ public class Player {
 		
 		this.idPlayer = idPlayer; 
 		
-		playerResources = new ResourceSet();
+		/*playerResources = new ResourceSet();
 
 		territoryCards = new ArrayList<TerritoryCard>();
 		ventureCards = new ArrayList<VentureCard>();
 		buildingCards = new ArrayList<BuildingCard>();
 		characterCards = new ArrayList<CharacterCard>();
 		leaderCards = new ArrayList<LeaderCard>();
-
+		*/
 		
 		familyMembers = new LinkedHashMap<String,FamilyMember>();
 		familyMembers.put("White", new FamilyMember("White"));
 		familyMembers.put("Black", new FamilyMember("Black"));
 		familyMembers.put("Orange", new FamilyMember("Orange"));
 		familyMembers.put("Neutral", new FamilyMember("Neutral"));
-		/*
-		for (int i = 0; i < MAXOFFAMILYMEMBERS; i++)
-		{
-			String xConfigurationColorOftheFamilyMember= "WHITE FAMILY MEMBER";
-			FamilyMember yConfigurationFamilyMember = new FamilyMember();
-			familyMembers.put(xConfigurationColorOftheFamilyMember, yConfigurationFamilyMember);
-		}
-		*/
+		
+		//TODO parsing del file personalboard
+		FactoryBoard factoryBoard = FactoryBoard.getFactoryBoard();
+		personalBoard = factoryBoard.createPersonalBoard("PersonalBoard.json");
+		
 		int init = 0;
 		Dice initializationDice = new Dice(init);
 		bonus = new HashMap<String, Dice>();
@@ -139,7 +123,6 @@ public class Player {
 		return idPlayer;
 	}
 
-	
 	public String getUsername() {
 		return username;
 	}
@@ -148,118 +131,8 @@ public class Player {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
-	
-	//--------------------------------------------------//
-	//-------------BEGIN METHODS FOR CARDS--------------//
-	//--------------------------------------------------//
-	
-	/**
-	 * Sets a value to attribute territoryCards. 
-	 * @param newTerritoryCards 
-	 */
-	public void putTerritoryCardInPlayerSet(TerritoryCard newTerritoryCard) { //eccezione?!
-		if (territoryCards.size() < MAXNUMBEROFCARDS)
-		{
-			territoryCards.add(newTerritoryCard);
-		}
-		//else ECCEZIONE?! return -1 ?boh	
-			
-	}
-	
-	public void putCharacterCardInPlayerSet(CharacterCard newCharacterCard) { //eccezione?!
-		if (characterCards.size() < MAXNUMBEROFCARDS)
-		{
-			characterCards.add(newCharacterCard);
-		}
-		// else ECCEZIONE?! return -1 ?boh	
-			
-	}
-		
-	public void putVentureCardInPlayerSet(VentureCard newVentureCard) { //eccezione?!
-		if (ventureCards.size() < MAXNUMBEROFCARDS)
-		{
-			ventureCards.add(newVentureCard);
-		}
-		//else ECCEZIONE?! return -1 ?boh	
-			
-	}
-	
-	
-	public void putBuildingCardInPlayerSet(BuildingCard newBuildingCard) { //eccezione?!
-		if (buildingCards.size() < MAXNUMBEROFCARDS)
-		{
-			buildingCards.add(newBuildingCard);
-		}
-		// else ECCEZIONE?! return -1 ?boh	
-			
-	}
-
-	
-	/**
-	 * Returns territoryCards.
-	 * @return territoryCards 
-	 */
-	
-	public ArrayList<TerritoryCard> getTerritoryDeck()
-	{
-		return territoryCards;
-		
-	}
 
 
-	/**
-	 * Returns ventureCards.
-	 * @return ventureCards 
-	 */
-	public ArrayList<VentureCard> getVentureDeck()
-	{
-		return ventureCards;
-	}
-	
-	/**
-	 * Returns buildingCards.
-	 * @return buildingCards 
-	 */
-	public ArrayList<BuildingCard> getBuildingDeck()
-	{
-		return buildingCards;
-		
-	}
-	
-	/**
-	 * Returns characterCards.
-	 * @return characterCards 
-	 */
-	public ArrayList<CharacterCard> getCharacterDeck()
-	{
-		return characterCards;
-		
-	}
-
-
-	/**
-	 * Returns resources.
-	 * @return resources 
-	 */
-	public ResourceSet getPlayerResourceSet() {
-		return playerResources;
-	}
-
-	/**
-	 * Setter of the Resources.
-	 * @param resources 
-	 */
-	public void setResources(ResourceSet resources) {
-		playerResources = resources;
-	}
-	
-	//--------------------------------------------------//
-	//-------------END METHODS FOR CARDS----------------//
-	//--------------------------------------------------//
-	
-	
 	
 	//FAMILY MEMBER - GETTER AND SETTER//
 	////////////////////////////////////
@@ -329,9 +202,7 @@ public class Player {
 		else {
 			
 			discount.put(discountKey, valueDiscount);
-
 		}
-	
 	}
 	
 	
@@ -358,7 +229,8 @@ public class Player {
 		}
 
 	
-	//PREACHER - GETTER AND SETTER
+	//PREACHER - GETTER AND SETTER//
+	///////////////////////////////
 
 	public boolean isPreacherEffect() {
 		return preacherEffect;
@@ -369,32 +241,15 @@ public class Player {
 	}
 
 	
-	//LEADER CARDS - GETTER AND SETTER//
-	///////////////////////////////////
+	//PERSONAL BOARD - GETTER AND SETTER//
+	/////////////////////////////////////
 
-	/**
-	 * Getter of the attribute leaderCards.
-	 * return leaderCard
-	 * @return leaderCards
-	 */
-	public ArrayList<LeaderCard> getLeaderCards() {
-		return leaderCards;
+	public PersonalBoard getPersonalBoard() {
+		return personalBoard;
 	}
-	
-	/**
-	 * Setter of the attribute leaderCards.
-	 * @param leaderCard
-	 */
-	public void setLeaderCards(LeaderCard leaderCard) {
-		leaderCards.add(leaderCard);
-	}
-	
-	
-	//PERSONAL BOARD - GETTER//
-	//////////////////////////
-	
-	public PersonalBoard getPlayerPersonaBoard() {
-		return playerPersonaBoard;
+
+	public void setPersonalBoard(PersonalBoard personalBoard) {
+		this.personalBoard = personalBoard;
 	}
 	
 	

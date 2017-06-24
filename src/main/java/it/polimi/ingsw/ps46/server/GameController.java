@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
@@ -39,8 +40,12 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	public void visit(EventMessage eventMessage) {
 		switch(eventMessage.getMessage()) {
+		case ADVANCED_GAME_MODE :
+			game.setAdvancedMode();
+			break;
 		case ACTION_SENT :
 			startAction();
+			break;
 		default:
 			break; 
 			
@@ -184,20 +189,18 @@ public class GameController implements Observer, ViewEventVisitor {
 					card = game.getTerritoryCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
 					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
 					break;
-				//TODO da scommentare quando il parsing di tutte le carte funziona
-				/*
 				case 1 : //Second Tower
 					card = game.getCharacterCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
 					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
-					break; */
+					break; 
 				case 2 : //Third tower
 					card = game.getBuildingCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
 					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
-					break;/*
+					break;
 				case 3 : //Fourth tower
 					card = game.getVentureCardsDeck().get(((floor)+4*(game.getCurrentRound()-1)));
 					game.getBoard().getTower(tower).getTowerFloor(floor).setCard(card);
-					break;*/
+					break;
 				}
 			}
 			
@@ -263,7 +266,21 @@ public class GameController implements Observer, ViewEventVisitor {
 	 * 
 	 */
 	private void endRound() {
-		// TODO Auto-generated method stub
+		//Remove all the all the faceup Development Cards from the board
+		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
+			for (int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
+				game.getBoard().getTower(tower).getTowerFloor(floor).setCard(null);
+			}
+		}
+		
+		//Change the Turn Order following the order of the Family Members placed in the Council Palace.
+		ArrayList<Player> councilPalaceOrder = game.getCouncilPalaceOrder();
+		if(councilPalaceOrder.size() < game.getNumberPlayers())
+			for(Player player : game.getPlayers()) {
+				if(!councilPalaceOrder.contains(player))
+					councilPalaceOrder.add(player);
+			}
+		game.setNextTurnOrder(councilPalaceOrder);
 	}
 
 }

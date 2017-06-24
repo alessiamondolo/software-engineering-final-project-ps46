@@ -49,7 +49,8 @@ public class IncreaseResourcesEffect implements Effect {
 		}
 		// POSSIBILE MILGIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
 		//player resources 2 ; increase +1; decrease -2 ===> risultato 3; 
-		game.getCurrentPlayer().getPlayerResourceSet().add(additionalResources);
+		
+		game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(additionalResources);
 	}
 	
 	public String toString() {

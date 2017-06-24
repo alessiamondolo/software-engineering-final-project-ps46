@@ -21,7 +21,7 @@ public class ExchageResourcesEffect implements Effect { // ho cambiato gli attri
 
 	public void activateEffect(Game game) {
 		if(canBeActivated(game)) {
-			game.getCurrentPlayer().getPlayerResourceSet().sub(requiredResources);
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(requiredResources);
 	
 			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
 			{
@@ -34,13 +34,14 @@ public class ExchageResourcesEffect implements Effect { // ho cambiato gli attri
 			}
 			// POSSIBILE MILGIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
 			//player resources 2 ; increase +1; decrease -2 ===> risultato 3; 
-			game.getCurrentPlayer().getPlayerResourceSet().add(gainedResources);
+			
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(gainedResources);
 		}
 		//else throw exception - NotActivableEffect
 	}
 	
 	public boolean canBeActivated(Game game) {
-		return(game.getCurrentPlayer().getPlayerResourceSet().greaterOrEqual(requiredResources));
+		return(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().greaterOrEqual(requiredResources));
 	}
 
 }

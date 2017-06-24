@@ -34,24 +34,25 @@ public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 		
 		switch (type) {
 		case "BuildingCards":
-			numberOfElements = game.getCurrentPlayer().getBuildingDeck().size();
+			numberOfElements = game.getCurrentPlayer().getPersonalBoard().getBuildingDeck().size();
 			break;
 			
 		case "VentureCards":
-			numberOfElements = game.getCurrentPlayer().getVentureDeck().size();
+			numberOfElements = game.getCurrentPlayer().getPersonalBoard().getVentureDeck().size();
 			break;
 		
 		case "CharactersCards":
-			numberOfElements = game.getCurrentPlayer().getCharacterDeck().size();
+			numberOfElements = game.getCurrentPlayer().getPersonalBoard().getCharacterDeck().size();
 			break;
 			
 		case "TerritoryCards":
-			numberOfElements = game.getCurrentPlayer().getTerritoryDeck().size();
+			numberOfElements = game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().size();
 			break;
 			
 		case "MilitaryPoints":
-			numberOfElements = game.getCurrentPlayer().getPlayerResourceSet().getResourcesMap().get(type).getQuantity();
+			numberOfElements = game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get(type).getQuantity();
 			numberOfElements /= 2 ;  // come gestire sto numero?
+
 			break;
 			
 		default:
@@ -65,6 +66,7 @@ public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 				quantity = quantity * numberOfElements;
 				resourceSet.getResourcesMap().get(key).setQuantity(quantity);
 			}
+			
 			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
 			{
 				for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
@@ -76,7 +78,8 @@ public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 			}
 			// POSSIBILE MILGIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
 			//player resources 2 ; increase +1; decrease -2 ===> risultato 3;
-			game.getCurrentPlayer().getPlayerResourceSet().add(resourceSet);
+			
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(resourceSet);
 	}
 	
 	

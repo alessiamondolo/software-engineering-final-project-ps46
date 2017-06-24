@@ -5,13 +5,16 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-
-//card layout dopo per navigare tra le varie dashboard giocatore
 
 /**
  * A dashboard that allows the player to visualizes resources and cards. 
@@ -23,22 +26,26 @@ public class PlayerDashboard extends JPanel{
 
 	private String playerUsername;
 	private Dimension dashboardDimension;
+	private double dashboardHeight;
+	private double dashboardWidth;
+	private double bonusTileWidth;
 	
 	public PlayerDashboard(String playerUsername, Dimension playerAreaDimension) {
 		
-		double dashBoardHeight = (playerAreaDimension.getHeight()*8)/28;
-		double dashBoardWidth = (playerAreaDimension.getWidth()*12)/13;
+		this.dashboardHeight = (playerAreaDimension.getHeight()*8)/28;
+		this.dashboardWidth = (playerAreaDimension.getWidth()*12)/13;
+		this.bonusTileWidth = (playerAreaDimension.getWidth()*3)/65;
 		
-		this.dashboardDimension = new Dimension((int) dashBoardWidth, (int) dashBoardHeight);
+		this.dashboardDimension = new Dimension((int) dashboardWidth, (int) dashboardHeight);
 		
-		System.out.println(String.valueOf(dashBoardHeight));
-		System.out.println(String.valueOf(dashBoardWidth));
+		System.out.println(String.valueOf(dashboardHeight));
+		System.out.println(String.valueOf(dashboardWidth));
 		
 		this.playerUsername = playerUsername;
 		
-		this.add(createDashboard());
-		
-		
+		this.add(createBonusTile());
+		this.add(createDashboard());  //devo passare il game per saper se sono avanzato o no
+			
 	}
 
 	/**
@@ -48,65 +55,108 @@ public class PlayerDashboard extends JPanel{
 	
 	private JPanel createDashboard() {
 		
-		//la prima cosa da fare è strutturare il gridbaglayout
-		
 		JPanel dashboard = new JPanel();
 		dashboard.setPreferredSize(dashboardDimension);
 		GridBagLayout gbl = new GridBagLayout();
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
 		dashboard.setBorder(border);
-		
-		
-		dashboard.setLayout(new GridBagLayout());
+		dashboard.setLayout(gbl);
 		GridBagConstraints gbc = new GridBagConstraints();
-		
-		
-		
-		
-		
-		
-		
-	
-		
-		
-		
-		//La image prenderà solo tot posti della griglia in quanto ci sono a destra altre carte viola e blu
-
-		
-		
-		//dashboardImage.setIcon(returndashboardImage(boardDimension));
-		//
-		/*gbc = new GridBagConstraints();
+		JLabel dashboardImage = new JLabel();
+		 
 		gbc.fill = GridBagConstraints.BOTH;  
-		gbc.gridwidth = 23;
-		gbc.gridheight = 33;
+		gbc.ipadx = 0;
+		gbc.ipady = 0;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		
+		for (int i = 0; i < 96; i++) {
+			
+			//JLabel di prova per fare la griglia 
+			JLabel l = new JLabel();
+			//l.setPreferredSize(new Dimension(20, 20));
+			Border b1 = BorderFactory.createLineBorder(Color.BLACK, 1);
+			l.setBorder(b1);
+			
+			if ( 0 <= i && i < 12 ) {
+				gbc.gridx = i;
+				gbc.gridy = 0;	
+			} else if ( 12 <= i && i < 24 ) {
+				gbc.gridx = i - 12;
+				gbc.gridy = 1;
+			} else if ( 24 <= i && i < 36 ) {
+				gbc.gridx = i - 24;
+				gbc.gridy = 2;
+			} else if ( 36 <= i && i < 48) {
+				gbc.gridx = i - 36;
+				gbc.gridy = 3;
+			} else if ( 48 <= i && i < 60) {
+				gbc.gridx = i - 48;
+				gbc.gridy = 4;
+			} else if ( 60 <= i && i < 72) {
+				gbc.gridx = i - 60;
+				gbc.gridy = 5;
+			} else if ( 72 <= i && i < 84 ) {
+				gbc.gridx = i - 72;
+				gbc.gridy = 6;
+			} else if ( 84 <= i && i < 96 ) {
+				gbc.gridx = i - 84;
+				gbc.gridy = 7;
+			} 
+			
+			dashboard.add(l, gbc);
+		}
+		
+		dashboardImage.setIcon(returndashboardImage());
+		
+		gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;  
+		gbc.gridwidth = 12;
+		gbc.gridheight = 8;
 		gbc.weightx = 1;
 		gbc.weighty = 1;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		panel.add(dashboardImage, gbc);*/
+		dashboard.add(dashboardImage, gbc);
 		
-		return dashboard;
+		return dashboard;	
+	}
+	
+	private ImageIcon returndashboardImage() {
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(getClass().getResource("img/dashboard/dashboard.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
+		Image img = image.getScaledInstance((int) (dashboardWidth/2 - 5), (int) dashboardHeight, Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(img);
+
+		return imageIcon;
+	}
+	
+	private JLabel createBonusTile() {
+		
+		JLabel bonusTile = new JLabel();
+		
+		//if (game == basic) 	TODO
+		
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(getClass().getResource("img/mixed/personalbonustile_1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
+		Image img = image.getScaledInstance((int) bonusTileWidth, (int) dashboardHeight, Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(img);
+		bonusTile.setIcon(imageIcon);
+
+		return bonusTile;
 		
 	}
 	
-	/*	private ImageIcon returndashboardImage(Dimension boardDimension) {
-	
-	 BufferedImage image = null;
-	try {
-		image = ImageIO.read(getClass().getResource("gameboard.png"));
-	} catch (IOException e) {
-		
-		e.printStackTrace();
-	}
-	Image img = image.getScaledInstance((int) boardDimension.getWidth(), (int) boardDimension.getHeight(), Image.SCALE_SMOOTH);
-	//Image img = image.getScaledInstance(471, 650, Image.SCALE_SMOOTH);
-	
-	ImageIcon imageIcon = new ImageIcon(img);
-   String path = this.getClass().getClassLoader().getResource("gameboard.png").toExternalForm();
-	System.out.println(path);
-   
-	return imageIcon;
-	
-}*/
 }
