@@ -40,11 +40,10 @@ public class MoveToActionSpaceAction implements Action {
 	 * 		- it it is a market action space, it launches the market space action;
 	 * 		- if it is a council action space, it launches a council space action.
 	 */
-	public void execute() {
+	public boolean execute() {
 		
-		System.out.println("I'm inside the action with " + servants + " servants.");
+		System.out.println("I'm inside the action with the " + familyMember.getColor() + " family member and " + servants + " servants.");
 		
-		/*
 		if(isLegal()) {
 			//Sets the action space as not available
 			//TODO check modifications to this method
@@ -60,30 +59,26 @@ public class MoveToActionSpaceAction implements Action {
 				}
 				case "ProductionActionSpace" : {
 					Action nextAction = new ActivateProductionAction();
-					nextAction.execute();
-					break;
+					return nextAction.execute();
 				}
 				case "HarvestActionSpace" : {
 					Action nextAction = new ActivateHarvestAction();
-					nextAction.execute();
-					break;
+					return nextAction.execute();
 				}
 				case "MarketActionSpace" : {
 					//Effect getFromMarket = new IncreaseResourcesEffect(actionSpace.getResources());
-					break;
+					return false;
 				}
 				case "CouncilActionSpace" : {
 					Action nextAction = new CouncilAction();
-					nextAction.execute();
-					break;
+					return nextAction.execute();
 				}
-				default : //throw new Exception: notExistingActionSpace
-					break;				
+				default : 
+					return false;		
 			}
 		}
-		else {
-			//throw Exception illigal action
-		}*/
+		
+		return false;
 
 	}
 

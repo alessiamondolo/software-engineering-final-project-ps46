@@ -18,7 +18,7 @@ public class GameController implements Observer, ViewEventVisitor {
 
 	private Game game;
 	
-	private String actionName = null;
+	private int actionSpaceID = 0;
 	private String familyMemberName = null;
 	private int servants = 0;
 
@@ -60,15 +60,23 @@ public class GameController implements Observer, ViewEventVisitor {
 		case PLAYER_COLOR : 
 			game.getCurrentPlayer().setColor(eventStringInput.getString());
 			break;
-		case PLAYER_ACTION :
-			actionName = eventStringInput.getString();
-			break;
 		case FAMILY_MEMBER_CHOICE :
 			familyMemberName = eventStringInput.getString();
 			break;
+		default:
+			break;
+		}
+	}
+	
+	
+	
+	public void visit(EventIntInput eventIntInput) {
+		switch(eventIntInput.getType()) {
+		case PLAYER_ACTION :
+			actionSpaceID = eventIntInput.getValue();
+			break;
 		case SERVANTS_USED : 
-			//TODO temporaneo
-			servants = 1;
+			servants = eventIntInput.getValue();
 			break;
 		default:
 			break;
@@ -221,26 +229,27 @@ public class GameController implements Observer, ViewEventVisitor {
 	 * 
 	 */
 	private void startAction() {
+		Player player = game.getCurrentPlayer();
+		
 		FamilyMember familyMember = game.getCurrentPlayer().getFamilyMember(familyMemberName);
+		
 		ActionSpace actionSpace = null;
-		switch(actionName) {
-		case "GREEN_TOWER_FLOOR_1" : 
-			actionSpace = game.getBoard().getTower(1).getTowerFloor(1).getActionSpace();
-			break;
-		case "GREEN_TOWER_FLOOR_2" : 
-			actionSpace = game.getBoard().getTower(1).getTowerFloor(2).getActionSpace();
-			break;
-		case "GREEN_TOWER_FLOOR_3" : 
-			actionSpace = game.getBoard().getTower(1).getTowerFloor(3).getActionSpace();
-			break;
-		case "GREEN_TOWER_FLOOR_4" : 
-			actionSpace = game.getBoard().getTower(1).getTowerFloor(4).getActionSpace();
-			break;
-		
+		if(actionSpaceID <= (game.getBoard().getNumberOfTowers() * game.getBoard().getTower(0).getNumberOfFloors())) {
+			int tower = (actionSpaceID - 1) / game.getBoard().getNumberOfTowers();
+			System.out.println("Tower: " + tower);
+			int floor = (actionSpaceID - 1) % game.getBoard().getNumberOfTowers();
+			System.out.println("Floor: " + floor);
+			actionSpace = game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace();
 		}
-		
-		Action action = new MoveToActionSpaceAction(game, game.getCurrentPlayer(), familyMember, servants, actionSpace);
-		action.execute();
+		else {
+			actionSpace = game.getBoard().getBoardBox(actionSpaceID - (game.getBoard().getNumberOfTowers() * game.getBoard().getTower(0).getNumberOfFloors()));
+		}	
+		Action action = new MoveToActionSpaceAction(game, player, familyMember, servants, actionSpace);
+		boolean executed = action.execute();
+		if(!executed) {
+			game.setGameState(GameState.ACTION_NOT_VALID);
+			game.setCurrentPlayer(player);
+		}
 	}
 	
 	

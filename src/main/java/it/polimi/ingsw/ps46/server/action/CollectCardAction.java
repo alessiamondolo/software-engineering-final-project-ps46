@@ -21,7 +21,7 @@ public class CollectCardAction implements Action {
 	}
 	
 	@Override
-	public void execute() {
+	public boolean execute() {
 		if(isLegal()) {
 			
 			
@@ -29,6 +29,7 @@ public class CollectCardAction implements Action {
 		else {
 			//throw Exception illegal action
 		}
+		return false;
 	}
 
 	@Override

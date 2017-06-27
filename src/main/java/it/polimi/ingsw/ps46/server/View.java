@@ -26,10 +26,10 @@ public abstract class View extends Observable implements Observer, EventVisitor 
 	
 	public void printBoard() {
 	}
-
-	public ActionSpaceName getPlayerAction() {
-		return null;		
-	}
+	/*
+	public int getPlayerAction() {
+		return 0;		
+	}*/
 
 	public void printPlayerStatus(String username) {		
 	}

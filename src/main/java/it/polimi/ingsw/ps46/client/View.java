@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps46.client;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps46.server.ActionSpaceName;
 import it.polimi.ingsw.ps46.server.Game;
 
 
@@ -29,13 +28,23 @@ public interface View {
 	public void showInitialOrder();
 
 	public String getPlayerColor(ArrayList<String> colors);
+
+	public void updateRoundInfo();
 	
 	public void printBoard();
-
-	public ActionSpaceName getPlayerAction();
+	
+	public void printCurrentPlayer();
 
 	public void printPlayerStatus();
 
-	public void updateRoundInfo();
+	public int getPlayerAction();
+	
+	public String getFamilyMember();
+	
+	public int getServants();
+	
+	public void printPlayerAction();
+	
+	public void showNextTurnOrder();
 	
 }

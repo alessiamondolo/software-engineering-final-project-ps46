@@ -41,7 +41,11 @@ public class WaitingList {
 			ObjectInputStream reader = new ObjectInputStream(input);
 			readers.put(socket, reader);
 			
-			writers.get(socket).writeObject("You are now connected to the server.");
+			writer.writeObject("You are now connected to the server.");
+			writer.flush();
+			
+			writer.writeObject("STORE_YOUR_ID");
+			writer.writeObject(clients.size());
 			writer.flush();
 			
 			if(clients.size() == 1) {

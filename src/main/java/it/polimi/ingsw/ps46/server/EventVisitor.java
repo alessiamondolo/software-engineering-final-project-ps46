@@ -4,6 +4,4 @@ public interface EventVisitor {
 
 	void visit(EventMessage eventMessage);
 	
-	void visit(EventMV eventMV);
-
 }

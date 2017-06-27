@@ -21,6 +21,8 @@ import it.polimi.ingsw.ps46.server.Game;
  */
 public class SocketClient implements Runnable {
 	
+	private int clientID;
+	
 	private String serverIP;
 	private int serverPort;
 	
@@ -28,6 +30,8 @@ public class SocketClient implements Runnable {
 	private ObjectOutputStream writer;
 	
 	private View view;
+	
+	boolean listening = true;
 
 	
 	/**
@@ -63,26 +67,32 @@ public class SocketClient implements Runnable {
 
 			String message;
 			try {
-				message = (String) reader.readObject();
-				view.printMessage(message);
-				while(!message.equals("END_GAME")) {
+				while(listening) {
 					message = (String) reader.readObject();
 					interpreter(message);
 				}
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 			view.printMessage("The game is over, thanks for playing with us!");
 			socket.close();
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	
+	/**
+	 * Sets the ID of the client.
+	 * 
+	 * @param id : the ID that has to be assigned to the client.
+	 */
+	private void setClientID(int id) {
+		clientID = id;
 	}
 	
 	
@@ -95,17 +105,26 @@ public class SocketClient implements Runnable {
 	 * @param message : the message that needs to be interpreted.
 	 */
 	public void interpreter(String message) {
-		
 		switch(message) {
-		case "WELCOME_MESSAGE" :
+		case "STORE_YOUR_ID" :
+			try {
+				setClientID((int) reader.readObject());
+				view.printMessage("Your ID is " + clientID + ".");
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			break;
+		case "WELCOME_MESSAGE" : {
 			view.welcomeMessage();
 			break;
+		}
 		case "GET_GAME_MODE" :
 			try {
 				writer.writeObject(view.getGameMode());
 				writer.flush();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -114,20 +133,16 @@ public class SocketClient implements Runnable {
 				writer.writeObject(view.getPlayerUserame());
 				writer.flush();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
 		case "SHOW_INITIAL_GAME_ORDER" :
 			try {
-				Game game = (Game) reader.readObject();
-				view.setGame(game);
+				view.setGame((Game) reader.readObject());
 				view.showInitialOrder();
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -135,16 +150,79 @@ public class SocketClient implements Runnable {
 			try {
 				@SuppressWarnings("unchecked")
 				ArrayList<String> colors = (ArrayList<String>) reader.readObject();
-				System.out.println(colors);
 				writer.writeObject(view.getPlayerColor(colors));
 				writer.flush();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			break;
+		case "SHOW_ROUND_INFO" :
+			try {
+				view.setGame((Game) reader.readObject());
+				view.updateRoundInfo();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
+		case "SHOW_BOARD" :
+			try {
+				view.setGame((Game) reader.readObject());
+				view.printBoard();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
+		case "SHOW_CURRENT_PLAYER" :
+			try {
+				Game game = (Game) reader.readObject();
+				view.setGame(game);
+				if(game.getCurrentPlayer().getIdPlayer() != clientID)
+					view.printCurrentPlayer();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
+		case "SHOW_PLAYER_STATUS" :
+			view.printPlayerStatus();
+			break;
+		case "GET_PLAYER_ACTION" :
+			try {
+				writer.writeObject(view.getPlayerAction());
+				writer.flush();
+				writer.writeObject(view.getFamilyMember());
+				writer.flush();
+				writer.writeObject(view.getServants());
+				writer.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
+		case "PREVIOUS_ACTION_NOT_VALID" :
+			view.printMessage("The action you chose is not valid, please try again.\n");
+			break;
+		case "SHOW_NEXT_TURN_ORDER" :
+			Game game;
+			try {
+				game = (Game) reader.readObject();
+				view.setGame(game);
+				view.showNextTurnOrder();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
+			break;
+		case "END_GAME" :
+			listening = false;
+			break;
 		default :
 			view.printMessage(message);
 			break;

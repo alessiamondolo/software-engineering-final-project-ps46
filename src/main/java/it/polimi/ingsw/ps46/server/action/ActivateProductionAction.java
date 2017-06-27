@@ -5,9 +5,9 @@ public class ActivateProductionAction implements Action {
 	
 	
 	@Override
-	public void execute() {
+	public boolean execute() {
 		// TODO Auto-generated method stub
-
+		return false;
 	}
 
 	@Override
