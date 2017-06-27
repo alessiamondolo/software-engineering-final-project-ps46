@@ -6,7 +6,7 @@ import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
- * 
+ * This Class implements Effect, it's used to exchange resources between two differents resourceSet.
  * 
  * @author Alessia Mondolo
  */
@@ -25,8 +25,26 @@ public class ExchageResourcesEffect implements Effect, Serializable {
 
 	public void activateEffect(Game game) {
 		if(canBeActivated(game)) {
+			
+			
+			//TODO SCELTA DI QUALE EXCHANGE RESOURCES EFFETTUARE?
+			
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(requiredResources);
-			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(gainedResources);
+			
+			ResourceSet temporaryEffectResourceSet = new ResourceSet(gainedResources);
+			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
+			{
+				for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
+					if (decreaseResourcesMalus.name == "DecreaseResourcesMalus"){
+						
+						temporaryEffectResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
+					}	
+				}
+			}
+			// POSSIBILE MILGIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
+			//player resources 2 ; increase +1; decrease -2 ===> risultato 3; 
+			
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
 		}
 		//else throw exception - NotActivableEffect
 	}

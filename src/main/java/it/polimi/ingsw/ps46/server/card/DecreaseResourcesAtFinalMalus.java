@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
+import it.polimi.ingsw.ps46.server.Game;
+
 /**
  * DecreaseResourcesAtFinalMalus extends DecreaseResourcesMalus. 
  * It's used to implements the last malus effect of the ExcommunicationTiles acting on the building cards and resourceSet of the player. 
@@ -29,6 +31,14 @@ public class DecreaseResourcesAtFinalMalus extends DecreaseResourcesMalus{
 		 this.from = from;
 	}
 	
+	
+	@Override
+	public void activationMalus(Game game){
+		
+		game.getCurrentPlayer().setDecreaseAtFinalMalus(this);
+
+	}
+	
 	/**
 	 * Getter of the class DecreaseResourcesAtFinalMalus. return a String.
 	 * @return from
@@ -36,5 +46,7 @@ public class DecreaseResourcesAtFinalMalus extends DecreaseResourcesMalus{
 	public String getType() {
 		return from;
 	}
+	
+	
 	
 }

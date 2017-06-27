@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server.card;
 
+import it.polimi.ingsw.ps46.server.Game;
 
 /**
  * This Class extends MalusEffect.
@@ -19,6 +20,8 @@ public class GenericMalusEffect extends MalusEffect{
 		type = null;	
 	}
 	
+
+	
 	/**
 	 * This Constructor creates a new object GenericMalusEffect.
 	 * Built by .json file.	 
@@ -32,6 +35,14 @@ public class GenericMalusEffect extends MalusEffect{
 		
 	}
 
+	
+	@Override
+	public void activationMalus(Game game){
+		
+		game.getCurrentPlayer().getGenericMalus().add(this);
+	}
+	
+	
 	public String getType() {
 		return type;
 	}

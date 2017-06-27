@@ -25,6 +25,12 @@ public class ExcommunicationTile implements Serializable {
 	}
 	
 	
+	public ExcommunicationTile() {
+		era = 0;
+		permanentMalus = null;
+	}
+
+
 	public int getEra() {
 		return era;
 	}

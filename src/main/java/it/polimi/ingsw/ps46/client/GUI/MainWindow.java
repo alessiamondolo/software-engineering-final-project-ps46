@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -21,7 +23,7 @@ import javax.swing.border.Border;
  *
  */
 
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements Observer {
 	
 	
 	
@@ -30,8 +32,8 @@ public class MainWindow extends JFrame {
 		// da mettere un check che le dimensioni dei component siano < di quelle della Wind
 		//così sto però dando per scontata la risoluzione dell'utente
 		
-		int mainWindowWidth = 1400;
-		int mainWindowHeight = 900;
+		int mainWindowWidth = 1400;  //1400
+		int mainWindowHeight = 900;   //900
 		int boardWidth = (mainWindowWidth * 6)/ 14;
 		int boardHeight = (mainWindowHeight * 7) / 9;
 		int playerAreaWidth = (mainWindowWidth * 65)/ 140;
@@ -65,6 +67,12 @@ public class MainWindow extends JFrame {
 		MainBoard board = new MainBoard(boardDimension);
 		return board;
 	
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

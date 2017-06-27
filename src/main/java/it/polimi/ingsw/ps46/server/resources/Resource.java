@@ -48,8 +48,13 @@ public abstract class Resource implements Serializable {
 	 * Sets quantity.
 	 * @return quantity 
 	 */
-	public void setQuantity(int newQuantity) { //errore se è negativo
+	public void setQuantity(int newQuantity) { 
 		quantity = newQuantity;
+		
+	/*	if (quantity < 0){
+			throw Exception;	//errore se è negativo
+		}
+	*/
 	}
 	
 	/**
@@ -61,19 +66,28 @@ public abstract class Resource implements Serializable {
 	}
 	
 	/**
-	 * Decreases the value of quantity by lessQuantity, if there are enough resources.
-	 * Otherwise, throws and exception. 
+	 * Decreases the value of quantity by lessQuantity, if there are enough resources to do the sub operation return true;
+	 * Otherwise, return false.
+	 * 
 	 * @param lessQuantity 
+	 * @return boolean 
 	 */
-	public void sub(Resource lessResource) {
-		if(greaterOrEqual(lessResource))
+	public boolean sub(Resource lessResource) {
+		if(greaterOrEqual(lessResource)){ 
 			quantity -= lessResource.getQuantity();
-		//else 
-		//	throw new Exception()
+			return true;
+		}
+		else 
+			return false;
 	}
 
 	public boolean greaterOrEqual(Resource resource) {
 		return (this.quantity >= resource.getQuantity());
+	}
+	
+	public boolean minor(Resource resource) {
+		return (this.quantity < resource.getQuantity());
+		
 	}
 	
 	@Override

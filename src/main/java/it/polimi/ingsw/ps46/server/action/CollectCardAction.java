@@ -24,10 +24,7 @@ public class CollectCardAction implements Action {
 	public boolean execute() {
 		if(isLegal()) {
 			
-			
-		}
-		else {
-			//throw Exception illegal action
+			return true;	
 		}
 		return false;
 	}

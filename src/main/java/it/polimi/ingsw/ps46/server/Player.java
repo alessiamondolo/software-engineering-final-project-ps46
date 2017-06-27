@@ -10,8 +10,8 @@ import it.polimi.ingsw.ps46.server.card.DecreaseResourcesAtFinalMalus;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
 import it.polimi.ingsw.ps46.server.card.GenericMalusEffect;
+//import it.polimi.ingsw.ps46.server.card.LeaderCard;
 import it.polimi.ingsw.ps46.server.card.LeaderCard;
-import it.polimi.ingsw.ps46.server.card.MalusEffect;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
@@ -28,7 +28,7 @@ public class Player implements Serializable {
 	private String username;
 	private String color;
 	
-	private ArrayList<LeaderCard> leaderCards = null;  //TODO completare tutta la lista delle carte i suoi effetti ecc ecc
+	private ArrayList<LeaderCard> leaderCards;  //TODO completare tutta la lista delle carte i suoi effetti ecc ecc
 	
 	private PersonalBoard personalBoard;
 	
@@ -37,19 +37,21 @@ public class Player implements Serializable {
 	private Map<String, ResourceSet> discount;
 	private Map<String, ResourceSet> optionalDiscount;
 	
-	private boolean preacherEffect = false; // da usare come malus e magari come parametro il numero di torre!
+	private boolean preacherEffect = false; 
 	
-	private Map <String, MalusEffect> excommunicationMalus;
+	private ArrayList<DiceMalusEffect> diceMalus;
+	private ArrayList<GenericMalusEffect> genericMalus;
+	private ArrayList<DecreaseResourcesMalus> decreaseResourcesMalus;
+	private DecreaseResourcesAtFinalMalus decreaseAtFinalMalus;
 
 
 	
 	/**
-	 * The constructor.
+	 * The constructor of Player.
 	 * 
 	 * @param idPlayer
 	 * @configurationParam xConfigurationColorOftheFamilyMember, yConfigurationFamilyMember. Used to put the right values by configuration file.
 	 */
-	
 	public Player(int idPlayer) {
 		
 		this.idPlayer = idPlayer; 
@@ -77,10 +79,14 @@ public class Player implements Serializable {
 		
 		discount = new HashMap<String, ResourceSet>();
 		optionalDiscount = new HashMap<String, ResourceSet>();
-
 		
-		excommunicationMalus = new HashMap<String, MalusEffect>();
+		diceMalus = new ArrayList<DiceMalusEffect>();
+		genericMalus = new ArrayList<GenericMalusEffect>();
+		decreaseResourcesMalus = new ArrayList<DecreaseResourcesMalus>();
+		decreaseAtFinalMalus = new DecreaseResourcesAtFinalMalus();
 		
+		
+		/* TENGO QUESTA LISTA PER COMODITA' ---> COSì DA SAPERE IN CHE ERE CI SONO I VARI EFFETTI
 		// excommunicationMalus of the first era.
 		excommunicationMalus.put("DecreaseResourcesMalus", new DecreaseResourcesMalus() );
 		excommunicationMalus.put("DiceMalusEffect", new DiceMalusEffect() );
@@ -96,8 +102,12 @@ public class Player implements Serializable {
 		excommunicationMalus.put("notCountingVictoryPointsFromCards", new GenericMalusEffect() );
 		excommunicationMalus.put("loseOneVictoryPointEveryXResource", new DecreaseResourcesMalus() );
 		excommunicationMalus.put("loseOneVictoryPointEveryXResource", new DecreaseResourcesAtFinalMalus() );
-
+		*/
 	}
+	
+	
+	//ID & USERNAME PLAYER - GETTER AND SETTER//
+	///////////////////////////////////////////
 	
 	/**
 	 * Description of the method getIdPlayer.
@@ -107,53 +117,58 @@ public class Player implements Serializable {
 		return idPlayer;
 	}
 
+	public String getUsername() {
+		return username;
+	}
 	
 
-	/**
-	 * Description of the method getFamilyMembers.
-	 * This method returns a selected familyMember by colorKey (String).
-	 * 
-	 * @return selectfamilyMember 
-	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	//LEADER CARDS - GETTER//
+	////////////////////////
+		
+	public ArrayList<LeaderCard> getLeaderCards() {
+		return leaderCards;
+	}
+	
+	
+	//FAMILY MEMBER - GETTER AND SETTER//
+	////////////////////////////////////
+	
 	public FamilyMember getFamilyMember(String colorKey) {
 		return familyMembers.get(colorKey);
 		
 	}
 	
-	public Map<String, FamilyMember> getFamilyMembers() {
+	
+	/**
+	 * Returns FamilyMembersMap.
+	 * @return familyMembers 
+	 */
+	public Map<String, FamilyMember> getFamilyMembersMap() {
 		return familyMembers;
 	}
-
-
-	public String getUsername() {
-		return username;
-	}
 	
 	
-	public String getColor() {
-		return color;
-	}
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 	
 
+	//BONUS - GETTER AND SETTER//
+	////////////////////////////
+
+	/**
+	 * Returns BonusMap.
+	 * @return bonus
+	 */
 	public Map<String, Dice> getBonusMap() {
 		return bonus;
 	}
 	
-	public Dice getBonus(String bonusName) {
-		
-		return bonus.get(bonusName);
-		
-	}
 
 	/**
-	 * Description of the method updateBonus.
-	 * 
-	 * This Method is used to upDate the bonus Map.
+	 * This Method is used to update the bonus Map.
 	 * @param bonusName
 	 * @param updateValue
 	 */
@@ -166,33 +181,20 @@ public class Player implements Serializable {
 		bonus.put(bonusName, currentValue);
 	}
 
+	
+	// DISCOUNT - GETTER AND SETTER//
+	////////////////////////////////
+	
 	/** 
-	 * Description of the method getDiscount.
-	 * 
-	 * This Method is used to get the entire Map.
+	 * This Method is used to get the entire DiscountMap.
 	 * @return Discount
 	 */
-
 	public Map<String, ResourceSet> getDiscount() {
 		return discount;
 	}
 	
-	/** 
-	 * Description of the method getDiscountByKey.
-	 * 
-	 * This Method is used to get the resourceSet (using the key discountKey)
-	 * @return discount.get(discountKey)
-	 */
-	
-	public ResourceSet getDiscountByKey(String discountKey) {
-		return discount.get(discountKey);
-		
-	}
-
 	
 	/**
-	 * Description of the method updateDiscount.
-	 * 
 	 * This Method is used to update the map of discounts (previously initialized to NULL)
 	 * it puts a new value if the key is not contained OR
 	 * it updates the exists key (using the sum between resourceSet)
@@ -209,39 +211,23 @@ public class Player implements Serializable {
 		else {
 			
 			discount.put(discountKey, valueDiscount);
-
 		}
-	
 	}
 	
 	
+	//OPTIONAL DISCOUNT - GETTER AND SETTER//
+	////////////////////////////////////////
+	
 	/** 
-	 * Description of the method getOptionalDiscountsMap.
-	 * 
-	 * This Method is used to get the entire Map
+	 * This Method is used to get the entire OptionalDiscountMap
 	 * @return optionalDiscount
 	 */
 	public Map<String, ResourceSet> getOptionalDiscountsMap() {
 		return optionalDiscount;
 	}
-	
-	
-	/**
-	 * Description of the method getOptionalDiscountsListByKey.
-	 * 
-	 * This Method is used to get the list of resourceSet
-	 * @param discountKey
-	 * @return optionalDiscount.get(discountKey)
-	 */
-	public ResourceSet getOptionalDiscountsKey(String discountKey) {
-		return optionalDiscount.get(discountKey);
-		
-	}
 
 	
 	/**
-	 * Description of the method setOptionalDiscount.
-	 * 
 	 * This Method is used to set the single resourceSetList into the map, it's formed by differents options of resourceSet.
 	 * @param discountKey
 	 * @param valuesOptionalDiscount
@@ -250,6 +236,10 @@ public class Player implements Serializable {
 	
 			optionalDiscount.put(discountKey, valuesOptionalDiscount);
 		}
+
+	
+	//PREACHER - GETTER AND SETTER//
+	///////////////////////////////
 
 	public boolean isPreacherEffect() {
 		return preacherEffect;
@@ -260,6 +250,9 @@ public class Player implements Serializable {
 	}
 
 	
+	//PERSONAL BOARD - GETTER AND SETTER//
+	/////////////////////////////////////
+
 	public PersonalBoard getPersonalBoard() {
 		return personalBoard;
 	}
@@ -268,44 +261,53 @@ public class Player implements Serializable {
 		this.personalBoard = personalBoard;
 	}
 	
-	/**
-	 * Getter and Setter of the attribute leaderCards.
-	 * 
-	 * @return leaderCards
-	 */
 	
-	public ArrayList<LeaderCard> getLeaderCards() {
-		return leaderCards;
+	//COLOR - GETTER AND SETTER//
+	////////////////////////////
+	
+	public String getColor() {
+		return color;
 	}
 
-	public void setLeaderCards(LeaderCard leaderCard) {
-		leaderCards.add(leaderCard);
-	}
-
-
-	/**
-	 * Getter of the Map excommunicationMalus.
-	 * 
-	 * @return excommunicationMalus
-	 */
-	public Map <String, MalusEffect> getExcommunicationMap() {
-		return excommunicationMalus;
-	}
-	
-	/**
-	 * Getter of the Malus excommunicationMalus.
-	 * 
-	 * @return excommunicationMalus.get(type)
-	 */
-	
-	public MalusEffect getExcommunicationMalus(String type){
-		
-		return excommunicationMalus.get(type);
-		
-	}
 
 	public void setColor(String color) {
 		this.color = color;		
 	}
 
+	
+	//DICE MALUS - GETTER//
+	//////////////////////
+
+	public ArrayList<DiceMalusEffect> getDiceMalus() {
+		return diceMalus;
+	}
+
+
+	//GENERIC MALUS - GETTER//
+	/////////////////////////
+	
+	public ArrayList<GenericMalusEffect> getGenericMalus() {
+		return genericMalus;
+	}
+
+
+	//DECREASE RESOURCES MALUS - GETTER//
+	////////////////////////////////////
+	
+	public ArrayList<DecreaseResourcesMalus> getDecreaseResourcesMalus() {
+		return decreaseResourcesMalus;
+	}
+
+
+	//DECREASE AT FINAL MALUS - GETTER AND SETTER//
+	//////////////////////////////////////////////
+	
+	public DecreaseResourcesAtFinalMalus getDecreaseAtFinalMalus() {
+		return decreaseAtFinalMalus;
+	}
+
+
+	public void setDecreaseAtFinalMalus(DecreaseResourcesAtFinalMalus decreaseAtFinalMalus) {
+		this.decreaseAtFinalMalus = decreaseAtFinalMalus;
+	}	
 }

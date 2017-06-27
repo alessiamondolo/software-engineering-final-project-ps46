@@ -423,17 +423,17 @@ public class ConsoleView implements View {
 	public String getFamilyMember() {
 		output.println("Which family member do you want to use?");
 		int index = 1;
-		for(String key : game.getCurrentPlayer().getFamilyMembers().keySet()) {
-			if(!game.getCurrentPlayer().getFamilyMembers().get(key).isUsed()) {
+		for(String key : game.getCurrentPlayer().getFamilyMembersMap().keySet()) {
+			if(!game.getCurrentPlayer().getFamilyMembersMap().get(key).isUsed()) {
 				output.println(index + ". " + key);
 				index++;
 			}
 		}
 		
-		int choice = input.IntegerFromConsole(1, game.getCurrentPlayer().getFamilyMembers().size());
+		int choice = input.IntegerFromConsole(1, game.getCurrentPlayer().getFamilyMembersMap().size());
 		index = 1;
 		String color = null;
-		for(String key : game.getCurrentPlayer().getFamilyMembers().keySet()) {
+		for(String key : game.getCurrentPlayer().getFamilyMembersMap().keySet()) {
 			if(index == choice) {
 				color = key;
 				break;

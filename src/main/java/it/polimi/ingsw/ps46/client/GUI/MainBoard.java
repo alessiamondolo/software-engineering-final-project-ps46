@@ -163,7 +163,7 @@ public class MainBoard extends JPanel  {
 		
 		JLabel boardImage = new JLabel();
 		boardImage.setPreferredSize(boardDimension);
-		//boardImage.setIcon(returnBoardImage(boardDimension));
+		boardImage.setIcon(returnBoardImage(boardDimension));
 		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;  
 		gbc.gridwidth = 23;
@@ -184,11 +184,11 @@ public class MainBoard extends JPanel  {
 	 * @return imageIcon
 	 */
 	
-/*	private ImageIcon returnBoardImage(Dimension boardDimension) {
+	private ImageIcon returnBoardImage(Dimension boardDimension) {
 		
 		 BufferedImage image = null;
 		try {
-			image = ImageIO.read(getClass().getResource("gameboard.png"));
+			image = ImageIO.read(getClass().getResource("img/gameboard.png"));
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -197,12 +197,12 @@ public class MainBoard extends JPanel  {
 		//Image img = image.getScaledInstance(471, 650, Image.SCALE_SMOOTH);
 		
 		ImageIcon imageIcon = new ImageIcon(img);
-	    String path = this.getClass().getClassLoader().getResource("gameboard.png").toExternalForm();
-		System.out.println(path);
+	    //String path = this.getClass().getClassLoader().getResource("gameboard.png").toExternalForm();
+		//System.out.println(path);
 	    
 		return imageIcon;
 		
-	}*/
+	}
     
   /*  @Override
     protected void paintComponent(Graphics g) {

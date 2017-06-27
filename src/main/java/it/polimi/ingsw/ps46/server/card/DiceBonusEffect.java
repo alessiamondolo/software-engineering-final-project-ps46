@@ -21,7 +21,6 @@ public class DiceBonusEffect implements Effect, Serializable {
 	
 	/**
 	 * The constructor of DiceBonusEffect.
-	 * 
 	 * @param bonus
 	 * @param type
 	 */

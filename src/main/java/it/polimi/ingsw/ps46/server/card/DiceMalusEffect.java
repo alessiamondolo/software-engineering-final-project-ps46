@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps46.server.card;
 
 
 import it.polimi.ingsw.ps46.server.Dice;
+import it.polimi.ingsw.ps46.server.Game;
 
 /**
  * This Class extends the class MalusEffect.
@@ -40,8 +41,14 @@ public class DiceMalusEffect extends MalusEffect {
 		malus = null;
 	}
 
-
 	
+	
+	@Override
+	public void activationMalus(Game game){
+		
+		game.getCurrentPlayer().getDiceMalus().add(this);
+	}
+
 	
 	public String getType() {
 		return type;

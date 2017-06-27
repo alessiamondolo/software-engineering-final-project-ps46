@@ -57,9 +57,9 @@ public class MoveToActionSpaceAction implements Action {
 					//nextAction.execute();
 					break;
 				}
-				case "ProductionActionSpace" : {
+				case "ProductionActionSpace" : { /*
 					Action nextAction = new ActivateProductionAction();
-					return nextAction.execute();
+					return nextAction.execute();*/
 				}
 				case "HarvestActionSpace" : {
 					Action nextAction = new ActivateHarvestAction();
@@ -77,7 +77,7 @@ public class MoveToActionSpaceAction implements Action {
 					return false;		
 			}
 		}
-		
+
 		return false;
 
 	}

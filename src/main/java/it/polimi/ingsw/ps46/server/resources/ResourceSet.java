@@ -17,6 +17,7 @@ public class ResourceSet implements Serializable {
 	private static final long serialVersionUID = 786707586186550634L;
 	
 	private LinkedHashMap<String, Resource> resourcesMap;
+
 	
 	/**
 	 * Creates a new ResourceSet object by reading a list of Resource objects and filling the hashmap
@@ -31,10 +32,31 @@ public class ResourceSet implements Serializable {
 		for(Resource resource : resourcesList) {
 			resourcesMap.put(resource.getId(), resource);
 		}
-		
 	}
 	
+	/**
+	 * This constructor is used to create a deep copy of a resourceSet passed parameter called resourceSetToBeCloned.
+	 * 
+	 * @param resourceSetToBeCloned
+	 */
+	public ResourceSet (ResourceSet resourceSetToBeCloned){
+		
+		resourcesMap = new LinkedHashMap<String, Resource>();
+		
+		for (String keyString : resourceSetToBeCloned.getResourcesMap().keySet()) {
+			
+			String tempId = resourceSetToBeCloned.getResourcesMap().get(keyString).getId();
+			int tempValue = resourceSetToBeCloned.getResourcesMap().get(keyString).getQuantity();
+			Resource tempResource = new Resource(tempId, tempValue) {};
+			
+			resourcesMap.put(tempId, tempResource);
+		}
+	}
+		
+	
+	
 	public LinkedHashMap<String, Resource> getResourcesMap() {
+		
 		return resourcesMap;
 	}
 
@@ -52,8 +74,8 @@ public class ResourceSet implements Serializable {
 	 * 
 	 * @param Resource
 	 */
-	public void sub(Resource lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource>myResource
-		resourcesMap.get(lessResources.getId()).sub(lessResources);
+	public boolean sub (Resource lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource > myResource
+		return resourcesMap.get(lessResources.getId()).sub(lessResources);
 	}
 	
 	/**
@@ -83,14 +105,22 @@ public class ResourceSet implements Serializable {
 	/**
 	 * Decreases the value of the resources of the ResourceSet that has the same ID as the resources in the ResourceSet 
 	 * received as parameter.
-	 * 
-	 * @param Resource
+	 * This method checks if the sub operation is done with a positive (or negative) result, and return this result as a boolean value. 
+	 *
+	 * @param lessResources
+	 * @result subResult;
 	 */
-	public void sub(ResourceSet lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource>myResource
-		for(String key : lessResources.getResourcesMap().keySet())
-			//gets the resource of this resourceSet with the same key of the resource received by parameter
-			//and increases it by the resource received by parameter
-			resourcesMap.get(key).sub(lessResources.getResourcesMap().get(key));
+	public boolean sub(ResourceSet lessResources) {
+		if (greaterOrEqual( lessResources)){
+			for(String key : lessResources.getResourcesMap().keySet()){
+					//gets the resource of this resourceSet with the same key of the resource received by parameter
+					//and decreases it by the resource received by parameter			
+					resourcesMap.get(key).sub(lessResources.getResourcesMap().get(key));
+				}
+			return true;
+		}
+		else 
+			return false;
 	}
 	
 	/**
@@ -98,6 +128,7 @@ public class ResourceSet implements Serializable {
 	 * received as parameter is greater or equal than all the resources of the resourceSet received as parameter.
 	 * 
 	 * @param Resource
+	 * @return boolean
 	 */
 	public boolean greaterOrEqual(ResourceSet resource) {
 		for(String key : resource.getResourcesMap().keySet()) {
@@ -108,6 +139,8 @@ public class ResourceSet implements Serializable {
 		}
 		return true;
 	}
+	
+	
 	
 	public ArrayList<Resource> toArray() {
 		ArrayList<Resource> array = new ArrayList<Resource>();
