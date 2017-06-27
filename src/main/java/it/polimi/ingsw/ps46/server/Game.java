@@ -49,7 +49,7 @@ public class Game extends Observable {
 	private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/config/";
 	
 	
-		Game(int numberPlayers) {
+		public Game(int numberPlayers) {
 		this.numberPlayers = numberPlayers;
 		players = new ArrayList<Player>();
 		//creates the players objects and adds them to the list of players
@@ -60,6 +60,9 @@ public class Game extends Observable {
 		configDice();
 		configDecks();
 		configBoard();
+		///
+		currentPlayer = new Player(1); // AGGIUNTO PER IL TESTING DA TOGLIERE//
+		///
 	}
 
 	private void newState(Object event) {

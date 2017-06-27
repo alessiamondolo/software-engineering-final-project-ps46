@@ -40,7 +40,7 @@ public class MoveToActionSpaceAction implements Action {
 	 * 		- it it is a market action space, it launches the market space action;
 	 * 		- if it is a council action space, it launches a council space action.
 	 */
-	public void execute() {
+	public boolean execute() {
 		
 		System.out.println("I'm inside the action with " + servants + " servants.");
 		
@@ -82,8 +82,8 @@ public class MoveToActionSpaceAction implements Action {
 			}
 		}
 		else {
-			//throw Exception illigal action
-		}*/
+		*/
+			return false;
 
 	}
 

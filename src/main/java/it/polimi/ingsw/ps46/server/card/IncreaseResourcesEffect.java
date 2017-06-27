@@ -36,22 +36,33 @@ public class IncreaseResourcesEffect implements Effect {
 	 * It's implemented the excommunication malus effect -1 called "DecreaseResourcesMalus"
 	 */
 	public void activateEffect(Game game) {
+		//System.out.println("STAMPO ADDITIONAL RESOURCES...prima L'ATTIVAZIONE DEL MALUS");
+		//System.out.println(additionalResources.toString());
+		
+		ResourceSet temporaryEffectResourceSet = new ResourceSet(additionalResources);
 		
 		//this part is used to check if there are excommunication Malus action on the effect
+		
 		if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
 		{
 			for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
 				if (decreaseResourcesMalus.name == "DecreaseResourcesMalus"){
 					
-					additionalResources.sub(decreaseResourcesMalus.getDecreasedResources());
+					temporaryEffectResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
 				}	
 			}
 		}
 		// POSSIBILE MILGIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
 		//player resources 2 ; increase +1; decrease -2 ===> risultato 3; 
 		
-		game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(additionalResources);
+		game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
+		//System.out.println("STAMPO ADDITIONAL RESOURCES...dopo L'ATTIVAZIONE DEL MALUS _NON DOVREBBE ESSER STATO MODIFICATO");
+		//System.out.println(additionalResources.toString());
+		
+		//System.out.println("STAMPO TEMPORARY RESOURCESET...dopo L'ATTIVAZIONE DEL MALUS_ DOVREBBE ESSERE STATO MODIFICATO");
+		//System.out.println(temporaryEffectResourceSet.toString());
 	}
+	
 	
 	public String toString() {
 		return additionalResources.toString();

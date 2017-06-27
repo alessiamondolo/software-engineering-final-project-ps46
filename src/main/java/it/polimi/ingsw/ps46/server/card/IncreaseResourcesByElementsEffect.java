@@ -58,28 +58,28 @@ public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 		default:
 			break;
 		}
-		
-			ResourceSet resourceSet = getAdditionalResources();
-			for(String key : resourceSet.getResourcesMap().keySet()) 
-			{
-				int quantity = resourceSet.getResourcesMap().get(key).getQuantity();
-				quantity = quantity * numberOfElements;
-				resourceSet.getResourcesMap().get(key).setQuantity(quantity);
-			}
 			
+		ResourceSet temporaryEffectResourceSet = new ResourceSet(getAdditionalResources());
+		for(String key : temporaryEffectResourceSet.getResourcesMap().keySet()) 
+			{
+				int quantity = temporaryEffectResourceSet.getResourcesMap().get(key).getQuantity();
+				quantity = quantity * numberOfElements;
+				temporaryEffectResourceSet.getResourcesMap().get(key).setQuantity(quantity);
+			}
+
 			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
 			{
 				for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
 					if (decreaseResourcesMalus.name == "DecreaseResourcesMalus"){
 						
-						resourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
+						temporaryEffectResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
 					}	
 				}
 			}
 			// POSSIBILE MILGIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
 			//player resources 2 ; increase +1; decrease -2 ===> risultato 3;
 			
-			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(resourceSet);
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
 	}
 	
 	

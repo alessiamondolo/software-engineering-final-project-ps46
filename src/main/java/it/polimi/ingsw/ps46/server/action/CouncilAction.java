@@ -3,9 +3,9 @@ package it.polimi.ingsw.ps46.server.action;
 public class CouncilAction implements Action {
 
 	@Override
-	public void execute() {
+	public boolean execute() {
 		// TODO Auto-generated method stub
-
+		return true;
 	}
 
 	@Override

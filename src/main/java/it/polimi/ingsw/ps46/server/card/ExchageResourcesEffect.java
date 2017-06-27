@@ -21,21 +21,26 @@ public class ExchageResourcesEffect implements Effect { // ho cambiato gli attri
 
 	public void activateEffect(Game game) {
 		if(canBeActivated(game)) {
+			
+			
+			//TODO SCELTA DI QUALE EXCHANGE RESOURCES EFFETTUARE?
+			
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(requiredResources);
-	
+			
+			ResourceSet temporaryEffectResourceSet = new ResourceSet(gainedResources);
 			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
 			{
 				for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
 					if (decreaseResourcesMalus.name == "DecreaseResourcesMalus"){
 						
-						gainedResources.sub(decreaseResourcesMalus.getDecreasedResources());
+						temporaryEffectResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
 					}	
 				}
 			}
 			// POSSIBILE MILGIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
 			//player resources 2 ; increase +1; decrease -2 ===> risultato 3; 
 			
-			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(gainedResources);
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
 		}
 		//else throw exception - NotActivableEffect
 	}

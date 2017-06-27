@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.ExchageResourcesEffect;
+import it.polimi.ingsw.ps46.server.card.IncreaseResourcesByElementsEffect;
 import it.polimi.ingsw.ps46.server.card.IncreaseResourcesEffect;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.resources.Resource;
@@ -48,7 +49,7 @@ public class MalusDecreaseTEST {
 	 */
 	public MalusDecreaseTEST() {
 		
-		//game = new Game(2);
+		game = new Game(2);
 		
 		//CREATING RESOURCESET FOR PLAYER RESOURCESET//
 		//////////////////////////////////////////////
@@ -70,7 +71,11 @@ public class MalusDecreaseTEST {
 		}
 		
 		playerResourceSet = new ResourceSet(resourcesList);
+		
+		//assegno al player il resourceSet.
+		game.getCurrentPlayer().getPersonalBoard().setResources(playerResourceSet);
 
+		
 		System.out.println("\n" + "STAMPO: ||playerResourceSet||" + "\n" );
 		System.out.println( playerResourceSet.toString());	
 			
@@ -82,34 +87,34 @@ public class MalusDecreaseTEST {
 		resourcesList.add(new Resource("Wood", 				INTVALUE0){});
 		resourcesList.add(new Resource("Stones", 			INTVALUE0){});
 		resourcesList.add(new Resource("Servants", 			INTVALUE0){});
-		resourcesList.add(new Resource("Money", 			INTVALUE0){});
-		resourcesList.add(new Resource("FaithPoints", 		INTVALUE0){});
-		resourcesList.add(new Resource("MilitaryPoints", 	INTVALUE2){});
-		resourcesList.add(new Resource("VictoryPoints", 	INTVALUE0){});
-		resourcesList.add(new Resource("CounsilPrivilege", 	INTVALUE0){});
-		
-		immidiateCardResources = new ResourceSet(resourcesList);
-
-		System.out.println("\n" + "STAMPO: ||immediateCardResources||" + "\n" );
-		System.out.println( immidiateCardResources.toString());	
-		
-		
-		//CREATING RESOURCESET FOR CARD PERMANENT EFFECT//
-		/////////////////////////////////////////////////
-		resourcesList.clear();
-		resourcesList.add(new Resource("Wood", 				INTVALUE0){});
-		resourcesList.add(new Resource("Stones", 			INTVALUE0){});
-		resourcesList.add(new Resource("Servants", 			INTVALUE0){});
-		resourcesList.add(new Resource("Money", 			INTVALUE0){});
+		resourcesList.add(new Resource("Money", 			INTVALUE3){});
 		resourcesList.add(new Resource("FaithPoints", 		INTVALUE0){});
 		resourcesList.add(new Resource("MilitaryPoints", 	INTVALUE0){});
 		resourcesList.add(new Resource("VictoryPoints", 	INTVALUE0){});
 		resourcesList.add(new Resource("CounsilPrivilege", 	INTVALUE0){});
 		
+		immidiateCardResources = new ResourceSet(resourcesList);
+
+		System.out.println("\n" + "STAMPO: ||immediateCardResources||");
+		System.out.println( immidiateCardResources.toString() + "\n");	
+		
+		
+		//CREATING RESOURCESET FOR CARD PERMANENT EFFECT//
+		/////////////////////////////////////////////////
+		resourcesList.clear();
+		resourcesList.add(new Resource("Wood", 				INTVALUE1){});
+		resourcesList.add(new Resource("Stones", 			INTVALUE1){});
+		resourcesList.add(new Resource("Servants", 			INTVALUE1){});
+		resourcesList.add(new Resource("Money", 			INTVALUE1){});
+		resourcesList.add(new Resource("FaithPoints", 		INTVALUE1){});
+		resourcesList.add(new Resource("MilitaryPoints", 	INTVALUE1){});
+		resourcesList.add(new Resource("VictoryPoints", 	INTVALUE1){});
+		resourcesList.add(new Resource("CounsilPrivilege", 	INTVALUE1){});
+		
 		permanentCardResources = new ResourceSet(resourcesList);
 
-		System.out.println("\n" + "STAMPO: ||permanentCardResources||" + "\n" );
-		System.out.println( permanentCardResources.toString());	
+		System.out.println("\n" + "STAMPO: ||permanentCardResources||");
+		System.out.println( permanentCardResources.toString() + "\n");	
 			
 		
 		
@@ -129,8 +134,8 @@ public class MalusDecreaseTEST {
 		
 		malus = new DecreaseResourcesMalus("DecreaseResourcesMalus", temporaryResourcetForMalus);
 
-		System.out.println("\n" + "STAMPO: ||malus resources||" + "\n" );
-		System.out.println( malus.getDecreasedResources().toString());	
+		System.out.println("\n" + "STAMPO: ||malus resources||");
+		System.out.println( malus.getDecreasedResources().toString() + "\n");	
 		
 		
 		//SETTING PLAYER RESOURCES AND MALUS EFFECT//
@@ -147,24 +152,30 @@ public class MalusDecreaseTEST {
 		}
 		System.out.println("\n----Fine controllo della lista Malus----\n\n\n");
 
-		System.out.println("\n----PLAYER RESOURCES BEFORE----\n");
+		System.out.println("\n----PLAYER RESOURCES BEFORE----");
 		System.out.println(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString());
 
 		game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(playerResourceSet);
 		
-		System.out.println("\n----PLAYER RESOURCES AFTER----\n");
+		System.out.println("\n----PLAYER RESOURCES AFTER----");
 		System.out.println(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString());
 
+		
+		
+		
+		
+		
+		
 		
 		//SETTING CARD TERRITORY PROPERTIES & EFFECTS//
 		//////////////////////////////////////////////
 		IncreaseResourcesEffect increaseResourcesImmEffect = new IncreaseResourcesEffect(immidiateCardResources);
 		IncreaseResourcesEffect increaseResourcesPerEffect = new IncreaseResourcesEffect(permanentCardResources);
 
-		territoryCard = new TerritoryCard("TerritoryCard", 1, increaseResourcesImmEffect, increaseResourcesPerEffect, new ResourceSet(), new Dice()){};
+		territoryCard = new TerritoryCard("TerritoryCard", 1, increaseResourcesImmEffect, increaseResourcesPerEffect, playerResourceSet, new Dice()){};
 		game.getCurrentPlayer().getPersonalBoard().putTerritoryCardInPlayerSet(territoryCard);
 
-		System.out.println("\n----PLAYER TERRITORY CARDs----\n");
+		System.out.println("\n----PLAYER TERRITORY CARDs----");
 		System.out.println("Numero di carte Territorio: " + game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().size() +"\n");
 
 		int j = 1;
@@ -175,14 +186,21 @@ public class MalusDecreaseTEST {
 		System.out.println("\n----Fine controllo della lista carte territorio----");		
 	
 		
+		
+		
+		
+		
+		
+		
+		
 		//SETTING CARD BUILDING PROPERTIES & EFFECTS//
 		//////////////////////////////////////////////	
 		
 		boolean doubleChoise = false;
 		
 		resourcesList.clear();
-		resourcesList.add(new Resource("Wood", 				INTVALUE1){});
-		resourcesList.add(new Resource("Stones", 			INTVALUE1){});
+		resourcesList.add(new Resource("Wood", 				INTVALUE0){});
+		resourcesList.add(new Resource("Stones", 			INTVALUE0){});
 		resourcesList.add(new Resource("Servants", 			INTVALUE0){});
 		resourcesList.add(new Resource("Money", 			INTVALUE0){});
 		resourcesList.add(new Resource("FaithPoints", 		INTVALUE0){});
@@ -196,7 +214,7 @@ public class MalusDecreaseTEST {
 		resourcesList.add(new Resource("Wood", 				INTVALUE0){});
 		resourcesList.add(new Resource("Stones", 			INTVALUE0){});
 		resourcesList.add(new Resource("Servants", 			INTVALUE0){});
-		resourcesList.add(new Resource("Money", 			INTVALUE3){});
+		resourcesList.add(new Resource("Money", 			INTVALUE0){});
 		resourcesList.add(new Resource("FaithPoints", 		INTVALUE0){});
 		resourcesList.add(new Resource("MilitaryPoints", 	INTVALUE0){});
 		resourcesList.add(new Resource("VictoryPoints", 	INTVALUE0){});
@@ -209,10 +227,10 @@ public class MalusDecreaseTEST {
 		System.out.println("\n" + "STAMPO: ||GAINED resources||" + "\n" );
 		System.out.println( gainedResources.toString());	
 		
-		
+		IncreaseResourcesByElementsEffect increaseResourcesByElementsEffect = new IncreaseResourcesByElementsEffect(immidiateCardResources, "TerritoryCards");
 		ExchageResourcesEffect exchageResourcesEffect = new ExchageResourcesEffect(requiredResources, gainedResources);
 	
-		buildingCard = new BuildingCard("BuildingCard", 1, increaseResourcesImmEffect, doubleChoise, exchageResourcesEffect, new ExchageResourcesEffect(immidiateCardResources, permanentCardResources), new ResourceSet(), new Dice()){};
+		buildingCard = new BuildingCard("BuildingCard", 1, increaseResourcesByElementsEffect, doubleChoise, exchageResourcesEffect, new ExchageResourcesEffect(immidiateCardResources, permanentCardResources), playerResourceSet, new Dice()){};
 		game.getCurrentPlayer().getPersonalBoard().putBuildingCardInPlayerSet(buildingCard);
 
 		System.out.println("\n----PLAYER BUILDING CARDs----\n");
@@ -237,48 +255,63 @@ public class MalusDecreaseTEST {
 		System.out.println("\n----FINE SETTAGGIO----\n\n\n");	
 		System.out.println("\n----INIZIO TESTING----");		
 		
-		System.out.println("\n" + "STAMPO: ||playerResourceSet|| PRIMA l'attivazione dell'effetto\n" );
-		System.out.println( game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString());	
+		ResourceSet clone = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet());
+		
+		System.out.println("\n" + "STAMPO: ||IL CLONE DEL playerResourceSet||" );
+		System.out.println( clone.toString() + "\n" + 
+		"____________________________________________________________________________________________________________________");
+		
+		
+		System.out.println("\n" + "STAMPO: ||playerResourceSet|| PRIMA l'attivazione dell'effetto" );
+		System.out.println( game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString() + "\n" + 
+		"____________________________________________________________________________________________________________________");	
 		/*
-		for (TerritoryCard territoryCard : game.getCurrentPlayer().getTerritoryDeck()) {
+		for (TerritoryCard territoryCard : game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck()) {
 			territoryCard.getImmediateEffects().activateEffect(game);
 		}
 		
-		System.out.println("\n" + "STAMPO: ||playerResourceSet|| DOPO l'attivazione dell'effetto Immediato\n" );
-		System.out.println( game.getCurrentPlayer().getPlayerResourceSet().toString());	
+		System.out.println("\n" + "STAMPO: ||playerResourceSet|| DOPO l'attivazione dell'effetto Immediato( prima volta)" );
+		System.out.println( game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString() + "\n");	
 		
-		for (TerritoryCard territoryCard : game.getCurrentPlayer().getTerritoryDeck()) {
-			territoryCard.getPermanentEffects().activateEffect(game);
+		for (TerritoryCard territoryCard : game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck()) {
+			territoryCard.getImmediateEffects().activateEffect(game);
 		}
 		
-		System.out.println("\n" + "STAMPO: ||playerResourceSet|| DOPO l'attivazione dell'effetto Permanente\n" );
-		System.out.println( game.getCurrentPlayer().getPlayerResourceSet().toString());	
+		System.out.println("\n" + "STAMPO: ||playerResourceSet|| DOPO l'attivazione dell'effetto Immediato (seconda volta)" );
+		System.out.println( game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString() + "\n");	
+		
 		*/
 		for (BuildingCard buildingCard : game.getCurrentPlayer().getPersonalBoard().getBuildingDeck()) {
-			buildingCard.getPermanentEffects().activateEffect(game);
+				buildingCard.getImmediateEffects().activateEffect(game);	
 		}
+		System.out.println("\n" + "STAMPO: ||playerResourceSet|| DOPO l'attivazione dell'effetto" );
+		System.out.println( game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString() + "\n" + 
+		"____________________________________________________________________________________________________________________");
 		
-		System.out.println("\n" + "STAMPO: ||playerResourceSet|| DOPO l'attivazione di exchange resources\n" );
-		System.out.println( game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString());	
+			
+		System.out.println("\n" + "STAMPO: ||IL CLONE DEL playerResourceSet||" );
+		System.out.println( clone.toString() + "\n" + 
+		"____________________________________________________________________________________________________________________");
 		
+		
+		
+		
+		
+//______________________________________________________________________________________________________________________//		
 // RISULTATO DEL TEST quando il Malus è troppo grande per le risorse, NON AGISCE! 
 		//esempio: Player resources 2 ; increase resources +1; decrese resources -2 ==> RISULTATO = 3
 		//il malus potrebbe aggiornarsi al valore massimo di incremento il malus era di -2 ma in questo caso sarà di -1  ==> risultato = 2
 		//così avrebbe bilanciato l'incremento (così facendo avrebbe agito!)
 // FINE RISULTATO TODO implementare il cambiamento
-		
-		
-	/*
-		game.getCurrentPlayer().getPlayerResourceSet().add(immidiateCardResources);
-		
-		System.out.println("\n" + "STAMPO: ||playerResourceSet|| SOMMA FORZATA\n" );
-		System.out.println( game.getCurrentPlayer().getPlayerResourceSet().toString());	
-		//FUNGE
-		 
-	 */
-		
-		
+//______________________________________________________________________________________________________________________//			
 	}
+	
+	
+	
+	
+	
+	
+	
 
 	//--------------------------------------------------//
 	//-----------------MAIN METHOD----------------------//
@@ -292,6 +325,9 @@ public class MalusDecreaseTEST {
 	
 	
 	
+	//-------------------------------------------------------------//
+	//-----------------GETTER & SETTER METHODS---------------------//
+	//-------------------------------------------------------------//
 
 	public ResourceSet getAdditionalCardResources() {
 		return immidiateCardResources;

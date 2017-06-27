@@ -14,7 +14,6 @@ import java.util.List;
 public class ResourceSet {
 	
 	private LinkedHashMap<String, Resource> resourcesMap;
-	private static final int CONSTANT = 0;
 
 	
 	/**
@@ -30,33 +29,28 @@ public class ResourceSet {
 		for(Resource resource : resourcesList) {
 			resourcesMap.put(resource.getId(), resource);
 		}
-		
 	}
-		
+	
 	/**
-	 * Creates a new ResourceSet object filling the hashmap with the value of zero for every resource
-	 * with the ID of the resource as Key and the resource itself as value.
+	 * This constructor is used to create a deep copy of a resourceSet passed parameter called resourceSetToBeCloned.
 	 * 
-	 * @param List<Resource>
+	 * @param resourceSetToBeCloned
 	 */
-	public ResourceSet() {
+	public ResourceSet (ResourceSet resourceSetToBeCloned){
 		
-		ArrayList<Resource> resourcesList = new ArrayList<>();
+		resourcesMap = new LinkedHashMap<String, Resource>();
 		
-		resourcesList.add(new Resource("Wood", CONSTANT){});
-		resourcesList.add(new Resource("Stones", CONSTANT){});
-		resourcesList.add(new Resource("Servants", CONSTANT){});
-		resourcesList.add(new Resource("Money", CONSTANT){});
-		resourcesList.add(new Resource("FaithPoints", CONSTANT){});
-		resourcesList.add(new Resource("MilitaryPoints", CONSTANT){});
-		resourcesList.add(new Resource("VictoryPoints", CONSTANT){});
-		resourcesList.add(new Resource("CounsilPrivilege", CONSTANT){});
-		
-		resourcesMap = new LinkedHashMap<String, Resource>(); 
-		for(Resource resource : resourcesList) {
-			resourcesMap.put(resource.getId(), resource);
-		}	
+		for (String keyString : resourceSetToBeCloned.getResourcesMap().keySet()) {
+			
+			String tempId = resourceSetToBeCloned.getResourcesMap().get(keyString).getId();
+			int tempValue = resourceSetToBeCloned.getResourcesMap().get(keyString).getQuantity();
+			Resource tempResource = new Resource(tempId, tempValue) {};
+			
+			resourcesMap.put(tempId, tempResource);
+		}
 	}
+		
+	
 	
 	public LinkedHashMap<String, Resource> getResourcesMap() {
 		
@@ -77,9 +71,9 @@ public class ResourceSet {
 	 * 
 	 * @param Resource
 	 */
-	public void sub(Resource lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource > myResource
-		resourcesMap.get(lessResources.getId()).sub(lessResources);
-		}
+	public boolean sub (Resource lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource > myResource
+		return resourcesMap.get(lessResources.getId()).sub(lessResources);
+	}
 	
 	/**
 	 * Returns true if the the value of the resource of the ResourceSet that has the same ID as the resource received as parameter 
@@ -108,20 +102,22 @@ public class ResourceSet {
 	/**
 	 * Decreases the value of the resources of the ResourceSet that has the same ID as the resources in the ResourceSet 
 	 * received as parameter.
-	 * 
+	 * This method checks if the sub operation is done with a positive (or negative) result, and return this result as a boolean value. 
+	 *
 	 * @param lessResources
+	 * @result subResult;
 	 */
-	public void sub(ResourceSet lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource > myResource
-		
-		for(String key : lessResources.getResourcesMap().keySet()){
-			//gets the resource of this resourceSet with the same key of the resource received by parameter
-			//and decreases it by the resource received by parameter
-			/*if (!resourcesMap.get(key).greaterOrEqual(lessResources.getResourcesMap().get(key))){
-				//le risorse che devo sottrarre sono maggiori di quelle del giocatore?
-				System.out.println("\n Sono dentro al metodo SUB e il risultato è:" + !resourcesMap.get(key).greaterOrEqual(lessResources.getResourcesMap().get(key)));
-			}*/
-			resourcesMap.get(key).sub(lessResources.getResourcesMap().get(key));
+	public boolean sub(ResourceSet lessResources) {
+		if (greaterOrEqual( lessResources)){
+			for(String key : lessResources.getResourcesMap().keySet()){
+					//gets the resource of this resourceSet with the same key of the resource received by parameter
+					//and decreases it by the resource received by parameter			
+					resourcesMap.get(key).sub(lessResources.getResourcesMap().get(key));
+				}
+			return true;
 		}
+		else 
+			return false;
 	}
 	
 	/**
@@ -129,6 +125,7 @@ public class ResourceSet {
 	 * received as parameter is greater or equal than all the resources of the resourceSet received as parameter.
 	 * 
 	 * @param Resource
+	 * @return boolean
 	 */
 	public boolean greaterOrEqual(ResourceSet resource) {
 		for(String key : resource.getResourcesMap().keySet()) {
@@ -139,6 +136,8 @@ public class ResourceSet {
 		}
 		return true;
 	}
+	
+	
 	
 	public ArrayList<Resource> toArray() {
 		ArrayList<Resource> array = new ArrayList<Resource>();

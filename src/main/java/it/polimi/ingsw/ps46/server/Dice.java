@@ -77,6 +77,7 @@ public class Dice {
 			return false;
 	}
 	
+	
 	/**
 	 * Description of the method sumDice
 	 * This method sum the value of two dice
@@ -96,14 +97,13 @@ public class Dice {
 	 * @param dice2
 	 */
 	public void subDice(Dice dice2){
+		value =- dice2.getValue(); 
 		
-		value =- dice2.getValue();
-		
-		if (value < 0)
-		{
+		if (value < 0){
 			value = 0;
 		}
 	}
+	
 	
 	
 	/**

@@ -19,7 +19,7 @@ public class PersonalBoard {
 	private ArrayList<BuildingCard> buildingCards = new ArrayList<BuildingCard>();
 	private ArrayList<CharacterCard> characterCards = new ArrayList<CharacterCard>();
 	
-	private ResourceSet playerResources = null;
+	private ResourceSet playerResources = null; 
 	
 	private Dice productionValue;
 	private Dice harvestValue;
@@ -98,8 +98,7 @@ public class PersonalBoard {
 		return territoryCards;
 		
 	}
-
-
+	
 	/**
 	 * Returns ventureCards.
 	 * @return ventureCards 
