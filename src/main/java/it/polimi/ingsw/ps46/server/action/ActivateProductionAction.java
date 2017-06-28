@@ -20,18 +20,18 @@ public class ActivateProductionAction implements Action {
 	
 	private Game game;
 	private ActionSpace productionActionSpace;
-	private Dice familyMemberValue;
+	private FamilyMember familyMemberUsed;
 	
 	private Dice penality;
 	private final static int PENALITYOFTHEACTIONSPACE = 3;
 	
 	
 	
-	public ActivateProductionAction(Game game, ActionSpace productionActionSpace,  FamilyMember familyMemberUsed){
+	public ActivateProductionAction(Game game, ActionSpace productionActionSpace, FamilyMember familyMemberUsed){
 		
 		this.game = game;
 		this.productionActionSpace = productionActionSpace;
-		familyMemberValue = familyMemberUsed.getValueFamilyMember();
+		this.familyMemberUsed = familyMemberUsed;
 		
 		}
 	
@@ -54,13 +54,13 @@ public class ActivateProductionAction implements Action {
 		if (isLegal() == true){
 			for (BuildingCard buildingCard : game.getCurrentPlayer().getPersonalBoard().getBuildingDeck()) {
 				
-				if(familyMemberValue.greaterOrEqual(buildingCard.getProductionValue())){
-					if(buildingCard.getDoubleChoise()){
+				if(familyMemberUsed.getValueFamilyMember().greaterOrEqual(buildingCard.getProductionValue())){
+					if(buildingCard.getDoubleChoice()){
 					//TODO 	Interazione col gicoatore
 						
 						
 					}
-					buildingCard.getPermanentEffects().activateEffect(game);	
+					buildingCard.use(game);	
 					
 				}
 			}
@@ -75,11 +75,14 @@ public class ActivateProductionAction implements Action {
 				}
 			}
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(personalBoardResourceSet);
+			//setting occupied this actionSpace and used the familyMember
+			productionActionSpace.updateAvailability();
+			familyMemberUsed.setPositionOfFamilyMember(productionActionSpace.getIdLocalActionSpaces());
+			
 			return true;
 		}
-		else {
+		else
 			return false;
-		}
 	}
 
 
@@ -89,14 +92,14 @@ public class ActivateProductionAction implements Action {
 	 *	This method check if the called action of production by a player with his family member into a 
 	 * specific produtionActionSpace is Valid or not:<br>
 	 * <ul>
-	 * <li>Check: if the selected action space for the production is for more than one family members , 
-	 * putting the Dice penality if it is. 
-	 * <li>Check: all the dice bonus on the attribute of the player "Bonus" (given by all the character cards got by the player), and Sum (if present).
-	 * <li>Check: possible DiceMalus got by excommunication on the attribute of the player "DiceMalusEffect", and Sub (if present).
+	 * <li>Check: if the selected action space for production is for more than one family members , 
+	 * putting the Dice penalty if it is. 
+	 * <li>Check: all the dice bonus on the player's attribute "Bonus" (given by all the character cards got by the player), 
+	 * and Sum (if present).
+	 * <li>Check: possible DiceMalus got by excommunication on the player's attribute "DiceMalusEffect", and Sub (if present).
 	 * <li>Update the temporary Family member Dice value for the next step.
-	 * <li>Check: FOR Activation of the action, if the production is executable for at least one building card with the updated Family Member Dice value,
-	 *  or the production is executable for the personal board production. If It is return true.
-	 * <li>Else: TODO ask for another action.
+	 * <li>Check: For Activation of the action, if the production is executable for at least one building card with 
+	 * the updated Family Member Dice value, or the production is executable for the personal board production. If it is, return true.
 	 * </ul>
 	 *	@return boolean 
 	 */
@@ -104,7 +107,7 @@ public class ActivateProductionAction implements Action {
 	@Override
 	public boolean isLegal() {
 		
-		Dice temporaryDice = new Dice( familyMemberValue.getValue() );
+		Dice temporaryDice = new Dice( familyMemberUsed.getValueFamilyMember().getValue());
 
 		if ( productionActionSpace.isMaxOnePlayer() != true )
 		{
@@ -124,22 +127,22 @@ public class ActivateProductionAction implements Action {
 					temporaryDice.subDice( diceMalusEffect.getMalus() );	
 				}
 			}
-				
-		//TODO RICHIEDERE AL CONTROLLER SE SI VUOLE AUMENTARE IL VALORE DEL DADO BRUCIANDO DEI SERVI
+			
 		
 		for (BuildingCard buildingCard : game.getCurrentPlayer().getPersonalBoard().getBuildingDeck()) {
 		
 			if(temporaryDice.greaterOrEqual(buildingCard.getProductionValue())){
-				familyMemberValue = temporaryDice;	
+				familyMemberUsed.setValueOfFamilyMember(temporaryDice);
 				return true;
 			}
 		}
 		
 		if(temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getProductionValue())){
-			familyMemberValue = temporaryDice;	
+			familyMemberUsed.setValueOfFamilyMember(temporaryDice);
 			return true;
 		}
 		
 		return false;
 	}
+
 }

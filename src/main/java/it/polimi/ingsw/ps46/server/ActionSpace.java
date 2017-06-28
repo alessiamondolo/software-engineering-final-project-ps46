@@ -60,17 +60,6 @@ public class ActionSpace implements Serializable {
 
 	
 	/**
-	 * Description of the method getIdActionSpaces().
-	 * 
-	 * @return idActionSpaces 
-	 */
-	public int getIdActionSpaces() {
-		return IDACTIONSPACE;
-		
-	}
-	
-	
-	/**
 	 * Description of the method getRequiredFamilyMemberValue().
 	 * 
 	 * @return requiredFamilyMemberValue 
@@ -88,9 +77,7 @@ public class ActionSpace implements Serializable {
 	 */
 	public boolean getAvailability() {
 		return available;	
-			
 	}
-	
 	
 	
 	/**
@@ -107,6 +94,7 @@ public class ActionSpace implements Serializable {
 	public String getType() {
 		return type;
 	}
+	
 
 	public int getIdLocalActionSpaces() {
 		return idLocalActionSpaces;
@@ -116,7 +104,7 @@ public class ActionSpace implements Serializable {
 		return effectOfActionSpace;
 	}
 
-	public void setIdLocalActionSpaces(int idLocalActionSpaces) {
+	private void setIdLocalActionSpaces(int idLocalActionSpaces) {
 		this.idLocalActionSpaces = idLocalActionSpaces;
 	}
 

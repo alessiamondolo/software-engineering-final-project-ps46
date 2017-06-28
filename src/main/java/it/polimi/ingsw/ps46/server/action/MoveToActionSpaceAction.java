@@ -31,14 +31,16 @@ public class MoveToActionSpaceAction implements Action {
 	
 	
 	/**
-	 * After checking if the action is valid, this method:
-	 * - updates the number of spots available in the action space;
-	 * - sets the family member as used;
-	 * - checks the type of action space and based on it launches the next action:
-	 * 		- if it is a tower action space it collects and activates the card in the action space;
-	 * 		- if it is a production or harvest action space, it launches the production or harvest action;
-	 * 		- it it is a market action space, it launches the market space action;
-	 * 		- if it is a council action space, it launches a council space action.
+	 * After checking if the action is valid, this method:<br>
+	 * <ul>
+	 * <li>updates the number of spots available in the action space;</li>
+	 * <li>sets the family member as used;</li>
+	 * <li>checks the type of action space and based on it launches the next action:</li>
+	 * 		- if it is a tower action space it collects and activates the card in the action space;<br>
+	 * 		- if it is a production or harvest action space, it launches the production or harvest action;<br>
+	 * 		- it it is a market action space, it launches the market space action;<br>
+	 * 		- if it is a council action space, it launches a council space action.<br>
+	 * </ul>
 	 */
 	public boolean execute() {
 		
@@ -51,18 +53,18 @@ public class MoveToActionSpaceAction implements Action {
 			//TODO set the family member as used			
 			switch(actionSpace.getType()) {
 				case "TowerActionSpace" : {
-					//TODO verificare se ci sono altri giocatori nella stessa torre
+					//TODO verificare se ci sono altri giocatori nella stessa torre FATTO
 					//TODO capire come prendere il piano in cui si trova la carta
-					//nextAction = new CollectCardAction(Player player, Card card);
-					//nextAction.execute();
+					Action nextAction = new CollectCardAction(game, actionSpace, familyMember);
+				//nextAction.execute();
 					break;
 				}
-				case "ProductionActionSpace" : { /*
-					Action nextAction = new ActivateProductionAction();
-					return nextAction.execute();*/
+				case "ProductionActionSpace" : {
+					Action nextAction = new ActivateProductionAction(game, actionSpace, familyMember);
+					return nextAction.execute();
 				}
 				case "HarvestActionSpace" : {
-					Action nextAction = new ActivateHarvestAction();
+					Action nextAction = new ActivateHarvestAction(game, actionSpace, familyMember);
 					return nextAction.execute();
 				}
 				case "MarketActionSpace" : {
@@ -85,12 +87,13 @@ public class MoveToActionSpaceAction implements Action {
 	
 	
 	/**
-	 * Verifies the following conditions:
-	 * - The player that wants to move to an action space has to be the current player;
-	 * - The action space has to be available;
-	 * - The family member has to be available - it can't be in other action spaces;
-	 * - The value of the family member that needs to be moved to the action space has to be
-	 * 	 greater or equal than the value of the dice of the same color of the family member.
+	 * Verifies the following conditions:<br>
+	 * <ul>
+	 * <li>The player that wants to move to an action space has to be the current player;</li>
+	 * <li>The action space has to be available;</li>
+	 * <li>The family member has to be available - it can't be in other action spaces;</li>
+	 * <li>The value of the family member that needs to be moved to the action space has to be
+	 * 	 greater or equal than the value of the dice of the same color of the family member.</li>
 	 * @return boolean
 	 */
 	public boolean isLegal() {

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
 import it.polimi.ingsw.ps46.server.Dice;
+import it.polimi.ingsw.ps46.server.Game;
 //import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -23,6 +24,12 @@ public class TerritoryCard extends Card {
 			ResourceSet cost, Dice harvestValue) {
 		super(cardName,cardEra, immediateEffects, permanentEffects, cost);
 		this.harvestValue = harvestValue;
+	}
+	
+	@Override
+	public void collectCard(Game game) {
+		immediateEffects.activateEffect(game);
+		game.getCurrentPlayer().getPersonalBoard().putTerritoryCardInPlayerSet(this);
 	}
 	
 	

@@ -60,8 +60,9 @@ public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 		default:
 			break;
 		}
-			
+		//I'm using a copy of the resourceSet of the Card to avoid to change them values.
 		ResourceSet temporaryEffectResourceSet = new ResourceSet(getAdditionalResources());
+		
 		for(String key : temporaryEffectResourceSet.getResourcesMap().keySet()) 
 			{
 				int quantity = temporaryEffectResourceSet.getResourcesMap().get(key).getQuantity();
@@ -78,7 +79,7 @@ public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 					}	
 				}
 			}
-			// POSSIBILE MILGIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
+			// POSSIBILE MIGLIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
 			//player resources 2 ; increase +1; decrease -2 ===> risultato 3;
 			
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
