@@ -22,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import it.polimi.ingsw.ps46.server.EventAcceptor;
-import it.polimi.ingsw.ps46.server.EventMV;
 import it.polimi.ingsw.ps46.server.EventMessage;
 import it.polimi.ingsw.ps46.server.EventVisitor;
 import it.polimi.ingsw.ps46.server.Game;

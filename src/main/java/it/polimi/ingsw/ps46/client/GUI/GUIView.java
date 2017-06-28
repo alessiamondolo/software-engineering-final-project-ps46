@@ -6,7 +6,6 @@ import java.util.Observable;
 import javax.swing.JFrame;
 
 import it.polimi.ingsw.ps46.client.View;
-import it.polimi.ingsw.ps46.server.ActionSpaceName;
 import it.polimi.ingsw.ps46.server.EventAcceptor;
 import it.polimi.ingsw.ps46.server.EventMessage;
 import it.polimi.ingsw.ps46.server.Game;
@@ -121,12 +120,12 @@ public class GUIView implements View {
 	}
 
 	
-	@Override
+/*	@Override
 	public String getPlayerUserame(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+*/
 	
 	@Override
 	public void showInitialOrder() {
@@ -135,18 +134,18 @@ public class GUIView implements View {
 	}
 
 	
-	@Override
+/*	@Override
 	public String getPlayerColor(String username) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	
-	@Override
+/*	@Override
 	public ActionSpaceName getPlayerAction() {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	
 	@Override
@@ -154,15 +153,66 @@ public class GUIView implements View {
 		// TODO Auto-generated method stub
 		
 	}
-<<<<<<< HEAD
 
-	
+	@Override
+	public void printMessage(String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getPlayerUserame() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPlayerColor(ArrayList<String> colors) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public void updateRoundInfo() {
 		// TODO Auto-generated method stub
 		
 	}
-=======
->>>>>>> 2c863c1dcd54dbaba844516375d73be21cd4d4f5
+
+	@Override
+	public void printCurrentPlayer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getPlayerAction() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getFamilyMember() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getServants() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void printPlayerAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showNextTurnOrder() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
