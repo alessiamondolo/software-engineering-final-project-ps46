@@ -102,10 +102,10 @@ private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/co
 	public PersonalBoard createPersonalBoard(String personalBoardConfig) {
 
 		PersonalBoard personalBoard = new PersonalBoard(null, null, null, null, null, null);
-		
+		/*
 		JSONParser parser = new JSONParser();
 		MyJSONParser myJSONParser = new MyJSONParser();
-		
+		*/
 		
 		
 		return personalBoard;

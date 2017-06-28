@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps46.server.card.Card;
 
 /**
@@ -9,7 +11,10 @@ import it.polimi.ingsw.ps46.server.card.Card;
  */
 
 
-public class TowerFloor {
+public class TowerFloor implements Serializable {
+	
+	private static final long serialVersionUID = 856421117347183587L;
+	
 	private int floor = 0; 
 	private ActionSpace actionOfTheTower = null;
 	private Card cardInTheFloor = null;

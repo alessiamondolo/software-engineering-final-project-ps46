@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -10,7 +11,7 @@ import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
 import it.polimi.ingsw.ps46.server.card.GenericMalusEffect;
 //import it.polimi.ingsw.ps46.server.card.LeaderCard;
-
+import it.polimi.ingsw.ps46.server.card.LeaderCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
@@ -19,13 +20,15 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  * 
  * @author Andrea.Masi
  */
-public class Player {
+public class Player implements Serializable {
 
+	private static final long serialVersionUID = -7052325730099632561L;
+	
 	private int idPlayer;
 	private String username;
 	private String color;
 	
-	// private ArrayList<LeaderCard> leaderCards;  //TODO completare tutta la lista delle carte i suoi effetti ecc ecc
+	private ArrayList<LeaderCard> leaderCards;  //TODO completare tutta la lista delle carte i suoi effetti ecc ecc
 	
 	private PersonalBoard personalBoard;
 	
@@ -52,11 +55,6 @@ public class Player {
 	public Player(int idPlayer) {
 		
 		this.idPlayer = idPlayer; 
-		
-		/*playerResources = new ResourceSet();
-
-		
-		*/
 		
 		familyMembers = new LinkedHashMap<String,FamilyMember>();
 		familyMembers.put("White", new FamilyMember("White"));
@@ -129,9 +127,22 @@ public class Player {
 	}
 
 
+	//LEADER CARDS - GETTER//
+	////////////////////////
+		
+	public ArrayList<LeaderCard> getLeaderCards() {
+		return leaderCards;
+	}
+	
 	
 	//FAMILY MEMBER - GETTER AND SETTER//
 	////////////////////////////////////
+	
+	public FamilyMember getFamilyMember(String colorKey) {
+		return familyMembers.get(colorKey);
+		
+	}
+	
 	
 	/**
 	 * Returns FamilyMembersMap.
@@ -140,6 +151,8 @@ public class Player {
 	public Map<String, FamilyMember> getFamilyMembersMap() {
 		return familyMembers;
 	}
+	
+	
 	
 
 	//BONUS - GETTER AND SETTER//
@@ -296,12 +309,10 @@ public class Player {
 
 	public void setDecreaseAtFinalMalus(DecreaseResourcesAtFinalMalus decreaseAtFinalMalus) {
 		this.decreaseAtFinalMalus = decreaseAtFinalMalus;
+
 	}
 
-
-	public FamilyMember getFamilyMember(String familyMemberName) {
-		// TODO Auto-generated method stub
-		return this.getFamilyMember(familyMemberName);
-	}
 	
-}
+
+	}	
+

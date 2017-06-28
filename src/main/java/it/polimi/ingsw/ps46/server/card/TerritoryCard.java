@@ -14,6 +14,8 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  */
 public class TerritoryCard extends Card {
 
+	private static final long serialVersionUID = -638138649575488909L;
+	
 	//Territory cards don't have any cost
 	private Dice harvestValue;
 

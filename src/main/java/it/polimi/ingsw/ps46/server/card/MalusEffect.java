@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps46.server.card;
 
+
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps46.server.Game;
 
 /**
@@ -8,7 +11,9 @@ import it.polimi.ingsw.ps46.server.Game;
  * @author Andrea.Masi
  */
 
-public abstract class MalusEffect {
+public abstract class MalusEffect implements Serializable {
+	
+	private static final long serialVersionUID = -554625838030700049L;
 	
 	protected String name;
 	

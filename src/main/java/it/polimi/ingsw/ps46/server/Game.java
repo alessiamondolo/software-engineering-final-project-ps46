@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps46.server;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,7 +26,9 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 import it.polimi.ingsw.ps46.utils.MyJSONParser;
 
 
-public class Game extends Observable {
+public class Game extends Observable implements Serializable {
+	
+	private static final long serialVersionUID = 2038242402419462794L;
 	
 	private final int ROUNDS_PER_PERIOD = 2;
 	private final int PERIODS = 3;
@@ -49,7 +52,7 @@ public class Game extends Observable {
 	private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/config/";
 	
 	
-		Game(int numberPlayers) {
+		public Game(int numberPlayers) {
 		this.numberPlayers = numberPlayers;
 		players = new ArrayList<Player>();
 		//creates the players objects and adds them to the list of players
@@ -60,6 +63,9 @@ public class Game extends Observable {
 		configDice();
 		configDecks();
 		configBoard();
+		///
+		currentPlayer = new Player(1); // AGGIUNTO PER IL TESTING DA TOGLIERE//
+		///
 	}
 
 	private void newState(Object event) {

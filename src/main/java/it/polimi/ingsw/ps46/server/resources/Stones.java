@@ -8,6 +8,8 @@ package it.polimi.ingsw.ps46.server.resources;
  */
 public class Stones extends Resource {
 	
+	private static final long serialVersionUID = -2861477755384927863L;
+
 	/**
 	 * The constructor.
 	 */

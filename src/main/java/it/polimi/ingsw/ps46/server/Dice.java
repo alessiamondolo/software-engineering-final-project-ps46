@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.Serializable;
 
 /**
  * This Class is used to create an object Dice used (as an int) 
@@ -8,7 +9,9 @@ package it.polimi.ingsw.ps46.server;
  *
  */
 
-public class Dice {
+public class Dice implements Serializable {
+	
+	private static final long serialVersionUID = 8456130205960916201L;
 	
 	private int value = 0;
 	private static final int NFACES = 6;
@@ -77,6 +80,7 @@ public class Dice {
 			return false;
 	}
 	
+	
 	/**
 	 * Description of the method sumDice
 	 * This method sum the value of two dice
@@ -96,14 +100,13 @@ public class Dice {
 	 * @param dice2
 	 */
 	public void subDice(Dice dice2){
+		value =- dice2.getValue(); 
 		
-		value =- dice2.getValue();
-		
-		if (value < 0)
-		{
+		if (value < 0){
 			value = 0;
 		}
 	}
+	
 	
 	
 	/**

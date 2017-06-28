@@ -8,6 +8,8 @@ package it.polimi.ingsw.ps46.server.resources;
  */
 public class CounsilPrivilege extends Resource {
 	
+	private static final long serialVersionUID = -1942721378066858491L;
+
 	/**
 	 * The constructor.
 	 */

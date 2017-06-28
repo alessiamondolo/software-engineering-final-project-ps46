@@ -3,43 +3,65 @@ package it.polimi.ingsw.ps46.client;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ListIterator;
 
-import it.polimi.ingsw.ps46.server.ActionSpaceName;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.utils.ReadInput;
 
 
+/**
+ * This class implements the Command Line User Interface for the game.
+ * 
+ * @author Alessia Mondolo
+ * @version 1.1
+ */
 public class ConsoleView implements View {
 	
 	private ReadInput input;
 	private PrintStream output;
-	private int i = 1;
-	private List<String> colors = new ArrayList<String>();
 	
-	private Game game;
+	private Game game = null;
 	
-	public ConsoleView(Game game, OutputStream output) {
-		this.game = game;
+	
+	/**
+	 * Creates a new ConsoleView object.
+	 * 
+	 * @param output : the output stream that the view will use to print the outputs.
+	 */
+	public ConsoleView(OutputStream output) {
 		this.output = new PrintStream(output);
 		input = new ReadInput();
-		
-		colors.add("Red");
-		colors.add("Yellow");
-		colors.add("Blue");
-		colors.add("Green");
 	}
 	
 	
+	
+	/**
+	 * Sets a new value for the attribute game.
+	 * 
+	 * @param game : the new game object that we want to assign to the attribute game.
+	 */
 	public void setGame(Game game) {
 		this.game = game;
 	}
 	
 	
 	
+	/**
+	 * Prints the message received as parameter
+	 * 
+	 * @param message : the message that has to be print.
+	 */
+	public void printMessage(String message) {
+		output.println(message);
+	}
+	
+	
+	
+	/**
+	 * Prints on the output stream a welcome message for the client.
+	 */
 	public void welcomeMessage() {
 		output.println("==========================================================================");
 		output.println("==========================================================================");
@@ -48,8 +70,17 @@ public class ConsoleView implements View {
 	
 	
 	
+	/**
+	 * Gets the game mode in which the client wants to play the game.
+	 * The client can choose between:
+	 * <ul>
+	 * <li>Basic game mode</li>
+	 * <li>Advanced game mode</li>
+	 * </ul>
+	 * 
+	 * @return a string containing the game mode chosen by the client.
+	 */
 	public String getGameMode() {
-		
 		output.println("==========================================================================");
 		output.println("In which game mode do you want to play?");
 		output.println("1. Basic");
@@ -63,24 +94,29 @@ public class ConsoleView implements View {
 	
 	
 	
-	public String getPlayerUserame(int id) {
-		
+	/**
+	 * Gets the username that the client wants to use for the game.
+	 * 
+	 * @return username : the username received by input from the client.
+	 */
+	public String getPlayerUserame() {
 		output.println("==========================================================================");
-		output.println("Player " + id + ": what is your username?");
+		output.println("What is your username?");
 		String username = input.stringFromConsole();	
 		return username;
 	}
 	
 	
 	
+	/**
+	 * Prints on the output stream the game oder that will be used during the first round of the game.
+	 */
 	public void showInitialOrder() {
-		
 		output.println("==========================================================================");
 		output.println("The initial game order will be:");
 		int position = 1;
 		
-		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){
-			Player player=iterator.next();
+		for(Player player : game.getPlayers()){
 			output.println(position + ". " + player.getUsername());
 			position++;
 		}
@@ -88,24 +124,44 @@ public class ConsoleView implements View {
 	
 	
 	
-	public String getPlayerColor(String username) {
+	/**
+	 * Gets the color that the client wants to use for the game. The color can be chosen from a list of colors
+	 * that is received as parameter.
+	 * 
+	 * @param colors : a list of colors from which the client can choose his color.
+	 * @return color : the color received by input from the client.
+	 */
+	public String getPlayerColor(ArrayList<String> colors) {
 		output.println("==========================================================================");
-		output.println(username + ": which color do you want?");
+		output.println("Which color do you want?");
 		int index = 1;
-		for(ListIterator<String> iterator=colors.listIterator(); iterator.hasNext();){
-			String color =iterator.next();
+		for(String color : colors){
 			output.println(index + ". " + color);
 			index++;
 		}
 		int color = input.IntegerFromConsole(1, colors.size()) - 1;
 		output.println("Your color will be " + colors.get(color));
-		colors.remove(color);
 		return colors.get(color);
 	}
 	
 	
 	
+	/**
+	 * Prints on the output stream the info about the current round.
+	 */
+	public void updateRoundInfo() {
+		output.println("==========================================================================");
+		output.println("We are now playing round " + game.getCurrentRound() + " of period " + game.getCurrentPeriod() + ".");
+		output.println("\n");
+	}
+	
+	
+	
+	/**
+	 * Prints on the output stream the board of the game.
+	 */
 	public void printBoard() {
+		//BEGIN of the setup of the parameters that will be shown in the board
 		int quantity;
 		int cost;
 		String name;
@@ -125,7 +181,6 @@ public class ConsoleView implements View {
 				else 
 					quantity = 0;
 				towersBonusQuantity[tower][floor] = quantity;
-				
 				
 				if(!game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().getEffectOfActionSpace().getAdditionalResources().getResourcesMap().isEmpty()) {
 					name = game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().getEffectOfActionSpace().getAdditionalResources().toArray().get(0).getId();
@@ -155,11 +210,9 @@ public class ConsoleView implements View {
 				}
 				else 
 					towersBonusName[tower][floor] = "|             |";
-				 
 				
 				cost = game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().getRequiredFamilyMemberValue().getValue();
 				towersCost[tower][floor] = cost;
-				
 				
 				color = game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().getPlayerColor();
 				switch(color) {
@@ -179,16 +232,16 @@ public class ConsoleView implements View {
 					towersPlayers[tower][floor] = "|      -      |";
 					break;
 				};
-				
 			}
 		}
+		//END of the setup of the parameters that will be shown in the board
 		
 		output.println("THIS IS THE BOARD OF LORENZO IL MAGNIFICO:");
 		output.println(" ________________________________________________________________________ ");
 		output.println("|                                                                        |");
 		output.println("|     GREEN TOWER      BLUE TOWER      YELLOW TOWER     PURPLE TOWER     |");
 		output.println("|    _____________    _____________    _____________    _____________    |");
-		output.println("|   |   FLOOR 4   |  |   FLOOR 4   |  |   FLOOR 4   |  |   FLOOR 4   |   |");
+		output.println("|   | SPACE ID: 4 |  | SPACE ID: 8 |  | SPACE ID: 12|  | SPACE ID: 16|   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.printf("|   |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |   |\n",
 				towersBonusQuantity[0][3], towersBonusQuantity[1][3], towersBonusQuantity[2][3], towersBonusQuantity[3][3]);
@@ -203,7 +256,7 @@ public class ConsoleView implements View {
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
 		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][3], towersPlayers[1][3], towersPlayers[2][3], towersPlayers[3][3]);
 		output.println("|   |=============|  |=============|  |=============|  |=============|   |");
-		output.println("|   |   FLOOR 3   |  |   FLOOR 3   |  |   FLOOR 3   |  |   FLOOR 3   |   |");
+		output.println("|   | SPACE ID: 3 |  | SPACE ID: 7 |  | SPACE ID: 11|  | SPACE ID: 15|   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.printf("|   |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |   |\n",
 				towersBonusQuantity[0][2], towersBonusQuantity[1][2], towersBonusQuantity[2][2], towersBonusQuantity[3][2]);
@@ -217,7 +270,7 @@ public class ConsoleView implements View {
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
 		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][3], towersPlayers[1][3], towersPlayers[2][3], towersPlayers[3][3]);
 		output.println("|   |=============|  |=============|  |=============|  |=============|   |");
-		output.println("|   |   FLOOR 2   |  |   FLOOR 2   |  |   FLOOR 2   |  |   FLOOR 2   |   |");
+		output.println("|   | SPACE ID: 2 |  | SPACE ID: 6 |  | SPACE ID: 10|  | SPACE ID: 14|   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.printf("|   |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |   |\n",
 				towersBonusQuantity[0][1], towersBonusQuantity[1][1], towersBonusQuantity[2][1], towersBonusQuantity[3][1]);
@@ -231,7 +284,7 @@ public class ConsoleView implements View {
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
 		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][3], towersPlayers[1][3], towersPlayers[2][3], towersPlayers[3][3]);
 		output.println("|   |=============|  |=============|  |=============|  |=============|   |");
-		output.println("|   |   FLOOR 1   |  |   FLOOR 1   |  |   FLOOR 1   |  |   FLOOR 1   |   |");
+		output.println("|   | SPACE ID: 1 |  | SPACE ID: 5 |  | SPACE ID: 9 |  | SPACE ID: 13|   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.printf("|   |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |  |   Bonus: %d  |   |\n",
 				towersBonusQuantity[0][0], towersBonusQuantity[1][0], towersBonusQuantity[2][0], towersBonusQuantity[3][0]);
@@ -249,25 +302,31 @@ public class ConsoleView implements View {
 		output.println("|------------------------------------------------------------------------|");
 		output.println("|           PRODUCTION SPACES                 HARVEST SPACES             |");
 		output.println("|    _____________    ____(3+)_____    _____________    ____(3+)_____    |");
-		output.println("|   |             |  |             |  |             |  |             |   |");
+		output.println("|   | SPACE ID: 17|  | SPACE ID: 18|  | SPACE ID: 19|  | SPACE ID: 20|   |");
+		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Cost: 1   |  |   Cost: 1   |  |   Cost: 1   |  |   Cost: 1   |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   | Penality: - |  | Penality: 3 |  | Penality: - |  | Penality: 3 |   |");
+		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
+		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
 		output.println("|   |_____________|  |_____________|  |_____________|  |_____________|   |");
 		output.println("|          1                2                1                2          |");
 		output.println("|------------------------------------------------------------------------|");
 		output.println("|                             MARKET SPACES                              |");
 		output.println("|    _____________    _____________    _____(4)_____    _____(4)_____    |");
-		output.println("|   |             |  |             |  |             |  |             |   |");
+		output.println("|   | SPACE ID: 21|  | SPACE ID: 22|  | SPACE ID: 23|  | SPACE ID: 24|   |");
+		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Cost: 1   |  |   Cost: 1   |  |   Cost: 1   |  |   Cost: 1   |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |  Bonus: 5   |  |  Bonus: 5   |  |  Bonus: 2   |  |  Bonus: 2   |   |");
 		output.println("|   |    money    |  |  servants   |  | military pt,|  |  different  |   |");
 		output.println("|   |             |  |             |  |   2 money   |  |counsil priv.|   |");
+		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
+		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
 		output.println("|   |_____________|  |_____________|  |_____________|  |_____________|   |");
 		output.println("|          1                2                3                4          |");
 		output.println("|------------------------------------------------------------------------|");
-		output.println("|           COUNSIL SPACE                            DICE                |");
+		output.println("|        COUNSIL SPACE - ID 25                       DICE                |");
 		output.println("|    ______________________________         _____    _____    _____      |");
 		output.println("|   |         |                    |       |     |  |     |  |     |     |");
 		output.println("|   |  Cost:  | Bonus: 1 counsil   |       |  " + game.getDice().get("Black").getValue() +
@@ -293,114 +352,75 @@ public class ConsoleView implements View {
 		}		
 	}
 	
-	public ActionSpaceName getPlayerAction() {
-		output.println("Where do you want to move?");
-		output.println("1. Green Tower");
-		output.println("2. Blue Tower");
-		output.println("3. Yellow Tower");
-		output.println("4. Purple Tower");
-		output.println("5. Production Spaces");
-		output.println("6. Harvest Spaces");
-		output.println("7. Council Space");
-		int move = input.IntegerFromConsole(1, 7);
-		switch(move) {
-			case 1 : {
-				output.println("In witch floor do you want to move? (1, 2, 3, 4)");
-				int space = input.IntegerFromConsole(1, 4);
-				switch(space) {
-					case 1 :
-						return ActionSpaceName.GREEN_TOWER_FLOOR_1;
-					case 2 :
-						return ActionSpaceName.GREEN_TOWER_FLOOR_2;
-					case 3 :
-						return ActionSpaceName.GREEN_TOWER_FLOOR_3;
-					case 4 :
-						return ActionSpaceName.GREEN_TOWER_FLOOR_4;
-					default:
-						return null;
-				}
-			}
-			case 2 : {
-				output.println("In witch floor do you want to move? (1, 2, 3, 4)");
-				int space = input.IntegerFromConsole(1, 4);
-				switch(space) {
-					case 1 :
-						return ActionSpaceName.BLUE_TOWER_FLOOR_1;
-					case 2 :
-						return ActionSpaceName.BLUE_TOWER_FLOOR_2;
-					case 3 :
-						return ActionSpaceName.BLUE_TOWER_FLOOR_3;
-					case 4 :
-						return ActionSpaceName.BLUE_TOWER_FLOOR_4;
-					default:
-						return null;
-				}
-			}
-			case 3 : {
-				output.println("In witch floor do you want to move? (1, 2, 3, 4)");
-				int space = input.IntegerFromConsole(1, 4);
-				switch(space) {
-					case 1 :
-						return ActionSpaceName.YELLOW_TOWER_FLOOR_1;
-					case 2 :
-						return ActionSpaceName.YELLOW_TOWER_FLOOR_2;
-					case 3 :
-						return ActionSpaceName.YELLOW_TOWER_FLOOR_3;
-					case 4 :
-						return ActionSpaceName.YELLOW_TOWER_FLOOR_4;
-					default:
-						return null;
-				}
-			}
-			case 4 : {
-				output.println("In witch floor do you want to move? (1, 2, 3, 4)");
-				int space = input.IntegerFromConsole(1, 4);
-				switch(space) {
-					case 1 :
-						return ActionSpaceName.PURPLE_TOWER_FLOOR_1;
-					case 2 :
-						return ActionSpaceName.PURPLE_TOWER_FLOOR_2;
-					case 3 :
-						return ActionSpaceName.PURPLE_TOWER_FLOOR_3;
-					case 4 :
-						return ActionSpaceName.PURPLE_TOWER_FLOOR_4;
-					default:
-						return null;
-				}
-			}
-			case 5: {
-				output.println("Do you want to move in the first or second space? (1, 2)");
-				int space = input.IntegerFromConsole(1, 2);
-				switch(space) {
-				case 1 :
-					return ActionSpaceName.PRODUCTION_SPACE_1;
-				case 2 :
-					return ActionSpaceName.PRODUCTION_SPACE_2;
-				default:
-					return null;
-				}
-			}
-			case 6: {
-				output.println("Do you want to move in the first or second space? (1, 2)");
-				int space = input.IntegerFromConsole(1, 2);
-				switch(space) {
-				case 1 :
-					return ActionSpaceName.HARVEST_SPACE_1;
-				case 2 :
-					return ActionSpaceName.HARVEST_SPACE_2;
-				default:
-					return null;
-				}
-			}
-			case 7: {
-				return ActionSpaceName.COUNSIL_SPACE;
-			}
-		}
-		return null;
+	
+	
+	/**
+	 * Prints on the output stream the username of the client that is currently playing his turn.
+	 */
+	public void printCurrentPlayer() {
+		Player player = game.getCurrentPlayer();
+		output.println("==========================================================================");
+		output.println(player.getUsername() + " is now playing.");
+	}
+	
+
+	
+	/**
+	 * Prints on the output stream the status of the client that is currently playing his turn.
+	 * It will show the resources and the cards of the player.
+	 */
+	public void printPlayerStatus() {
+		Player player = game.getCurrentPlayer();
+		output.println("==========================================================================");
+		output.println("It's now your turn.");
+		output.println("This is what you have:");
+		output.println("1. Resources:");
+		output.println(player.getPersonalBoard().getPlayerResourceSet().toString());
+		output.println("2. Territory Cards:");
+		if(player.getPersonalBoard().getTerritoryDeck().isEmpty())
+			output.println("You don't have territory cards for now.");
+		else
+			output.println(player.getPersonalBoard().getTerritoryDeck());
+		output.println("3. Character Cards:");
+		if(player.getPersonalBoard().getCharacterDeck().isEmpty())
+			output.println("You don't have character cards for now.");
+		else
+			output.println(player.getPersonalBoard().getCharacterDeck());
+		output.println("4. Building Cards:");
+		if(player.getPersonalBoard().getBuildingDeck().isEmpty())
+			output.println("You don't have building cards for now.");
+		else
+			output.println(player.getPersonalBoard().getBuildingDeck());
+		output.println("5. Venture Cards:");
+		if(player.getPersonalBoard().getVentureDeck().isEmpty())
+			output.println("You don't have venture cards for now.");
+		else
+			output.println(player.getPersonalBoard().getVentureDeck());
+		output.println("\n");
 	}
 	
 	
-	public void getFamilyMember() {
+	
+	/**
+	 * Gets the ID of the action space where the client wants to move during his action.
+	 * 
+	 * @return move : the ID of the action space.
+	 */
+	public int getPlayerAction() {
+		output.println("Where do you want to move? (Insert the ID of the action space)");
+		int move = input.IntegerFromConsole(1, 25);
+		return move;
+		
+	}
+	
+	
+	
+	/**
+	 * Gets the family member that the client wants to move during his action.
+	 * 
+	 * @return color : the color of the family member.
+	 */
+	public String getFamilyMember() {
 		output.println("Which family member do you want to use?");
 		int index = 1;
 		for(String key : game.getCurrentPlayer().getFamilyMembersMap().keySet()) {
@@ -423,56 +443,44 @@ public class ConsoleView implements View {
 		}
 		
 		output.println("You chose the " + color + " family member.");
+		return color;
 	}
 	
-	public void getServants() {
+	
+	
+	/**
+	 * Gets the number of servants that the client wants to add to his family member for the current action.<br>
+	 * The maximum number of servants that the player can use is taken from the number of servants that he has at the moment of the action.
+	 * 
+	 * @return servants : the number of servants that the client wants to use.
+	 */
+	public int getServants() {
 		output.println("How many servants do you want to add to your family member?");
-		int servants = input.IntegerFromConsole(0, 50);
-		Integer aux = new Integer(servants);		
+		int myServants = game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").getQuantity();
+		output.println("You still have " + myServants + " servants.");
+		int servants = input.IntegerFromConsole(0, myServants);
+		return servants;
 	}
+
 	
-	public void printPlayerStatus() {
+	
+	/**
+	 * Prints on the output stream the action that the current player made during his turn.
+	 */
+	public void printPlayerAction() {
 		Player player = game.getCurrentPlayer();
 		output.println("==========================================================================");
-		output.println(player.getUsername() + ": it's now your turn.");
-		output.println("This is what you have:");
-		output.println("1. Resources:");
-		output.println(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString());
-		output.println("2. Territory Cards:");
-		if(game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().isEmpty())
-			output.println("You don't have territory cards for now.");
-		else
-			output.println(game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck());
-		output.println("3. Character Cards:");
-		if(game.getCurrentPlayer().getPersonalBoard().getCharacterDeck().isEmpty())
-			output.println("You don't have character cards for now.");
-		else
-			output.println(game.getCurrentPlayer().getPersonalBoard().getCharacterDeck());
-		output.println("4. Building Cards:");
-		if(game.getCurrentPlayer().getPersonalBoard().getBuildingDeck().isEmpty())
-			output.println("You don't have building cards for now.");
-		else
-			output.println(game.getCurrentPlayer().getPersonalBoard().getBuildingDeck());
-		output.println("5. Venture Cards:");
-		if(game.getCurrentPlayer().getPersonalBoard().getVentureDeck().isEmpty())
-			output.println("You don't have venture cards for now.");
-		else
-			output.println(game.getCurrentPlayer().getPersonalBoard().getVentureDeck());
-		output.println("\n");
-		//TODO print cards
-	}
-	
-	public void updateRoundInfo() {
-		output.println("==========================================================================");
-		output.println("We are now playing round " + game.getCurrentRound() + " of period " + game.getCurrentPeriod() + ".");
-		output.println("\n");
+		output.println(player.getUsername() + " moved on the action space with ID ");
 	}
 	
 	
+	
+	/**
+	 * Prints on the output stream the game oder that will be used during the next round of the game.
+	 */
 	public void showNextTurnOrder() {
 		output.println("==========================================================================");
-		output.println("The game order for the next round will be:" + i);
-		i++;
+		output.println("The game order for the next round will be:");
 		int position = 1;
 		
 		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){

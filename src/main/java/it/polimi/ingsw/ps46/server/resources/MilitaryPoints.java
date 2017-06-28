@@ -8,6 +8,8 @@ package it.polimi.ingsw.ps46.server.resources;
  */
 public class MilitaryPoints extends Resource {
 	
+	private static final long serialVersionUID = 8732852356545191886L;
+
 	/**
 	 * The constructor.
 	 */

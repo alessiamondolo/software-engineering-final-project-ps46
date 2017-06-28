@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -8,8 +10,10 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  * 
  * @author Alessia Mondolo
  */
-public class ExchageResourcesEffect implements Effect { // ho cambiato gli attributi da public a private 
+public class ExchageResourcesEffect implements Effect, Serializable { 
 
+	private static final long serialVersionUID = 730731164960929718L;
+	
 	private ResourceSet requiredResources;
 	private ResourceSet gainedResources;
 
@@ -21,21 +25,26 @@ public class ExchageResourcesEffect implements Effect { // ho cambiato gli attri
 
 	public void activateEffect(Game game) {
 		if(canBeActivated(game)) {
+			
+			
+			//TODO SCELTA DI QUALE EXCHANGE RESOURCES EFFETTUARE?
+			
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(requiredResources);
-	
+			
+			ResourceSet temporaryEffectResourceSet = new ResourceSet(gainedResources);
 			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
 			{
 				for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
 					if (decreaseResourcesMalus.name == "DecreaseResourcesMalus"){
 						
-						gainedResources.sub(decreaseResourcesMalus.getDecreasedResources());
+						temporaryEffectResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
 					}	
 				}
 			}
 			// POSSIBILE MILGIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
 			//player resources 2 ; increase +1; decrease -2 ===> risultato 3; 
 			
-			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(gainedResources);
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
 		}
 		//else throw exception - NotActivableEffect
 	}

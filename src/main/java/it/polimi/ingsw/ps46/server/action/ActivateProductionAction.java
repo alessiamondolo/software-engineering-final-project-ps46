@@ -6,16 +6,16 @@ import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
+import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
 /**
- * TODO commentare
+ * This Class implements the Action of Production.
  * 
  * @author Andrea.Masi
  */
-
-
 public class ActivateProductionAction implements Action {
 	
 	private Game game;
@@ -36,47 +36,75 @@ public class ActivateProductionAction implements Action {
 		}
 	
 	
+	/**
+	 * This method execute the action of production checking and doing several operations:<br>
+	 * <ul>
+	 * <li>Check: Got the familyMemberValue and if the action is legal.</li>
+	 * <li>Activate the effect of those player's cards activable by the action of production (if familyMemberValue is enough).</li>
+	 * <li>TODO chiedere al giocatore quale delle due scelte di risorse vuole effettuare (per alcuni tipi di carta)?</li>
+	 * <li>Check if are there some malus acting on the personal board production resourceSet gained.</li>
+	 * <li>Update player's resourceSet.</li>
+	 * </ul>
+	 * @param familyMemberValue
+	 */
+	
 	@Override
-	public void execute() {
-		/*
-		 *  "parametri in entrata" il resourceSet, valore del familiare usato (già aggiornato), le carte relative alla produzione.
-		 * TODO cosa farà il metodo execute?
-		 *  - passare le carte una ad una e ...
-		 *	- controllare quali effetti delle carte possono essere attivate col valore attuale del dado
-		 *	- chiedere al giocatore quale delle due scelte di risorse vuole effettuare (per alcuni tipi di carta)?
-		 *  - togliere le risorse dal resourceSet del giocatore 
-		 *	- aggiornare il resourceSet del giocatore
-		 *  - * Se con malus -1 ... fare in modo che ogni carta venga vista come una sorgente e togliere -1 della risorsa X.
-		 */
+	public boolean execute() {
+		
 		if (isLegal() == true){
 			for (BuildingCard buildingCard : game.getCurrentPlayer().getPersonalBoard().getBuildingDeck()) {
 				
 				if(familyMemberValue.greaterOrEqual(buildingCard.getProductionValue())){
+					if(buildingCard.getDoubleChoise()){
+					//TODO 	Interazione col gicoatore
+						
+						
+					}
 					buildingCard.getPermanentEffects().activateEffect(game);	
+					
 				}
 			}
+
+			ResourceSet personalBoardResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getGainedFromPersonalBoardProduction());
+			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty()){
+				
+				for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
+					if (decreaseResourcesMalus.getName() == "DecreaseResourcesMalus"){
+						personalBoardResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
+					}	
+				}
+			}
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(personalBoardResourceSet);
+			return true;
 		}
 		else {
-			//TODO throw exception! Illegal Action
+			return false;
 		}
-		
-		
-		
 	}
 
+
+	
+	
+	/**
+	 *	This method check if the called action of production by a player with his family member into a 
+	 * specific produtionActionSpace is Valid or not:<br>
+	 * <ul>
+	 * <li>Check: if the selected action space for the production is for more than one family members , 
+	 * putting the Dice penality if it is. 
+	 * <li>Check: all the dice bonus on the attribute of the player "Bonus" (given by all the character cards got by the player), and Sum (if present).
+	 * <li>Check: possible DiceMalus got by excommunication on the attribute of the player "DiceMalusEffect", and Sub (if present).
+	 * <li>Update the temporary Family member Dice value for the next step.
+	 * <li>Check: FOR Activation of the action, if the production is executable for at least one building card with the updated Family Member Dice value,
+	 *  or the production is executable for the personal board production. If It is return true.
+	 * <li>Else: TODO ask for another action.
+	 * </ul>
+	 *	@return boolean 
+	 */
+	
 	@Override
 	public boolean isLegal() {
-		 /* 
-		 *  Cosa farà il metodo #isValid?
-		 *	- controllare dove si è posizionato il family member e modifica il penality (se si trova nello spazio di produzione più grosso)
-		 *	- controllare il bonus (dalle carte personaggio)
-		 *	- * Controllare malus delle carte scomunica
-		 *	- passare le carte una ad una e capire se almeno una carta è attivabile/ personal board
-		 *  - verificare se il giocatore ha abbastanza servi e se può chiedere al giocatore se vuole aumentare ancora il valore del dado usando altri servi?
-		 * 	- **ECCEZIONE	se dopo aver aggiornato il dado il giocatore ha finito i servi e non non avesse la più possibilità di effettuare l'azione?
-		 */
-		Dice temporaryDice = new Dice();
-		temporaryDice = familyMemberValue;
+		
+		Dice temporaryDice = new Dice( familyMemberValue.getValue() );
 
 		if ( productionActionSpace.isMaxOnePlayer() != true )
 		{
@@ -86,7 +114,7 @@ public class ActivateProductionAction implements Action {
 			penality = new Dice(0);
 		
 		temporaryDice.subDice( penality );
-		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "ProductionAction" ) );
+		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "ProductionAction" ));
 		
 	
 		if( !game.getCurrentPlayer().getDiceMalus().isEmpty() )

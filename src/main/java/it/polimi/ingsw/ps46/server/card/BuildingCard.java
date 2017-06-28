@@ -12,6 +12,8 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  */
 public class BuildingCard extends Card {
 	
+	private static final long serialVersionUID = -3659260772278856141L;
+	
 	private Dice productionValue;
 	private ExchageResourcesEffect permanentEffectsTwo;
 	private Boolean doubleChoice = false;

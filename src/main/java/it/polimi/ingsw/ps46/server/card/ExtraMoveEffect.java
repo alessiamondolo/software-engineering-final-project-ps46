@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.action.ActivateHarvestAction;
@@ -11,7 +13,10 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  * 
  * @author Andrea.Masi
  */
-public class ExtraMoveEffect implements Effect {
+public class ExtraMoveEffect implements Effect, Serializable {
+	
+	private static final long serialVersionUID = -1452018894242891182L;
+	
 	private String extraMoveType;
 	private String whichActionSpace;
 	private Dice extraMoveValue;

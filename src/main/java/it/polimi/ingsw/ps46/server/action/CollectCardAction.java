@@ -21,14 +21,12 @@ public class CollectCardAction implements Action {
 	}
 	
 	@Override
-	public void execute() {
+	public boolean execute() {
 		if(isLegal()) {
 			
-			
+			return true;	
 		}
-		else {
-			//throw Exception illegal action
-		}
+		return false;
 	}
 
 	@Override

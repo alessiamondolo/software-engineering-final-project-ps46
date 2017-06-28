@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import it.polimi.ingsw.ps46.client.View;
 import it.polimi.ingsw.ps46.server.ActionSpaceName;
 import it.polimi.ingsw.ps46.server.EventAcceptor;
-import it.polimi.ingsw.ps46.server.EventMV;
 import it.polimi.ingsw.ps46.server.EventMessage;
 import it.polimi.ingsw.ps46.server.Game;
 
@@ -155,6 +154,7 @@ public class GUIView implements View {
 		// TODO Auto-generated method stub
 		
 	}
+<<<<<<< HEAD
 
 	
 	@Override
@@ -162,5 +162,7 @@ public class GUIView implements View {
 		// TODO Auto-generated method stub
 		
 	}
+=======
+>>>>>>> 2c863c1dcd54dbaba844516375d73be21cd4d4f5
 	
 }

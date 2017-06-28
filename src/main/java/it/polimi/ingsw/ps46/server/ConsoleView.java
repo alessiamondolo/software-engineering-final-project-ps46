@@ -15,7 +15,6 @@ public class ConsoleView extends View {
 	
 	private ReadInput input;
 	private PrintStream output;
-	private int i = 1;
 	private List<String> colors = new ArrayList<String>();
 	
 	private Game game;
@@ -56,9 +55,9 @@ public class ConsoleView extends View {
 				break;
 			case GET_PLAYER_ACTION : 
 				printPlayerStatus();
-				String action = getPlayerAction().toString();
+				Integer action = getPlayerAction();
 				setChanged();
-				notifyObservers(new EventStringInput(action, InputType.PLAYER_ACTION));
+				notifyObservers(new EventStringInput(action.toString(), InputType.PLAYER_ACTION));
 				getFamilyMember();
 				getServants();
 				break;
@@ -86,11 +85,6 @@ public class ConsoleView extends View {
 		}
 	}
 
-
-
-
-	public void visit(EventMV eventMV) {
-	}
 	
 	
 	public void setGame(Game game) {
@@ -165,10 +159,11 @@ public class ConsoleView extends View {
 			output.println(index + ". " + color);
 			index++;
 		}
-		int color = input.IntegerFromConsole(1, colors.size()) - 1;
-		output.println("Your color will be " + colors.get(color));
+		int choice = input.IntegerFromConsole(1, colors.size()) - 1;
+		String color = colors.get(choice);
 		colors.remove(color);
-		return colors.get(color);
+		output.println("Your color will be " + color);
+		return color;
 	}
 	
 	
@@ -361,110 +356,11 @@ public class ConsoleView extends View {
 		}		
 	}
 	
-	public ActionSpaceName getPlayerAction() {
-		output.println("Where do you want to move?");
-		output.println("1. Green Tower");
-		output.println("2. Blue Tower");
-		output.println("3. Yellow Tower");
-		output.println("4. Purple Tower");
-		output.println("5. Production Spaces");
-		output.println("6. Harvest Spaces");
-		output.println("7. Council Space");
-		int move = input.IntegerFromConsole(1, 7);
-		switch(move) {
-			case 1 : {
-				output.println("In witch floor do you want to move? (1, 2, 3, 4)");
-				int space = input.IntegerFromConsole(1, 4);
-				switch(space) {
-					case 1 :
-						return ActionSpaceName.GREEN_TOWER_FLOOR_1;
-					case 2 :
-						return ActionSpaceName.GREEN_TOWER_FLOOR_2;
-					case 3 :
-						return ActionSpaceName.GREEN_TOWER_FLOOR_3;
-					case 4 :
-						return ActionSpaceName.GREEN_TOWER_FLOOR_4;
-					default:
-						return null;
-				}
-			}
-			case 2 : {
-				output.println("In witch floor do you want to move? (1, 2, 3, 4)");
-				int space = input.IntegerFromConsole(1, 4);
-				switch(space) {
-					case 1 :
-						return ActionSpaceName.BLUE_TOWER_FLOOR_1;
-					case 2 :
-						return ActionSpaceName.BLUE_TOWER_FLOOR_2;
-					case 3 :
-						return ActionSpaceName.BLUE_TOWER_FLOOR_3;
-					case 4 :
-						return ActionSpaceName.BLUE_TOWER_FLOOR_4;
-					default:
-						return null;
-				}
-			}
-			case 3 : {
-				output.println("In witch floor do you want to move? (1, 2, 3, 4)");
-				int space = input.IntegerFromConsole(1, 4);
-				switch(space) {
-					case 1 :
-						return ActionSpaceName.YELLOW_TOWER_FLOOR_1;
-					case 2 :
-						return ActionSpaceName.YELLOW_TOWER_FLOOR_2;
-					case 3 :
-						return ActionSpaceName.YELLOW_TOWER_FLOOR_3;
-					case 4 :
-						return ActionSpaceName.YELLOW_TOWER_FLOOR_4;
-					default:
-						return null;
-				}
-			}
-			case 4 : {
-				output.println("In witch floor do you want to move? (1, 2, 3, 4)");
-				int space = input.IntegerFromConsole(1, 4);
-				switch(space) {
-					case 1 :
-						return ActionSpaceName.PURPLE_TOWER_FLOOR_1;
-					case 2 :
-						return ActionSpaceName.PURPLE_TOWER_FLOOR_2;
-					case 3 :
-						return ActionSpaceName.PURPLE_TOWER_FLOOR_3;
-					case 4 :
-						return ActionSpaceName.PURPLE_TOWER_FLOOR_4;
-					default:
-						return null;
-				}
-			}
-			case 5: {
-				output.println("Do you want to move in the first or second space? (1, 2)");
-				int space = input.IntegerFromConsole(1, 2);
-				switch(space) {
-				case 1 :
-					return ActionSpaceName.PRODUCTION_SPACE_1;
-				case 2 :
-					return ActionSpaceName.PRODUCTION_SPACE_2;
-				default:
-					return null;
-				}
-			}
-			case 6: {
-				output.println("Do you want to move in the first or second space? (1, 2)");
-				int space = input.IntegerFromConsole(1, 2);
-				switch(space) {
-				case 1 :
-					return ActionSpaceName.HARVEST_SPACE_1;
-				case 2 :
-					return ActionSpaceName.HARVEST_SPACE_2;
-				default:
-					return null;
-				}
-			}
-			case 7: {
-				return ActionSpaceName.COUNSIL_SPACE;
-			}
-		}
-		return null;
+	public int getPlayerAction() {
+		output.println("Where do you want to move? (Insert the ID of the action space)");
+		int move = input.IntegerFromConsole(1, 25);
+		return move;
+		
 	}
 	
 	
@@ -548,8 +444,7 @@ public class ConsoleView extends View {
 	
 	private void showNextTurnOrder() {
 		output.println("==========================================================================");
-		output.println("The game order for the next round will be:" + i);
-		i++;
+		output.println("The game order for the next round will be:");
 		int position = 1;
 		
 		for(ListIterator<Player> iterator=game.getPlayers().listIterator(); iterator.hasNext();){

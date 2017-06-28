@@ -11,6 +11,8 @@ import it.polimi.ingsw.ps46.server.Game;
 
 public class GenericMalusEffect extends MalusEffect{
 
+	private static final long serialVersionUID = -5303989501452852134L;
+	
 	private String type;
 	
 	public GenericMalusEffect(){

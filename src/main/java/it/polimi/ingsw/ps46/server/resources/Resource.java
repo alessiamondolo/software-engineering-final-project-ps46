@@ -1,12 +1,15 @@
 package it.polimi.ingsw.ps46.server.resources;
 
+import java.io.Serializable;
 
 /**
  * Resource can be used to represent any type of resource.
  * 
  * @author Alessia Mondolo 
  */
-public abstract class Resource {
+public abstract class Resource implements Serializable {
+	
+	private static final long serialVersionUID = -2185596359494356372L;
 	
 	/**
 	 * Stores the id  that identifies the type of resource.
@@ -45,8 +48,13 @@ public abstract class Resource {
 	 * Sets quantity.
 	 * @return quantity 
 	 */
-	public void setQuantity(int newQuantity) { //errore se è negativo
+	public void setQuantity(int newQuantity) { 
 		quantity = newQuantity;
+		
+	/*	if (quantity < 0){
+			throw Exception;	//errore se è negativo
+		}
+	*/
 	}
 	
 	/**
@@ -58,16 +66,19 @@ public abstract class Resource {
 	}
 	
 	/**
-	 * Decreases the value of quantity by lessQuantity, if there are enough resources.
-	 * Otherwise, throws and exception. 
+	 * Decreases the value of quantity by lessQuantity, if there are enough resources to do the sub operation return true;
+	 * Otherwise, return false.
+	 * 
 	 * @param lessQuantity 
+	 * @return boolean 
 	 */
-	public void sub(Resource lessResource) {
-		if(greaterOrEqual(lessResource)) // così non fa nulla se sto togliendo più risorse di quelle che ho.
+	public boolean sub(Resource lessResource) {
+		if(greaterOrEqual(lessResource)){ 
 			quantity -= lessResource.getQuantity();
-		//else 
-		//	quantity = 0;
-		//	throw new Exception()
+			return true;
+		}
+		else 
+			return false;
 	}
 
 	public boolean greaterOrEqual(Resource resource) {

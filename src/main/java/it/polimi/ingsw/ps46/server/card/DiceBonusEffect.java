@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Game;
 
@@ -9,7 +11,9 @@ import it.polimi.ingsw.ps46.server.Game;
  * @author Andrea.Masi
  */
 
-public class DiceBonusEffect implements Effect {
+public class DiceBonusEffect implements Effect, Serializable {
+	
+	private static final long serialVersionUID = 6370738656493432310L;
 	
 	protected String type;
 	protected Dice bonus; 
