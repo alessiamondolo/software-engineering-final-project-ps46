@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -14,7 +13,12 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+
+import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.PersonalBoard;
+import it.polimi.ingsw.ps46.server.Player;
 
 /**
  * A dashboard that allows the player to visualizes resources and cards. 
@@ -22,15 +26,26 @@ import javax.swing.border.Border;
  *
  */
 
-public class PlayerDashboard extends JPanel{
+public class PlayerDashboard extends JPanel {
 
-	private String playerUsername;
+	private static final long serialVersionUID = 1221239488547892322L;
+	
+	private Game game;
+	private Player player;
+	private JPanel dashboard;
+	private JLabel bonusTile;
+	
 	private Dimension dashboardDimension;
 	private double dashboardHeight;
 	private double dashboardWidth;
 	private double bonusTileWidth;
 	
-	public PlayerDashboard(String playerUsername, Dimension playerAreaDimension) {
+	private JLabel moneyValue = new JLabel();
+	private JLabel woodValue = new JLabel();
+	private JLabel stonesValue = new JLabel();
+	private JLabel servantsValue = new JLabel();
+	
+	public PlayerDashboard(Dimension playerAreaDimension) {
 		
 		this.dashboardHeight = (playerAreaDimension.getHeight()*8)/28;
 		this.dashboardWidth = (playerAreaDimension.getWidth()*12)/13;
@@ -41,10 +56,10 @@ public class PlayerDashboard extends JPanel{
 		System.out.println(String.valueOf(dashboardHeight));
 		System.out.println(String.valueOf(dashboardWidth));
 		
-		this.playerUsername = playerUsername;
-		
-		this.add(createBonusTile());
-		this.add(createDashboard());  //devo passare il game per saper se sono avanzato o no
+		this.bonusTile= createBonusTile();
+		this.add(bonusTile);
+		this.dashboard = createDashboard(); 
+		this.add(dashboard);
 			
 	}
 
@@ -64,6 +79,8 @@ public class PlayerDashboard extends JPanel{
 		GridBagConstraints gbc = new GridBagConstraints();
 		JLabel dashboardImage = new JLabel();
 		 
+	
+		
 		gbc.fill = GridBagConstraints.BOTH;  
 		gbc.ipadx = 0;
 		gbc.ipady = 0;
@@ -74,9 +91,8 @@ public class PlayerDashboard extends JPanel{
 		
 		for (int i = 0; i < 96; i++) {
 			
-			//JLabel di prova per fare la griglia 
 			JLabel l = new JLabel();
-			//l.setPreferredSize(new Dimension(20, 20));
+			l.setText(String.valueOf(i));
 			Border b1 = BorderFactory.createLineBorder(Color.BLACK, 1);
 			l.setBorder(b1);
 			
@@ -106,6 +122,20 @@ public class PlayerDashboard extends JPanel{
 				gbc.gridy = 7;
 			} 
 			
+			if (i == 84) {
+				moneyValue.setHorizontalAlignment(SwingConstants.CENTER);
+				dashboard.add(moneyValue, gbc);
+			} else if (i == 85) {
+				woodValue.setHorizontalAlignment(SwingConstants.CENTER);
+				dashboard.add(woodValue, gbc);
+			} else if (i == 86) {
+				stonesValue.setHorizontalAlignment(SwingConstants.CENTER);
+				dashboard.add(stonesValue, gbc);
+			} else if (i == 87) {
+				servantsValue.setHorizontalAlignment(SwingConstants.CENTER);
+				dashboard.add(servantsValue, gbc);
+			} 
+			
 			dashboard.add(l, gbc);
 		}
 		
@@ -122,6 +152,7 @@ public class PlayerDashboard extends JPanel{
 		dashboard.add(dashboardImage, gbc);
 		
 		return dashboard;	
+	
 	}
 	
 	private ImageIcon returndashboardImage() {
@@ -137,6 +168,7 @@ public class PlayerDashboard extends JPanel{
 
 		return imageIcon;
 	}
+	
 	
 	private JLabel createBonusTile() {
 		
@@ -157,6 +189,35 @@ public class PlayerDashboard extends JPanel{
 
 		return bonusTile;
 		
+	}
+	
+	/**
+	 * Method to be called at early stages, as soon as the players list is available this 
+	 * associates a dashboard to a player.
+	 * @param player
+	 */
+	
+	public void setPlayer(Player player) {
+		
+		this.player = player;
+	
+	}
+ 
+	
+	
+	/**
+	 * This needs to be called in order to display resource accordingly to the player's values stored in model
+	 */
+	
+	public void update(Game game) {
+		
+		this.game = game;
+		
+		moneyValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Money").getQuantity()));
+		woodValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Wood").getQuantity()));
+		stonesValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Stones").getQuantity()));
+		servantsValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").getQuantity()));	
+	
 	}
 	
 }

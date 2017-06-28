@@ -297,5 +297,11 @@ public class Player {
 	public void setDecreaseAtFinalMalus(DecreaseResourcesAtFinalMalus decreaseAtFinalMalus) {
 		this.decreaseAtFinalMalus = decreaseAtFinalMalus;
 	}
+
+
+	public FamilyMember getFamilyMember(String familyMemberName) {
+		// TODO Auto-generated method stub
+		return this.getFamilyMember(familyMemberName);
+	}
 	
 }

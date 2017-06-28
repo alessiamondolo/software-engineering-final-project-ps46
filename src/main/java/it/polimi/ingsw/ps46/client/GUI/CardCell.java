@@ -1,47 +1,73 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
-public class CardCell extends Cell {
-	
-	//da valutare se renderla zoomabile quindi dotata di action listener
-	
-	
-	String cardName;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.IOException;
+import java.util.ArrayList;
 
-	//anche le celle carte possono essere identificate da un numero di convenzione. ogni torre dall'alto verso il basso..
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
+import it.polimi.ingsw.ps46.server.card.Card;
+
+public class CardCell extends Cell<Card> {
 	
-	public CardCell(int number, String cardName) {
-		
-		super(number);
-		this.cardName = cardName;
-		this.availability = true; //strettamente legato alla casella appena a fianco a dx
-	
+	private static final long serialVersionUID = 5769254098690808463L;
+
+	public CardCell() {
+		imageList = new ArrayList<Image> ();
 	}
-	
-	public void showCard() {
-		 
-		//getImage(String cardName);
-		//this.add(Image);
-	}
-	
-/**
- * A CardCell is created with a card associated, the attribute availability represents
- * the presence of the above mentioned card, whenever a player picks up the card the 
- * setAvailability method gets called and sets availability to false while removing also, 
- *  the card image, meaning that the CardCell no longer has an available card.
- */
 
-
+	/**
+	 *  Paints a card accordingly to the one the model set for that tower floor.
+	 */
+	
+	//cosa ricevere e come mappare le carte con i file immagine per implementare il metodo
+	//paint per fargli stampare di volta in volta l'immagine della carta corretta?
+	
 	@Override
-	void setAvailability() {
+	public void paint(Graphics g) {
+		// TODO Auto-generated method stub
+		super.paint(g);
 		
-		this.availability = false;
-		//this.remove(image);
-		
+		this.removeAll();
+		for (Card c : itemList) {
+			int index = CardNames.find(c.getCardName());
+			Image img = imageList.get(index);
+			if (img == null) {
+				img = loadCard(index);
+				imageList.set(index, img);
+			}
+			ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(g.getClipBounds().width, g.getClipBounds().height, Image.SCALE_SMOOTH));
+			this.setIcon(imageIcon);
+		}
 	}
+	
+	private static ArrayList<Image> imageList;
+	
+	private Image loadCard(int index) {
+		String path = "img/cards/devcards_f_en_c_" + index + ".png";
+		Image img = null;
+		try {
+			img = ImageIO.read(getClass().getResource(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return img;
+	}
+}
 
-	@Override
-	void showToken(Token token) {
-
-		
+final class CardNames {
+	static String names[] = {
+			"",
+			"Mint",
+			"Woods"
+	};
+	static int find(String name) {
+		for (int i = 0; i < names.length; i++) {
+			if (names[i].compareToIgnoreCase(name) == 0)
+				return i;
+		}
+		return -1;
 	}
 }
