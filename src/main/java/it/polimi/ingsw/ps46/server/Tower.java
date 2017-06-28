@@ -24,7 +24,7 @@ public class Tower implements Serializable {
 	 **/
 	public Tower (String towerColor, ArrayList<TowerFloor> floors){
 		colorOfTheTower = towerColor;
-		this.floors = floors;
+	//	this.floors = floors;
 		if(floors != null)
 		numberOfFloors = floors.size();
 	}
@@ -46,22 +46,20 @@ public class Tower implements Serializable {
 			return false;
 	}
 	
-	/**
-	 * Description of the method getTowerFloor
-	 * 
-	 * @param floorTowerIndex
-	 * @return the same floor of the floorTowerIndex
-	 */
 	
-	public TowerFloor getTowerFloor (int floorTowerIndex){
-		
-		return floors.get(floorTowerIndex);
-		
+	public ArrayList<TowerFloor> getFloors() {
+		return floors;
 	}
 
 
+	public String getColorOfTheTower(){
+		
+		return colorOfTheTower;
+	}
+	
 	public int getNumberOfFloors() {
 		return numberOfFloors;
 	}
-	
+
+
 }

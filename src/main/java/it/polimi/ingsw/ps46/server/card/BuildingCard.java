@@ -37,7 +37,7 @@ public class BuildingCard extends Card {
 
 
 
-	public Boolean getDoubleChoise() {
+	public Boolean getDoubleChoice() {
 		return doubleChoice;
 	}
 

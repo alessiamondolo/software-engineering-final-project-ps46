@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps46.server;
 import java.io.Serializable;
 
 /**
- * This Class creates an object family member formed by its id ( set in the Class Player for a MAX of 4) Availability and its value.
+ * This Class creates an object family member formed by its Value (Dice), position (int), color (String) and if isUsed(boolean)
  * 
  * @author Andrea.Masi
  */
