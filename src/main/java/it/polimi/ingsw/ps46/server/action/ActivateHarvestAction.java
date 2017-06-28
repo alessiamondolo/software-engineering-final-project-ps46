@@ -54,7 +54,7 @@ public class ActivateHarvestAction implements Action {
 				
 				if(familyMemberUsed.getValueFamilyMember().greaterOrEqual(territoryCard.getHarvestValue())){
 
-					territoryCard.getPermanentEffects().activateEffect(game);	
+					territoryCard.use(game);	
 					
 				}
 			}

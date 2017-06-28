@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps46.server;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps46.server.card.Card;
+
 /**
  * 
  * @author Andrea.Masi
@@ -88,7 +90,7 @@ public class Board implements Serializable {
 	 * comparing the id of the action space with the passed one by argument. 
 	 * 
 	 * @param idActionSpace
-	 * @return
+	 * @return indexOf(tower) which contains the actionSpace
 	 */
 	private int getWhichTowerContain(int idActionSpace) { //TODO da testare
 		
@@ -101,4 +103,47 @@ public class Board implements Serializable {
 		}
 		return -1; //nel caso di errore ritorna -1
 	}
+	
+	
+	/**
+	 * This class is used to get the card associate with the actionSpace passed as argument.
+	 * 
+	 * @param idActionSpace
+	 * @return towerFloor.getCard()
+	 */
+	public Card getCardOfTheTowerFloor(int idActionSpace) {
+		
+		int towerId = getWhichTowerContain(idActionSpace);	
+		
+		if (towerId != -1 ){
+				for (TowerFloor towerFloor : towers.get(towerId).getFloors()) {
+					if (towerFloor.getActionSpace().getIdLocalActionSpaces() == idActionSpace){
+						return towerFloor.getCard();	
+					}		
+				}
+			}		
+		System.out.println("Errore nella lettura delle torri, oggetto non trovato e 'return null'");
+		return null ;
+	}
+	
+	
+	/**
+	 * This class is used to get the color of the tower associate with the actionSpace passed as argument.
+
+	 * @param idActionSpace
+	 * @return tower.getColorOfTheTower()
+	 */
+	public String getColorOfTower (int idActionSpace){
+		
+		for (Tower tower : towers) {
+			for (TowerFloor towerFloor : tower.getFloors()) {
+				if( towerFloor.getActionSpace().getIdLocalActionSpaces() == idActionSpace){
+					return (tower.getColorOfTheTower());
+				}	
+			}
+		}
+		System.out.println("Errore nella lettura delle torri, oggetto non trovato e 'return null'");
+		return null; //nel caso di errore ritorna null
+	}
+	
 }

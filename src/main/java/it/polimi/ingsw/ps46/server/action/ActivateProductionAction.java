@@ -60,7 +60,7 @@ public class ActivateProductionAction implements Action {
 						
 						
 					}
-					buildingCard.getPermanentEffects().activateEffect(game);	
+					buildingCard.use(game);	
 					
 				}
 			}
@@ -81,9 +81,8 @@ public class ActivateProductionAction implements Action {
 			
 			return true;
 		}
-		else {
+		else
 			return false;
-		}
 	}
 
 

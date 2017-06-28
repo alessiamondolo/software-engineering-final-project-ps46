@@ -53,9 +53,9 @@ public class MoveToActionSpaceAction implements Action {
 			//TODO set the family member as used			
 			switch(actionSpace.getType()) {
 				case "TowerActionSpace" : {
-					//TODO verificare se ci sono altri giocatori nella stessa torre
+					//TODO verificare se ci sono altri giocatori nella stessa torre FATTO
 					//TODO capire come prendere il piano in cui si trova la carta
-					Action nextAction = new CollectCardAction(player, actionSpace, game.getBoard().isEmptyTower(actionSpace.getIdLocalActionSpaces()));
+					Action nextAction = new CollectCardAction(game, actionSpace, familyMember);
 				//nextAction.execute();
 					break;
 				}

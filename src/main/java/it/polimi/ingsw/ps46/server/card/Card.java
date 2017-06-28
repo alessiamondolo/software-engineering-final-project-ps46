@@ -16,7 +16,7 @@ public abstract class Card implements Serializable {
 	
 	private final String cardName;
 	private final int cardEra;
-	private final Effect immediateEffects;
+	protected final Effect immediateEffects;
 	private final Effect permanentEffects;
 	private final ResourceSet cost;
 	 
@@ -58,14 +58,17 @@ public abstract class Card implements Serializable {
 	 * into the list of permanent effects of the player that uses the card.
 	 * @param game
 	 */
+	//POSSIBILE INTERAZIONE COL GIOCATORE PER LA SCELTA DI QUALE EFFETTO PERMANENTE ATTIVARE?
 	public void use(Game game) {
-		//activates the immediate effects of the card
-		immediateEffects.activateEffect(game);
-		
-		//stores the permanent effects in the list of permanent effects of the player
-		// TODO
-		//gameState.getCurrentPlayer().addPermanentEffect(permanentEffects);
+		permanentEffects.activateEffect(game);
+	
 	}
+	/**
+	 * This method is used to collect this card object (implemented into the differents kind of cards @overriding)
+	 * 
+	 * @param game
+	 */
+	public void collectCard(Game game) {}
 	
 	@Override
 	public String toString() {

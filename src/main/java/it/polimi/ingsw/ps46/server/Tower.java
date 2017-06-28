@@ -62,4 +62,10 @@ public class Tower implements Serializable {
 	}
 
 
+	public TowerFloor getTowerFloor(int floor) {
+		return floors.get(floor);
+
+	}
+
+
 }

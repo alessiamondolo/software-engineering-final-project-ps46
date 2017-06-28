@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
 import it.polimi.ingsw.ps46.server.Dice;
+import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
@@ -26,6 +27,13 @@ public class BuildingCard extends Card {
 		this.doubleChoice = doubleChoice ;
 		this.permanentEffectsTwo = permanentEffectsTwo;
 	}
+	
+	
+	@Override
+	public void collectCard(Game game) {
+		immediateEffects.activateEffect(game);
+		game.getCurrentPlayer().getPersonalBoard().putBuildingCardInPlayerSet(this);
+	}
 
 	public Dice getProductionValue() {
 		return productionValue;
@@ -34,7 +42,6 @@ public class BuildingCard extends Card {
 	public ExchageResourcesEffect getPermanentEffectsTwo() {
 		return permanentEffectsTwo;
 	}
-
 
 
 	public Boolean getDoubleChoice() {

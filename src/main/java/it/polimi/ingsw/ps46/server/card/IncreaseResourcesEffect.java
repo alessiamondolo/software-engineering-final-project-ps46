@@ -40,9 +40,8 @@ public class IncreaseResourcesEffect implements Effect, Serializable {
 	 * It's implemented the excommunication malus effect -1 called "DecreaseResourcesMalus"
 	 */
 	public void activateEffect(Game game) {
-		//System.out.println("STAMPO ADDITIONAL RESOURCES...prima L'ATTIVAZIONE DEL MALUS");
-		//System.out.println(additionalResources.toString());
 		
+		//I'm using a copy of the resourceSet of the Card to avoid to change them values.
 		ResourceSet temporaryEffectResourceSet = new ResourceSet(additionalResources);
 		
 		//this part is used to check if there are excommunication Malus action on the effect
@@ -56,15 +55,11 @@ public class IncreaseResourcesEffect implements Effect, Serializable {
 				}	
 			}
 		}
-		// POSSIBILE MILGIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
+		// POSSIBILE MIGLIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
 		//player resources 2 ; increase +1; decrease -2 ===> risultato 3; 
 		
 		game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
-		//System.out.println("STAMPO ADDITIONAL RESOURCES...dopo L'ATTIVAZIONE DEL MALUS _NON DOVREBBE ESSER STATO MODIFICATO");
-		//System.out.println(additionalResources.toString());
-		
-		//System.out.println("STAMPO TEMPORARY RESOURCESET...dopo L'ATTIVAZIONE DEL MALUS_ DOVREBBE ESSERE STATO MODIFICATO");
-		//System.out.println(temporaryEffectResourceSet.toString());
+
 	}
 	
 	

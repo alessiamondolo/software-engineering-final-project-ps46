@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server.card;
 
+import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
@@ -28,15 +29,25 @@ public class VentureCard extends Card {
 		this.requiredResource = requiredResource;
 	}
 	
+	
+	@Override
+	public void collectCard(Game game) {
+		immediateEffects.activateEffect(game);
+		game.getCurrentPlayer().getPersonalBoard().putVentureCardInPlayerSet(this);
+	}
+	
+	
 	public boolean getdoubleCostChoice(){
 		
 		return doubleCostChoice;
 	}
 	
+	
 	public ResourceSet getCostTwo(){
 		
 		return costTwo;
 	}
+	
 	
 	public ResourceSet getRequiredResource() {
 		return requiredResource;
