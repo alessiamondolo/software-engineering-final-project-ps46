@@ -58,7 +58,6 @@ public abstract class Card implements Serializable {
 	 * into the list of permanent effects of the player that uses the card.
 	 * @param game
 	 */
-	//POSSIBILE INTERAZIONE COL GIOCATORE PER LA SCELTA DI QUALE EFFETTO PERMANENTE ATTIVARE?
 	public void use(Game game) {
 		permanentEffects.activateEffect(game);
 	

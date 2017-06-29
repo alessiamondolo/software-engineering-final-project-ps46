@@ -50,13 +50,10 @@ public class MoveToActionSpaceAction implements Action {
 			//Sets the action space as not available
 			//TODO check modifications to this method
 			actionSpace.updateAvailability ();
-			//TODO set the family member as used			
 			switch(actionSpace.getType()) {
 				case "TowerActionSpace" : {
-					//TODO verificare se ci sono altri giocatori nella stessa torre FATTO
-					//TODO capire come prendere il piano in cui si trova la carta
 					Action nextAction = new CollectCardAction(game, actionSpace, familyMember);
-				//nextAction.execute();
+					nextAction.execute();
 					break;
 				}
 				case "ProductionActionSpace" : {
@@ -68,6 +65,7 @@ public class MoveToActionSpaceAction implements Action {
 					return nextAction.execute();
 				}
 				case "MarketActionSpace" : {
+					//TODO scrivere l'azione del mercato.
 					//Effect getFromMarket = new IncreaseResourcesEffect(actionSpace.getResources());
 					return false;
 				}

@@ -3,11 +3,8 @@ package it.polimi.ingsw.ps46.server.action;
 import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
-import it.polimi.ingsw.ps46.server.card.CharacterCard;
-import it.polimi.ingsw.ps46.server.card.TerritoryCard;
-import it.polimi.ingsw.ps46.server.card.VentureCard;
+import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.resources.Money;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -62,13 +59,13 @@ public class CollectCardAction implements Action {
 	}
 	
 	
-	
 	 /**
 	  * This method execute the action of collect a card after the operation of checking done by isValid method:<br>
 	  *  <ul>
-	  *  <li>Active the immediate effect of the new card.
-	  *  <li>Collect it into the personalBoard of the player.
-	  *  <li>Set as used the family member and occupied the actionSpace.
+	  *  <li>Active the immediate effect of the new card.</li>
+	  *  <li>Collect it into the personalBoard of the player.</li>
+	  *  <li>Set as used the family member and occupied the actionSpace.</li>
+	  *  </ul>
 	  */
 	@Override
 	public boolean execute() {
@@ -85,13 +82,15 @@ public class CollectCardAction implements Action {
 			return false;
 	}
 
+	
+	
 	/**
 	 *	Verifies the following conditions:<br>
 	 * <ul>
-	 * <li>If the tower is already occupied (the player has to pay 3 money), so check if can he afford this fee;
+	 * <li>If the tower is already occupied (the player has to pay 3 money), so check if can he afford this fee;</li>
 	 * <li>Check if the player can afford the cost of the card, but before it should be added the bonus of the tower floor.
-	 * If he cannot afford these fees, re-Set the resourceSet as before and return false.
-	 * 
+	 * If he cannot afford these fees, re-Set the resourceSet as before and return false.</li>
+	 * </ul>
 	 * @return boolean
 	 */
 	@Override
@@ -101,18 +100,26 @@ public class CollectCardAction implements Action {
 		ResourceSet temporaryPlayerResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet());
 		
 		if (!isTheTowerEmpty) {
-			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(TOWERFEE);
-		}
-		actionSpace.getEffectOfActionSpace().activateEffect(game);
-		
-		if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().greaterOrEqual(card.getCost())){
-			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(card.getCost());
-			return true;
+			if(!temporaryPlayerResourceSet.greaterOrEqual(TOWERFEE)) return false;
+			temporaryPlayerResourceSet.sub(TOWERFEE);
 		}
 		
-		else
-			game.getCurrentPlayer().getPersonalBoard().setResources(temporaryPlayerResourceSet);
-			return false;
+		ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());
+		if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
+		{
+			for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
+				if (decreaseResourcesMalus.getName() == "DecreaseResourcesMalus"){
+					
+					temporaryEffectResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
+				}	
+			}
+		}
+		temporaryPlayerResourceSet.add(temporaryEffectResourceSet);
+		
+		if(!temporaryPlayerResourceSet.greaterOrEqual(card.getCost())) return false;
+		temporaryPlayerResourceSet.sub(card.getCost());
+		
+		game.getCurrentPlayer().getPersonalBoard().setResources(temporaryPlayerResourceSet);
+		return true;
 	}
-
 }

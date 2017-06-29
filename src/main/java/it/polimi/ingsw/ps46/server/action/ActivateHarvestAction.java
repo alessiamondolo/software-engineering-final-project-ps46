@@ -86,14 +86,14 @@ public class ActivateHarvestAction implements Action {
 	 * This method check if the called action of harvest by a player with his family member into a 
 	 * specific harvestActionSpace is Valid or not:<br>
 	 * <ul>
-	 * <li>Check: if the selected action space for harvest is for more than one family members , 
-	 * putting the Dice penalty if it is. 
+	 * <li>Check: if the selected action space for harvest is for more than one family members, 
+	 * putting the Dice penalty if it is.</li> 
 	 * <li>Check: all the dice bonus on the attribute of player's "Bonus" (given by all the character cards got by the player),
-	 *  and Sum (if present).
-	 * <li>Check: possible DiceMalus got by excommunication on the player's attribute "DiceMalusEffect", and Sub (if present).
-	 * <li>Update the temporary Family member Dice value for the next step.
+	 *  and Sum (if present).</li>
+	 * <li>Check: possible DiceMalus got by excommunication on the player's attribute "DiceMalusEffect", and Sub (if present).</li>
+	 * <li>Update the temporary Family member Dice value for the next step.</li>
 	 * <li>Check: For Activation of the action, if harvest is executable for at least one territory card with 
-	 * the updated Family Member Dice value, or the harvest is executable for the personal board harvest. If it is, return true.
+	 * the updated Family Member Dice value, or the harvest is executable for the personal board harvest. If it is, return true.</li>
 	 * </ul>
 	 *	@return boolean 
 	 */
@@ -102,7 +102,8 @@ public class ActivateHarvestAction implements Action {
 	public boolean isLegal() {
 		
 		Dice temporaryDice = new Dice( familyMemberUsed.getValueFamilyMember().getValue());
-
+		//calculating every penality, bonus, malus on a copy of the familyMember Dice
+		
 		if ( harvestActionSpace.isMaxOnePlayer() != true )
 		{
 			penality = new Dice( PENALITYOFTHEACTIONSPACE );
@@ -113,7 +114,6 @@ public class ActivateHarvestAction implements Action {
 		temporaryDice.subDice( penality );
 		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "HarvestAction" ));
 		
-	
 		if( !game.getCurrentPlayer().getDiceMalus().isEmpty() )
 			for( DiceMalusEffect diceMalusEffect : game.getCurrentPlayer().getDiceMalus() ){
 				
@@ -122,20 +122,20 @@ public class ActivateHarvestAction implements Action {
 				}
 			}
 			
-		
+		// checking if is it possible activate harvest action or not
+		boolean oneCardActivableAtLeast = false;
 		for (TerritoryCard territoryCard : game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck()) {
 		
 			if(temporaryDice.greaterOrEqual(territoryCard.getHarvestValue())){
-				familyMemberUsed.setValueOfFamilyMember(temporaryDice);
-				return true;
+				oneCardActivableAtLeast = true;
 			}
 		}
-		
-		if(temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getHarvestValue())){
-			familyMemberUsed.setValueOfFamilyMember(temporaryDice);
-			return true;
+		if(!oneCardActivableAtLeast) return false;
+		if(!temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getHarvestValue())){
+			return false;
 		}
 		
-		return false;
+		familyMemberUsed.setValueOfFamilyMember(temporaryDice);
+		return true;
 	}
 }

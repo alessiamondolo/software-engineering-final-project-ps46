@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps46.server.card.Card;
 
 /**
+ * This Class contains all the objects of the game board, all the towers and all the actionSpaces.
  * 
  * @author Andrea.Masi
- *
  */
 public class Board implements Serializable {
 	
@@ -123,7 +123,7 @@ public class Board implements Serializable {
 				}
 			}		
 		System.out.println("Errore nella lettura delle torri, oggetto non trovato e 'return null'");
-		return null ;
+		return null;
 	}
 	
 	

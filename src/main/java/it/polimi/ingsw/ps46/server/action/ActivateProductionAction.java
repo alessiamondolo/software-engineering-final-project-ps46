@@ -92,14 +92,14 @@ public class ActivateProductionAction implements Action {
 	 *	This method check if the called action of production by a player with his family member into a 
 	 * specific produtionActionSpace is Valid or not:<br>
 	 * <ul>
-	 * <li>Check: if the selected action space for production is for more than one family members , 
-	 * putting the Dice penalty if it is. 
+	 * <li>Check: if the selected action space for production is for more than one family members, 
+	 * putting the Dice penalty if it is.</li>
 	 * <li>Check: all the dice bonus on the player's attribute "Bonus" (given by all the character cards got by the player), 
-	 * and Sum (if present).
-	 * <li>Check: possible DiceMalus got by excommunication on the player's attribute "DiceMalusEffect", and Sub (if present).
-	 * <li>Update the temporary Family member Dice value for the next step.
+	 * and Sum (if present).</li>
+	 * <li>Check: possible DiceMalus got by excommunication on the player's attribute "DiceMalusEffect", and Sub (if present).</li>
+	 * <li>Update the temporary Family member Dice value for the next step.</li>
 	 * <li>Check: For Activation of the action, if the production is executable for at least one building card with 
-	 * the updated Family Member Dice value, or the production is executable for the personal board production. If it is, return true.
+	 * the updated Family Member Dice value, or the production is executable for the personal board production. If it is, return true.</li>
 	 * </ul>
 	 *	@return boolean 
 	 */
@@ -108,6 +108,7 @@ public class ActivateProductionAction implements Action {
 	public boolean isLegal() {
 		
 		Dice temporaryDice = new Dice( familyMemberUsed.getValueFamilyMember().getValue());
+		//calculating every penality, bonus, malus on a copy of the familyMember Dice
 
 		if ( productionActionSpace.isMaxOnePlayer() != true )
 		{
@@ -129,20 +130,22 @@ public class ActivateProductionAction implements Action {
 			}
 			
 		
+		// checking if is it possible activate production action or not
+		boolean oneCardActivableAtLeast = false;
 		for (BuildingCard buildingCard : game.getCurrentPlayer().getPersonalBoard().getBuildingDeck()) {
 		
 			if(temporaryDice.greaterOrEqual(buildingCard.getProductionValue())){
-				familyMemberUsed.setValueOfFamilyMember(temporaryDice);
-				return true;
+				oneCardActivableAtLeast = true;
 			}
 		}
-		
-		if(temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getProductionValue())){
-			familyMemberUsed.setValueOfFamilyMember(temporaryDice);
-			return true;
+		if(!oneCardActivableAtLeast) return false;
+		if(!temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getProductionValue())){
+			return false;
 		}
 		
-		return false;
+		familyMemberUsed.setValueOfFamilyMember(temporaryDice);
+		return true;
 	}
 
+	
 }
