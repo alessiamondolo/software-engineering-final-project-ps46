@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.LayoutManager;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -11,6 +13,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+
+import it.polimi.ingsw.ps46.server.Game;
 
 /**
  * This Class builds the panel meant to host Cards Action Spaces in the central part
@@ -20,6 +24,10 @@ import javax.swing.border.EmptyBorder;
  */
 
 public class UpperPiece extends JPanel {
+	
+	private Game game;
+	private ArrayList<ActionTower> actionTowers = new ArrayList <ActionTower>();
+	private ArrayList<ToTower> toTowers = new ArrayList <ToTower>();
 	
 	public UpperPiece(double widthSmall, double heightSmall) {
 		
@@ -38,27 +46,20 @@ public class UpperPiece extends JPanel {
 		ActionTower yellowTower = new ActionTower(widthSmall, heightSmall);
 		ActionTower violetTower = new ActionTower(widthSmall, heightSmall);
 		
+		actionTowers.add(greenTower);
+		actionTowers.add(azureTower);
+		actionTowers.add(yellowTower);
+		actionTowers.add(violetTower);
 		
-		//da scrivere meglio con magari una lista per rendere più veloci istruzioni
-		JPanel toGreenTower = new JPanel();
-		toGreenTower.setPreferredSize(new Dimension((int) widthSmall/2, (int) (heightSmall*16-heightSmall/5)));
-		JPanel toAzureTower = new JPanel();
-		toAzureTower.setPreferredSize(new Dimension((int) widthSmall/2, (int) (heightSmall*16-heightSmall/5)));
-		JPanel toYellowTower = new JPanel();
-		toYellowTower.setPreferredSize(new Dimension((int) widthSmall/2, (int) (heightSmall*16-heightSmall/5)));
-		JPanel toVioletTower = new JPanel();
-		toVioletTower.setPreferredSize(new Dimension((int) widthSmall/2, (int) (heightSmall*16-heightSmall/5)));
+		ToTower toGreenTower = new ToTower(widthSmall, heightSmall);
+		ToTower toAzureTower = new ToTower(widthSmall, heightSmall);
+		ToTower toYellowTower = new ToTower(widthSmall, heightSmall);
+		ToTower toVioletTower = new ToTower(widthSmall, heightSmall);
 		
-		Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-		
-		/*toGreenTower.setBorder(border);
-		toAzureTower.setBorder(border);
-		toYellowTower.setBorder(border);
-		toVioletTower.setBorder(border);*/
-		toGreenTower.setOpaque(false);
-		toAzureTower.setOpaque(false);
-		toYellowTower.setOpaque(false);
-		toVioletTower.setOpaque(false);
+		toTowers.add(toGreenTower);
+		toTowers.add(toGreenTower);
+		toTowers.add(toGreenTower);
+		toTowers.add(toGreenTower);
 		
 
 		this.add(greenTower);
@@ -70,11 +71,23 @@ public class UpperPiece extends JPanel {
 		this.add(yellowTower);
 		this.add(toYellowTower);
 		
-		this.add(new Box.Filler(new Dimension(5, 5), new Dimension(5, 5), new Dimension(5, 5)));
-		
 		this.add(violetTower);
 		this.add(toVioletTower);
 		
+	}
+	
+	void updateUpperPiece(Game game) {
+		
+		for ( ActionTower tower : actionTowers) {
+			int i = 0;
+			tower.updateTower(game, i);
+			i++;
+		}
+		for ( ToTower toTower : toTowers) {
+			int i = 0;
+			toTower.updateToTower(game, i);
+			i++;
+		}
 	}
 
 }

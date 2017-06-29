@@ -4,20 +4,33 @@ package it.polimi.ingsw.ps46.client.GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+
+import it.polimi.ingsw.ps46.server.EventAcceptor;
+import it.polimi.ingsw.ps46.server.EventMessage;
+import it.polimi.ingsw.ps46.server.EventVisitor;
+import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.NewStateMessage;
+import it.polimi.ingsw.ps46.server.Player;
+import it.polimi.ingsw.ps46.server.resources.Resource;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
+import it.polimi.ingsw.ps46.server.resources.VictoryPoints;
+import it.polimi.ingsw.ps46.server.resources.Wood;
 
 /**
  * MainBoard class displays the board through a top-bottom approach:
@@ -28,13 +41,27 @@ import javax.swing.border.Border;
  *
  */
 
-public class MainBoard extends JPanel  {
+public class MainBoard extends JPanel {
 
 	private static final long serialVersionUID = 6546742554971391289L;
 
+	private ArrayList<PointCell> victoryPointCells;
+	private Game game;
+	private JPanel board;
+	private CentralPiece centralPiece;
+	private MilitaryTower militaryTower;
+	private Dimension tokenDimension;
+	
+	
 	public MainBoard(Dimension boardDimension) {
 		
-		this.add(createBoard(boardDimension));
+		victoryPointCells = new ArrayList<PointCell>();
+		
+		this.board = createBoard(boardDimension);
+		this.add(board);
+		
+		//provaTokenModel();
+		
 		
 	}
 	
@@ -49,20 +76,19 @@ public class MainBoard extends JPanel  {
 	
 	private JPanel createBoard(Dimension boardDimension) {
 		
-		//Dimension boardDimension =  new Dimension (dimension); //(512, 700) proporzioni corrette per non distorcere originale
+		double widthBig = 180.0*((int)boardDimension.getWidth())/1808;		//60
+		double heightBig = 180.0*((int)boardDimension.getHeight())/2493;    //50,5
 		
-		double widthBig = 180.0*((int)boardDimension.getWidth())/1808;
-		double heightBig = 180.0*((int)boardDimension.getHeight())/2493;
-		
-		double widthSmall = (boardDimension.getWidth() - widthBig * 2) / 19;
-		double heightSmall = (boardDimension.getHeight() - heightBig * 2) / 29;
+		double widthSmall = (boardDimension.getWidth() - widthBig * 2) / 19;   //25,2
+		double heightSmall = (boardDimension.getHeight() - heightBig * 2) / 29;   //20,7
+		this.tokenDimension = new Dimension((int) ((widthSmall*7)/25), (int) ((heightSmall*7)/21));
 		
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new GridBagLayout());
 		
-		
 		GridBagConstraints gbc = new GridBagConstraints();
+		
 		gbc.fill = GridBagConstraints.BOTH;  
 		gbc.ipadx = 0;
 		gbc.ipady = 0;
@@ -76,70 +102,69 @@ public class MainBoard extends JPanel  {
 		
 		for (int i = 0; i < 100; i++) {
 			
-			JLabel l = new JLabel();
-			Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
-			l.setBorder(border);
-			// l.setBackground(Color.BLUE);
-			l.setText(String.valueOf(i));
+			PointCell pointCell = new PointCell();
+			victoryPointCells.add(pointCell);
 			
 			if (i == 0) {	
 				gbc.gridx = 0;
 				gbc.gridy = 0;
-				l.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+				pointCell.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
 			} else if (1 <= i && i < 20) {
 				gbc.gridx = i;
 				gbc.gridy = 0;
 				accX += widthSmall - (int)widthSmall;
 				if (accX >= 1.0) {
-					l.setPreferredSize(new Dimension((int)widthSmall+1, (int)heightBig));		
+					pointCell.setPreferredSize(new Dimension((int)widthSmall+1, (int)heightBig));		
 					accX -= 1.0;
 				} else
-					l.setPreferredSize(new Dimension((int)widthSmall, (int)heightBig));
+					pointCell.setPreferredSize(new Dimension((int)widthSmall, (int)heightBig));
 			} else if (i == 20) {
 				gbc.gridx = 20;
 				gbc.gridy = 0;
-				l.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+				pointCell.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
 			} else if (20 < i && i < 50) {
 				gbc.gridx = 20;
 				gbc.gridy = i-20;
 				accY += heightSmall - (int)heightSmall;
 				if (accY >= 1.0) {
-					l.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall+1));		
+					pointCell.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall+1));		
 					accY -= 1.0;
 				} else
-					l.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall));		
+					pointCell.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall));		
 			} else if (i == 50) {
 				gbc.gridx = 20;
 				gbc.gridy = 30;
-				l.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+				pointCell.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
 			} else if (50 < i && i < 70) {
 				gbc.gridx = 70-i; // 20 - (i-50)
 				gbc.gridy = 30;
 				if (accX >= 1.0) {
-					l.setPreferredSize(new Dimension((int)widthSmall+1, (int)heightBig));		
+					pointCell.setPreferredSize(new Dimension((int)widthSmall+1, (int)heightBig));		
 					accX -= 1.0;
 				} else
-					l.setPreferredSize(new Dimension((int)widthSmall, (int)heightBig));
+					pointCell.setPreferredSize(new Dimension((int)widthSmall, (int)heightBig));
 			} else if (i == 70) {
 				gbc.gridx = 0;
 				gbc.gridy = 30;
-				l.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+				pointCell.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+			
+				
 			} else if (70 < i && i < 100) {
 				gbc.gridx = 0;
 				gbc.gridy = 100-i;
 				accY += heightSmall - (int)heightSmall;
 				if (accY >= 1.0) {
-					l.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall+1));		
+					pointCell.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall+1));
 					accY -= 1.0;
 				} else
-					l.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall));		
+					pointCell.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall));		
 			}
 				
-			panel.add(l, gbc);
+			panel.add(pointCell, gbc);
 			
 		}
 			
-		CentralPiece centralPiece = new CentralPiece((widthSmall), (heightSmall));
+		this.centralPiece = new CentralPiece((widthSmall), (heightSmall));
 		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridwidth = 17;
@@ -150,7 +175,7 @@ public class MainBoard extends JPanel  {
 		gbc.gridy = 1;	 
 		panel.add(centralPiece, gbc);
 		
-		MilitaryTower militaryTower = new MilitaryTower();
+		this.militaryTower = new MilitaryTower(widthSmall, heightSmall);
 		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;  
 		gbc.gridwidth = 2;
@@ -173,10 +198,9 @@ public class MainBoard extends JPanel  {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		panel.add(boardImage, gbc);
-			
+		
 		return panel;
-	}
-	
+	}	
 
 	/**
 	 * Obtain the background board image
@@ -193,31 +217,66 @@ public class MainBoard extends JPanel  {
 			
 			e.printStackTrace();
 		}
-		Image img = image.getScaledInstance((int) boardDimension.getWidth(), (int) boardDimension.getHeight(), Image.SCALE_SMOOTH);
-		//Image img = image.getScaledInstance(471, 650, Image.SCALE_SMOOTH);
 		
+		Image img = image.getScaledInstance((int) boardDimension.getWidth(), (int) boardDimension.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(img);
-	    //String path = this.getClass().getClassLoader().getResource("gameboard.png").toExternalForm();
-		//System.out.println(path);
-	    
-		return imageIcon;
+	    return imageIcon;
 		
 	}
-    
-  /*  @Override
-    protected void paintComponent(Graphics g) {
-    	Image image = null;
-    try {
-			 image = ImageIO.read(getClass().getResource("gameboard.png"));
-	} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
+	//metodo di prova per testare i token
+	
+/*	public void provaTokenModel() {
+				
+		List<Resource> list = new ArrayList<Resource>();
+		list.add(new VictoryPoints(10));
+		Player player = new Player(2);
+		player.setColor("Red");
+		ResourceSet set = new ResourceSet(list);
+		
+		player.getPersonalBoard().setResources(set);
+		//player.getPersonalBoard().getPlayerResourceSet().add(new Wood (10));
+		player.getPersonalBoard().getPlayerResourceSet().add(new VictoryPoints (10));
+		
+		int vp = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("VictoryPoints").getQuantity();
+		for (int i = 0; i < victoryPointCells.size(); i++) {
+			PointCell pc = victoryPointCells.get(i);
+			if (i != vp) pc.remove(player);
+			else pc.add(player); 
+			//pc.paint();    crea problemi
 		}
-    	super.paintComponent(g);
-    	//Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-    	
-    	g.drawImage(image, 0, 0, 600, 800, this);
-   	
-    }*/
-    
+	}*/
+
+
+	/**
+	 *  Method to display current Victory Points accordingly to Model's values. This method 
+	 *  is part of the macro method printBoard which is in charge of providing a snapshot 
+	 *  of the Model's situation at the time.
+	 */
+
+	public void update(Game game) {
+		
+		this.game = game; 
+		
+		this.militaryTower.updateMilitaryPoints(this.game, this.tokenDimension);
+	
+		//List <Player> players  = new ArrayList <Player> ();
+		//players = game.getPlayers();
+		
+		for (Player player : game.getPlayers()) {
+			int vp = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("VictoryPoints").getQuantity();
+			for (int i = 0; i < victoryPointCells.size(); i++) {
+				PointCell pc = victoryPointCells.get(i);
+				if (i != vp) pc.remove(player);
+				else pc.add(player); 
+				//pc.paint();  //e player color come parametri
+			}
+		}	
+	
+		
+		centralPiece.updateCentralPiece(game);
+
+		
+	}
+
 }

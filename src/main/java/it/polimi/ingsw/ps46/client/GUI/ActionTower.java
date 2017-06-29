@@ -6,13 +6,24 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+
+import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.card.BuildingCard;
+import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.card.CharacterCard;
+import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.card.IncreaseResourcesEffect;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
+import it.polimi.ingsw.ps46.server.resources.Wood;
 
 /**
  * Board area where cards get displayed. An ActionTower is made of four TowerActionCell
@@ -22,57 +33,62 @@ import javax.swing.border.Border;
  */
 public class ActionTower extends JPanel {
 	
-	
+	private Game game;
+	private Dimension cardDimension;
+	private ArrayList <CardCell> cardCells = new ArrayList <CardCell> ();
   
 	public ActionTower(double widthSmall, double heightSmall) {
+	
+		setActionTower(widthSmall, heightSmall);	
 		
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		setActionTower(widthSmall, heightSmall);
+		for (int i = 0; i < 4; i++) {
 			
+			CardCell cell = new CardCell();
+			cell.setPreferredSize(new Dimension((int) ((2*widthSmall)), (int) (heightSmall*16-heightSmall/5)/5));
+			cell.setMaximumSize(getPreferredSize());
+			cell.setMinimumSize(getPreferredSize());
+			this.add(cell);
+			cardCells.add(cell);
+		}
+		
+		Image img = cardCells.get(0).loadCard(4);
+		Image img1 = cardCells.get(0).loadCard(5);
+		Image img2 = cardCells.get(0).loadCard(6);
+		Image img3 = cardCells.get(0).loadCard(78);
+		
+		ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		cardCells.get(0).setIcon(imageIcon);
+		imageIcon = new ImageIcon(img1.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		cardCells.get(1).setIcon(imageIcon);
+		imageIcon = new ImageIcon(img2.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		cardCells.get(2).setIcon(imageIcon);
+		imageIcon = new ImageIcon(img3.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		cardCells.get(3).setIcon(imageIcon);
 		
 	}
 	
 	private void setActionTower(double widthSmall, double heightSmall) {
 		
-		this.setPreferredSize(new Dimension((int) widthSmall, (int) (heightSmall*16-heightSmall/5)));
+		this.setPreferredSize(new Dimension((int) ((7*widthSmall/3)), (int) (heightSmall*16-heightSmall/5)));
+		this.setMaximumSize(getPreferredSize());
+		this.setMinimumSize(getPreferredSize());
 		this.setOpaque(false);
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
 		this.setBorder(border);	
 	
 	}
+
+	public void updateTower(Game game, int i) {
+		this.game = game;
 		
-/*	private void getCard() {
-			
-		BufferedImage image = null;
-			try {
-				image = ImageIO.read(getClass().getResourceAsStream("LorenzoCards_compressed_png/devcards_f_en_c_1.png"));
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Image img = image.getScaledInstance(35, 75, Image.SCALE_SMOOTH);
-		    ImageIcon cardIcon = new ImageIcon(img);
-		    
-		    card.setIcon(cardIcon);
-			
-		} */
-		
-	/*@Override
-    protected void paintComponent(Graphics g) {
-    	Image image = null;
-    try {
-			 image = ImageIO.read(getClass().getResource("LorenzoCards_compressed_png/devcards_f_en_c_1.png"));
-	} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for (int x = 0; x < 4; x++) {
+		Card card = game.getBoard().getTower(i).getTowerFloor(x + (3 - x*2)).getCard();
+		CardCell cc = cardCells.get(x);
+		cc.itemList.remove(0);  //una cardCells avrà sempre solo una carta, soluzione non elegante però
+		cc.add(card);
 		}
-    	super.paintComponent(g);
-    	//Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-    	
-    	g.drawImage(image, 0, 0, 600, 800, this);
-   	
-    }*/
-
-
+		
+	}
 }

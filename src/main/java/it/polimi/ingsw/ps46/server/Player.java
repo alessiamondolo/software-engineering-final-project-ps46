@@ -309,5 +309,10 @@ public class Player implements Serializable {
 
 	public void setDecreaseAtFinalMalus(DecreaseResourcesAtFinalMalus decreaseAtFinalMalus) {
 		this.decreaseAtFinalMalus = decreaseAtFinalMalus;
+
+	}
+
+	
+
 	}	
-}
+

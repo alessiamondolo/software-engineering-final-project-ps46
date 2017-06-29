@@ -1,19 +1,13 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
+
+import it.polimi.ingsw.ps46.server.Game;
 
 /**
  * MainWindow Class is the GUI root Container for the main game screen. 
@@ -23,9 +17,15 @@ import javax.swing.border.Border;
  *
  */
 
-public class MainWindow extends JFrame implements Observer {
+public class MainWindow extends JFrame {
 	
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6629824344371954788L;
+
+	private MainBoard mainBoard;
+	private PlayerArea playerArea;
 	
 	public MainWindow() {
 		
@@ -43,39 +43,37 @@ public class MainWindow extends JFrame implements Observer {
 		
 		this.setTitle("Lorenzo il Magnifico");
 		this.setPreferredSize(new Dimension(mainWindowWidth, mainWindowHeight));
-		this.add(createplayerArea(playerAreaDimension), BorderLayout.WEST);
-		this.add(createBoardArea(boardDimension));
 		
-		  //parametri che dovrebbero essere calcolati in base alla risoluzione dello schermo su cui il programma gira
+		this.mainBoard = createBoardArea(boardDimension);
+		this.add(mainBoard);
+		this.playerArea = createplayerArea(playerAreaDimension);
+		this.add(playerArea, BorderLayout.WEST);
 		
-		//this.getContentPane().setLayout(new BorderLayout());
-		//this.setLayout(new BorderLayout());
-		//this.add(boardArea, BorderLayout.EAST);
-
-
 	}
 	
-	private PlayerArea createplayerArea(Dimension playerAreaDimension)  {
-		
-		PlayerArea playerArea = new PlayerArea(playerAreaDimension);
-		return playerArea;
-
-	}
 	
 	private MainBoard createBoardArea(Dimension boardDimension) {
 		
 		MainBoard board = new MainBoard(boardDimension);
 		return board;
-	
 	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+	
+	
+	private PlayerArea createplayerArea(Dimension playerAreaDimension)  {
 		
+		PlayerArea playerArea = new PlayerArea(playerAreaDimension);
+		return playerArea;
 	}
 	
 	
+	public MainBoard getMainBoard() {
+		return this.mainBoard;	
+	}
+	
+	
+	public PlayerArea getPlayerArea() {
+		return this.playerArea;
+	}
 	
 }
 	
