@@ -61,7 +61,7 @@ public class MainBoard extends JPanel {
 		this.add(board);
 		
 		//provaTokenModel();
-		provaTokenGUI(tokenDimension);
+		
 		
 	}
 	
@@ -246,16 +246,6 @@ public class MainBoard extends JPanel {
 			//pc.paint();    crea problemi
 		}
 	}*/
-	
-	public void provaTokenGUI(Dimension tokenDimension) {
-		
-		PointCell cell = null; 
-		for (int i = 0; i < 100; i ++) {
-			cell = victoryPointCells.get(i);
-		}
-		System.out.println(String.valueOf(victoryPointCells.size()));
-	
-	}
 
 
 	/**
@@ -279,7 +269,7 @@ public class MainBoard extends JPanel {
 				PointCell pc = victoryPointCells.get(i);
 				if (i != vp) pc.remove(player);
 				else pc.add(player); 
-				//pc.paint(tokenDimension);  //e player color come parametri
+				//pc.paint();  //e player color come parametri
 			}
 		}	
 	

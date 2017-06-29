@@ -40,7 +40,6 @@ public class PointCell extends Cell<Player> {
 		this.add(new Token(dimension));
 		this.add(new Token(dimension));
 		this.add(new Token(dimension));
-		this.add(new Token(dimension));
 		
 		/*for (player p : itemList) {
 			

@@ -61,12 +61,9 @@ public class CentralPiece extends JPanel {
 		
 	}
 	
-	public void updateUpperPiece(Game game) {
-		upperPiece.updateUpperPiece(game);
-	}
-	
-	public void updateLowerPiece(Game game) {
-		
+	public void updateCentralPiece(Game game) {
+		this.upperPiece.updateUpperPiece(game);
+		//this.lowerPiece.updateLowerPiece(game)
 	}
 	
 	

@@ -17,6 +17,13 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.card.BuildingCard;
+import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.card.CharacterCard;
+import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.card.IncreaseResourcesEffect;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
+import it.polimi.ingsw.ps46.server.resources.Wood;
 
 /**
  * Board area where cards get displayed. An ActionTower is made of four TowerActionCell
@@ -46,6 +53,20 @@ public class ActionTower extends JPanel {
 			cardCells.add(cell);
 		}
 		
+		Image img = cardCells.get(0).loadCard(4);
+		Image img1 = cardCells.get(0).loadCard(5);
+		Image img2 = cardCells.get(0).loadCard(6);
+		Image img3 = cardCells.get(0).loadCard(78);
+		
+		ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		cardCells.get(0).setIcon(imageIcon);
+		imageIcon = new ImageIcon(img1.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		cardCells.get(1).setIcon(imageIcon);
+		imageIcon = new ImageIcon(img2.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		cardCells.get(2).setIcon(imageIcon);
+		imageIcon = new ImageIcon(img3.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		cardCells.get(3).setIcon(imageIcon);
+		
 	}
 	
 	private void setActionTower(double widthSmall, double heightSmall) {
@@ -63,8 +84,10 @@ public class ActionTower extends JPanel {
 		this.game = game;
 		
 		for (int x = 0; x < 4; x++) {
-		game.getBoard().getTower(i).getTowerFloor(x).getCard();
-		//cardCells.get(x).paint(null);  dopo aver ottenuto la nuova carta la devo stampare
+		Card card = game.getBoard().getTower(i).getTowerFloor(x + (3 - x*2)).getCard();
+		CardCell cc = cardCells.get(x);
+		cc.itemList.remove(0);  //una cardCells avrà sempre solo una carta, soluzione non elegante però
+		cc.add(card);
 		}
 		
 	}

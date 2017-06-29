@@ -22,9 +22,6 @@ public class CardCell extends Cell<Card> {
 	 *  Paints a card accordingly to the one the model set for that tower floor.
 	 */
 	
-	//cosa ricevere e come mappare le carte con i file immagine per implementare il metodo
-	//paint per fargli stampare di volta in volta l'immagine della carta corretta?
-	
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
@@ -45,7 +42,8 @@ public class CardCell extends Cell<Card> {
 	
 	private static ArrayList<Image> imageList;
 	
-	private Image loadCard(int index) {
+	public Image loadCard(int index) {
+		
 		String path = "img/cards/devcards_f_en_c_" + index + ".png";
 		Image img = null;
 		try {
@@ -60,9 +58,104 @@ public class CardCell extends Cell<Card> {
 final class CardNames {
 	static String names[] = {
 			"",
+			"Commercial Hub",
+			"Woods",
+			"Village",
+			"Gravel Pit",
+			"Forest",
+			"Monastery",
+			"Citadel",
+			"City",
+			"Gold Mine",
+			"Mountain Town",
+			"Mining Town",
+			"Rock Pit",
+			"Estate",
+			"Hermitage",
+			"Manor House",
+			"Dukedom",
+			"Trading Town",
+			"Farm",
+			"Colony",
+			"Marble Pit",
+			"Province",
+			"Sanctuary",
+			"Castle",
+			"Fortified Town",
 			"Mint",
-			"Woods"
+			"Tax Office",
+			"Triumphal Arch",
+			"Theater",
+			"Carpenter's Shop",
+			"Stonemason's Shop",
+			"Chapel",
+			"Residence",
+			"Marketplace",
+			"Treasury",
+			"Painters' Guild",
+			"Sculptors' Guild",
+			"Stonemasons' Guild",
+			"Baptistery",
+			"Barracks",
+			"Stronghold",
+			"Bank",
+			"Fair",
+			"Garden",
+			"Fortress",
+			"Palace",
+			"Church",
+			"Military Academy",
+			"Cathedral",
+			"Warlord",
+			"Stonemason",
+			"Dame",
+			"Knight",
+			"Farmer",
+			"Artisan",
+			"Preacher",
+			"Abbess",
+			"Captain",
+			"Architect",
+			"Patron",
+			"Hero",
+			"Peasant",
+			"Scholar",
+			"Papal Messenger",
+			"Royal Messenger",
+			"Noble",
+			"Governor",
+			"Paramour",
+			"Herald",
+			"Cardinal",
+			"Bishop",
+			"General",
+			"Ambassador",
+			"Hiring Recruits",
+			"Repairing the Church",
+			"Building the Walls",
+			"Raising a Statue",
+			"Military Campaign",
+			"Hosting Panhandlers",
+			"Fighting Heresies",
+			"Support to the Bishop",
+			"Hiring Soldiers",
+			"Repairing the Abbey",
+			"Building the Bastions",
+			"Support to the King",
+			"Improving the Canals",
+			"Hosting Foreigners",
+			"Crusade",
+			"Support to the Cardinal",
+			"Hiring Mercenaries",
+			"Repairing the Cathedral",
+			"Building the Towers",
+			"Promoting Sacred Art",
+			"Military Conquest",
+			"Improving the Roads",
+			"Sacred War",
+			"Support to the Pope"	
 	};
+	
 	static int find(String name) {
 		for (int i = 0; i < names.length; i++) {
 			if (names[i].compareToIgnoreCase(name) == 0)
