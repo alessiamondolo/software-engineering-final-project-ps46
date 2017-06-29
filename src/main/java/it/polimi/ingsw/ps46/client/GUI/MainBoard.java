@@ -274,8 +274,8 @@ public class MainBoard extends JPanel {
 		}	
 	
 		
-		centralPiece.updateUpperPiece(game);
-		centralPiece.updateLowerPiece(game);
+		centralPiece.updateCentralPiece(game);
+
 		
 	}
 
