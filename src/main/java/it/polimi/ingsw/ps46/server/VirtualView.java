@@ -332,8 +332,10 @@ public class VirtualView extends View {
 		ObjectOutputStream writer = writers.get(currentSocket);
 		ObjectInputStream reader = readers.get(currentSocket);
 		try {
-			if(game.getGameState().equals(GameState.ACTION_NOT_VALID))
+			if(game.getGameState().equals(GameState.ACTION_NOT_VALID)) {
 				writer.writeObject("PREVIOUS_ACTION_NOT_VALID");
+				writer.flush();
+			}
 			writer.writeObject("GET_PLAYER_ACTION");
 			writer.flush();
 			try {					

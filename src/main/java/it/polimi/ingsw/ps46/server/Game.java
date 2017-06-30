@@ -277,8 +277,11 @@ public class Game extends Observable implements Serializable {
 	}
 	
 	public void throwDice() {
-		for(String key : dice.keySet())
+		for(String key : dice.keySet()) {
 			dice.get(key).throwDice();
+			for(Player player : players)
+				player.getFamilyMember(key).setValueOfFamilyMember(dice.get(key));
+		}
 		newState(new EventMessage(NewStateMessage.THROWN_DICE));
 	}
 	
