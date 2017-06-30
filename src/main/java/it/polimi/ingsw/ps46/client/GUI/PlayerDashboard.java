@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -19,12 +20,15 @@ import javax.swing.border.Border;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.PersonalBoard;
 import it.polimi.ingsw.ps46.server.Player;
+import it.polimi.ingsw.ps46.server.card.Card;
 
 /**
  * A dashboard that allows the player to visualizes resources and cards. 
  * @author lorenzo
  *
  */
+
+// TODO da rendere la dashboard associata ai giocatore, il player che visualizza il terminale deve avere vista preferenziale
 
 public class PlayerDashboard extends JPanel {
 
@@ -45,6 +49,17 @@ public class PlayerDashboard extends JPanel {
 	private JLabel stonesValue = new JLabel();
 	private JLabel servantsValue = new JLabel();
 	
+	private ArrayList <CardCell> buildingCardCells = new ArrayList <CardCell> ();
+	private ArrayList <CardCell> territoryCardCells = new ArrayList <CardCell> ();
+	private ArrayList <CardCell> ventureCardCells = new ArrayList <CardCell> ();
+	private ArrayList <CardCell> characterCardCells = new ArrayList <CardCell> ();
+	private ArrayList <Card> cards = new ArrayList <Card> ();
+	
+	private int buildingCardsCounter = 0;
+	private int territoryCardsCounter = 0;
+	private int ventureCardsCounter = 0;
+	private int characterCardsCounter = 0;
+	
 	public PlayerDashboard(Dimension playerAreaDimension) {
 		
 		this.dashboardHeight = (playerAreaDimension.getHeight()*8)/28;
@@ -52,9 +67,6 @@ public class PlayerDashboard extends JPanel {
 		this.bonusTileWidth = (playerAreaDimension.getWidth()*3)/65;
 		
 		this.dashboardDimension = new Dimension((int) dashboardWidth, (int) dashboardHeight);
-		
-		System.out.println(String.valueOf(dashboardHeight));
-		System.out.println(String.valueOf(dashboardWidth));
 		
 		this.bonusTile= createBonusTile();
 		this.add(bonusTile);
@@ -72,15 +84,22 @@ public class PlayerDashboard extends JPanel {
 		
 		JPanel dashboard = new JPanel();
 		dashboard.setPreferredSize(dashboardDimension);
+		//dashboard.setMinimumSize(dashboard.getPreferredSize());
+		//dashboard.setMaximumSize(dashboard.getPreferredSize());
 		GridBagLayout gbl = new GridBagLayout();
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
 		dashboard.setBorder(border);
 		dashboard.setLayout(gbl);
-		GridBagConstraints gbc = new GridBagConstraints();
+		GridBagConstraints gbc;
 		JLabel dashboardImage = new JLabel();
-		 
-	
+		moneyValue.setForeground(Color.WHITE);
+		woodValue.setForeground(Color.WHITE);
+		stonesValue.setForeground(Color.WHITE);
+		servantsValue.setForeground(Color.WHITE);
 		
+		for (int i = 0; i < 36; i++) {
+		
+		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;  
 		gbc.ipadx = 0;
 		gbc.ipady = 0;
@@ -88,55 +107,58 @@ public class PlayerDashboard extends JPanel {
 		gbc.gridheight = 1;
 		gbc.weightx = 1;
 		gbc.weighty = 1;
+		CardCell cardcell = new CardCell();
+
 		
-		for (int i = 0; i < 96; i++) {
-			
-			JLabel l = new JLabel();
-			l.setText(String.valueOf(i));
-			Border b1 = BorderFactory.createLineBorder(Color.BLACK, 1);
-			l.setBorder(b1);
-			
-			if ( 0 <= i && i < 12 ) {
+		if ( 0 <= i && i < 12) {
 				gbc.gridx = i;
-				gbc.gridy = 0;	
+				gbc.gridy = 0;
+				gbc.gridheight = 1;
+				cardcell.setPreferredSize(new Dimension( (int) dashboardWidth/12, (int) (3*dashboardHeight)/8));
+				cardcell.setMaximumSize(cardcell.getPreferredSize());
+				cardcell.setMinimumSize(cardcell.getPreferredSize());
+				if (i < 6) {
+					buildingCardCells.add(cardcell);
+				} else {
+					ventureCardCells.add(cardcell);
+				}
 			} else if ( 12 <= i && i < 24 ) {
 				gbc.gridx = i - 12;
-				gbc.gridy = 1;
-			} else if ( 24 <= i && i < 36 ) {
-				gbc.gridx = i - 24;
-				gbc.gridy = 2;
-			} else if ( 36 <= i && i < 48) {
-				gbc.gridx = i - 36;
 				gbc.gridy = 3;
-			} else if ( 48 <= i && i < 60) {
-				gbc.gridx = i - 48;
-				gbc.gridy = 4;
-			} else if ( 60 <= i && i < 72) {
-				gbc.gridx = i - 60;
-				gbc.gridy = 5;
-			} else if ( 72 <= i && i < 84 ) {
-				gbc.gridx = i - 72;
+				gbc.gridheight = 1;
+				cardcell.setPreferredSize(new Dimension( (int) dashboardWidth/12, (int) (3*dashboardHeight)/8));
+				cardcell.setMaximumSize(cardcell.getPreferredSize());
+				cardcell.setMinimumSize(cardcell.getPreferredSize());
+				if (i < 18) {
+					territoryCardCells.add(cardcell);
+				} else {
+					characterCardCells.add(cardcell);
+				}
+			} else if ( 24 <= i && i < 36) {
+				gbc.gridx = i - 24;
 				gbc.gridy = 6;
-			} else if ( 84 <= i && i < 96 ) {
-				gbc.gridx = i - 84;
-				gbc.gridy = 7;
-			} 
-			
-			if (i == 84) {
-				moneyValue.setHorizontalAlignment(SwingConstants.CENTER);
-				dashboard.add(moneyValue, gbc);
-			} else if (i == 85) {
-				woodValue.setHorizontalAlignment(SwingConstants.CENTER);
-				dashboard.add(woodValue, gbc);
-			} else if (i == 86) {
-				stonesValue.setHorizontalAlignment(SwingConstants.CENTER);
-				dashboard.add(stonesValue, gbc);
-			} else if (i == 87) {
-				servantsValue.setHorizontalAlignment(SwingConstants.CENTER);
-				dashboard.add(servantsValue, gbc);
-			} 
-			
-			dashboard.add(l, gbc);
+				gbc.gridheight = 1;
+				gbc.weighty = 0.60;
+				cardcell.setPreferredSize(new Dimension( (int) dashboardWidth/12, (int) (2*dashboardHeight)/8));
+				cardcell.setMaximumSize(cardcell.getPreferredSize());
+				cardcell.setMinimumSize(cardcell.getPreferredSize());
+			}
+		
+		if (i == 24) {
+			moneyValue.setHorizontalAlignment(SwingConstants.CENTER);
+			dashboard.add(moneyValue, gbc);
+		} else if (i == 25) {
+			woodValue.setHorizontalAlignment(SwingConstants.CENTER);
+			dashboard.add(woodValue, gbc);
+		} else if (i == 26) {
+			stonesValue.setHorizontalAlignment(SwingConstants.CENTER);
+			dashboard.add(stonesValue, gbc);
+		} else if (i == 27) {
+			servantsValue.setHorizontalAlignment(SwingConstants.CENTER);
+			dashboard.add(servantsValue, gbc);
+		} 
+		
+			dashboard.add(cardcell, gbc);
 		}
 		
 		dashboardImage.setIcon(returndashboardImage());
@@ -150,6 +172,20 @@ public class PlayerDashboard extends JPanel {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		dashboard.add(dashboardImage, gbc);
+		
+		Image img = territoryCardCells.get(0).loadCard(4);
+		Image img1 = ventureCardCells.get(5).loadCard(5);
+		Image img2 = characterCardCells.get(3).loadCard(6);
+		Image img3 = buildingCardCells.get(4).loadCard(78);
+		
+		ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		territoryCardCells.get(0).setIcon(imageIcon);
+		imageIcon = new ImageIcon(img1.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		ventureCardCells.get(5).setIcon(imageIcon);
+		imageIcon = new ImageIcon(img2.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		characterCardCells.get(3).setIcon(imageIcon);
+		imageIcon = new ImageIcon(img3.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		buildingCardCells.get(4).setIcon(imageIcon);
 		
 		return dashboard;	
 	
@@ -203,8 +239,6 @@ public class PlayerDashboard extends JPanel {
 	
 	}
  
-	
-	
 	/**
 	 * This needs to be called in order to display resource accordingly to the player's values stored in model
 	 */
@@ -213,11 +247,57 @@ public class PlayerDashboard extends JPanel {
 		
 		this.game = game;
 		
+		updateResource();	
+		updateCards();
+	}
+	
+	
+	private void updateResource() {
 		moneyValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Money").getQuantity()));
 		woodValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Wood").getQuantity()));
 		stonesValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Stones").getQuantity()));
 		servantsValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").getQuantity()));	
-	
 	}
 	
+	//controllare che le associazioni sugli indici delle strutture dati siano valide
+	//attenzione eccezioni! cosa succede quando cerco di accedere 
+	
+	private void updateCards() {
+		
+			for (int i = 0; i < this.player.getPersonalBoard().getBuildingDeck().size(); i++) {
+				Card card = this.player.getPersonalBoard().getBuildingDeck().get(i);
+				if (! cards.contains(card)) {
+					cards.add(card);
+					buildingCardCells.get(buildingCardsCounter).add(card);
+					buildingCardsCounter ++;
+				}
+			}
+			
+			for (int i = 0; i < this.player.getPersonalBoard().getVentureDeck().size(); i++) {
+				Card card = this.player.getPersonalBoard().getVentureDeck().get(i);
+				if (! cards.contains(card)) {
+					cards.add(card);
+					ventureCardCells.get(ventureCardsCounter).add(card);
+					ventureCardsCounter ++;
+				}
+			}
+			
+			for (int i = 0; i < this.player.getPersonalBoard().getTerritoryDeck().size(); i++) {
+				Card card = this.player.getPersonalBoard().getTerritoryDeck().get(i);
+				if (! cards.contains(card)) {
+					cards.add(card);
+					territoryCardCells.get(territoryCardsCounter).add(card);
+					territoryCardsCounter ++;
+				}
+			}
+			
+			for (int i = 0; i < this.player.getPersonalBoard().getCharacterDeck().size(); i++) {
+				Card card = this.player.getPersonalBoard().getCharacterDeck().get(i);
+				if (! cards.contains(card)) {
+					cards.add(card);
+					characterCardCells.get(characterCardsCounter).add(card);
+					characterCardsCounter ++;
+				}
+			}		
+	}
 }

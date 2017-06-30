@@ -30,7 +30,7 @@ public class PointCell extends Cell<Player> {
 	
 	public void paint(Graphics g) {
 		super.paint(g);
-		paint(new Dimension(5, 5));
+		paint(new Dimension(7, 7));
 	}
 	
 	public void paint(Dimension dimension) {

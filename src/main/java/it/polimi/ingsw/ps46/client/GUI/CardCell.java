@@ -16,6 +16,7 @@ public class CardCell extends Cell<Card> {
 
 	public CardCell() {
 		imageList = new ArrayList<Image> ();
+		this.setEnabled(true);
 	}
 
 	/**
