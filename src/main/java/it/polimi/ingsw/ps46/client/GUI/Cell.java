@@ -38,6 +38,7 @@ public abstract class Cell<T> extends JButton {
 		this.setBorder(border);
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.setRolloverEnabled(false);
+		this.setEnabled(false);
 		this.setContentAreaFilled(false);
 		
 		this.removeAll();
