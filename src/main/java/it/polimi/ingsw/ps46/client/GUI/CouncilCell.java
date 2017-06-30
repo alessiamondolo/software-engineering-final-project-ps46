@@ -1,14 +1,14 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CouncilCell extends Cell implements ActionListener {
 
-	public CouncilCell(int number) {
-		super(number);
+	public CouncilCell() {
+		super();
 		
-		//numero qui non servirebbe in realtà
 		// TODO Auto-generated constructor stub
 	}
 
@@ -18,14 +18,7 @@ public class CouncilCell extends Cell implements ActionListener {
 		
 	}
 
-	@Override
-	void setAvailability() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	void showToken(Token token) {
+	public void paint(Dimension dimension) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -42,8 +42,8 @@ public class ExtraMoveEffect implements Effect, Serializable {
 		
 		switch (extraMoveType) {
 		case "ActivateHarvestAction":
-			ActivateHarvestAction newHarvestAction = new ActivateHarvestAction(); //del valore di value (un dado)
-			newHarvestAction.execute();
+			//ActivateHarvestAction newHarvestAction = new ActivateHarvestAction(); //del valore di value (un dado)
+			//newHarvestAction.execute();
 			//ATTENDENDO ALESSIA per completare questa classe
 			//#SpacMan
 			

@@ -1,7 +1,16 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
-import java.awt.List;
-import java.util.ArrayList;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+
+import it.polimi.ingsw.ps46.server.Player;
 
 /**
  * A cell specific for the external grid. All players can place a token inside the cell.
@@ -11,45 +20,34 @@ import java.util.ArrayList;
  *
  */
 
-public class PointCell extends Cell {
+public class PointCell extends Cell<Player> {
 	
-	ArrayList <Token> tokens = new ArrayList <Token> ();
-	public PointCell(int number) {
-		
-		super(number);
-		this.availability = true;
-	}
+	private static final long serialVersionUID = 591002007000957139L;
 	
-	/**
-	 * Checks if tokens can be placed on the cell, but it is always possible
-	 * to place a token on a PointCell.
-	 */
-	
-	@Override
-	public void setAvailability() {
-		this.availability = true;
-	}
-	
-	@Override
-	public void showToken(Token token) {
-		
-		tokens.add(token);
-		this.add(token);	
+	public PointCell() {
 		
 	}
 	
-	//bisogna assicurarsi che non si cerchi di togliere un token che non c'è altrimenti ciclo infinito
+	public void paint(Graphics g) {
+		super.paint(g);
+		paint(new Dimension(7, 7));
+	}
 	
-	public void removeToken(Token token) { //ogni token è identificato dal suo colore, nel senso che in ogni cella c'è al max un token per colore
-		int i=0;
-		boolean found = false;
-		do { 
-			if (tokens.get(i).color == token.color) {
-				found = true;
-				this.remove(tokens.get(i));
-			} else i++;
+	public void paint(Dimension dimension) {
+		
+		this.removeAll();
+
+		this.add(new Token(dimension));
+		this.add(new Token(dimension));
+		this.add(new Token(dimension));
+		
+		/*for (player p : itemList) {
 			
-		} while (found != true);
+			this.add(new Token(p.getColor));
+			
+		}*/
+
+		//System.out.println(String.valueOf(itemList.get(2).getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints)")));
 		
 	}
 	

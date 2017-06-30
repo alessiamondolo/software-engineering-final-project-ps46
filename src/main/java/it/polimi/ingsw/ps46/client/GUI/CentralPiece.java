@@ -9,6 +9,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import it.polimi.ingsw.ps46.server.Game;
+
 /**
  * The central part of the Board which is then again structured in two subpanels:
  * an @UpperPiece and a @LowerPiece
@@ -18,7 +20,8 @@ import javax.swing.border.Border;
 
 public class CentralPiece extends JPanel {
 
-	
+	private UpperPiece upperPiece;
+	private LowerPiece lowerPiece;
 	
 	private static final long serialVersionUID = -5672600042329800625L;
 
@@ -38,9 +41,9 @@ public class CentralPiece extends JPanel {
 	private void composeCentralPiece(double widthSmall, double heightSmall) {
 		// TODO Auto-generated method stub
 		
-		UpperPiece upperPiece = new UpperPiece(widthSmall, heightSmall); 
+		this.upperPiece = new UpperPiece(widthSmall, heightSmall); 
 		
-		LowerPiece lowerPiece = new LowerPiece(widthSmall, heightSmall);
+		this.lowerPiece = new LowerPiece(widthSmall, heightSmall);
 		
 		//lowerPiece.setPreferredSize(new Dimension (425, 260));
 		
@@ -56,7 +59,12 @@ public class CentralPiece extends JPanel {
 		this.add(upperPiece);
 		this.add(lowerPiece);
 		
-		
 	}
+	
+	public void updateCentralPiece(Game game) {
+		this.upperPiece.updateUpperPiece(game);
+		//this.lowerPiece.updateLowerPiece(game)
+	}
+	
 	
 }

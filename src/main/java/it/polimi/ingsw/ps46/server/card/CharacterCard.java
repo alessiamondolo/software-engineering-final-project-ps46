@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.server.card;
 
+import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /** 
@@ -16,5 +17,11 @@ public class CharacterCard extends Card {
 	public CharacterCard(String cardName,int cardEra, Effect immediateEffects, Effect permanentEffects, 
 		 ResourceSet cost) {
 		super(cardName, cardEra, immediateEffects, permanentEffects, cost);
+	}
+	
+	@Override
+	public void collectCard(Game game) {
+		immediateEffects.activateEffect(game);
+		game.getCurrentPlayer().getPersonalBoard().putCharacterCardInPlayerSet(this);
 	}
 }

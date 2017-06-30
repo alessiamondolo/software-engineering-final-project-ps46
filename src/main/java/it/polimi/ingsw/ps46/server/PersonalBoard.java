@@ -10,6 +10,11 @@ import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
+/**
+ * TODO COMMENTARE
+ * 
+ * @author Alessia Mondolo
+ */
 public class PersonalBoard implements Serializable {
 	
 	private static final long serialVersionUID = -2644034889315743722L;
@@ -44,44 +49,51 @@ public class PersonalBoard implements Serializable {
 		
 	}
 	
-	/**
-	 * Sets a value to attribute territoryCards. 
-	 * @param newTerritoryCards 
-	 */
-	public void putTerritoryCardInPlayerSet(TerritoryCard newTerritoryCard) { //eccezione?!
+    
+	//TODO se non riesce a mettere la carta nel set è perchè ho troppe carte di quel tipo ---> bisogna avvisare il giocatore
+	
+	public boolean putTerritoryCardInPlayerSet(TerritoryCard newTerritoryCard) { 
 		if (territoryCards.size() < MAX_NUMBER_OF_CARDS)
 		{
 			territoryCards.add(newTerritoryCard);
+			return true;
 		}
-		//else ECCEZIONE?! return -1 ?boh	
+		else 
+			return false;
 			
 	}
 	
-	public void putCharacterCardInPlayerSet(CharacterCard newCharacterCard) { //eccezione?!
+	public boolean putCharacterCardInPlayerSet(CharacterCard newCharacterCard) { 
 		if (characterCards.size() < MAX_NUMBER_OF_CARDS)
 		{
 			characterCards.add(newCharacterCard);
+			return true;
 		}
-		// else ECCEZIONE?! return -1 ?boh	
+		else 
+			return false;
 			
 	}
 		
-	public void putVentureCardInPlayerSet(VentureCard newVentureCard) { //eccezione?!
+	public boolean putVentureCardInPlayerSet(VentureCard newVentureCard) { 
 		if (ventureCards.size() < MAX_NUMBER_OF_CARDS)
 		{
 			ventureCards.add(newVentureCard);
+			return true;
 		}
-		//else ECCEZIONE?! return -1 ?boh	
+		else 
+			return false;
 			
 	}
 	
 	
-	public void putBuildingCardInPlayerSet(BuildingCard newBuildingCard) { //eccezione?!
+	public boolean putBuildingCardInPlayerSet(BuildingCard newBuildingCard) { 
 		if (buildingCards.size() < MAX_NUMBER_OF_CARDS)
 		{
 			buildingCards.add(newBuildingCard);
+			return true;
 		}
-		// else ECCEZIONE?! return -1 ?boh	
+		else 
+			return false;
 			
 	}
 	
@@ -90,10 +102,6 @@ public class PersonalBoard implements Serializable {
 	 * Returns territoryCards.
 	 * @return territoryCards 
 	 */
-	public  TerritoryCard getTerritoryCards(int index) {
-		return territoryCards.get(index);
-		
-	}
 	
 	public ArrayList<TerritoryCard> getTerritoryDeck()
 	{
@@ -105,10 +113,6 @@ public class PersonalBoard implements Serializable {
 	 * Returns ventureCards.
 	 * @return ventureCards 
 	 */
-	public VentureCard getVentureCards(int index) {
-		return ventureCards.get(index);
-		
-	}
 
 	public ArrayList<VentureCard> getVentureDeck()
 	{
@@ -119,9 +123,6 @@ public class PersonalBoard implements Serializable {
 	 * Returns buildingCards.
 	 * @return buildingCards 
 	 */
-	public BuildingCard getBuildingCards(int index) {
-		return buildingCards.get(index);
-	}
 
 	public ArrayList<BuildingCard> getBuildingDeck()
 	{
@@ -133,9 +134,6 @@ public class PersonalBoard implements Serializable {
 	 * Returns characterCards.
 	 * @return characterCards 
 	 */
-	public CharacterCard getCharacterCards(int index) {
-		return characterCards.get(index);
-	}
 	
 	public ArrayList<CharacterCard> getCharacterDeck()
 	{
@@ -144,10 +142,6 @@ public class PersonalBoard implements Serializable {
 	}
 
 
-	/**
-	 * Returns resources.
-	 * @return resources 
-	 */
 	public ResourceSet getPlayerResourceSet() {
 		return playerResources;
 	}

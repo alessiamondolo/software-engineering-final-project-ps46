@@ -26,5 +26,4 @@ public abstract class MalusEffect implements Serializable {
 	public String getName() {
 		return name;
 	}
-
 }

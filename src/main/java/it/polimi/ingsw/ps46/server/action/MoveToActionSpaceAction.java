@@ -51,24 +51,23 @@ public class MoveToActionSpaceAction implements Action {
 		if(isLegal()) {
 			//Sets the action space as not available
 			//TODO check modifications to this method
-			actionSpace.updateAvailability();
-			//TODO set the family member as used			
+			actionSpace.updateAvailability ();
 			switch(actionSpace.getType()) {
 				case "TowerActionSpace" : {
-					//TODO capire come prendere il piano in cui si trova la carta
-					//Action nextAction = new CollectCardAction(Player player, Card card);
-					//nextAction.execute();
+					Action nextAction = new CollectCardAction(game, actionSpace, familyMember);
+					nextAction.execute();
 					break;
 				}
-				case "ProductionActionSpace" : { /*
-					Action nextAction = new ActivateProductionAction();
-					return nextAction.execute();*/
+				case "ProductionActionSpace" : {
+					Action nextAction = new ActivateProductionAction(game, actionSpace, familyMember);
+					return nextAction.execute();
 				}
 				case "HarvestActionSpace" : {
-					Action nextAction = new ActivateHarvestAction();
+					Action nextAction = new ActivateHarvestAction(game, actionSpace, familyMember);
 					return nextAction.execute();
 				}
 				case "MarketActionSpace" : {
+					//TODO scrivere l'azione del mercato.
 					//Effect getFromMarket = new IncreaseResourcesEffect(actionSpace.getResources());
 					return false;
 				}
