@@ -1,8 +1,1088 @@
 [
 	{
-	
+			"cardName" : "Francesco Sforza",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "ExtraMoveEffect",
+				"extraMoveType" : "ActivateHarvestAction",
+				"whichActionSpace": "",
+				"extraMoveValue": 
+				{
+					"value" : 1
+				},
+				"resourcesDiscounted" : false
+			},
+			"isPermanent": "false",	
+			
+			"requiredCards":  [	
+					{
+						"cardType" : "TerritoryCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "BuldingCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "VentureCards",
+						"quantity" : 5
+					},
+					{
+						"cardType" : "CharacterCards",
+						"quantity" : 0
+					}
+			],
+						
+			"requiredResources":  []
+	},
+	{
+			"cardName" : "Ludovico Ariosto",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "putFamilyMemberEverywhereEffect"
 
+			},
+			"isPermanent": "true",
+					
+			"requiredCards":  [	
+					{
+						"cardType" : "TerritoryCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "BuldingCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "VentureCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "CharacterCards",
+						"quantity" : 5
+					}
+			],
 
+			"requiredResources":  []
+	},
+	{
+			"cardName" : "Filippo Brunelleschi",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "noFeeForTowerEffect"
 
+			},
+			"isPermanent": "true",
+						
+			"requiredCards":  [	
+					{
+						"cardType" : "TerritoryCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "BuldingCards",
+						"quantity" : 5
+					},
+					{
+						"cardType" : "VentureCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "CharacterCards",
+						"quantity" : 0
+					}
+			],
+			"requiredResources":  []
+	},
+	{
+			"cardName" : "Sigismondo Malatesta",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "DiceBonusEffect",
+				
+				"type": "NeutralFamilyMember",
+				"bonus": {
+							"value": 3
+						 }
+
+			},
+			"isPermanent": "true",	
+					
+			"requiredCards":  [],
+			
+			"requiredResources":  [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 3
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 7
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+			]
+	},
+	{
+			"cardName" : "Girolamo Savoranola",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 1
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+				]
+			},
+			"isPermanent": "false",
+					
+			"requiredCards":  [],
+			
+			"requiredResources":  [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 18
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+			]
+	},
+	{
+			"cardName" : "Michelangelo Buonarroti",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 3
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+				]
+			},
+			"isPermanent": "false",
+						
+			"requiredCards":  [],
+					
+			"requiredResources":  [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 10
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+			]
+	},
+	{
+			"cardName" : "Giovanni dalle Bande Nere",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [
+					{
+						"id" : "Wood",
+						"quantity" : 1
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 1
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 1
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+				]
+			},
+			"isPermanent": "false",
+						
+			"requiredCards":  [],
+					
+			"requiredResources":  [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 12
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+			]
+	},
+	{
+			"cardName" : "Leonardo da Vinci",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "ExtraMoveEffect",
+				"extraMoveType" : "ActivateProductionAction",
+				"whichActionSpace": "",
+				"extraMoveValue": 
+				{
+					"value" : 0
+				},
+				"resourcesDiscounted" : false
+			},
+			"isPermanent": "false",
+						
+			"requiredCards":  [	
+					{
+						"cardType" : "TerritoryCards",
+						"quantity" : 2
+					},
+					{
+						"cardType" : "BuldingCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "VentureCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "CharacterCards",
+						"quantity" : 4
+					}
+			],
+						
+			"requiredResources":  []
+	},
+	{
+			"cardName" : "Sandro Botticelli",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 2
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 1
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+				]
+			},
+			"isPermanent": "false",
+						
+			"requiredCards":  [],
+					
+			"requiredResources":  [	
+					{
+						"id" : "Wood",
+						"quantity" : 10
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+			]
+	},
+	{
+			"cardName" : "Ludovico il Moro",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "setValueToAllColoredFamilyMemberEffect",
+				"newDiceValue":	{
+								"value": 5
+							}
+			},
+			"isPermanent": "true",
+						
+			"requiredCards":  [	
+					{
+						"cardType" : "TerritoryCards",
+						"quantity" : 2
+					},
+					{
+						"cardType" : "BuldingCards",
+						"quantity" : 2
+					},
+					{
+						"cardType" : "VentureCards",
+						"quantity" : 2
+					},
+					{
+						"cardType" : "CharacterCards",
+						"quantity" : 2
+					}
+			],
+				
+			"requiredResources":  []
+	},
+	{
+			"cardName" : "Lucrezia Borgia",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "DiceBonusEffect",
+				
+				"type": "ColoredFamilyMember",
+				"bonus": {
+							"value": 2
+						 }
+
+			},
+			"isPermanent": "true",		
+			
+			"requiredCards":  [	
+					{
+						"cardType" : "TerritoryCards",
+						"quantity" : 6
+					},
+					{
+						"cardType" : "BuldingCards",
+						"quantity" : 6
+					},
+					{
+						"cardType" : "VentureCards",
+						"quantity" : 6
+					},
+					{
+						"cardType" : "CharacterCards",
+						"quantity" : 6
+					}
+			],
+						
+			"requiredResources":  [] 
+	},
+	{
+			"cardName" : "Federico da Montefeltro",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "setValueToOneColoredFamilyMemberEffect",
+				"newDiceValue":	{
+								"value": 6
+							}
+			},
+			"isPermanent": "false",
+						
+			"requiredCards":  [	
+					{
+						"cardType" : "TerritoryCards",
+						"quantity" : 5
+					},
+					{
+						"cardType" : "BuldingCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "VentureCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "CharacterCards",
+						"quantity" : 0
+					}
+			],
+				
+			"requiredResources":  []
+	},
+	{
+			"cardName" : "Lorenzo de' Medici",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "copyOneLeaderCardEffectOnceEffect"
+
+			},
+			"isPermanent": "true",
+					
+			"requiredCards":  [],
+
+			"requiredResources":  [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 35
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+			]
+	},
+	{
+			"cardName" : "Sisto IV",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 5
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+				]
+			},
+			"isPermanent": "true",
+					
+			"requiredCards":  [],
+			
+			"requiredResources":  [	
+					{
+						"id" : "Wood",
+						"quantity" : 6
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 6
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 6
+					},
+					{
+						"id" : "Money",
+						"quantity" : 6
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+			]
+	},
+	{
+			"cardName" : "Cesare Borgia",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "NoRequiredMilitaryPointsEffect"
+
+			},
+			"isPermanent": "true",
+					
+			"requiredCards":  [	
+					{
+						"cardType" : "TerritoryCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "BuldingCards",
+						"quantity" : 3
+					},
+					{
+						"cardType" : "VentureCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "CharacterCards",
+						"quantity" : 0
+					}
+			],
+
+			"requiredResources":  [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 12
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 2
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+			]
+	},
+	{
+			"cardName" : "Santa Rita",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "ResourcesX2Effect"
+
+			},
+			"isPermanent": "true",
+					
+			"requiredCards":  [],
+
+			"requiredResources":  [	
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 8
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+			]
+	},
+	{
+			"cardName" : "Cosimo de' Medici",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 3
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 1
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+				]
+			},
+			"isPermanent": "false",
+					
+			"requiredCards":  [	
+					{
+						"cardType" : "TerritoryCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "BuldingCards",
+						"quantity" : 4
+					},
+					{
+						"cardType" : "VentureCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "CharacterCards",
+						"quantity" : 2
+					}
+			],
+			
+			"requiredResources":  []
+	},
+	{
+			"cardName" : "Bartolomeo Colleoni",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 4
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+				]
+			},
+			"isPermanent": "false",
+					
+			"requiredCards":  [	
+					{
+						"cardType" : "TerritoryCards",
+						"quantity" : 4
+					},
+					{
+						"cardType" : "BuldingCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "VentureCards",
+						"quantity" : 2
+					},
+					{
+						"cardType" : "CharacterCards",
+						"quantity" : 0
+					}
+			],
+			
+			"requiredResources":  []
+	},
+	{
+			"cardName" : "Ludovico III Gonzaga",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "IncreaseResourcesEffect",
+				"additionalResources": [
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 0
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 1
+					}
+				]
+			},
+			"isPermanent": "false",
+					
+			"requiredCards":  [],
+			
+			"requiredResources":  [
+					{
+						"id" : "Wood",
+						"quantity" : 0
+					},
+					{
+						"id" : "Stones",
+						"quantity" : 0
+					},
+					{
+						"id" : "Servants",
+						"quantity" : 15
+					},
+					{
+						"id" : "Money",
+						"quantity" : 0
+					},
+					{
+						"id" : "FaithPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "MilitaryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "VictoryPoints",
+						"quantity" : 0
+					},
+					{
+						"id" : "CounsilPrivilege",
+						"quantity" : 0
+					}
+				]
+	},
+	{
+			"cardName" : "Pico della Mirandola",
+			
+			"leaderEffect" : 
+			{
+				"effectType": "CardsDiscountedEffect"
+
+			},
+			"isPermanent": "true",
+					
+			"requiredCards":  [	
+					{
+						"cardType" : "TerritoryCards",
+						"quantity" : 0
+					},
+					{
+						"cardType" : "BuldingCards",
+						"quantity" : 2
+					},
+					{
+						"cardType" : "VentureCards",
+						"quantity" : 4
+					},
+					{
+						"cardType" : "CharacterCards",
+						"quantity" : 0
+					}
+			],
+
+			"requiredResources":  []
 	}
 ]

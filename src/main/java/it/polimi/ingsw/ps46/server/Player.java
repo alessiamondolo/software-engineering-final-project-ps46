@@ -28,7 +28,7 @@ public class Player implements Serializable {
 	private String username;
 	private String color;
 	
-	private ArrayList<LeaderCard> leaderCards;  //TODO completare tutta la lista delle carte i suoi effetti ecc ecc
+	private ArrayList<LeaderCard> leaderCards;
 	
 	private PersonalBoard personalBoard;
 	
@@ -312,7 +312,4 @@ public class Player implements Serializable {
 
 	}
 
-	
-
-	}	
-
+}	

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.action.ActivateHarvestAction;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
