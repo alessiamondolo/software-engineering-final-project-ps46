@@ -17,7 +17,7 @@ import it.polimi.ingsw.ps46.server.Game;
  *
  */
 
-public class MainWindow extends JFrame {
+public class GameWindow extends JFrame {
 	
 	/**
 	 * 
@@ -26,14 +26,16 @@ public class MainWindow extends JFrame {
 
 	private MainBoard mainBoard;
 	private PlayerArea playerArea;
+	private Game game;
 	
-	public MainWindow() {
+	public GameWindow(Game game) {
 		
 		// da mettere un check che le dimensioni dei component siano < di quelle della Wind
 		//così sto però dando per scontata la risoluzione dell'utente
 		
-		int mainWindowWidth = 1400;  //1400
-		int mainWindowHeight = 900;   //900
+		this.game = game;
+		int mainWindowWidth = 1400;  //1400 o 1200
+		int mainWindowHeight = 900;   //900 o 700
 		int boardWidth = (mainWindowWidth * 6)/ 14;
 		int boardHeight = (mainWindowHeight * 7) / 9;
 		int playerAreaWidth = (mainWindowWidth * 65)/ 140;
@@ -46,8 +48,9 @@ public class MainWindow extends JFrame {
 		
 		this.mainBoard = createBoardArea(boardDimension);
 		this.add(mainBoard);
-		this.playerArea = createplayerArea(playerAreaDimension);
+		this.playerArea = createplayerArea(playerAreaDimension, this.game);
 		this.add(playerArea, BorderLayout.WEST);
+		this.pack();
 		
 	}
 	
@@ -59,9 +62,9 @@ public class MainWindow extends JFrame {
 	}
 	
 	
-	private PlayerArea createplayerArea(Dimension playerAreaDimension)  {
+	private PlayerArea createplayerArea(Dimension playerAreaDimension, Game game)  {
 		
-		PlayerArea playerArea = new PlayerArea(playerAreaDimension);
+		PlayerArea playerArea = new PlayerArea(playerAreaDimension, this.game);
 		return playerArea;
 	}
 	
@@ -75,6 +78,14 @@ public class MainWindow extends JFrame {
 		return this.playerArea;
 	}
 	
+	public void update(Game game) {
+		
+		this.game = game;
+		this.playerArea.update(game);
+		this.mainBoard.update(game);
+		this.pack();
+		repaint();
+	}
 }
 	
 	

@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps46.client;
 
 import java.io.PrintStream;
 
+import it.polimi.ingsw.ps46.client.GUI.GUIView;
 import it.polimi.ingsw.ps46.utils.ReadInput;
 
 public class Client {
@@ -58,7 +59,7 @@ public class Client {
 			break;
 		case "GUI" :
 			//TODO sostituire con costruttore della GUI
-			view = new ConsoleView(System.out);
+			view = new GUIView();
 			break;
 		}
 		

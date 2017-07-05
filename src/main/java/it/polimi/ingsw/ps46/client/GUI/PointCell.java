@@ -1,14 +1,16 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Shape;
 
-import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 import it.polimi.ingsw.ps46.server.Player;
 
@@ -22,34 +24,94 @@ import it.polimi.ingsw.ps46.server.Player;
 
 public class PointCell extends Cell<Player> {
 	
+
 	private static final long serialVersionUID = 591002007000957139L;
 	
 	public PointCell() {
+	
+	}
+	
+	public PointCell(int action) {
+		super(action);
 		
+	}
+	
+	public void update() {
+		
+		this.removeAllToken();
+		
+		for (Player p : itemList) {
+			Token t = new Token(p.getColor());
+			
+			t.setPreferredSize(computeTokenSize());
+			this.add(t);
+		
+		}
+		repaint();
+	}
+	
+	public void update(String fmColor) {
+		
+		this.removeAllToken();
+		
+		for (Player p : itemList) {
+			Token t = new Token(p.getColor(), fmColor);
+			t.setPreferredSize(computeTokenSize());
+			System.out.println(t.getPreferredSize());
+			this.setLayout(new FlowLayout(CENTER, ((int) this.getPreferredSize().getWidth()/3), (int) this.getPreferredSize().getHeight()/2));
+			this.add(t);
+			
+			
+		}
+		repaint();
+	}
+	
+	public void add(Player player, String fmColor) {
+		itemList.add(player);
+		update(fmColor);
+	}
+	
+
+	
+	public void removeAllToken() {
+		for (Component c : this.getComponents()) {
+			if (c instanceof Token)
+				this.remove(c);
+		}
+	}
+	
+	
+	//probabilmente questo metodo non serve piu
+	private Dimension computeTokenSize() {
+		
+		double width = this.getPreferredSize().getWidth()/6;
+		double height = this.getPreferredSize().getHeight()/6;
+
+
+		int size = (int)Math.max(width, height);
+		return new Dimension(size, size);
+				
 	}
 	
 	public void paint(Graphics g) {
 		super.paint(g);
-		paint(new Dimension(7, 7));
+		for (Component c : getComponents()) {
+			if (c instanceof Token) {
+				
+				Dimension dimension = new Dimension((int) g.getClipBounds().getWidth(), (int) g.getClipBounds().getHeight());
+				c.setPreferredSize(computeTokenSize(dimension)); 
+			}
+			
+		}
+		
 	}
-	
-	public void paint(Dimension dimension) {
-		
-		this.removeAll();
 
-		this.add(new Token(dimension));
-		this.add(new Token(dimension));
-		this.add(new Token(dimension));
+	private Dimension computeTokenSize(Dimension dimension) {
+		double width = dimension.getWidth()/8;   //valori drastici da migliorare 
+		double height = dimension.getHeight()/8;   //
 		
-		/*for (player p : itemList) {
-			
-			this.add(new Token(p.getColor));
-			
-		}*/
-
-		//System.out.println(String.valueOf(itemList.get(2).getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints)")));
-		
+		int size = (int)Math.max(width, height);
+		return new Dimension(size, size);
 	}
 	
 }
-
