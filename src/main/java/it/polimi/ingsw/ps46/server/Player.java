@@ -63,6 +63,8 @@ public class Player implements Serializable {
 		
 		personalBoard = new PersonalBoard();
 		
+		leaderCards = new LinkedHashMap<String, LeaderCard>();
+		
 		int init = 0;
 		Dice initializationDice = new Dice(init);
 		bonus = new HashMap<String, Dice>();

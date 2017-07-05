@@ -47,7 +47,8 @@ public class PointCell extends Cell<Player> {
 			this.add(t);
 		
 		}
-		repaint();
+		
+		//repaint();
 	}
 	
 	public void update(String fmColor) {
@@ -63,7 +64,14 @@ public class PointCell extends Cell<Player> {
 			
 			
 		}
-		repaint();
+		//repaint();
+	}
+	
+	@Override
+	public void add(Player pl) {
+		itemList.add(pl);
+		update();
+		
 	}
 	
 	public void add(Player player, String fmColor) {
@@ -75,8 +83,10 @@ public class PointCell extends Cell<Player> {
 	
 	public void removeAllToken() {
 		for (Component c : this.getComponents()) {
-			if (c instanceof Token)
+			if (c instanceof Token) {
 				this.remove(c);
+			}
+				
 		}
 	}
 	

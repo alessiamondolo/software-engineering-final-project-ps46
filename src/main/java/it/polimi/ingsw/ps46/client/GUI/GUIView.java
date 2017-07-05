@@ -48,7 +48,7 @@ public class GUIView implements View {
 	}
 	
 	
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		
 		GUIView g = new GUIView(true);
 		Game game = null;
@@ -63,7 +63,7 @@ public class GUIView implements View {
 		while ((a=g.getPlayerAction()) != 4) {
 			System.out.println("Action: " + a);
 		}
-	}
+	}*/
 	
 	public GUIView () {
 		
@@ -148,10 +148,11 @@ public class GUIView implements View {
 		
 		gameWindow = new GameWindow(this.game);
 		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		firstTime = false;
 		
 		}
-		
 		firstTime = false;
+		
 	}
 
 	

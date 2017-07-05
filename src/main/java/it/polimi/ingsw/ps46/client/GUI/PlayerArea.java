@@ -31,8 +31,8 @@ public class PlayerArea extends JPanel {
 	private Game game;
 	
 	private JTabbedPane dashboardArea = new JTabbedPane();
-	private JPanel turnOrder = new JPanel();
-	private JPanel familyMembers = new JPanel();
+	private TurnPanel turnOrder = new TurnPanel();
+	private FMPanel fmPanel = new FMPanel();
 	private JTabbedPane leaderCardPanel = new JTabbedPane();
 	private ArrayList<PlayerDashboard> dashboards = new ArrayList<PlayerDashboard>();
 	private ArrayList<JPanel> lCardsPanels = new ArrayList<JPanel>();
@@ -58,6 +58,7 @@ public class PlayerArea extends JPanel {
 		this.setLayout(new BorderLayout());
 		
 		createDashboardArea();
+		//metodosoloperprova();
 		createZoomBox();
 		createControlArea();
 		createInfoArea();
@@ -70,7 +71,7 @@ public class PlayerArea extends JPanel {
 	
 	private void createDashboardArea() {
 		
-/*		int nr = this.game.getNumberPlayers();
+	int nr = this.game.getNumberPlayers();
 		
 		for (int i = 0; i < nr; i++) {
 			
@@ -92,9 +93,30 @@ public class PlayerArea extends JPanel {
 		
 		dashboardArea.setSelectedIndex(0);
 		
-		this.add(dashboardArea, BorderLayout.NORTH);*/
+		this.add(dashboardArea, BorderLayout.NORTH);
 	
 	}
+	
+	private void metodosoloperprova() {
+		
+		this.dashboardAreaDimension = new Dimension ((int) playerAreaDimension.getWidth(), 
+                (int) (playerAreaDimension.getHeight()*9/27));
+		dashboardArea.setPreferredSize(dashboardAreaDimension);
+		Player p = new Player(4);
+		for (int i = 0; i < 4; i ++) {
+			dashboards.add(new PlayerDashboard(playerAreaDimension, p));
+		}
+		for (int i = 0; i < 4; i++) {
+			
+			dashboardArea.addTab("Player " +(i + 1), null, dashboards.get(i), null);
+		}
+		
+		dashboardArea.setSelectedIndex(0);
+		
+		this.add(dashboardArea, BorderLayout.NORTH);
+	}
+	
+	
 	
 	private void createZoomBox() {
 		
@@ -135,9 +157,11 @@ public class PlayerArea extends JPanel {
 		leaderCardPanel.setMaximumSize(leaderCardPanel.getPreferredSize());
 		leaderCardPanel.setMinimumSize(leaderCardPanel.getPreferredSize());
 		
-		controlArea.add(familyMembers);
-		familyMembers.setBorder(border);
+		this.fmPanel = new FMPanel();
+		controlArea.add(fmPanel);
+		fmPanel.setBorder(border);
 		
+		this.turnOrder = new TurnPanel();  //TODO DA AGGIUNGERE IL GAME COME PARAMETRO
 		controlArea.add(turnOrder);
 		turnOrder.setBorder(border);
 		
@@ -161,7 +185,7 @@ public class PlayerArea extends JPanel {
 		int i;
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
 	
-		for ( int x = 0; x < 4; x++) {   //game.getNumberPlayers();
+		for ( int x = 0; x < game.getNumberPlayers(); x++) {   //game.getNumberPlayers()
 			
 			JPanel playerLeaderCards = new JPanel();
 			playerLeaderCards.setPreferredSize(new Dimension((int) width, (int) height/6));
@@ -177,9 +201,9 @@ public class PlayerArea extends JPanel {
 					player1LeaderCardCells.add(cardCell);
 				} else if ( x == 1) {
 					player2LeaderCardCells.add(cardCell);
-				} else if ( x == 2 ) {                //&& game.getNumberPlayers() == 3
+				} else if ( x == 2 && game.getNumberPlayers() == 3 ) {  //&& game.getNumberPlayers() == 3
 					player3LeaderCardCells.add(cardCell);
-				} else if ( x == 3 ) {         //&& game.getNumberPlayers() == 4
+				} else if ( x == 3 && game.getNumberPlayers() == 4 ) {   // && game.getNumberPlayers() == 4
 					player4LeaderCardCells.add(cardCell);
 				}
 				

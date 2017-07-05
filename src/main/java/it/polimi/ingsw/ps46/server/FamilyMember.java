@@ -13,7 +13,7 @@ public class FamilyMember implements Serializable {
 	private static final long serialVersionUID = -6382000537229373852L;
 	
 	private boolean isUsed = false;
-	private Dice value = null;
+	private Dice value = new Dice(0);
 	private int positionOfFamilyMember = 0;
 	private String color;
 	
@@ -43,6 +43,7 @@ public class FamilyMember implements Serializable {
 	 * Description of the method useOrSetFreeFamilyMember.
 	 * 
 	 */
+	/*
 	private boolean useOrSetFreeFamilyMember(){
 		if (isUsed = false){
 			isUsed = true;
@@ -52,9 +53,14 @@ public class FamilyMember implements Serializable {
 		else isUsed = false;
 		return false;
 	}
+	*/
+	
+	public void use() {
+		isUsed = true;
+	}
 	
 	
-
+	/*
 	public void setPositionOfFamilyMember(int newPositionOfFamilyMember) {
 		
 		if (useOrSetFreeFamilyMember() == false) 
@@ -67,6 +73,22 @@ public class FamilyMember implements Serializable {
 		
 		if (useOrSetFreeFamilyMember() == true) 
 			positionOfFamilyMember = 0;
+		//ECCEZIONE riporto un valore intero (0) se il metodo fa il suo lavoro o serve un'eccezione?
+
+	}
+	*/
+	
+	public void setPositionOfFamilyMember(int newPositionOfFamilyMember) {
+		
+		positionOfFamilyMember = newPositionOfFamilyMember;
+		
+		//ECCEZIONE riporto un valore intero (0) se il metodo fa il suo lavoro o serve un'eccezione?
+	}
+	
+	public void clearPositionOfFamilyMember() {
+	
+		positionOfFamilyMember = 0;
+		isUsed = false;
 		//ECCEZIONE riporto un valore intero (0) se il metodo fa il suo lavoro o serve un'eccezione?
 
 	}

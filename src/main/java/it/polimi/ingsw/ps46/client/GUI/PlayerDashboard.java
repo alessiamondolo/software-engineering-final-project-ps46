@@ -246,6 +246,14 @@ public class PlayerDashboard extends JPanel {
 	private void updateResource() {
 		
 		System.out.println("sono " +this.player.getUsername()+ "e sto provando a fare update della dash");
+		int id =  this.player.getIdPlayer();
+		ArrayList<Player> players = (ArrayList<Player>) this.game.getPlayers(); 
+		for (Player player : players) {
+			if (player.getIdPlayer() == id) {    //forse non è troppo solido come algoritmo
+				this.player = player;
+			}
+		}
+		
 		PersonalBoard board = this.player.getPersonalBoard();
 		GameState gameState = this.game.getGameState();
 		System.out.println(gameState);

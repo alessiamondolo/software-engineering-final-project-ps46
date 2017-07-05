@@ -35,9 +35,9 @@ public class ToTower extends JPanel {
 			cell.setPreferredSize(new Dimension((int) ((9*widthSmall/5)), (int) (heightSmall*16-heightSmall/5)/5));
 			cell.setMaximumSize(getPreferredSize());
 			cell.setMinimumSize(getPreferredSize());
-			Player player = new Player(1);  //test
-			player.setColor("Blue");   //test
-			cell.add(player, "White");   //test
+			//Player player = new Player(1);  //test
+			//player.setColor("Blue");   //test
+			//cell.add(player, "White");   //test
 			
 			this.add(cell);
 			actionCells.add(cell);

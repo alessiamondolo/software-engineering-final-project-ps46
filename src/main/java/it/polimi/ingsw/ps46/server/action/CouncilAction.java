@@ -55,6 +55,8 @@ public class CouncilAction implements Action {
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
 			
 			familyMemberUsed.setPositionOfFamilyMember(councilActionSpace.getId());
+			familyMemberUsed.use();
+			
 			return true;
 		}
 		else 
