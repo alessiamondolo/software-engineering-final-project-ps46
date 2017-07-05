@@ -5,6 +5,8 @@ import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.GameState;
 import it.polimi.ingsw.ps46.server.Player;
+import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
 /**
@@ -62,14 +64,35 @@ public class MoveToActionSpaceAction implements Action {
 					Action nextAction = new ActivateHarvestAction(game, actionSpace, familyMember);
 					return nextAction.execute();
 				}
-				case "Market" : {
-					//TODO scrivere l'azione del mercato.
-					//Effect getFromMarket = new IncreaseResourcesEffect(actionSpace.getResources());
-					return false;
+				case "MarketActionSpace" : {
+					if(!actionSpace.getEffectOfActionSpace().getAdditionalResources().getResourcesMap().containsKey("CounsilPrivilege")){
+						//check sui malus
+						ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());
+						if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
+						{
+							for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
+								if (decreaseResourcesMalus.getName() == "DecreaseResourcesMalus"){
+									
+									temporaryEffectResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
+								}	
+							}
+						}
+						game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
+						
+						actionSpace.updateAvailability();
+						familyMember.setPositionOfFamilyMember(actionSpace.getId());
+						return true;
+					}
+					else 
+					{
+						//TODO ci sono i due bonus del consiglio da prendere
+						return true;
+					}
 				}
 				case "CouncilActionSpace" : {
+					//TODO interazione col giocatore
 					game.setGameState(GameState.COUNCIL_ACTION);
-					Action nextAction = new CouncilAction();
+					Action nextAction = new CouncilAction(game, actionSpace, familyMember);
 					return nextAction.execute();
 				}
 			}
@@ -90,6 +113,7 @@ public class MoveToActionSpaceAction implements Action {
 	 * @return true if the move is legal, otherwise false
 	 */
 	public boolean isLegal() {
+		//TODO Quando faccio un'azione bonus, perchè dovrei settare il family member utilizzato?
 		//The player that wants to move to an action space has to be the current player
 		if (game.getCurrentPlayer().getIdPlayer() != player.getIdPlayer()) {
 			System.out.println("Andrea culo 1\n");

@@ -111,7 +111,7 @@ public class Board implements Serializable {
 	 * @param idActionSpace
 	 * @return towerFloor.getCard()
 	 */
-	public Card getCardOfTheTowerFloor(int idActionSpace) {
+	public Card getCardOfTheTowerFloor(int idActionSpace) { //TODO da testare
 		
 		int towerId = getWhichTowerContain(idActionSpace);	
 		
@@ -133,7 +133,7 @@ public class Board implements Serializable {
 	 * @param idActionSpace
 	 * @return tower.getColorOfTheTower()
 	 */
-	public String getColorOfTower (int idActionSpace){
+	public String getColorOfTower (int idActionSpace){ //TODO da testare
 		
 		for (Tower tower : towers) {
 			for (TowerFloor towerFloor : tower.getFloors()) {
@@ -143,7 +143,7 @@ public class Board implements Serializable {
 			}
 		}
 		System.out.println("Errore nella lettura delle torri, oggetto non trovato e 'return null'");
-		return null; //nel caso di errore ritorna null
+		return null; //nel caso di errore ritorna null 
 	}
 
 

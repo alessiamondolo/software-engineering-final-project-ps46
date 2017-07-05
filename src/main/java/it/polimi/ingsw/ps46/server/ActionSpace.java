@@ -23,7 +23,6 @@ public class ActionSpace implements Serializable {
 
 	
 	/** 
-	 * Description of the Constructor ActionSpace().
 	 * Create a new actionSpace with the value of requiredFamilyMember and the maximum number of free spotted passed as arguments.
 	 * 
 	 * @param value
@@ -41,8 +40,7 @@ public class ActionSpace implements Serializable {
 
 	
 	/**
-	 * Description of the method updateAvailability().
-	 * If the action space is available and there is the limitation of maximum one player,
+	 * If the actionSpace is available and there is the limitation of maximum one player,
 	 * sets available as false.
 	 */
 

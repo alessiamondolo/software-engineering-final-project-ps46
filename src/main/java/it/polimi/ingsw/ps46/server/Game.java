@@ -26,6 +26,11 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 import it.polimi.ingsw.ps46.utils.MyJSONParser;
 
 
+/**
+ * 
+ * @author Alessia Mondolo
+ *
+ */
 public class Game extends Observable implements Serializable {
 	
 	private static final long serialVersionUID = 2038242402419462794L;
