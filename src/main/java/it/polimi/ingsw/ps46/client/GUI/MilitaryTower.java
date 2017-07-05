@@ -71,12 +71,17 @@ public class MilitaryTower extends JPanel {
 			int vp = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("VictoryPoints").getQuantity();
 			for (int i = 0; i < militaryPointCells.size(); i++) {
 				PointCell mc = militaryPointCells.get(i); 
-					if (i != (vp - (25 - i*2))) {
-						mc.remove(player);
-					} else {
-						mc.add(player);
+				
+				ArrayList<Player> players = mc.getItemList();
+				for ( Player cellPlayer : players) {
+					if ( player.getIdPlayer() == cellPlayer.getIdPlayer()) {
+						mc.remove(cellPlayer);
 					}
-				//mc.paint(tokenDimension);
+				}
+				if (i == (vp - (25 - i*2))) {
+						mc.add(player);
+					} 
+						
 			}
 		}	
 	}
