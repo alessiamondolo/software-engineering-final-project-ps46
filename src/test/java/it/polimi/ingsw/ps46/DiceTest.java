@@ -1,52 +1,52 @@
 package it.polimi.ingsw.ps46;
 
+import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import it.polimi.ingsw.ps46.server.Dice;
 
-
-
 public class DiceTest {
-
+	
+	
 	@Test
-	public void test1costruttore() {
+	public void testConstructor1() {
 
-		Dice d1 = new Dice();
-		assert (1 <= d1.getValue() && d1.getValue() <= 6);
-
+		Dice dice = new Dice();
+		assertTrue (dice.getValue() > 0 && dice.getValue() < 7);
 	}
 
 	@Test
-	public void test2costruttore() {
+	public void testConstructor2() {
 		
-		Dice d1 = new Dice(4);
-		Assert.assertEquals(4, d1.getValue());
+		Dice dice = new Dice(4);
+		assertEquals(4, dice.getValue());
 	}
 	
 	@Test
-	public void test3throwDice() {
-		
-		Dice d1 = new Dice();
-		for(int i = 0; i < 50; i++) {
-			d1.throwDice();
-			assert (1 <= d1.getValue() && d1.getValue() <= 6);
+	public void testThrowDice() {
+		ArrayList<Integer> setOfValues;
+		setOfValues = new ArrayList<Integer>();
+		for (int n=1; n < 7; n++){
+			setOfValues.add(n);
 		}
 		
+		Dice dice = new Dice();
+		for(int i = 0; i < 100; i++) {
+			dice.throwDice();
+			assertTrue("Il dado n°"+ i + " ha valore: " + dice.getValue() + ". Risultato del assertTrue: " + setOfValues.contains(dice.getValue()), setOfValues.contains(dice.getValue()));
+			System.out.println("Il dado n°"+ i + " ha valore: " + dice.getValue() + ". Risultato del assertTrue: " + setOfValues.contains(dice.getValue()));
+		}
 	}
-	
-
 	
 	
 	@Test
-	public void test4toString() {
-		
-		Dice d1 = new Dice(4);
-		assert (d1.toString().equals("4"));
-		
+	public void testToString() {
+		Dice dice = new Dice(2);
+		assertEquals(2, dice.getValue());
+		System.out.println(dice.toString());
 	}
-
-
 }

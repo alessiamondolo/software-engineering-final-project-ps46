@@ -50,6 +50,7 @@ public class ActivateHarvestAction implements Action {
 	public boolean execute() {
 		
 		if (isLegal() == true){
+			
 			for (TerritoryCard territoryCard : game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck()) {
 				
 				if(familyMemberUsed.getValueFamilyMember().greaterOrEqual(territoryCard.getHarvestValue())){
@@ -72,6 +73,7 @@ public class ActivateHarvestAction implements Action {
 			//setting occupied this actionSpace and used the familyMember
 			harvestActionSpace.updateAvailability();
 			familyMemberUsed.setPositionOfFamilyMember(harvestActionSpace.getId());
+			familyMemberUsed.use();
 			
 			return true;
 		}
@@ -123,7 +125,6 @@ public class ActivateHarvestAction implements Action {
 			}
 
 		if(!temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getBonusTile().getHarvestValue())){
-			System.out.println("Andrea culo 5\n");	
 			return false;
 		}
 		

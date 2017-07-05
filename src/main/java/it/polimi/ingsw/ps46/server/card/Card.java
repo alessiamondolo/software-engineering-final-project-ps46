@@ -60,11 +60,12 @@ public abstract class Card extends Observable implements Serializable {
 	 * @param game
 	 */
 	public void use(Game game) {
-		permanentEffects.activateEffect(game);
+		if(permanentEffects != null)
+			permanentEffects.activateEffect(game);
 	
 	}
 	/**
-	 * This method is used to collect this card object (implemented into the differents kind of cards @overriding)
+	 * This method is used to collect this card object (implemented into the different kind of cards @overriding)
 	 * 
 	 * @param game
 	 */
@@ -72,10 +73,17 @@ public abstract class Card extends Observable implements Serializable {
 	
 	@Override
 	public String toString() {
+		if(permanentEffects != null) {
 		return "Card name: " + cardName + "\n" + 
 				"Immediate effects: " + immediateEffects + "\n" +
 				"Permanent effects: " + permanentEffects + "\n" +
 				"Cost: " + cost;
+		}
+		else
+			return "Card name: " + cardName + "\n" + 
+			"Immediate effects: " + immediateEffects + "\n" +
+			"Permanent effects: - \n" +
+			"Cost: " + cost;
 	}
 
 }

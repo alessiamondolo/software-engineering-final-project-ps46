@@ -80,7 +80,10 @@ public class CollectCardAction implements Action {
 			
 			//setting occupied this actionSpace and used the familyMember
 			actionSpace.updateAvailability();
+
 			familyMemberUsed.setPositionOfFamilyMember(actionSpace.getId());
+			familyMemberUsed.use();
+			
 			return true;	
 		}
 		else 
@@ -105,11 +108,11 @@ public class CollectCardAction implements Action {
 		ResourceSet temporaryPlayerResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet());
 		
 		if (!isTheTowerEmpty) {
-			
-			if(!temporaryPlayerResourceSet.greaterOrEqual(TOWERFEE)) {
-				return false;
+			if(!game.getCurrentPlayer().getLeaderCards().containsKey("Filippo Brunelleschi") || !(game.getCurrentPlayer().getLeaderCards().get("Filippo Brunelleschi").isActive()) ){
+				if(!temporaryPlayerResourceSet.greaterOrEqual(TOWERFEE)) return false;
+				temporaryPlayerResourceSet.sub(TOWERFEE);
 			}
-			temporaryPlayerResourceSet.sub(TOWERFEE);
+
 		}
 		
 		ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());

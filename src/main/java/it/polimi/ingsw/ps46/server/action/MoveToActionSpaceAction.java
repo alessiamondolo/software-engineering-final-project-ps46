@@ -19,15 +19,13 @@ public class MoveToActionSpaceAction implements Action {
 	private Game game;
 	private Player player;
 	private FamilyMember familyMember;
-	private int servants;
 	private ActionSpace actionSpace;
 	
 	
-	public MoveToActionSpaceAction(Game game, Player player, FamilyMember familyMember, int servants, ActionSpace actionSpace) {
+	public MoveToActionSpaceAction(Game game, Player player, FamilyMember familyMember, ActionSpace actionSpace) {
 		this.game = game;
 		this.player = player;
 		this.familyMember = familyMember;
-		this.servants = servants;
 		this.actionSpace = actionSpace;
 	}
 	
@@ -81,6 +79,7 @@ public class MoveToActionSpaceAction implements Action {
 						
 						actionSpace.updateAvailability();
 						familyMember.setPositionOfFamilyMember(actionSpace.getId());
+						familyMember.use();
 						return true;
 					}
 					else 
@@ -114,25 +113,27 @@ public class MoveToActionSpaceAction implements Action {
 	 */
 	public boolean isLegal() {
 		//TODO Quando faccio un'azione bonus, perchè dovrei settare il family member utilizzato?
+		
 		//The player that wants to move to an action space has to be the current player
 		if (game.getCurrentPlayer().getIdPlayer() != player.getIdPlayer()) {
-			System.out.println("Andrea culo 1\n");
 			return false;
 		}
-		//The action space has to be available
+		//The action space has to be available 
 		if(!(actionSpace.getAvailability())) {
-			System.out.println("Andrea culo 2\n");
-			return false;
+			if(!(game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico Ariosto") || 
+					((game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico Ariosto") && !(game.getCurrentPlayer().getLeaderCards().get("Ludovico Ariosto").isActive())))))
+				return false;
 		}
+		//If the actionSpace is the green tower check military points liked with the number of territory cards got by the player
+		//TODO 
+
 		//The family member has to be available - it can't be in other action spaces
 		if((familyMember.isUsed())) {
-			System.out.println("Andrea culo 3\n");
 			return false;
 		}
 		//The value of the family member that needs to be moved to the action space, summed with the number of servants
 		// added to the family member, has to be greater or equal than the value of the dice of the action space
-		if(familyMember.getValueFamilyMember().getValue() + servants < actionSpace.getRequiredFamilyMemberValue().getValue()) {
-			System.out.println("Andrea culo 4\n");
+		if(familyMember.getValueFamilyMember().getValue() < actionSpace.getRequiredFamilyMemberValue().getValue()) {
 			return false;
 		}
 		

@@ -3,8 +3,11 @@ package it.polimi.ingsw.ps46.client;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.ListIterator;
+import java.util.Map;
 
+import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
@@ -380,23 +383,31 @@ public class ConsoleView implements View {
 		output.println("2. Territory Cards:");
 		if(player.getPersonalBoard().getTerritoryDeck().isEmpty())
 			output.println("You don't have territory cards for now.");
-		else
-			output.println(player.getPersonalBoard().getTerritoryDeck());
+		else {
+			for (Card card : player.getPersonalBoard().getTerritoryDeck())
+				output.println(card);
+		}
 		output.println("3. Character Cards:");
 		if(player.getPersonalBoard().getCharacterDeck().isEmpty())
 			output.println("You don't have character cards for now.");
-		else
-			output.println(player.getPersonalBoard().getCharacterDeck());
+		else {
+			for (Card card : player.getPersonalBoard().getCharacterDeck())
+				output.println(card);
+		}
 		output.println("4. Building Cards:");
 		if(player.getPersonalBoard().getBuildingDeck().isEmpty())
 			output.println("You don't have building cards for now.");
-		else
-			output.println(player.getPersonalBoard().getBuildingDeck());
+		else {
+			for (Card card : player.getPersonalBoard().getBuildingDeck())
+				output.println(card);
+		}
 		output.println("5. Venture Cards:");
 		if(player.getPersonalBoard().getVentureDeck().isEmpty())
 			output.println("You don't have venture cards for now.");
-		else
-			output.println(player.getPersonalBoard().getVentureDeck());
+		else {
+			for (Card card : player.getPersonalBoard().getVentureDeck())
+				output.println(card);
+		}
 		output.println("\n");
 	}
 	
@@ -423,10 +434,12 @@ public class ConsoleView implements View {
 	 * @return color : the color of the family member.
 	 */
 	public String getFamilyMember() {
+		Map<String,FamilyMember> familyMembersAvailable = new LinkedHashMap<String,FamilyMember>();
 		output.println("Which family member do you want to use?");
 		int index = 1;
 		for(String key : game.getCurrentPlayer().getFamilyMembersMap().keySet()) {
 			if(!game.getCurrentPlayer().getFamilyMembersMap().get(key).isUsed()) {
+				familyMembersAvailable.put(key, game.getCurrentPlayer().getFamilyMembersMap().get(key));
 				output.println(index + ". " + key);
 				index++;
 			}
@@ -435,7 +448,7 @@ public class ConsoleView implements View {
 		int choice = input.IntegerFromConsole(1, game.getCurrentPlayer().getFamilyMembersMap().size());
 		index = 1;
 		String color = null;
-		for(String key : game.getCurrentPlayer().getFamilyMembersMap().keySet()) {
+		for(String key : familyMembersAvailable.keySet()) {
 			if(index == choice) {
 				color = key;
 				break;
