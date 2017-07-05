@@ -457,5 +457,12 @@ public class ConsoleView extends View {
 		notifyObservers(new EventMessage(NewStateMessage.SET_NEXT_TURN_ORDER));
 		
 	}
+
+
+	@Override
+	public void visit(EventEffectChoice eventEffectChoice) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

@@ -9,6 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import it.polimi.ingsw.ps46.server.ActionSpace;
+import it.polimi.ingsw.ps46.server.BonusTile;
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Tower;
 import it.polimi.ingsw.ps46.server.TowerFloor;
@@ -63,13 +64,19 @@ public class MyJSONParser {
 	 */
 	public ActionSpace buildActionSpace(JSONObject actionSpaceJSON) {
 		
+		//Parsing of type field
+        String type = (String) actionSpaceJSON.get("type");
+        
+      //Parsing of id field
+        int id = ((Long) actionSpaceJSON.get("id")).intValue();
+		
 		//BEGIN of parsing of requiredFamilyMemberValue field
 		JSONObject requiredFamilyMemberValueJSON = (JSONObject) actionSpaceJSON.get("requiredFamilyMemberValue");
     	Dice requiredFamilyMemberValue = buildDice(requiredFamilyMemberValueJSON);
     	//END of parsing of requiredFamilyMemberValue field
     	
     	//Parsing of maxOnePlayer field
-    	Boolean maxOnePlayer = ((Boolean) actionSpaceJSON.get("maxOnePlayer"));
+    	boolean maxOnePlayer = (boolean) actionSpaceJSON.get("maxOnePlayer");
     	
     	//BEGIN of parsing of action space's effect
     	JSONObject effect = (JSONObject) actionSpaceJSON.get("effectOfActionSpace");
@@ -77,7 +84,7 @@ public class MyJSONParser {
     	ResourceSet resourceSet = buildResourceSet(additionalResourcesArray);
         IncreaseResourcesEffect effectOfActionSpace = new IncreaseResourcesEffect(resourceSet);
     	//END of parsing of action space's effect
-        ActionSpace actionSpace = new ActionSpace(requiredFamilyMemberValue, maxOnePlayer, effectOfActionSpace);
+        ActionSpace actionSpace = new ActionSpace(type, id, requiredFamilyMemberValue, maxOnePlayer, effectOfActionSpace);
         return actionSpace;
         
 	}
@@ -231,6 +238,21 @@ public class MyJSONParser {
 		boolean malusEffect = (boolean) effectJSON.get("malusEffect");
 		PreacherEffect effect = new PreacherEffect(malusEffect);
 		return effect;
+	}
+
+
+
+	public BonusTile buildBonusTile(JSONObject bonusTileJSON) {
+		boolean advancedPersonalBoard = (boolean) bonusTileJSON.get("advancedPersonalBoard");
+		JSONObject diceJSON = (JSONObject) bonusTileJSON.get("requiredFamilyMemberValue");
+		Dice requiredFamilyMemberValue = buildDice(diceJSON);
+		JSONArray gainedFromPersonalBoardProductionArray = (JSONArray) bonusTileJSON.get("gainedFromPersonalBoardProduction");
+        ResourceSet gainedFromPersonalBoardProduction = buildResourceSet(gainedFromPersonalBoardProductionArray);
+        JSONArray gainedFromPersonalBoardHarvestArray = (JSONArray) bonusTileJSON.get("gainedFromPersonalBoardHarvest");
+        ResourceSet gainedFromPersonalBoardHarvest = buildResourceSet(gainedFromPersonalBoardHarvestArray);
+		BonusTile bonusTile = new BonusTile(advancedPersonalBoard, requiredFamilyMemberValue, requiredFamilyMemberValue, 
+				gainedFromPersonalBoardProduction, gainedFromPersonalBoardHarvest);
+		return bonusTile;
 	}
 	
 }

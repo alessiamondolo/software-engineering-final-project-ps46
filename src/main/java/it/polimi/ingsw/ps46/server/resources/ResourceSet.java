@@ -42,12 +42,13 @@ public class ResourceSet implements Serializable {
 	public ResourceSet (ResourceSet resourceSetToBeCloned){
 		
 		resourcesMap = new LinkedHashMap<String, Resource>();
+		ResourcesFactory factory = new ResourcesFactory();
 		
 		for (String keyString : resourceSetToBeCloned.getResourcesMap().keySet()) {
 			
 			String tempId = resourceSetToBeCloned.getResourcesMap().get(keyString).getId();
 			int tempValue = resourceSetToBeCloned.getResourcesMap().get(keyString).getQuantity();
-			Resource tempResource = new Resource(tempId, tempValue) {};
+			Resource tempResource = factory.getResource(tempId, tempValue);
 			
 			resourcesMap.put(tempId, tempResource);
 		}
@@ -99,7 +100,8 @@ public class ResourceSet implements Serializable {
 		for(String key : moreResources.getResourcesMap().keySet())
 			//gets the resource of this resourceSet with the same key of the resource received by parameter
 			//and increases it by the resource received by parameter
-			resourcesMap.get(key).add(moreResources.getResourcesMap().get(key));
+			if(key != "CounsilPrivilege")
+				resourcesMap.get(key).add(moreResources.getResourcesMap().get(key));
 	}
 	
 	/**

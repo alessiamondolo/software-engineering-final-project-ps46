@@ -8,6 +8,7 @@ import java.util.ListIterator;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.card.Effect;
 import it.polimi.ingsw.ps46.utils.ReadInput;
 
 
@@ -268,7 +269,7 @@ public class ConsoleView implements View {
 		output.println("|   |      3      |  |      7      |  |     11      |  |     15      |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
-		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][3], towersPlayers[1][3], towersPlayers[2][3], towersPlayers[3][3]);
+		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][2], towersPlayers[1][2], towersPlayers[2][2], towersPlayers[3][2]);
 		output.println("|   |=============|  |=============|  |=============|  |=============|   |");
 		output.println("|   | SPACE ID: 2 |  | SPACE ID: 6 |  | SPACE ID: 10|  | SPACE ID: 14|   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
@@ -282,7 +283,7 @@ public class ConsoleView implements View {
 		output.println("|   |      2      |  |      6      |  |     10      |  |     14      |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
-		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][3], towersPlayers[1][3], towersPlayers[2][3], towersPlayers[3][3]);
+		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][1], towersPlayers[1][1], towersPlayers[2][1], towersPlayers[3][1]);
 		output.println("|   |=============|  |=============|  |=============|  |=============|   |");
 		output.println("|   | SPACE ID: 1 |  | SPACE ID: 5 |  | SPACE ID: 9 |  | SPACE ID: 13|   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
@@ -296,7 +297,7 @@ public class ConsoleView implements View {
 		output.println("|   |      1      |  |      5      |  |      9      |  |     13      |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
-		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][3], towersPlayers[1][3], towersPlayers[2][3], towersPlayers[3][3]);
+		output.printf("|   %s  %s  %s  %s   |\n", towersPlayers[0][0], towersPlayers[1][0], towersPlayers[2][0], towersPlayers[3][0]);
 		output.println("|   |_____________|  |_____________|  |_____________|  |_____________|   |");
 		output.println("|                                                                        |");
 		output.println("|------------------------------------------------------------------------|");
@@ -407,6 +408,7 @@ public class ConsoleView implements View {
 	 * @return move : the ID of the action space.
 	 */
 	public int getPlayerAction() {
+		
 		output.println("Where do you want to move? (Insert the ID of the action space)");
 		int move = input.IntegerFromConsole(1, 25);
 		return move;
@@ -471,6 +473,16 @@ public class ConsoleView implements View {
 		Player player = game.getCurrentPlayer();
 		output.println("==========================================================================");
 		output.println(player.getUsername() + " moved on the action space with ID ");
+	}
+	
+	
+	
+	public int getEffectCoice(Effect effect1, Effect effect2) {
+		output.println("Which of these effect do you want to activate?");
+		output.println("1. " + effect1.toString());
+		output.println("2. " + effect2.toString());
+		int choice = input.IntegerFromConsole(1, 2);
+		return choice;
 	}
 	
 	

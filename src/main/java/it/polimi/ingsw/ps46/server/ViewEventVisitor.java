@@ -6,4 +6,6 @@ public interface ViewEventVisitor {
 	void visit(EventMessage eventMessage);
 	
 	void visit(EventIntInput eventIntInput);
+
+	void visit(EventEffectChoice eventEffectChoice);
 }

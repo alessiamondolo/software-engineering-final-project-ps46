@@ -74,8 +74,8 @@ public class Board implements Serializable {
 		int towerId = getWhichTowerContain(idActionSpace);
 		if (towerId != -1 ){
 			for (TowerFloor towerFloor : towers.get(towerId).getFloors()) {
-				if(towerFloor.getActionSpace().getAvailability() == false);
-				return false;
+				if(towerFloor.getActionSpace().getAvailability() == false)
+					return false;
 			}
 			return true;
 		}
@@ -96,7 +96,7 @@ public class Board implements Serializable {
 		
 		for (Tower tower : towers) {
 			for (TowerFloor towerFloor : tower.getFloors()) {
-				if( towerFloor.getActionSpace().getIdLocalActionSpaces() == idActionSpace){
+				if( towerFloor.getActionSpace().getId() == idActionSpace){
 					return (towers.indexOf(tower));
 				}	
 			}
@@ -117,7 +117,7 @@ public class Board implements Serializable {
 		
 		if (towerId != -1 ){
 				for (TowerFloor towerFloor : towers.get(towerId).getFloors()) {
-					if (towerFloor.getActionSpace().getIdLocalActionSpaces() == idActionSpace){
+					if (towerFloor.getActionSpace().getId() == idActionSpace){
 						return towerFloor.getCard();	
 					}		
 				}
@@ -137,13 +137,18 @@ public class Board implements Serializable {
 		
 		for (Tower tower : towers) {
 			for (TowerFloor towerFloor : tower.getFloors()) {
-				if( towerFloor.getActionSpace().getIdLocalActionSpaces() == idActionSpace){
+				if( towerFloor.getActionSpace().getId() == idActionSpace){
 					return (tower.getColorOfTheTower());
 				}	
 			}
 		}
 		System.out.println("Errore nella lettura delle torri, oggetto non trovato e 'return null'");
 		return null; //nel caso di errore ritorna null 
+	}
+
+
+	public ArrayList<ActionSpace> getBoardBoxes() {
+		return boardBoxes;
 	}
 	
 }

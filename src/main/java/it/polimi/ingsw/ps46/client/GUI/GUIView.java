@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Observable;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,9 +15,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import it.polimi.ingsw.ps46.client.View;
+
 import it.polimi.ingsw.ps46.server.EventMessage;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
+
+import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.card.Effect;
+
 
 /**
  * A WindowClass acts as the entry point for the game User Interface by launching the 
@@ -350,5 +354,14 @@ public class GUIView implements View {
 	public void showNextTurnOrder() {
 		printBoard();
 	}
+
+
+	@Override
+	public int getEffectCoice(Effect effect1, Effect effect2) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 	
 }

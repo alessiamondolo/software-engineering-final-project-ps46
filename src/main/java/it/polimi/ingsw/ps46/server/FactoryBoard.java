@@ -99,16 +99,31 @@ private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/co
 	}
 	
 	
-	public PersonalBoard createPersonalBoard(String personalBoardConfig) {
-
-		PersonalBoard personalBoard = new PersonalBoard(null, null, null, null, null, null);
-		/*
+	public ArrayList<BonusTile> createBonusTiles(String configFile) {
+		
+		ArrayList<BonusTile> bonusTiles = new ArrayList<BonusTile>();
+		
 		JSONParser parser = new JSONParser();
 		MyJSONParser myJSONParser = new MyJSONParser();
-		*/
 		
+		try {
+			Object obj = parser.parse(new FileReader(configFilesPath + configFile));
+        	JSONArray bonusTilesJSON = (JSONArray) obj;
+        	Iterator<?> iterator = bonusTilesJSON.iterator();
+        	while(iterator.hasNext()) {
+        		JSONObject bonusTileJSON = (JSONObject) iterator.next();
+        		BonusTile bonusTile = myJSONParser.buildBonusTile(bonusTileJSON);
+        		bonusTiles.add(bonusTile);
+        	}
+		} catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 		
-		return personalBoard;
+		return bonusTiles;
 		
 	}
 	

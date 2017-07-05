@@ -52,20 +52,18 @@ public class ActivateProductionAction implements Action {
 	public boolean execute() {
 		
 		if (isLegal() == true){
+			
 			for (BuildingCard buildingCard : game.getCurrentPlayer().getPersonalBoard().getBuildingDeck()) {
 				
 				if(familyMemberUsed.getValueFamilyMember().greaterOrEqual(buildingCard.getProductionValue())){
-					if(buildingCard.getDoubleChoice()){
-					//TODO 	Interazione col gicoatore
-						
-						
-					}
-					buildingCard.use(game);	
+					
+					game.useCard(buildingCard);
+					//buildingCard.use(game);
 					
 				}
 			}
 
-			ResourceSet personalBoardResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getGainedFromPersonalBoardProduction());
+			ResourceSet personalBoardResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getBonusTile().getGainedFromPersonalBoardProduction());
 			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty()){
 				
 				for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
@@ -77,7 +75,7 @@ public class ActivateProductionAction implements Action {
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(personalBoardResourceSet);
 			//setting occupied this actionSpace and used the familyMember
 			productionActionSpace.updateAvailability();
-			familyMemberUsed.setPositionOfFamilyMember(productionActionSpace.getIdLocalActionSpaces());
+			familyMemberUsed.setPositionOfFamilyMember(productionActionSpace.getId());
 			
 			return true;
 		}
@@ -109,16 +107,15 @@ public class ActivateProductionAction implements Action {
 		
 		Dice temporaryDice = new Dice( familyMemberUsed.getValueFamilyMember().getValue());
 		//calculating every penality, bonus, malus on a copy of the familyMember Dice
-
-		if ( productionActionSpace.isMaxOnePlayer() != true )
+		if (!productionActionSpace.isMaxOnePlayer())
 		{
 			penality = new Dice( PENALITYOFTHEACTIONSPACE );
 		}
 		else
 			penality = new Dice(0);
-		
+
 		temporaryDice.subDice( penality );
-		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "ProductionAction" ));
+		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "ProductionActions" ));
 		
 	
 		if( !game.getCurrentPlayer().getDiceMalus().isEmpty() )
@@ -128,18 +125,8 @@ public class ActivateProductionAction implements Action {
 					temporaryDice.subDice( diceMalusEffect.getMalus() );	
 				}
 			}
-			
 		
-		// checking if is it possible activate production action or not
-		boolean oneCardActivableAtLeast = false;
-		for (BuildingCard buildingCard : game.getCurrentPlayer().getPersonalBoard().getBuildingDeck()) {
-		
-			if(temporaryDice.greaterOrEqual(buildingCard.getProductionValue())){
-				oneCardActivableAtLeast = true;
-			}
-		}
-		if(!oneCardActivableAtLeast) return false;
-		if(!temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getProductionValue())){
+		if(!temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getBonusTile().getProductionValue())){
 			return false;
 		}
 		
@@ -147,5 +134,4 @@ public class ActivateProductionAction implements Action {
 		return true;
 	}
 
-	
 }

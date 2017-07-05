@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
+
 /**
  * BuildingCard is an object that represent a single building card of the game.
  * Their immediate effects are of the type IncreaseResourcesEffect and their permanent effects 
@@ -26,6 +27,18 @@ public class BuildingCard extends Card {
 		this.productionValue = productionValue;
 		this.doubleChoice = doubleChoice ;
 		this.permanentEffectsTwo = permanentEffectsTwo;
+	}
+	
+	
+	public void useOptional(int option, Game game) {
+		switch(option) {
+		case 1 : 
+			super.getPermanentEffects().activateEffect(game);
+			break;
+		case 2 :
+			permanentEffectsTwo.activateEffect(game);
+			break;
+		}
 	}
 	
 	

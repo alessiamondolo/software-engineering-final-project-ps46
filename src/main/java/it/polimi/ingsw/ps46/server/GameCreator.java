@@ -24,7 +24,7 @@ public class GameCreator implements Runnable {
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+
 		game = new Game(clients.size());
 		view = new VirtualView(clients, writers, readers, game);
 		controller = new GameController(game);

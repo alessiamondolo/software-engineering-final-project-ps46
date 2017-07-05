@@ -89,7 +89,7 @@ public class Dice implements Serializable {
 	 */
 	
 	public void sumDice(Dice dice2){
-		value =+ dice2.getValue();
+		value += dice2.getValue();
 		}
 	
 	
@@ -100,7 +100,7 @@ public class Dice implements Serializable {
 	 * @param dice2
 	 */
 	public void subDice(Dice dice2){
-		value =- dice2.getValue(); 
+		value -= dice2.getValue(); 
 		
 		if (value < 0){
 			value = 0;
