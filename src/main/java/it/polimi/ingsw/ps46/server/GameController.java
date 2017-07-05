@@ -275,7 +275,12 @@ public class GameController implements Observer, ViewEventVisitor {
 			actionSpace = game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace();
 		}
 		else {
-			actionSpace = game.getBoard().getBoardBox(actionSpaceID - 1 - (game.getBoard().getNumberOfTowers() * game.getBoard().getTower(0).getNumberOfFloors()));
+			for(ActionSpace boardBox : game.getBoard().getBoardBoxes()) {
+				if(boardBox.getId() == actionSpaceID) {
+					actionSpace = boardBox;
+					break;
+				}
+			}
 		}	
 		int familyMemberValue = familyMember.getValueFamilyMember().getValue();
 		//increases the value of the family member with the servants
