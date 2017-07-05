@@ -15,18 +15,17 @@ public class CardCell extends Cell<Card> {
 	private static final long serialVersionUID = 5769254098690808463L;
 
 	public CardCell() {
-		imageList = new ArrayList<Image> ();
+		imageList = new ArrayList<Image> (97);
 		this.setEnabled(true);
 	}
 
 	/**
-	 *  Paints a card accordingly to the one the model set for that tower floor.
+	 *  Paints a card accordingly to the model set for that tower floor.
 	 */
 	
-	@Override
-	public void paint(Graphics g) {
+	public void update(Graphics g) {
 		// TODO Auto-generated method stub
-		super.paint(g);
+		// super.paint(g);
 		
 		this.removeAll();
 		for (Card c : itemList) {
@@ -34,7 +33,7 @@ public class CardCell extends Cell<Card> {
 			Image img = imageList.get(index);
 			if (img == null) {
 				img = loadCard(index);
-				imageList.set(index, img);
+				imageList.set(index, img);   //ma si può mettere una carta in una pos qualunque di un array?
 			}
 			ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(g.getClipBounds().width, g.getClipBounds().height, Image.SCALE_SMOOTH));
 			this.setIcon(imageIcon);
@@ -54,6 +53,12 @@ public class CardCell extends Cell<Card> {
 		}
 		return img;
 	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 final class CardNames {
@@ -68,7 +73,7 @@ final class CardNames {
 			"Citadel",
 			"City",
 			"Gold Mine",
-			"Mountain Town",
+			"Mountain Town",  //11
 			"Mining Town",
 			"Rock Pit",
 			"Estate",
@@ -78,7 +83,7 @@ final class CardNames {
 			"Trading Town",
 			"Farm",
 			"Colony",
-			"Marble Pit",
+			"Marble Pit",      //21
 			"Province",
 			"Sanctuary",
 			"Castle",
@@ -88,7 +93,7 @@ final class CardNames {
 			"Triumphal Arch",
 			"Theater",
 			"Carpenter's Shop",
-			"Stonemason's Shop",
+			"Stonemason's Shop",  //31
 			"Chapel",
 			"Residence",
 			"Marketplace",
@@ -98,7 +103,7 @@ final class CardNames {
 			"Stonemasons' Guild",
 			"Baptistery",
 			"Barracks",
-			"Stronghold",
+			"Stronghold",         //41
 			"Bank",
 			"Fair",
 			"Garden",
@@ -108,7 +113,7 @@ final class CardNames {
 			"Military Academy",
 			"Cathedral",
 			"Warlord",
-			"Stonemason",
+			"Stonemason",           //51
 			"Dame",
 			"Knight",
 			"Farmer",
@@ -118,7 +123,7 @@ final class CardNames {
 			"Captain",
 			"Architect",
 			"Patron",
-			"Hero",
+			"Hero",                  //61
 			"Peasant",
 			"Scholar",
 			"Papal Messenger",
@@ -128,7 +133,7 @@ final class CardNames {
 			"Paramour",
 			"Herald",
 			"Cardinal",
-			"Bishop",
+			"Bishop",                    //71
 			"General",
 			"Ambassador",
 			"Hiring Recruits",
@@ -138,7 +143,7 @@ final class CardNames {
 			"Military Campaign",
 			"Hosting Panhandlers",
 			"Fighting Heresies",
-			"Support to the Bishop",
+			"Support to the Bishop",              //81
 			"Hiring Soldiers",
 			"Repairing the Abbey",
 			"Building the Bastions",
@@ -148,7 +153,7 @@ final class CardNames {
 			"Crusade",
 			"Support to the Cardinal",
 			"Hiring Mercenaries",
-			"Repairing the Cathedral",
+			"Repairing the Cathedral",            //91
 			"Building the Towers",
 			"Promoting Sacred Art",
 			"Military Conquest",

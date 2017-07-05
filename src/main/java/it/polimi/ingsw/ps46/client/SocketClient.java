@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.card.Effect;
 
 /**
  * This class implements the client that communicates with the server with Sockets.
@@ -207,6 +208,18 @@ public class SocketClient implements Runnable {
 			break;
 		case "PREVIOUS_ACTION_NOT_VALID" :
 			view.printMessage("The action you chose is not valid, please try again.\n");
+			break;
+		case "GET_EFFECT_CHOICE" : 
+			try {
+				Effect effect1 = (Effect) reader.readObject();
+				Effect effect2 = (Effect) reader.readObject();
+				writer.writeObject(view.getEffectCoice(effect1, effect2));
+				writer.flush();
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "SHOW_NEXT_TURN_ORDER" :
 			Game game;

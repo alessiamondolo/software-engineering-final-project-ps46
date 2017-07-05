@@ -33,10 +33,10 @@ public class CollectCardAction implements Action {
 	public CollectCardAction(Game game, ActionSpace actionSpace, FamilyMember familyMemberUsed) {
 		this.game = game;
 		this.actionSpace = actionSpace;
-		isTheTowerEmpty = game.getBoard().isEmptyTower( actionSpace.getIdLocalActionSpaces() );
+		isTheTowerEmpty = game.getBoard().isEmptyTower( actionSpace.getId() );
 		this.familyMemberUsed = familyMemberUsed;
 		
-		card = game.getBoard().getCardOfTheTowerFloor( actionSpace.getIdLocalActionSpaces() );
+		card = game.getBoard().getCardOfTheTowerFloor( actionSpace.getId() );
 
 		/*switch ( game.getBoard().getColorOfTower(actionSpace.getIdLocalActionSpaces()) ) {
 		
@@ -73,10 +73,16 @@ public class CollectCardAction implements Action {
 			card.use(game);
 			card.collectCard(game);
 			
+			int tower = (actionSpace.getId() - 1) / game.getBoard().getNumberOfTowers();
+			int floor = (actionSpace.getId() - 1) % game.getBoard().getNumberOfTowers();
+			game.getBoard().getTower(tower).getTowerFloor(floor).setCard(null);
+			game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().setPlayerColor(game.getCurrentPlayer().getColor());
+			
 			//setting occupied this actionSpace and used the familyMember
 			actionSpace.updateAvailability();
-			familyMemberUsed.setPositionOfFamilyMember(actionSpace.getIdLocalActionSpaces());
-			return true;
+
+			familyMemberUsed.setPositionOfFamilyMember(actionSpace.getId());
+			return true;	
 		}
 		else 
 			return false;
@@ -104,6 +110,7 @@ public class CollectCardAction implements Action {
 				if(!temporaryPlayerResourceSet.greaterOrEqual(TOWERFEE)) return false;
 				temporaryPlayerResourceSet.sub(TOWERFEE);
 			}
+
 		}
 		
 		ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());
@@ -118,7 +125,9 @@ public class CollectCardAction implements Action {
 		}
 		temporaryPlayerResourceSet.add(temporaryEffectResourceSet);
 		
-		if(!temporaryPlayerResourceSet.greaterOrEqual(card.getCost())) return false;
+		if(!temporaryPlayerResourceSet.greaterOrEqual(card.getCost())) {
+			return false;
+		}
 		temporaryPlayerResourceSet.sub(card.getCost());
 		
 		game.getCurrentPlayer().getPersonalBoard().setResources(temporaryPlayerResourceSet);

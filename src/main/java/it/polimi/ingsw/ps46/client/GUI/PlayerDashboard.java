@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -18,9 +19,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.GameState;
 import it.polimi.ingsw.ps46.server.PersonalBoard;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.resources.Resource;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
  * A dashboard that allows the player to visualizes resources and cards. 
@@ -60,8 +64,9 @@ public class PlayerDashboard extends JPanel {
 	private int ventureCardsCounter = 0;
 	private int characterCardsCounter = 0;
 	
-	public PlayerDashboard(Dimension playerAreaDimension) {
+	public PlayerDashboard(Dimension playerAreaDimension, Player player) {
 		
+		this.player = player;
 		this.dashboardHeight = (playerAreaDimension.getHeight()*8)/28;
 		this.dashboardWidth = (playerAreaDimension.getWidth()*12)/13;
 		this.bonusTileWidth = (playerAreaDimension.getWidth()*3)/65;
@@ -84,8 +89,6 @@ public class PlayerDashboard extends JPanel {
 		
 		JPanel dashboard = new JPanel();
 		dashboard.setPreferredSize(dashboardDimension);
-		//dashboard.setMinimumSize(dashboard.getPreferredSize());
-		//dashboard.setMaximumSize(dashboard.getPreferredSize());
 		GridBagLayout gbl = new GridBagLayout();
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
 		dashboard.setBorder(border);
@@ -173,7 +176,7 @@ public class PlayerDashboard extends JPanel {
 		gbc.gridy = 0;
 		dashboard.add(dashboardImage, gbc);
 		
-		Image img = territoryCardCells.get(0).loadCard(4);
+/*		Image img = territoryCardCells.get(0).loadCard(4);
 		Image img1 = ventureCardCells.get(5).loadCard(5);
 		Image img2 = characterCardCells.get(3).loadCard(6);
 		Image img3 = buildingCardCells.get(4).loadCard(78);
@@ -185,7 +188,7 @@ public class PlayerDashboard extends JPanel {
 		imageIcon = new ImageIcon(img2.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 		characterCardCells.get(3).setIcon(imageIcon);
 		imageIcon = new ImageIcon(img3.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
-		buildingCardCells.get(4).setIcon(imageIcon);
+		buildingCardCells.get(4).setIcon(imageIcon);*/
 		
 		return dashboard;	
 	
@@ -226,18 +229,6 @@ public class PlayerDashboard extends JPanel {
 		return bonusTile;
 		
 	}
-	
-	/**
-	 * Method to be called at early stages, as soon as the players list is available this 
-	 * associates a dashboard to a player.
-	 * @param player
-	 */
-	
-	public void setPlayer(Player player) {
-		
-		this.player = player;
-	
-	}
  
 	/**
 	 * This needs to be called in order to display resource accordingly to the player's values stored in model
@@ -253,10 +244,31 @@ public class PlayerDashboard extends JPanel {
 	
 	
 	private void updateResource() {
-		moneyValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Money").getQuantity()));
-		woodValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Wood").getQuantity()));
-		stonesValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Stones").getQuantity()));
-		servantsValue.setText(String.valueOf(this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").getQuantity()));	
+		
+		System.out.println("sono " +this.player.getUsername()+ "e sto provando a fare update della dash");
+		PersonalBoard board = this.player.getPersonalBoard();
+		GameState gameState = this.game.getGameState();
+		System.out.println(gameState);
+		
+		if (board == null) {
+			System.out.println("Board null");
+		}
+		
+		ResourceSet rs =this.player.getPersonalBoard().getPlayerResourceSet();
+		if (rs == null) {
+			System.out.println("rs null");
+		}
+		
+		LinkedHashMap<String, Resource> rm = this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap();
+		if (rm == null) {
+			System.out.println("rm null, ossia l'ultima invocazione");
+		}
+		
+		LinkedHashMap<String, Resource> map = this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap();
+		moneyValue.setText(String.valueOf(map.get("Money").getQuantity()));
+		woodValue.setText(String.valueOf(map.get("Wood").getQuantity()));
+		stonesValue.setText(String.valueOf(map.get("Stones").getQuantity()));
+		servantsValue.setText(String.valueOf(map != null && map.get("Servants") != null ? map.get("Servants").getQuantity() : 0));	
 	}
 	
 	//controllare che le associazioni sugli indici delle strutture dati siano valide

@@ -14,7 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.Player;
 
 /**
  * This Class builds the panel meant to host Cards Action Spaces in the central part
@@ -51,15 +53,15 @@ public class UpperPiece extends JPanel {
 		actionTowers.add(yellowTower);
 		actionTowers.add(violetTower);
 		
-		ToTower toGreenTower = new ToTower(widthSmall, heightSmall);
-		ToTower toAzureTower = new ToTower(widthSmall, heightSmall);
-		ToTower toYellowTower = new ToTower(widthSmall, heightSmall);
-		ToTower toVioletTower = new ToTower(widthSmall, heightSmall);
+		ToTower toGreenTower = new ToTower(0, widthSmall, heightSmall);
+		ToTower toAzureTower = new ToTower(1, widthSmall, heightSmall);
+		ToTower toYellowTower = new ToTower(2, widthSmall, heightSmall);
+		ToTower toVioletTower = new ToTower(3, widthSmall, heightSmall);
 		
 		toTowers.add(toGreenTower);
-		toTowers.add(toGreenTower);
-		toTowers.add(toGreenTower);
-		toTowers.add(toGreenTower);
+		toTowers.add(toAzureTower);
+		toTowers.add(toYellowTower);
+		toTowers.add(toVioletTower);
 		
 
 		this.add(greenTower);
@@ -78,16 +80,61 @@ public class UpperPiece extends JPanel {
 	
 	void updateUpperPiece(Game game) {
 		
+		this.game = game;
+		
+		//per le carte dovrei allo stesso modo usare la clear?
+		
 		for ( ActionTower tower : actionTowers) {
 			int i = 0;
 			tower.updateTower(game, i);
 			i++;
 		}
-		for ( ToTower toTower : toTowers) {
-			int i = 0;
-			toTower.updateToTower(game, i);
-			i++;
+		
+		ArrayList <String> fmColors = new ArrayList <String>();
+		fmColors.add("White");
+		fmColors.add("Black");
+		fmColors.add("Orange");
+		fmColors.add("Neutral");
+		
+		for ( int x = 0; x < 4; x++) {
+			ArrayList <PointCell> actionCells = toTowers.get(x).getActionCells();
+			for (PointCell cell : actionCells) {
+				cell.itemList.clear();
+			}
 		}
+		
+		for (String fmColor : fmColors) {
+			for (Player player : game.getPlayers()) {
+				int i;
+				FamilyMember fm = player.getFamilyMember(fmColor);
+				int fmPosition = fm.getPositionOfFamilyMember();
+				
+				if (0 < fmPosition && fmPosition < 5){
+					i = 0;
+					PointCell position = (PointCell) toTowers.get(i).getActionCells().get(4 - fmPosition);
+					position.add(player, fmColor);   
+				}
+				
+				if (4 < fmPosition && fmPosition < 9){
+					i = 1;
+					PointCell position = (PointCell) toTowers.get(i).getActionCells().get(8 - fmPosition);
+					position.add(player, fmColor);   
+				}
+				
+				if (8 < fmPosition && fmPosition < 13){
+					i = 2;
+					PointCell position = (PointCell) toTowers.get(i).getActionCells().get(12 - fmPosition);
+					position.add(player, fmColor);   
+				}
+				
+				if (12 < fmPosition && fmPosition < 17){
+					i = 0;
+					PointCell position = (PointCell) toTowers.get(i).getActionCells().get(16 - fmPosition);
+					position.add(player, fmColor);   
+				}
+			}
+		}
+		
 	}
 
 }

@@ -4,7 +4,7 @@ public class EventMessage implements EventAcceptor, ViewEventAcceptor {
 
 	NewStateMessage message;
 	
-	EventMessage(NewStateMessage message) {
+	public EventMessage(NewStateMessage message) {
 		this.message = message;
 	}
 	

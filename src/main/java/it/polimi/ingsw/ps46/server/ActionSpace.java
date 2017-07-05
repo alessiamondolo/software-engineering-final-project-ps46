@@ -13,13 +13,12 @@ public class ActionSpace implements Serializable {
 	
 	private static final long serialVersionUID = -3813912382960678889L;
 	
-	private static int IDACTIONSPACE = 0;
-	private int idLocalActionSpaces = 0;
+	private int id;
 	private String type;
 	private IncreaseResourcesEffect effectOfActionSpace;
 	private Dice requiredFamilyMemberValue;
 	private boolean available = true;
-	private Boolean maxOnePlayer;
+	private boolean maxOnePlayer;
 	private String playerColor = "";
 
 	
@@ -30,10 +29,9 @@ public class ActionSpace implements Serializable {
 	 * @param totNumberSpot 
 	 */
 	
-	public ActionSpace(Dice familyMembervalue, Boolean maxOnePlayer, IncreaseResourcesEffect effectOfActionSpace) {
-		
-		setIdLocalActionSpaces(IDACTIONSPACE);
-		IDACTIONSPACE ++;
+	public ActionSpace(String type, int id, Dice familyMembervalue, boolean maxOnePlayer, IncreaseResourcesEffect effectOfActionSpace) {
+		this.id = id;
+		this.type = type;
 		this.effectOfActionSpace = effectOfActionSpace;
 		requiredFamilyMemberValue = familyMembervalue;
 		this.maxOnePlayer = maxOnePlayer; 
@@ -94,18 +92,13 @@ public class ActionSpace implements Serializable {
 	}
 	
 
-	public int getIdLocalActionSpaces() {
-		return idLocalActionSpaces;
+	public int getId() {
+		return id;
 	}
 	
 	public IncreaseResourcesEffect getEffectOfActionSpace() {
 		return effectOfActionSpace;
 	}
-
-	private void setIdLocalActionSpaces(int idLocalActionSpaces) {
-		this.idLocalActionSpaces = idLocalActionSpaces;
-	}
-
 
 
 	public String getPlayerColor() {

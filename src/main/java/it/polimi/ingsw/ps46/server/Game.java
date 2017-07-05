@@ -37,8 +37,10 @@ public class Game extends Observable implements Serializable {
 	
 	private final int ROUNDS_PER_PERIOD = 2;
 	private final int PERIODS = 3;
+	private final int PHASES_PER_ROUND = 4;
 	private int currentRound = 0;
 	private int currentPeriod = 1;
+	private int currentPhase = 1;
 	
 	private boolean advancedMode = false;
 	
@@ -52,6 +54,7 @@ public class Game extends Observable implements Serializable {
 	private ArrayList<CharacterCard> characterCardsDeck;
 	private ArrayList<VentureCard> ventureCardsDeck;
 	private Map<String, Dice> dice;
+	private ArrayList<BonusTile> bonusTiles = new ArrayList<BonusTile>();
 	
 	private GameState gameState;
 	private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/config/";
@@ -68,9 +71,8 @@ public class Game extends Observable implements Serializable {
 		configDice();
 		configDecks();
 		configBoard();
-		///
-		currentPlayer = new Player(1); // AGGIUNTO PER IL TESTING DA TOGLIERE//
-		///
+		configBonusTiles();
+		
 	}
 
 	private void newState(Object event) {
@@ -86,7 +88,6 @@ public class Game extends Observable implements Serializable {
 	 */
 	private void configDice() {		
 		dice = new HashMap<String, Dice>();
-		//TODO da configurare tramite File
 		dice.put("Black", new Dice());
 		dice.put("Orange", new Dice());
 		dice.put("White", new Dice());
@@ -133,6 +134,18 @@ public class Game extends Observable implements Serializable {
 					(ventureCardsDeck.size()/PERIODS)*period));
 		}
 		
+	}
+	
+	
+	
+	/**
+	 * 
+	 * 
+	 */
+	private void configBonusTiles() {
+		FactoryBoard factoryBoard = FactoryBoard.getFactoryBoard();
+		bonusTiles = factoryBoard.createBonusTiles("BonusTiles.json");
+		giveBonusTiles();
 	}
 //--------------------------------------------------//
 //-----------END OF CONFIGURATION METHODS-----------//
@@ -189,6 +202,10 @@ public class Game extends Observable implements Serializable {
 	}
 
 
+	public ArrayList<BonusTile> getBonusTiles() {
+		return bonusTiles;
+	}
+
 	public ArrayList<TerritoryCard> getTerritoryCardsDeck() {
 		return territoryCardsDeck;
 	}
@@ -228,6 +245,12 @@ public class Game extends Observable implements Serializable {
 	
 	public void setAdvancedMode() {
 		advancedMode = true;
+	}
+	
+	public void giveBonusTiles() {
+		for(Player player : players) {
+			player.getPersonalBoard().setBonusTile(bonusTiles.get(0));
+		}
 	}
 	
 	public void setNextTurnOrder(ArrayList<Player> nextTurnOrder) {
@@ -282,8 +305,11 @@ public class Game extends Observable implements Serializable {
 	}
 	
 	public void throwDice() {
-		for(String key : dice.keySet())
+		for(String key : dice.keySet()) {
 			dice.get(key).throwDice();
+			for(Player player : players)
+				player.getFamilyMember(key).setValueOfFamilyMember(dice.get(key));
+		}
 		newState(new EventMessage(NewStateMessage.THROWN_DICE));
 	}
 	
@@ -297,6 +323,28 @@ public class Game extends Observable implements Serializable {
 	
 	public GameState getGameState() {
 		return gameState;
+	}
+	
+	public void useCard(BuildingCard card) {
+		if(!card.getDoubleChoice())
+			card.use(this);
+		else {
+			System.out.println("Andrea culo 1\n");
+			newState(new EventEffectChoice(NewStateMessage.EXCHANGE_RESOURCES_CHOICE, card));
+		}
+	}
+
+	public int getPHASES_PER_ROUND() {
+		return PHASES_PER_ROUND;
+	}
+
+	public int getCurrentPhase() {
+		return currentPhase;
+	}
+
+	public void setCurrentPhase(int currentPhase) {
+		this.currentPhase = currentPhase;
+		newState(new EventMessage(NewStateMessage.UPDATE_PHASE_INFO));
 	}
 
 }

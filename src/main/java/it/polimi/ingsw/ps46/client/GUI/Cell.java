@@ -23,15 +23,14 @@ import javax.swing.border.Border;
 
 public abstract class Cell<T> extends JButton {
 	
-	/**
-	 * 
-	 */
+
+	
 	private static final long serialVersionUID = -4753827311083808447L;
 	
 	protected ArrayList<T> itemList;
+	private int action = 0;
 	
 	public Cell () {
-		
 		itemList = new ArrayList<T> ();
 		
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
@@ -41,29 +40,46 @@ public abstract class Cell<T> extends JButton {
 		this.setEnabled(false);
 		this.setContentAreaFilled(false);
 		
-		this.removeAll();
+		// repaint();
+	}
+	
+	public Cell (int action) {
+		this();
 		
+		this.action = action;
+		
+		this.setEnabled(true);
 		this.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				Object mon;
+				synchronized (mon = GUIView.getMonitor()) {
+					GUIView.setAction(action);
+					mon.notifyAll();
+				}
 			}
-			
 		});
 		
 		// repaint();
 	}
 	
+	public int getCellAction() {
+		return action;
+	}
+
 	public void add(T el) {
 		itemList.add(el);
+		update();
 	}
 	
 	public void remove(T el) {
 		itemList.remove(el);
+		update();
 	}
 	
 	public ArrayList<T> getItemList() {
 		return this.itemList;
 	}
+	
+	public abstract void update();
 }

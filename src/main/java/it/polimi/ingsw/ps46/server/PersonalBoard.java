@@ -21,6 +21,8 @@ public class PersonalBoard implements Serializable {
 
 	private final static int MAX_NUMBER_OF_CARDS = 6;
 	
+	private BonusTile bonusTile = null;
+	
 	private ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	private ArrayList<VentureCard> ventureCards = new ArrayList<VentureCard>();
 	private ArrayList<BuildingCard> buildingCards = new ArrayList<BuildingCard>();
@@ -28,26 +30,16 @@ public class PersonalBoard implements Serializable {
 	
 	private ResourceSet playerResources = null; 
 	
-	private Dice productionValue;
-	private Dice harvestValue;
-	private ResourceSet gainedFromPersonalBoardProduction;
-	private ResourceSet gainedFromPersonalBoardHarvest;
-	
 	private LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards = new LinkedHashMap<Integer, Integer>();
 	private LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards = new LinkedHashMap<Integer, Integer>();
 	
-	
-	public PersonalBoard(Dice productionValue, Dice harvestValue, ResourceSet gainedFromPersonalBoardProduction, ResourceSet gainedFromPersonalBoardHarvest,
-			LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards, LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards) {
+	/*
+	public PersonalBoard(LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards, LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards) {
 		
-		this.setProductionValue(productionValue);
-		this.setHarvestValue(harvestValue);
-		this.setGainedFromPersonalBoardHarvest(gainedFromPersonalBoardHarvest);
-		this.setGainedFromPersonalBoardProduction(gainedFromPersonalBoardProduction);
 		this.setVictoryPointsFromTerritoryCards(victoryPointsFromTerritoryCards);
 		this.setVictoryPointsFromCharacterCards(victoryPointsFromCharacterCards);
 		
-	}
+	}*/
 	
     
 	//TODO se non riesce a mettere la carta nel set è perchè ho troppe carte di quel tipo ---> bisogna avvisare il giocatore
@@ -151,38 +143,6 @@ public class PersonalBoard implements Serializable {
 		playerResources = resources;
 	}
 
-	public Dice getProductionValue() {
-		return productionValue;
-	}
-
-	private void setProductionValue(Dice productionValue) {
-		this.productionValue = productionValue;
-	}
-
-	public Dice getHarvestValue() {
-		return harvestValue;
-	}
-
-	private void setHarvestValue(Dice harvestValue) {
-		this.harvestValue = harvestValue;
-	}
-
-	public ResourceSet getGainedFromPersonalBoardProduction() {
-		return gainedFromPersonalBoardProduction;
-	}
-
-	private void setGainedFromPersonalBoardProduction(ResourceSet gainedFromPersonalBoardProduction) {
-		this.gainedFromPersonalBoardProduction = gainedFromPersonalBoardProduction;
-	}
-
-	public ResourceSet getGainedFromPersonalBoardHarvest() {
-		return gainedFromPersonalBoardHarvest;
-	}
-
-	private void setGainedFromPersonalBoardHarvest(ResourceSet gainedFromPersonalBoardHarvest) {
-		this.gainedFromPersonalBoardHarvest = gainedFromPersonalBoardHarvest;
-	}
-
 	public LinkedHashMap<Integer, Integer> getVictoryPointsFromTerritoryCards() {
 		return victoryPointsFromTerritoryCards;
 	}
@@ -197,6 +157,16 @@ public class PersonalBoard implements Serializable {
 
 	private void setVictoryPointsFromCharacterCards(LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards) {
 		this.victoryPointsFromCharacterCards = victoryPointsFromCharacterCards;
+	}
+
+
+	public BonusTile getBonusTile() {
+		return bonusTile;
+	}
+
+
+	public void setBonusTile(BonusTile bonusTile) {
+		this.bonusTile = bonusTile;
 	}
 	
 }

@@ -61,9 +61,7 @@ public class Player implements Serializable {
 		familyMembers.put("Orange", new FamilyMember("Orange"));
 		familyMembers.put("Neutral", new FamilyMember("Neutral"));
 		
-		//TODO parsing del file personalboard
-		FactoryBoard factoryBoard = FactoryBoard.getFactoryBoard();
-		personalBoard = factoryBoard.createPersonalBoard("PersonalBoard.json");
+		personalBoard = new PersonalBoard();
 		
 		int init = 0;
 		Dice initializationDice = new Dice(init);

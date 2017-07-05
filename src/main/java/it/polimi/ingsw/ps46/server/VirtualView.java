@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
+import it.polimi.ingsw.ps46.server.card.BuildingCard;
+
 
 /**
  * This class implements the virtual view that will be the communication point between the server and the client.<br>
@@ -100,12 +102,26 @@ public class VirtualView extends View {
 		case UPDATE_ROUND_INFO : 
 			updateRoundInfo();
 			break;
+		case UPDATE_PHASE_INFO :
+			printBoard();
+			break;
 		case THROWN_DICE :
 			printBoard();
 			break;
 		case SET_NEXT_TURN_ORDER :
 			showNextTurnOrder();
 			break;	
+		default:
+			break;
+		}
+	}
+	
+	
+	public void visit(EventEffectChoice eventEffectChoice) {
+		switch(eventEffectChoice.getMessage()) {
+		case EXCHANGE_RESOURCES_CHOICE :
+			getEffectChoice(eventEffectChoice.getCard());
+			break;
 		default:
 			break;
 		}
@@ -308,8 +324,7 @@ public class VirtualView extends View {
 	
 	
 	/**
-	 * Sends to the all the clients a message request to print the board.<br>
-	 * After the message request, it sends a serialized version of the current game object.
+	 * 
 	 */
 	public void printPlayerStatus() {
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
@@ -332,8 +347,10 @@ public class VirtualView extends View {
 		ObjectOutputStream writer = writers.get(currentSocket);
 		ObjectInputStream reader = readers.get(currentSocket);
 		try {
-			if(game.getGameState().equals(GameState.ACTION_NOT_VALID))
+			if(game.getGameState().equals(GameState.ACTION_NOT_VALID)) {
 				writer.writeObject("PREVIOUS_ACTION_NOT_VALID");
+				writer.flush();
+			}
 			writer.writeObject("GET_PLAYER_ACTION");
 			writer.flush();
 			try {					
@@ -352,6 +369,36 @@ public class VirtualView extends View {
 				e.printStackTrace();
 			}
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	/**
+	 * @param effect2 
+	 * @param effect1 
+	 * 
+	 */
+	public void getEffectChoice(BuildingCard card) {
+		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
+		ObjectOutputStream writer = writers.get(currentSocket);
+		ObjectInputStream reader = readers.get(currentSocket);
+		try {
+			writer.writeObject("GET_EFFECT_CHOICE");
+			writer.flush();
+			writer.writeObject(card.getPermanentEffects());
+			writer.flush();
+			writer.writeObject(card.getPermanentEffectsTwo());
+			writer.flush();
+			int choice = (int) reader.readObject();
+			setChanged();
+			EventEffectChoice event = new EventEffectChoice(NewStateMessage.EXCHANGE_RESOURCES_CHOICE, card);
+			event.setChoice(choice);
+			notifyObservers(event);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

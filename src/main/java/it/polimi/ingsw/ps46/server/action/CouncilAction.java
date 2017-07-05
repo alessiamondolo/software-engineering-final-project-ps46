@@ -54,7 +54,7 @@ public class CouncilAction implements Action {
 			}
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
 			
-			familyMemberUsed.setPositionOfFamilyMember(councilActionSpace.getIdLocalActionSpaces());
+			familyMemberUsed.setPositionOfFamilyMember(councilActionSpace.getId());
 			return true;
 		}
 		else 

@@ -59,7 +59,7 @@ public class ActivateHarvestAction implements Action {
 				}
 			}
 
-			ResourceSet personalBoardResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getGainedFromPersonalBoardHarvest());
+			ResourceSet personalBoardResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getBonusTile().getGainedFromPersonalBoardHarvest());
 			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty()){
 				
 				for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
@@ -71,7 +71,7 @@ public class ActivateHarvestAction implements Action {
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(personalBoardResourceSet);
 			//setting occupied this actionSpace and used the familyMember
 			harvestActionSpace.updateAvailability();
-			familyMemberUsed.setPositionOfFamilyMember(harvestActionSpace.getIdLocalActionSpaces());
+			familyMemberUsed.setPositionOfFamilyMember(harvestActionSpace.getId());
 			
 			return true;
 		}
@@ -103,8 +103,7 @@ public class ActivateHarvestAction implements Action {
 		
 		Dice temporaryDice = new Dice( familyMemberUsed.getValueFamilyMember().getValue());
 		//calculating every penality, bonus, malus on a copy of the familyMember Dice
-		
-		if ( harvestActionSpace.isMaxOnePlayer() != true )
+		if (!harvestActionSpace.isMaxOnePlayer())
 		{
 			penality = new Dice( PENALITYOFTHEACTIONSPACE );
 		}
@@ -112,7 +111,8 @@ public class ActivateHarvestAction implements Action {
 			penality = new Dice(0);
 		
 		temporaryDice.subDice( penality );
-		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "HarvestAction" ));
+		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "HarvestActions" ));
+		
 		
 		if( !game.getCurrentPlayer().getDiceMalus().isEmpty() )
 			for( DiceMalusEffect diceMalusEffect : game.getCurrentPlayer().getDiceMalus() ){
@@ -121,21 +121,14 @@ public class ActivateHarvestAction implements Action {
 					temporaryDice.subDice( diceMalusEffect.getMalus() );	
 				}
 			}
-			
-		// checking if is it possible activate harvest action or not
-		boolean oneCardActivableAtLeast = false;
-		for (TerritoryCard territoryCard : game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck()) {
-		
-			if(temporaryDice.greaterOrEqual(territoryCard.getHarvestValue())){
-				oneCardActivableAtLeast = true;
-			}
-		}
-		if(!oneCardActivableAtLeast) return false;
-		if(!temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getHarvestValue())){
+
+		if(!temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getBonusTile().getHarvestValue())){
+			System.out.println("Andrea culo 5\n");	
 			return false;
 		}
 		
 		familyMemberUsed.setValueOfFamilyMember(temporaryDice);
 		return true;
 	}
+	
 }

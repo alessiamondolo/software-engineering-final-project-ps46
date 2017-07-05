@@ -6,9 +6,12 @@
 			{
 				"floor" : 1,
 				"action" : {
+				"type" : "Tower",
+				"id" : 1,
 					"requiredFamilyMemberValue" : {
 						"value" : 1
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -21,9 +24,12 @@
 			{
 				"floor" : 2,
 				"action" : {
+				"type" : "Tower",
+				"id" : 2,
 					"requiredFamilyMemberValue" : {
 						"value" : 3
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -36,9 +42,12 @@
 			{
 				"floor" : 3,
 				"action" : {
+				"type" : "Tower",
+				"id" : 3,
 					"requiredFamilyMemberValue" : {
 						"value" : 5
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -54,9 +63,12 @@
 			{
 				"floor" : 4,
 				"action" : {
+				"type" : "Tower",
+				"id" : 4,
 					"requiredFamilyMemberValue" : {
 						"value" : 7
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -78,9 +90,12 @@
 			{
 				"floor" : 1,
 				"action" : {
+				"type" : "Tower",
+				"id" : 5,
 					"requiredFamilyMemberValue" : {
 						"value" : 1
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -93,9 +108,12 @@
 			{
 				"floor" : 2,
 				"action" : {
+				"type" : "Tower",
+				"id" : 6,
 					"requiredFamilyMemberValue" : {
 						"value" : 3
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -108,9 +126,12 @@
 			{
 				"floor" : 3,
 				"action" : {
+				"type" : "Tower",
+				"id" : 7,
 					"requiredFamilyMemberValue" : {
 						"value" : 5
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -126,9 +147,12 @@
 			{
 				"floor" : 4,
 				"action" : {
+				"type" : "Tower",
+				"id" : 8,
 					"requiredFamilyMemberValue" : {
 						"value" : 7
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -150,9 +174,12 @@
 			{
 				"floor" : 1,
 				"action" : {
+				"type" : "Tower",
+				"id" : 9,
 					"requiredFamilyMemberValue" : {
 						"value" : 1
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -165,9 +192,12 @@
 			{
 				"floor" : 2,
 				"action" : {
+				"type" : "Tower",
+				"id" : 10,
 					"requiredFamilyMemberValue" : {
 						"value" : 3
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -180,9 +210,12 @@
 			{
 				"floor" : 3,
 				"action" : {
+				"type" : "Tower",
+				"id" : 11,
 					"requiredFamilyMemberValue" : {
 						"value" : 5
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -198,9 +231,12 @@
 			{
 				"floor" : 4,
 				"action" : {
+				"type" : "Tower",
+				"id" : 12,
 					"requiredFamilyMemberValue" : {
 						"value" : 7
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -222,9 +258,12 @@
 			{
 				"floor" : 1,
 				"action" : {
+				"type" : "Tower",
+				"id" : 13,
 					"requiredFamilyMemberValue" : {
 						"value" : 1
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -237,9 +276,12 @@
 			{
 				"floor" : 2,
 				"action" : {
+				"type" : "Tower",
+				"id" : 14,
 					"requiredFamilyMemberValue" : {
 						"value" : 3
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -252,9 +294,12 @@
 			{
 				"floor" : 3,
 				"action" : {
+				"type" : "Tower",
+				"id" : 15,
 					"requiredFamilyMemberValue" : {
 						"value" : 5
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 
@@ -270,9 +315,12 @@
 			{
 				"floor" : 4,
 				"action" : {
+				"type" : "Tower",
+				"id" : 16,
 					"requiredFamilyMemberValue" : {
 						"value" : 7
 					},
+					"maxOnePlayer" : true,
 					"totalNumberOfSpot" : 1,
 					"effectOfActionSpace" : {
 						"additionalResources": 

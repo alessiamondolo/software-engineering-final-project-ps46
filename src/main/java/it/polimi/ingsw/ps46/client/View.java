@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps46.client;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.card.Effect;
 
 
 /**
@@ -44,6 +45,8 @@ public interface View {
 	public int getServants();
 	
 	public void printPlayerAction();
+
+	public int getEffectCoice(Effect effect1, Effect effect2);
 	
 	public void showNextTurnOrder();
 	

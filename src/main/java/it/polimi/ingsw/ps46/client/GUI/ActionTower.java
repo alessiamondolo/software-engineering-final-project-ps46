@@ -53,7 +53,7 @@ public class ActionTower extends JPanel {
 			cardCells.add(cell);
 		}
 		
-		Image img = cardCells.get(0).loadCard(4);
+/*		Image img = cardCells.get(0).loadCard(4);
 		Image img1 = cardCells.get(0).loadCard(5);
 		Image img2 = cardCells.get(0).loadCard(6);
 		Image img3 = cardCells.get(0).loadCard(78);
@@ -65,7 +65,7 @@ public class ActionTower extends JPanel {
 		imageIcon = new ImageIcon(img2.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 		cardCells.get(2).setIcon(imageIcon);
 		imageIcon = new ImageIcon(img3.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
-		cardCells.get(3).setIcon(imageIcon);
+		cardCells.get(3).setIcon(imageIcon);*/
 		
 	}
 	
@@ -84,10 +84,17 @@ public class ActionTower extends JPanel {
 		this.game = game;
 		
 		for (int x = 0; x < 4; x++) {
+		//quando la tower non ha carte la card può essere = null?
 		Card card = game.getBoard().getTower(i).getTowerFloor(x + (3 - x*2)).getCard();
+		
 		CardCell cc = cardCells.get(x);
-		cc.itemList.remove(0);  //una cardCells avrà sempre solo una carta, soluzione non elegante però
-		cc.add(card);
+		
+		//cosa succede se itemlist è vuota
+		cc.itemList.clear();  
+		if (card != null) {
+			cc.add(card);
+		}
+		
 		}
 		
 	}
