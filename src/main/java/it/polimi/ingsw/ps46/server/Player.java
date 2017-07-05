@@ -10,7 +10,6 @@ import it.polimi.ingsw.ps46.server.card.DecreaseResourcesAtFinalMalus;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
 import it.polimi.ingsw.ps46.server.card.GenericMalusEffect;
-//import it.polimi.ingsw.ps46.server.card.LeaderCard;
 import it.polimi.ingsw.ps46.server.card.LeaderCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -28,11 +27,11 @@ public class Player implements Serializable {
 	private String username;
 	private String color;
 	
-	private ArrayList<LeaderCard> leaderCards;  //TODO completare tutta la lista delle carte i suoi effetti ecc ecc
+	private Map<String, LeaderCard> leaderCards;
 	
 	private PersonalBoard personalBoard;
 	
-	private Map <String,FamilyMember> familyMembers;
+	private Map<String,FamilyMember> familyMembers;
 	private Map<String, Dice> bonus;
 	private Map<String, ResourceSet> discount;
 	private Map<String, ResourceSet> optionalDiscount;
@@ -127,8 +126,8 @@ public class Player implements Serializable {
 
 	//LEADER CARDS - GETTER//
 	////////////////////////
-		
-	public ArrayList<LeaderCard> getLeaderCards() {
+
+	public Map<String, LeaderCard> getLeaderCards() {
 		return leaderCards;
 	}
 	
@@ -310,7 +309,4 @@ public class Player implements Serializable {
 
 	}
 
-	
-
-	}	
-
+}	

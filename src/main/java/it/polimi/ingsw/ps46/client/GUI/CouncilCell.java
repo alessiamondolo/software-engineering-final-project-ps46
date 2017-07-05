@@ -23,4 +23,10 @@ public class CouncilCell extends Cell implements ActionListener {
 		
 	}
 
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

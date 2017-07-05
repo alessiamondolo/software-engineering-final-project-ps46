@@ -114,16 +114,20 @@ public class MoveToActionSpaceAction implements Action {
 	 */
 	public boolean isLegal() {
 		//TODO Quando faccio un'azione bonus, perchè dovrei settare il family member utilizzato?
+		
 		//The player that wants to move to an action space has to be the current player
 		if (game.getCurrentPlayer().getIdPlayer() != player.getIdPlayer()) {
 			System.out.println("Andrea culo 1\n");
 			return false;
 		}
-		//The action space has to be available
-		if(!(actionSpace.getAvailability())) {
+		//The action space has to be available 
+		if(!(actionSpace.getAvailability()))
 			System.out.println("Andrea culo 2\n");
-			return false;
-		}
+			if(!(game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico Ariosto") || !(game.getCurrentPlayer().getLeaderCards().get("Ludovico Ariosto").isActive())))
+				return false;
+		//If the actionSpace is the green tower check military points liked with the number of territory cards got by the player
+		//TODO 
+
 		//The family member has to be available - it can't be in other action spaces
 		if((familyMember.isUsed())) {
 			System.out.println("Andrea culo 3\n");

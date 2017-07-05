@@ -1,12 +1,28 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import it.polimi.ingsw.ps46.client.View;
+
+import it.polimi.ingsw.ps46.server.EventMessage;
+import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.Player;
+
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Effect;
+
 
 /**
  * A WindowClass acts as the entry point for the game User Interface by launching the 
@@ -19,28 +35,45 @@ import it.polimi.ingsw.ps46.server.card.Effect;
 public class GUIView implements View {
 	
 	private Game game;
-	private MainWindow mainWindow;
+	private WelcomeWindow welcomeWindow;
+	private GameWindow gameWindow;
+	private boolean firstTime = true;
+	
+	// TODO Rimuovere, solo per debug
+	private PrintStream output = System.out;
+	
+	private static Object monitor = new Object();
+	protected static Object getMonitor() {
+		return monitor;
+	}
 	
 	
 	public static void main(String[] args) {
-		new GUIView();
+		
+		GUIView g = new GUIView(true);
+		Game game = null;
+		Player p = new Player(1);
+		
+		GameWindow gw = new GameWindow(game);
+		gw.pack();
+		gw.setVisible(true);
+		
+		int a;
+		
+		while ((a=g.getPlayerAction()) != 4) {
+			System.out.println("Action: " + a);
+		}
 	}
 	
-/*	public GUIView (Game game) {
+	public GUIView () {
 		
-		
-		//il costruttore della GUI view dovrebbe creare le classi principali senza visualizzare nulla
-		
-		this.game = game;  //serve salvarne una copia o basta propoagarla alle sottoclassi?
-		
-		//Schedule a job for the event-dispatching thread:
-		//creating and showing this application's GUI.
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				createAndShowGUI();
+				boolean visible = false;
+				createAndShowGUI(visible);
 			}
 		});
-	}*/
+	}
 	
 	/**
 	 *  Constructor that creates all the containers for the GUI screens. No interaction with
@@ -48,13 +81,14 @@ public class GUIView implements View {
 	 *  the containers wil be populated with model's data.
 	 */
 	
-	public GUIView () {
+	public GUIView (boolean b) {   //costruttore per test
 		
 		//poi qui rimarrà solo createandshowgui che sarà il metodo del costruttore per creare tutto il framework
 		
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				createAndShowGUI();
+				
+				createAndShowGUI(b);
 			}
 		});
 		
@@ -65,135 +99,246 @@ public class GUIView implements View {
 	 *  Cascade creation of the game GUI, this method displays the main JFrame 
 	 *  (MainWindow) which will contain the Board and the Users Panels.
 	 */
-	//problema di denominazione, i nomi della view non sono ideali per la semantica della GUI
 	
-	private void createAndShowGUI() {
+	// Solo per debug
+	private void createAndShowGUI(boolean visible) {
 		// Create and set up the window.
-		mainWindow = new MainWindow();
-		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainWindow.pack();
-		mainWindow.setVisible(true);
-		mainWindow.repaint();
+		initUI(visible);
+		return;
 	}
 	
-	
-	
+	private void initUI(boolean visible) {
+		
+		//Create and set up the window.
+		welcomeWindow = new WelcomeWindow();
+		welcomeWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		welcomeWindow.pack();
+		welcomeWindow.setVisible(visible); //
+		welcomeWindow.repaint();
+		return;
+	}
 	
 	/**
 	 *  Central method to refresh all the game's graphical representations
 	 */
+	
 	@Override
 	public void printBoard() {
 		
-		MainBoard mainBoard = mainWindow.getMainBoard();
+		if (!(gameWindow instanceof GameWindow))
+			return;
 		
-		ArrayList<PlayerDashboard> list = mainWindow.getPlayerArea().getDashboards();
-		for ( PlayerDashboard pd : list) {
-			pd.update(this.game);
-		}
-		
-		mainBoard.update(this.game);
+		gameWindow.repaint();
+		gameWindow.setVisible(true);
+		gameWindow.update(this.game);
+		gameWindow.pack();
+		gameWindow.setVisible(true);
 		
 	}
 	
 	
 	//pensare quando va chiamato il metodo setPlayer delle dashboard che le associa ad un giocatore
-	
+	@Override
 	public void setGame(Game game) {
+
 		this.game = game;
+		System.out.println("set game è stato chiamato");
+		
+		if (firstTime) {	
+		
+		gameWindow = new GameWindow(this.game);
+		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		}
+		
+		firstTime = false;
 	}
 
 	
 	@Override
 	public void welcomeMessage() {
-		// TODO Auto-generated method stub
+		
+		welcomeWindow.setVisible(false);
+		System.out.println("sono welcome message");
 		
 	}
-
 	
+	
+	private volatile static String gameMode;
+	protected static void setGameMode(String mode) {
+		GUIView.gameMode = mode;
+	}
 	@Override
 	public String getGameMode() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
-/*	@Override
-	public String getPlayerUserame(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-*/
-	
-	@Override
-	public void showInitialOrder() {
-		// TODO Auto-generated method stub
+		if (!(welcomeWindow instanceof WelcomeWindow))
+			return "";
+		welcomeWindow.setGameMode();
+		System.out.println("ho appena invocato la gamemode");
+		welcomeWindow.pack();
+		welcomeWindow.setLocationRelativeTo(null);
+		welcomeWindow.setVisible(true);
+		welcomeWindow.repaint();
 		
+		GUIView.setColor(null);
+		synchronized (monitor) {
+			while (gameMode == null) {
+				System.out.println("Sto aspettando modalità");
+				try {
+					monitor.wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}	
+		return GUIView.gameMode;
 	}
-
 	
-/*	@Override
-	public String getPlayerColor(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
-
 	
-/*	@Override
-	public ActionSpaceName getPlayerAction() {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
-
+	@Override  //eseguita appena dopo aver inserito username 
+	public void showInitialOrder() {
+	
+		if (!(welcomeWindow instanceof WelcomeWindow))
+			return;
+		welcomeWindow.showInitialOrder(this.game);
+		System.out.println("ho appena invocato la showorder");
+		welcomeWindow.pack();
+		welcomeWindow.setLocationRelativeTo(null);
+		welcomeWindow.setVisible(true);
+		welcomeWindow.repaint();
+	}
 	
 	@Override
 	public void printPlayerStatus() {
-		// TODO Auto-generated method stub
-		
+		printBoard();
 	}
 
 	@Override
 	public void printMessage(String message) {
-		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(welcomeWindow, message);
 	}
 
+	
+	private volatile static String username;
+	protected static void setUsername(String username) {
+		GUIView.username = username;
+	}
 	@Override
 	public String getPlayerUserame() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		System.out.println("Sono appena arrivato in getplayerusername");
+		if (!(welcomeWindow instanceof WelcomeWindow))
+			return "";
+	
+		welcomeWindow.setPlayerUsername();
+		System.out.println("ho appena invocato la setplayer username dalla guiview");
+		welcomeWindow.pack();
+		welcomeWindow.setLocationRelativeTo(null);
+		welcomeWindow.setVisible(true);
+		
+		GUIView.setColor(null);
+		synchronized (monitor) {
+			while (username == null) {
+				System.out.println("Sto aspettando username");
+				try {
+					monitor.wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}	
+		System.out.println(GUIView.username);
+		return GUIView.username;
 	}
+	
 
+	private volatile static String color;
+	protected static void setColor(String color) {
+		GUIView.color = color;
+	}
 	@Override
 	public String getPlayerColor(ArrayList<String> colors) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("sono arrivato a chiedere il colore");
+		
+		if (!(welcomeWindow instanceof WelcomeWindow))
+			return "";
+		
+		
+		welcomeWindow.setColors(colors);
+		welcomeWindow.pack();
+		welcomeWindow.setLocationRelativeTo(null);
+		welcomeWindow.setVisible(true);
+		welcomeWindow.repaint();
+		
+		GUIView.setColor(null);
+		
+		synchronized (monitor) {
+			while (color == null) {
+				try {
+					monitor.wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		System.out.println(GUIView.color);
+		welcomeWindow.dispose();
+		return GUIView.color;
 	}
 
 	@Override
 	public void updateRoundInfo() {
-		// TODO Auto-generated method stub
-		
+		printBoard();
 	}
 
 	@Override
 	public void printCurrentPlayer() {
-		// TODO Auto-generated method stub
-		
+		printBoard();
 	}
 
+	private volatile static int action;
+	protected static void setAction(int action) {
+		GUIView.action = action;
+	}
 	@Override
 	public int getPlayerAction() {
-		// TODO Auto-generated method stub
-		return 0;
+		/* INIT */
+		GUIView.setAction(0);
+		
+		/* WAIT */
+		synchronized (monitor) {
+			while (GUIView.action == 0) {
+				try {
+					monitor.wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		/* GET */
+		return GUIView.action;
 	}
 
+	private volatile static String familyMember;
+	protected static void setFamilyMember(String familyMember) {
+		GUIView.familyMember = familyMember;
+	}
 	@Override
 	public String getFamilyMember() {
 		// TODO Auto-generated method stub
-		return null;
+		return "White";
 	}
 
+	private volatile static int servants;
+	protected static void setServants(int servants) {
+		GUIView.servants = servants;
+	}
 	@Override
 	public int getServants() {
 		// TODO Auto-generated method stub
@@ -202,21 +347,21 @@ public class GUIView implements View {
 
 	@Override
 	public void printPlayerAction() {
-		// TODO Auto-generated method stub
-		
+		printBoard();
 	}
 
 	@Override
 	public void showNextTurnOrder() {
-		// TODO Auto-generated method stub
-		
+		printBoard();
 	}
+
 
 	@Override
 	public int getEffectCoice(Effect effect1, Effect effect2) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 	
 }

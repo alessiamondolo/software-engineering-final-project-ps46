@@ -39,15 +39,11 @@ public class CentralPiece extends JPanel {
 	}
 
 	private void composeCentralPiece(double widthSmall, double heightSmall) {
-		// TODO Auto-generated method stub
 		
 		this.upperPiece = new UpperPiece(widthSmall, heightSmall); 
 		
 		this.lowerPiece = new LowerPiece(widthSmall, heightSmall);
-		
-		//lowerPiece.setPreferredSize(new Dimension (425, 260));
-		
-		
+
 	
 		upperPiece.setOpaque(false);
 		lowerPiece.setOpaque(false);
@@ -63,7 +59,8 @@ public class CentralPiece extends JPanel {
 	
 	public void updateCentralPiece(Game game) {
 		this.upperPiece.updateUpperPiece(game);
-		//this.lowerPiece.updateLowerPiece(game)
+		this.lowerPiece.updateLowerPiece(game);
+		
 	}
 	
 	

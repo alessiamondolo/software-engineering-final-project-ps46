@@ -1,17 +1,14 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.border.Border;
-
-import it.polimi.ingsw.ps46.server.Player;
 
 /**
  * A token to represent visually player's ranking and placement choices in the game's board
@@ -27,96 +24,111 @@ public class Token extends JLabel {
 	 */
 	
 	private static final long serialVersionUID = 1903309058325267711L;
+	private BufferedImage image = null;
 	
-	private Color color;
+	private Token() {
 		
-	public Token(String color) {    //il costruttore qui ha solo bisogno del colore del giocatore in realtà
+	}
+	
+	public Token(String color) {
+		this();
 		
-		double width = 5; 
-		double height = 5; 
+		//da migliorare la gestione dell'IO
 		
-		BufferedImage image = null;
-		Image img;
+		if (color == null) color = "";
+		
+		//teoricamente con concantenazione di stringe non serve neanche lo switch
 		
 		switch(color) {
 		
 		case "Red" :
-			this.color = Color.RED;
 			try {
 				image = ImageIO.read(getClass().getResource("img/token/red_token.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			img = image.getScaledInstance((int) width, (int) height, Image.SCALE_SMOOTH);
-			ImageIcon imageIcon = new ImageIcon(img);
-			this.setIcon(imageIcon);
+			//img = image.getScaledInstance((int) width, (int) height, Image.SCALE_SMOOTH);
+			//ImageIcon imageIcon = new ImageIcon(img);
+			
 			break;
 		
 		case "Blue" :
-			this.color = Color.BLUE;
 			try {
 				image = ImageIO.read(getClass().getResource("img/token/blue_token.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			img = image.getScaledInstance((int) width, (int) height, Image.SCALE_SMOOTH);
-			imageIcon = new ImageIcon(img);
-			this.setIcon(imageIcon);
+
 			break;
 		
 		case "Green" :
-			this.color = Color.GREEN;
 			try {
 				image = ImageIO.read(getClass().getResource("img/token/green_token.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			img = image.getScaledInstance((int) width, (int) height, Image.SCALE_SMOOTH);
-			imageIcon = new ImageIcon(img);
-			this.setIcon(imageIcon);
+			
 			break;
 		
 		case "Yellow" :
-			this.color = Color.YELLOW;
 			try {
 				image = ImageIO.read(getClass().getResource("img/token/yellow_token.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			img = image.getScaledInstance((int) width, (int) height, Image.SCALE_SMOOTH);
-			imageIcon = new ImageIcon(img);
-			this.setIcon(imageIcon);
+
 			break;
+		default :
+			try {
+				image = ImageIO.read(getClass().getResource("img/token/red_token.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//serve getscaled instance
+			
 		}
-		
-	
 	}
-	
-	//costruttore vuoto per simulazione
-	
-	private static Image redImg = null;
-	private static Image blueImg = null;
-	public Token(Dimension dimension) {    //anche questo costruttore dovrebbe prendere in ingresso un colore
+
+	public Token(String color, String fmColor) {
+		this();
 		
-		double width = dimension.getWidth(); 
-		double height = dimension.getHeight(); 
 		try {
-			if (redImg == null)
-				redImg = ImageIO.read(getClass().getResource("img/token/red_token.png")).getScaledInstance((int) width, (int) height, Image.SCALE_SMOOTH);
-			if (blueImg == null)
-				blueImg = ImageIO.read(getClass().getResource("img/token/blue_token.png")).getScaledInstance((int) width, (int) height, Image.SCALE_SMOOTH);
-			//this.color = Color.RED;
+			if (color == null) color = "";
+				
+			switch (fmColor) {
+					
+				case "White" :
+						image = ImageIO.read(getClass().getResource("img/family_member/" +color+ "_WhiteFM.png"));
+					break;
+				case "Black" :
+						image = ImageIO.read(getClass().getResource("img/family_member/" +color+ "_BlackFM.png"));
+					break;
+				case "Orange" :
+						image = ImageIO.read(getClass().getResource("img/family_member/" +color+ "_OrangeFM.png"));
+					break;
+				case "Neutral" :
+						image = ImageIO.read(getClass().getResource("img/family_member/" +color+ "_NeutralFM.png"));
+					break;
+			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		Image image = Math.random() > 0.5 ? redImg : blueImg;
-		ImageIcon imageIcon = new ImageIcon(image);
-		this.setIcon(imageIcon);
+	
 	}
-
-	public Color getColor() {
-		return this.color;
+	
+	
+	private Rectangle d = null;
+	public void paint(Graphics g) {
+		
+		if (d == null || d.width != g.getClipBounds().width ||
+				 d.height != g.getClipBounds().height) {
+			d = g.getClipBounds();
+			ImageIcon ii = new ImageIcon(image.getScaledInstance(g.getClipBounds().width, g.getClipBounds().height, Image.SCALE_SMOOTH));
+			this.setIcon(ii);
+		}
+		
+		super.paint (g);
 	}
 	
 }

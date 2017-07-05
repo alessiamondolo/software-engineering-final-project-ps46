@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.List;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -21,7 +22,7 @@ import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 
 public class PlayerArea extends JPanel {
-
+	
 	/**
 	 * 
 	 */
@@ -33,10 +34,8 @@ public class PlayerArea extends JPanel {
 	private JPanel turnOrder = new JPanel();
 	private JPanel familyMembers = new JPanel();
 	private JTabbedPane leaderCardPanel = new JTabbedPane();
-	private PlayerDashboard playerDashboard1;
-	private PlayerDashboard playerDashboard2;
-	private PlayerDashboard playerDashboard3;
-	private PlayerDashboard playerDashboard4;
+	private ArrayList<PlayerDashboard> dashboards = new ArrayList<PlayerDashboard>();
+	private ArrayList<JPanel> lCardsPanels = new ArrayList<JPanel>();
 	private ZoomBox zoomBox = new ZoomBox();
 	private Dimension playerAreaDimension = new Dimension();
 	private Dimension dashboardAreaDimension = new Dimension();
@@ -46,9 +45,11 @@ public class PlayerArea extends JPanel {
 	private ArrayList<CardCell> player4LeaderCardCells = new ArrayList <CardCell>();
 	private double controlAreaWidth;
 	private double controlAreaHeight;
+
 	
-	public PlayerArea(Dimension playerAreaDimension) {
+	public PlayerArea(Dimension playerAreaDimension, Game game) {
 		
+		this.game = game;
 		this.playerAreaDimension = playerAreaDimension;
 		this.setPreferredSize(playerAreaDimension);
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
@@ -63,35 +64,35 @@ public class PlayerArea extends JPanel {
 	}
 	
 	public ArrayList<PlayerDashboard> getDashboards() {
-		
-		ArrayList <PlayerDashboard> list = new ArrayList<PlayerDashboard>();
-		
-		list.add(playerDashboard1);
-		list.add(playerDashboard2);
-		list.add(playerDashboard3);
-		list.add(playerDashboard4);
-		
-		return list;	
+
+		return dashboards;	
 	}
 	
 	private void createDashboardArea() {
 		
-		playerDashboard1 = new PlayerDashboard(playerAreaDimension);
-		playerDashboard2 = new PlayerDashboard(playerAreaDimension);
-		playerDashboard3 = new PlayerDashboard(playerAreaDimension);
-		playerDashboard4 = new PlayerDashboard(playerAreaDimension);
+/*		int nr = this.game.getNumberPlayers();
+		
+		for (int i = 0; i < nr; i++) {
+			
+			Player player = this.game.getPlayers().get(i);
+			PlayerDashboard playerDashboard = new PlayerDashboard(playerAreaDimension, player);
+			System.out.println("Sto creando la dashboard di " +player.getUsername());
+			dashboards.add(playerDashboard);
+		}
 		
 		this.dashboardAreaDimension = new Dimension ((int) playerAreaDimension.getWidth(), 
 		                              (int) (playerAreaDimension.getHeight()*9/27));
 		
 		dashboardArea.setPreferredSize(dashboardAreaDimension);
-		dashboardArea.addTab("Player 1", null, playerDashboard1, "Tab 1");
-		dashboardArea.setSelectedIndex(0);
-		dashboardArea.addTab("Player 2", null, playerDashboard2, "Tab 2");
-		dashboardArea.addTab("Player 3", null, playerDashboard3, "Tab 3");
-		dashboardArea.addTab("Player 4", null, playerDashboard4, "Tab 4");
 		
-		this.add(dashboardArea, BorderLayout.NORTH);
+		for (int i = 0; i < dashboards.size(); i++) {
+			
+			dashboardArea.addTab("Player " +(i + 1), null, dashboards.get(i), null);
+		}
+		
+		dashboardArea.setSelectedIndex(0);
+		
+		this.add(dashboardArea, BorderLayout.NORTH);*/
 	
 	}
 	
@@ -160,54 +161,50 @@ public class PlayerArea extends JPanel {
 		int i;
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
 	
-		JPanel player1LeaderCards = new JPanel();
-		player1LeaderCards.setPreferredSize(new Dimension((int) width, (int) height/6));
-		player1LeaderCards.setBorder(border);
+		for ( int x = 0; x < 4; x++) {   //game.getNumberPlayers();
+			
+			JPanel playerLeaderCards = new JPanel();
+			playerLeaderCards.setPreferredSize(new Dimension((int) width, (int) height/6));
+			playerLeaderCards.setBorder(border);
+			lCardsPanels.add(playerLeaderCards);
+			
+			for (i = 0; i < 4; i++) {
+				CardCell cardCell = new CardCell();
+				cardCell.setPreferredSize(new Dimension( (int) width/5, (int) height/6));
+				playerLeaderCards.add(cardCell);
+				
+				if ( x == 0 ) {
+					player1LeaderCardCells.add(cardCell);
+				} else if ( x == 1) {
+					player2LeaderCardCells.add(cardCell);
+				} else if ( x == 2 ) {                //&& game.getNumberPlayers() == 3
+					player3LeaderCardCells.add(cardCell);
+				} else if ( x == 3 ) {         //&& game.getNumberPlayers() == 4
+					player4LeaderCardCells.add(cardCell);
+				}
+				
+			}
+		}	
 		
-		for (i = 0; i < 4; i++) {
-			CardCell cardCell = new CardCell();
-			cardCell.setPreferredSize(new Dimension( (int) width/5, (int) height/6));
-			player1LeaderCards.add(cardCell);
-			player1LeaderCardCells.add(cardCell);
+		for ( i = 0; i < lCardsPanels.size(); i++) {
+			
+			leaderCardPanel.addTab("P " +(i + 1), null, lCardsPanels.get(i), null);
+		
 		}
-		
-		JPanel player2LeaderCards = new JPanel();
-		player2LeaderCards.setPreferredSize(new Dimension((int) width, (int) height/6));
-		player2LeaderCards.setBorder(border);
-		
-		for (i = 0; i < 4; i++) {
-			CardCell cardCell = new CardCell();
-			cardCell.setPreferredSize(new Dimension( (int) width/5, (int) height/6));
-			player2LeaderCards.add(cardCell);
-			player2LeaderCardCells.add(cardCell);
-		}
-		
-		JPanel player3LeaderCards = new JPanel();
-		player3LeaderCards.setPreferredSize(new Dimension((int) width, (int) height/6));
-		player3LeaderCards.setBorder(border);
-		
-		for (i = 0; i < 4; i++) {
-			CardCell cardCell = new CardCell();
-			cardCell.setPreferredSize(new Dimension( (int) width/5, (int) height/6));
-			player3LeaderCards.add(cardCell);
-			player3LeaderCardCells.add(cardCell);
-		}
-		
-		JPanel player4LeaderCards = new JPanel();
-		player4LeaderCards.setPreferredSize(new Dimension((int) width, (int) height/6));
-		player4LeaderCards.setBorder(border);
-		
-		for (i = 0; i < 4; i++) {
-			CardCell cardCell = new CardCell();
-			cardCell.setPreferredSize(new Dimension( (int) width/5, (int) height/6));
-			player4LeaderCards.add(cardCell);
-			player4LeaderCardCells.add(cardCell);
-		}
-		
-		leaderCardPanel.addTab("P 1", null, player1LeaderCards, "Tab 1");
-		leaderCardPanel.setSelectedIndex(0);
-		leaderCardPanel.addTab("P 2", null, player2LeaderCards, "Tab 2");
-		leaderCardPanel.addTab("P 3", null, player3LeaderCards, "Tab 3");
-		leaderCardPanel.addTab("P 4", null, player4LeaderCards, "Tab 4");
+	
 	}
+	
+	
+	public void update(Game game) {
+		this.game = game;
+		
+		for ( PlayerDashboard pd : dashboards) {
+			pd.update(this.game);
+		}
+		
+		//TODO da pensare a come visualizzare e fare update delle carte leader. Complesso.
+		// deve coesistere anche con la modalità di gioco basic advanced
+		
+	}
+	
 }

@@ -109,6 +109,7 @@ public class MainBoard extends JPanel {
 				gbc.gridx = 0;
 				gbc.gridy = 0;
 				pointCell.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+				
 			} else if (1 <= i && i < 20) {
 				gbc.gridx = i;
 				gbc.gridy = 0;
@@ -116,12 +117,16 @@ public class MainBoard extends JPanel {
 				if (accX >= 1.0) {
 					pointCell.setPreferredSize(new Dimension((int)widthSmall+1, (int)heightBig));		
 					accX -= 1.0;
-				} else
+				} else {
 					pointCell.setPreferredSize(new Dimension((int)widthSmall, (int)heightBig));
+				}
+
 			} else if (i == 20) {
 				gbc.gridx = 20;
 				gbc.gridy = 0;
 				pointCell.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+
+
 			} else if (20 < i && i < 50) {
 				gbc.gridx = 20;
 				gbc.gridy = i-20;
@@ -129,25 +134,29 @@ public class MainBoard extends JPanel {
 				if (accY >= 1.0) {
 					pointCell.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall+1));		
 					accY -= 1.0;
-				} else
-					pointCell.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall));		
+				} else {
+					pointCell.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall));
+				}
+
 			} else if (i == 50) {
 				gbc.gridx = 20;
 				gbc.gridy = 30;
 				pointCell.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
+
 			} else if (50 < i && i < 70) {
 				gbc.gridx = 70-i; // 20 - (i-50)
 				gbc.gridy = 30;
 				if (accX >= 1.0) {
 					pointCell.setPreferredSize(new Dimension((int)widthSmall+1, (int)heightBig));		
 					accX -= 1.0;
-				} else
+				} else {
 					pointCell.setPreferredSize(new Dimension((int)widthSmall, (int)heightBig));
+				}
+
 			} else if (i == 70) {
 				gbc.gridx = 0;
 				gbc.gridy = 30;
 				pointCell.setPreferredSize(new Dimension((int)widthBig, (int)heightBig));
-			
 				
 			} else if (70 < i && i < 100) {
 				gbc.gridx = 0;
@@ -156,8 +165,9 @@ public class MainBoard extends JPanel {
 				if (accY >= 1.0) {
 					pointCell.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall+1));
 					accY -= 1.0;
-				} else
+				} else {
 					pointCell.setPreferredSize(new Dimension((int)heightBig, (int)heightSmall));		
+				}
 			}
 				
 			panel.add(pointCell, gbc);
