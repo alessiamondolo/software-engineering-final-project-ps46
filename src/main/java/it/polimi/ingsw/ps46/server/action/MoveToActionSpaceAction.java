@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.GameState;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
+import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
@@ -125,9 +126,21 @@ public class MoveToActionSpaceAction implements Action {
 			System.out.println("Andrea culo 2\n");
 			if(!(game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico Ariosto") || !(game.getCurrentPlayer().getLeaderCards().get("Ludovico Ariosto").isActive())))
 				return false;
-		//If the actionSpace is the green tower check military points liked with the number of territory cards got by the player
-		//TODO 
-
+		//If the actionSpace is the green tower, check military points liked with the number of territory cards got by the player.
+		//You can ignore this requirement if you have activated the LeaderCard effect of Cesare Borgia.
+		if (game.getBoard().getColorOfTower(actionSpace.getId()) == "green"){
+			if(!( game.getCurrentPlayer().getLeaderCards().containsKey("Cesare Borgia") || !(game.getCurrentPlayer().getLeaderCards().get("Cesare Borgia").isActive())))
+			{
+				int numberOfCards = game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().size();
+				if(numberOfCards > 2 ) {
+					MilitaryPoints temporaryMilitaryPointsRequired;
+					temporaryMilitaryPointsRequired = game.getCurrentPlayer().getPersonalBoard().getRequiredMilitaryPointsForTerritoryCardsMap().get(numberOfCards);
+					if (!player.getPersonalBoard().getPlayerResourceSet().greaterOrEqual(temporaryMilitaryPointsRequired)) {
+						return false;
+					}
+				}
+			}
+		}
 		//The family member has to be available - it can't be in other action spaces
 		if((familyMember.isUsed())) {
 			System.out.println("Andrea culo 3\n");

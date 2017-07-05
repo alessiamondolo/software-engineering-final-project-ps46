@@ -39,15 +39,7 @@ public class MalusTest {
 		resourcesList.add(new CounsilPrivilege	(INTVALUE2));
 	
 	ResourceSet playerResourceSet = new ResourceSet(resourcesList);
-	
-	
-	
 	}
 	
-	
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
 
 }

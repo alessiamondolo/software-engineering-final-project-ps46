@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
+import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.Money;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -129,6 +130,7 @@ public class CollectCardAction implements Action {
 			return false;
 		}
 		temporaryPlayerResourceSet.sub(card.getCost());
+		
 		
 		game.getCurrentPlayer().getPersonalBoard().setResources(temporaryPlayerResourceSet);
 		return true;

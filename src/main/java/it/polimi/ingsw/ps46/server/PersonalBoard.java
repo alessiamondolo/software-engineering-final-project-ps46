@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
+import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
@@ -22,6 +23,7 @@ public class PersonalBoard implements Serializable {
 	private final static int MAX_NUMBER_OF_CARDS = 6;
 	
 	private BonusTile bonusTile = null;
+	private final LinkedHashMap<Integer, MilitaryPoints> requiredMilitaryPointsForTerritoryCardsMap;
 	
 	private ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	private ArrayList<VentureCard> ventureCards = new ArrayList<VentureCard>();
@@ -30,16 +32,17 @@ public class PersonalBoard implements Serializable {
 	
 	private ResourceSet playerResources = null; 
 	
-	private LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards = new LinkedHashMap<Integer, Integer>();
-	private LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards = new LinkedHashMap<Integer, Integer>();
+	//private LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards = new LinkedHashMap<Integer, Integer>(); TODO???
+	//private LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards = new LinkedHashMap<Integer, Integer>(); TODO???
 	
-	/*
-	public PersonalBoard(LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards, LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards) {
-		
-		this.setVictoryPointsFromTerritoryCards(victoryPointsFromTerritoryCards);
-		this.setVictoryPointsFromCharacterCards(victoryPointsFromCharacterCards);
-		
-	}*/
+	//public PersonalBoard(LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards, LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards) {
+	public PersonalBoard() {
+		requiredMilitaryPointsForTerritoryCardsMap = new LinkedHashMap<>();
+		requiredMilitaryPointsForTerritoryCardsMap.put(3, new MilitaryPoints(3));
+		requiredMilitaryPointsForTerritoryCardsMap.put(4, new MilitaryPoints(7));
+		requiredMilitaryPointsForTerritoryCardsMap.put(5, new MilitaryPoints(12));
+		requiredMilitaryPointsForTerritoryCardsMap.put(6, new MilitaryPoints(18));
+	}
 	
     
 	//TODO se non riesce a mettere la carta nel set è perchè ho troppe carte di quel tipo ---> bisogna avvisare il giocatore
@@ -143,6 +146,7 @@ public class PersonalBoard implements Serializable {
 		playerResources = resources;
 	}
 
+	/*
 	public LinkedHashMap<Integer, Integer> getVictoryPointsFromTerritoryCards() {
 		return victoryPointsFromTerritoryCards;
 	}
@@ -158,7 +162,7 @@ public class PersonalBoard implements Serializable {
 	private void setVictoryPointsFromCharacterCards(LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards) {
 		this.victoryPointsFromCharacterCards = victoryPointsFromCharacterCards;
 	}
-
+	 */ 
 
 	public BonusTile getBonusTile() {
 		return bonusTile;
@@ -167,6 +171,10 @@ public class PersonalBoard implements Serializable {
 
 	public void setBonusTile(BonusTile bonusTile) {
 		this.bonusTile = bonusTile;
+	}
+	
+	public LinkedHashMap<Integer, MilitaryPoints> getRequiredMilitaryPointsForTerritoryCardsMap() {
+		return requiredMilitaryPointsForTerritoryCardsMap;
 	}
 	
 }

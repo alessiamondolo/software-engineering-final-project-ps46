@@ -511,8 +511,9 @@
 			
 			"leaderEffect" : 
 			{
-				"effectType": "setValueToAllColoredFamilyMemberEffect",
-				"newDiceValue":	{
+				"effectType": "SetValueFamilyMemberEffect",
+				"whichFamilyMember": "allColored",
+				"newValue":	{
 								"value": 5
 							}
 			},
@@ -580,8 +581,9 @@
 			
 			"leaderEffect" : 
 			{
-				"effectType": "setValueToOneColoredFamilyMemberEffect",
-				"newDiceValue":	{
+				"effectType": "SetValueFamilyMemberEffect",
+				"whichFamilyMember": "oneColored",
+				"newValue":	{
 								"value": 6
 							}
 			},
