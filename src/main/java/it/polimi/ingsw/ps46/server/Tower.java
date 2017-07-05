@@ -24,7 +24,7 @@ public class Tower implements Serializable {
 	 **/
 	public Tower (String towerColor, ArrayList<TowerFloor> floors){
 		colorOfTheTower = towerColor;
-	//	this.floors = floors;
+		this.floors = floors;
 		if(floors != null)
 		numberOfFloors = floors.size();
 	}

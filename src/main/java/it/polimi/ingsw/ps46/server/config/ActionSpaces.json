@@ -1,6 +1,75 @@
 [
 	{
+		"type" : "Production",
+		"id" : 17,
+		"minPlayers" : 2,
+		"requiredFamilyMemberValue" : 
+		{
+			"value" : 1
+		},
+		"maxOnePlayer" : true,
+		"effectOfActionSpace" : 
+		{
+			"additionalResources": 
+			[
+
+			]
+		}
+	},
+	{
+		"type" : "Production",
+		"id" : 18,
+		"minPlayers" : 3,
+		"requiredFamilyMemberValue" : 
+		{
+			"value" : 1
+		},
+		"maxOnePlayer" : false,
+		"effectOfActionSpace" : 
+		{
+			"additionalResources": 
+			[
+
+			]
+		}
+	},
+	{
+		"type" : "Harvest",
+		"id" : 19,
+		"minPlayers" : 2,
+		"requiredFamilyMemberValue" : 
+		{
+			"value" : 1
+		},
+		"maxOnePlayer" : true,
+		"effectOfActionSpace" : 
+		{
+			"additionalResources": 
+			[
+
+			]
+		}
+	},
+	{
+		"type" : "Harvest",
+		"id" : 20,
+		"minPlayers" : 3,
+		"requiredFamilyMemberValue" : 
+		{
+			"value" : 1
+		},
+		"maxOnePlayer" : false,
+		"effectOfActionSpace" : 
+		{
+			"additionalResources": 
+			[
+
+			]
+		}
+	},
+	{
 		"type" : "Market",
+		"id" : 21,
 		"minPlayers" : 2,
 		"requiredFamilyMemberValue" : 
 		{
@@ -20,6 +89,7 @@
 	},
 	{
 		"type" : "Market",
+		"id" : 22,
 		"minPlayers" : 2,
 		"requiredFamilyMemberValue" : 
 		{
@@ -39,6 +109,7 @@
 	},
 	{
 		"type" : "Market",
+		"id" : 23,
 		"minPlayers" : 4,
 		"requiredFamilyMemberValue" : 
 		{
@@ -62,6 +133,7 @@
 	},
 	{
 		"type" : "Market",
+		"id" : 24,
 		"minPlayers" : 4,
 		"requiredFamilyMemberValue" : 
 		{
@@ -80,7 +152,8 @@
 		}
 	},
 	{
-		"type" : "Production",
+		"type" : "Counsil",
+		"id" : 25,
 		"minPlayers" : 2,
 		"requiredFamilyMemberValue" : 
 		{
@@ -91,23 +164,14 @@
 		{
 			"additionalResources": 
 			[
-
-			]
-		}
-	},
-	{
-		"type" : "Production",
-		"minPlayers" : 3,
-		"requiredFamilyMemberValue" : 
-		{
-			"value" : 1
-		},
-		"maxOnePlayer" : false,
-		"effectOfActionSpace" : 
-		{
-			"additionalResources": 
-			[
-
+				{
+					"id" : "Money",
+					"quantity" : 1
+				},
+				{
+					"id" : "CounsilPrivilege",
+					"quantity" : 1
+				}
 			]
 		}
 	}

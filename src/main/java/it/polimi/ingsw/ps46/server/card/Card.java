@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
 import java.io.Serializable;
+import java.util.Observable;
 
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
@@ -10,7 +11,7 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
  * 
  * @author Alessia Mondolo
  */
-public abstract class Card implements Serializable {
+public abstract class Card extends Observable implements Serializable {
 	
 	private static final long serialVersionUID = 3588501054310706492L;
 	

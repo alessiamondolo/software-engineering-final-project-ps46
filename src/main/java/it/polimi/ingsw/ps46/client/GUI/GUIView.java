@@ -1,14 +1,12 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 import javax.swing.JFrame;
 
 import it.polimi.ingsw.ps46.client.View;
-import it.polimi.ingsw.ps46.server.EventAcceptor;
-import it.polimi.ingsw.ps46.server.EventMessage;
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.card.Effect;
 
 /**
  * A WindowClass acts as the entry point for the game User Interface by launching the 
@@ -212,6 +210,12 @@ public class GUIView implements View {
 	public void showNextTurnOrder() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getEffectCoice(Effect effect1, Effect effect2) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

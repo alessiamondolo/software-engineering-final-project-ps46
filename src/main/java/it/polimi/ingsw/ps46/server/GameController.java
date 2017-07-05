@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import it.polimi.ingsw.ps46.server.action.Action;
 import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
+import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
 
 
@@ -82,6 +83,19 @@ public class GameController implements Observer, ViewEventVisitor {
 			break;
 		}
 	}
+	
+	
+	
+	public void visit(EventEffectChoice eventEffectChoice) {
+		switch(eventEffectChoice.getMessage()) {
+		case EXCHANGE_RESOURCES_CHOICE :
+			BuildingCard card = eventEffectChoice.getCard();
+			card.useOptional(eventEffectChoice.getChoice(), game);
+			break;
+		default:
+			break;
+		}
+	}
 
 	
 	
@@ -96,11 +110,14 @@ public class GameController implements Observer, ViewEventVisitor {
 			
 			roundSetup();
 			
-			game.setGameState(GameState.GET_PLAYER_ACTION);
-			for(Player player : game.getPlayers()) {
-				game.setCurrentPlayer(player);
-				playerActions();
+			for(int turn = 1; turn <= 4; turn++) {
+				turnSetup();
+				game.setGameState(GameState.GET_PLAYER_ACTION);
+				for(Player player : game.getPlayers()) {
+					game.setCurrentPlayer(player);
+				}
 			}
+			
 			if(game.getCurrentRound() == game.getROUNDS_PER_PERIOD())
 				vaticanReport();
 			endRound();
@@ -218,10 +235,16 @@ public class GameController implements Observer, ViewEventVisitor {
 	/**
 	 * 
 	 */
-	private void playerActions() {
-		//ActionSpaceName move = 
-				//view.getPlayerAction();
+	private void turnSetup() {
+		if(game.getCurrentPhase() == game.getPHASES_PER_ROUND()) {
+			game.setCurrentPhase(1);
+		}
+		else {
+			int phase = game.getCurrentPhase() + 1;
+			game.setCurrentPhase(phase);
+		}
 	}
+	
 	
 	
 	
@@ -236,13 +259,11 @@ public class GameController implements Observer, ViewEventVisitor {
 		ActionSpace actionSpace = null;
 		if(actionSpaceID <= (game.getBoard().getNumberOfTowers() * game.getBoard().getTower(0).getNumberOfFloors())) {
 			int tower = (actionSpaceID - 1) / game.getBoard().getNumberOfTowers();
-			System.out.println("Tower: " + tower);
 			int floor = (actionSpaceID - 1) % game.getBoard().getNumberOfTowers();
-			System.out.println("Floor: " + floor);
 			actionSpace = game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace();
 		}
 		else {
-			actionSpace = game.getBoard().getBoardBox(actionSpaceID - (game.getBoard().getNumberOfTowers() * game.getBoard().getTower(0).getNumberOfFloors()));
+			actionSpace = game.getBoard().getBoardBox(actionSpaceID - 1 - (game.getBoard().getNumberOfTowers() * game.getBoard().getTower(0).getNumberOfFloors()));
 		}	
 		Action action = new MoveToActionSpaceAction(game, player, familyMember, servants, actionSpace);
 		boolean executed = action.execute();

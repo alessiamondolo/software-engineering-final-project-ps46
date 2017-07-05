@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps46.server.action;
 import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.GameState;
 import it.polimi.ingsw.ps46.server.Player;
 
 
@@ -46,32 +47,28 @@ public class MoveToActionSpaceAction implements Action {
 	 */
 	public boolean execute() {
 		
-		System.out.println("I'm inside the action with the " + familyMember.getColor() + " family member and " + servants + " servants.");
-		
 		if(isLegal()) {
-			//Sets the action space as not available
 			//TODO check modifications to this method
-			actionSpace.updateAvailability ();
 			switch(actionSpace.getType()) {
-				case "TowerActionSpace" : {
+				case "Tower" : {//NO INTERAZIONE
 					Action nextAction = new CollectCardAction(game, actionSpace, familyMember);
-					nextAction.execute();
-					break;
+					return nextAction.execute();
 				}
-				case "ProductionActionSpace" : {
+				case "Production" : {
 					Action nextAction = new ActivateProductionAction(game, actionSpace, familyMember);
 					return nextAction.execute();
 				}
-				case "HarvestActionSpace" : {
+				case "Harvest" : {
 					Action nextAction = new ActivateHarvestAction(game, actionSpace, familyMember);
 					return nextAction.execute();
 				}
-				case "MarketActionSpace" : {
+				case "Market" : {
 					//TODO scrivere l'azione del mercato.
 					//Effect getFromMarket = new IncreaseResourcesEffect(actionSpace.getResources());
 					return false;
 				}
 				case "CouncilActionSpace" : {
+					game.setGameState(GameState.COUNCIL_ACTION);
 					Action nextAction = new CouncilAction();
 					return nextAction.execute();
 				}
@@ -94,18 +91,27 @@ public class MoveToActionSpaceAction implements Action {
 	 */
 	public boolean isLegal() {
 		//The player that wants to move to an action space has to be the current player
-		if (game.getCurrentPlayer().getIdPlayer() != player.getIdPlayer())
+		if (game.getCurrentPlayer().getIdPlayer() != player.getIdPlayer()) {
+			System.out.println("Andrea culo 1\n");
 			return false;
+		}
 		//The action space has to be available
-		if(!(actionSpace.getAvailability()))
+		if(!(actionSpace.getAvailability())) {
+			System.out.println("Andrea culo 2\n");
 			return false;
+		}
 		//The family member has to be available - it can't be in other action spaces
-		if((familyMember.isUsed()))
+		if((familyMember.isUsed())) {
+			System.out.println("Andrea culo 3\n");
 			return false;
+		}
 		//The value of the family member that needs to be moved to the action space, summed with the number of servants
 		// added to the family member, has to be greater or equal than the value of the dice of the action space
-		if(familyMember.getValueFamilyMember().getValue() + servants < actionSpace.getRequiredFamilyMemberValue().getValue())
+		if(familyMember.getValueFamilyMember().getValue() + servants < actionSpace.getRequiredFamilyMemberValue().getValue()) {
+			System.out.println("Andrea culo 4\n");
 			return false;
+		}
+		
 		return true;
 	}
 
