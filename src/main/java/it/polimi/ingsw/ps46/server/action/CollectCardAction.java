@@ -82,6 +82,8 @@ public class CollectCardAction implements Action {
 			actionSpace.updateAvailability();
 
 			familyMemberUsed.setPositionOfFamilyMember(actionSpace.getId());
+			familyMemberUsed.use();
+			
 			return true;	
 		}
 		else 

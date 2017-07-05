@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps46.server.action.Action;
 import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.resources.Servants;
 
 
 /**
@@ -225,6 +226,17 @@ public class GameController implements Observer, ViewEventVisitor {
 		}
 		
 		
+		//Clear family members positions
+		for(Player player : game.getPlayers()) {
+			for (String key : player.getFamilyMembersMap().keySet()) {
+				player.getFamilyMembersMap().get(key).clearPositionOfFamilyMember();
+				if(key == "Neutral") {
+					player.getFamilyMembersMap().get(key).setValueOfFamilyMember(new Dice(0));
+				}
+			}
+		}
+		
+		
 		//Throw dice and update board in the view
 		game.throwDice();
 		
@@ -265,12 +277,23 @@ public class GameController implements Observer, ViewEventVisitor {
 		else {
 			actionSpace = game.getBoard().getBoardBox(actionSpaceID - 1 - (game.getBoard().getNumberOfTowers() * game.getBoard().getTower(0).getNumberOfFloors()));
 		}	
-		Action action = new MoveToActionSpaceAction(game, player, familyMember, servants, actionSpace);
+		int familyMemberValue = familyMember.getValueFamilyMember().getValue();
+		//increases the value of the family member with the servants
+		familyMember.setValueOfFamilyMember(new Dice(familyMemberValue+servants));
+		System.out.println("Value: " + (familyMemberValue+servants));
+		player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").sub(new Servants(servants));
+		
+		Action action = new MoveToActionSpaceAction(game, player, familyMember, actionSpace);
 		boolean executed = action.execute();
 		if(!executed) {
+			//restores original value of the family member
+			familyMember.setValueOfFamilyMember(new Dice(familyMemberValue));
+			player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").add(new Servants(servants));
+			
 			game.setGameState(GameState.ACTION_NOT_VALID);
 			game.setCurrentPlayer(player);
 		}
+		
 	}
 	
 	

@@ -58,7 +58,6 @@ public class ActivateProductionAction implements Action {
 				if(familyMemberUsed.getValueFamilyMember().greaterOrEqual(buildingCard.getProductionValue())){
 					
 					game.useCard(buildingCard);
-					//buildingCard.use(game);
 					
 				}
 			}
@@ -76,6 +75,7 @@ public class ActivateProductionAction implements Action {
 			//setting occupied this actionSpace and used the familyMember
 			productionActionSpace.updateAvailability();
 			familyMemberUsed.setPositionOfFamilyMember(productionActionSpace.getId());
+			familyMemberUsed.use();
 			
 			return true;
 		}
