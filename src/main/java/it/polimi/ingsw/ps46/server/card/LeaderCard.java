@@ -19,15 +19,15 @@ public class LeaderCard {
 	
 	/*
 	 * EFFETTI DA IMPLEMENTARE:
-	 * Ludovico Ariosto: putFamilyMemberEverywhereEffect
-	 * Filippo Brunelleschi: noFeeForTowerEffect
+	 * Ludovico Ariosto: putFamilyMemberEverywhereEffect DONE
+	 * Filippo Brunelleschi: noFeeForTowerEffect DONE
 	 * Ludovico il Moro: setValueToAllColoredFamilyMemberEffect
-	 * Federico da Montefeltro: setValueToOneColoredFamilyMemberEffect
-	 * Lorenzo de Medici: copyOneLeaderCardEffectOnceEffect
+	 * Federico da Montefeltro: setValueToOneColoredFamilyMemberEffect --->scelta del giocatore
+	 * Lorenzo de Medici: copyOneLeaderCardEffectOnceEffect ---> scelta del giocatore
 	 * Cesare Borgia: NoRequiredMilitaryPointsEffect
-	 * Santa Rita: ResourcesX2Effect
-	 * Pico della Mirandola: CardsDiscountedEffect
-	 * 
+	 * Santa Rita: ResourcesX2Effect 
+	 * Pico della Mirandola: CardsDiscountedEffect 
+	 * ANTONIOOOOOOOOOOOOOOOOOOOO
 	 * Sisto IV da implementare
 	 */
 	

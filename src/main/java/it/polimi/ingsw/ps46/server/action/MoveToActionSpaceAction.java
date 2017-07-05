@@ -122,9 +122,14 @@ public class MoveToActionSpaceAction implements Action {
 		//The player that wants to move to an action space has to be the current player
 		if (game.getCurrentPlayer().getIdPlayer() != player.getIdPlayer())
 			return false;
-		//The action space has to be available
+		//The action space has to be available 
 		if(!(actionSpace.getAvailability()))
-			return false;
+			if(!(game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico Ariosto") || !(game.getCurrentPlayer().getLeaderCards().get("Ludovico Ariosto").isActive())))
+				return false;
+		//If the actionSpace is the green tower check military points liked with the number of territory cards got by the player
+		//if()
+		
+		
 		//The family member has to be available - it can't be in other action spaces
 		if((familyMember.isUsed()))
 			return false;
