@@ -32,4 +32,10 @@ public class PreacherEffect implements Effect, Serializable {
 	public boolean isMalusEffect() {
 		return malusEffect;
 	}
+	
+	//TODO rivedere come stampare l'effetto
+	public String toString() {
+		return "Preacher effect";
+	}
+	
 }

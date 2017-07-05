@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.action.ActivateHarvestAction;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
@@ -39,7 +38,7 @@ public class ExtraMoveEffect implements Effect, Serializable {
 	 * Description of the method activateEffect.
 	 */
 	public void activateEffect(Game game) {
-		
+		//TODO da finire
 		switch (extraMoveType) {
 		case "ActivateHarvestAction":
 			//ActivateHarvestAction newHarvestAction = new ActivateHarvestAction(); //del valore di value (un dado)
@@ -85,5 +84,10 @@ public class ExtraMoveEffect implements Effect, Serializable {
 
 	public boolean isResoucesDiscounted() {
 		return resourcesDiscounted;
+	}
+	
+	//TODO completare
+	public String toString() {
+		return "Extra move type: " + extraMoveType;
 	}
 }

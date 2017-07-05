@@ -58,7 +58,8 @@ public class DiceBonusEffect implements Effect, Serializable {
 		return type;
 	}	
 	
-	
-	
+	public String toString() {
+		return "Dice bonus: " + bonus.toString() + ", type: " + type;
+	}
 
 }

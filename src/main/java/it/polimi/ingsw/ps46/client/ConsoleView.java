@@ -380,23 +380,31 @@ public class ConsoleView implements View {
 		output.println("2. Territory Cards:");
 		if(player.getPersonalBoard().getTerritoryDeck().isEmpty())
 			output.println("You don't have territory cards for now.");
-		else
-			output.println(player.getPersonalBoard().getTerritoryDeck());
+		else {
+			for (Card card : player.getPersonalBoard().getTerritoryDeck())
+				output.println(card);
+		}
 		output.println("3. Character Cards:");
 		if(player.getPersonalBoard().getCharacterDeck().isEmpty())
 			output.println("You don't have character cards for now.");
-		else
-			output.println(player.getPersonalBoard().getCharacterDeck());
+		else {
+			for (Card card : player.getPersonalBoard().getCharacterDeck())
+				output.println(card);
+		}
 		output.println("4. Building Cards:");
 		if(player.getPersonalBoard().getBuildingDeck().isEmpty())
 			output.println("You don't have building cards for now.");
-		else
-			output.println(player.getPersonalBoard().getBuildingDeck());
+		else {
+			for (Card card : player.getPersonalBoard().getBuildingDeck())
+				output.println(card);
+		}
 		output.println("5. Venture Cards:");
 		if(player.getPersonalBoard().getVentureDeck().isEmpty())
 			output.println("You don't have venture cards for now.");
-		else
-			output.println(player.getPersonalBoard().getVentureDeck());
+		else {
+			for (Card card : player.getPersonalBoard().getVentureDeck())
+				output.println(card);
+		}
 		output.println("\n");
 	}
 	

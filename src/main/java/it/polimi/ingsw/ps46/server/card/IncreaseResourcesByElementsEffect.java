@@ -89,5 +89,10 @@ public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 	public String getType() {
 		return type;
 	}
+	
+	public String toString() {
+		return additionalResources.toString() + "\n" +
+				"Type: " + type;
+	}
 
 }

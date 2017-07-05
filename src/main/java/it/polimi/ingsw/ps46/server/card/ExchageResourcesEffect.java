@@ -52,5 +52,10 @@ public class ExchageResourcesEffect implements Effect, Serializable {
 	public boolean canBeActivated(Game game) {
 		return(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().greaterOrEqual(requiredResources));
 	}
+	
+	public String toString() {
+		return "Required resources: " + requiredResources.toString() + "\n" +
+				"Gained resources: " + gainedResources.toString();
+	}
 
 }
