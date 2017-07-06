@@ -170,7 +170,6 @@ public class GUIView implements View {
 	protected static void setGameMode(String mode) {
 		GUIView.gameMode = mode;
 	}
-	@Override
 	public String getGameMode() {
 	
 		if (!(welcomeWindow instanceof WelcomeWindow))

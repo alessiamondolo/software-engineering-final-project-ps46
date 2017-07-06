@@ -75,30 +75,6 @@ public class ConsoleView implements View {
 	
 	
 	/**
-	 * Gets the game mode in which the client wants to play the game.
-	 * The client can choose between:
-	 * <ul>
-	 * <li>Basic game mode</li>
-	 * <li>Advanced game mode</li>
-	 * </ul>
-	 * 
-	 * @return a string containing the game mode chosen by the client.
-	 */
-	public String getGameMode() {
-		output.println("==========================================================================");
-		output.println("In which game mode do you want to play?");
-		output.println("1. Basic");
-		output.println("2. Advanced");
-		int gameMode = input.IntegerFromConsole(1, 2);
-		if (gameMode == 1)
-			return "BASIC_GAME_MODE";
-		else
-			return "ADVANCED_GAME_MODE";
-	}
-	
-	
-	
-	/**
 	 * Gets the username that the client wants to use for the game.
 	 * 
 	 * @return username : the username received by input from the client.

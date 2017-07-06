@@ -121,14 +121,6 @@ public class SocketClient implements Runnable {
 			view.welcomeMessage();
 			break;
 		}
-		case "GET_GAME_MODE" :
-			try {
-				writer.writeObject(view.getGameMode());
-				writer.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			break;
 		case "GET_PLAYER_USERNAME" :
 			try {
 				writer.writeObject(view.getPlayerUserame());

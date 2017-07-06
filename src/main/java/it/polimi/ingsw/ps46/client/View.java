@@ -21,8 +21,6 @@ public interface View {
 	public void printMessage(String message);
 
 	public void welcomeMessage();
-	
-	public String getGameMode();
 
 	public String getPlayerUserame();
 

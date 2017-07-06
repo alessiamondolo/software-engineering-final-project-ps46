@@ -74,7 +74,6 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		switch(eventMessage.getMessage()) {
 		case START_GAME :
 			welcomeMessage();
-			getGameMode();
 			break;
 		case CHANGED_CURRENT_PLAYER :
 			GameState gameState = game.getGameState();
@@ -139,36 +138,6 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			try {
 				writer.writeObject("WELCOME_MESSAGE");
 				writer.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	
-
-	/**
-	 * Sends to the all the clients a message request to get the game mode that the client wants for the game.
-	 * If the game mode chosen by the client is the advanced mode, it notifies the observers of this.<br>
-	 * The notify is sent only when the game mode chosen is advanced because by default the game mode is the basic mode.
-	 * For this, we need to change the game mode in the model only if it has to be set as advanced.
-	 */
-	private void getGameMode() {
-		for(Socket currentSocket : clients) {
-			ObjectOutputStream writer = writers.get(currentSocket);
-			ObjectInputStream reader = readers.get(currentSocket);
-			try {
-				writer.writeObject("GET_GAME_MODE");
-				writer.flush();
-				try {
-					String gameMode = (String) reader.readObject();
-					if(gameMode == "ADVANCED_GAME_MODE") {
-						setChanged();
-						notifyObservers(new EventMessage(NewStateMessage.ADVANCED_GAME_MODE));
-					}
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

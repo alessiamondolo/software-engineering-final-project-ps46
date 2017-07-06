@@ -42,7 +42,6 @@ public class Game extends Observable implements Serializable {
 	private int currentPeriod = 1;
 	private int currentPhase = 0;
 	
-	private boolean advancedMode = false;
 	
 	private int numberPlayers; 
 	private ArrayList<Player> players;
@@ -167,10 +166,6 @@ public class Game extends Observable implements Serializable {
 	public int getCurrentRound() {
 		return currentRound;
 	}
-	
-	public boolean getAdvancedMode() {
-		return advancedMode;
-	}
 
 	public Dice getDice(String color) {
 		return dice.get(color);
@@ -241,10 +236,6 @@ public class Game extends Observable implements Serializable {
 	
 	public void startGame() {
 		newState(new EventMessage(NewStateMessage.START_GAME));
-	}
-	
-	public void setAdvancedMode() {
-		advancedMode = true;
 	}
 	
 	public void giveBonusTiles() {
