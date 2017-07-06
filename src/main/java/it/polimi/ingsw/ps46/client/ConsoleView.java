@@ -238,6 +238,45 @@ public class ConsoleView implements View {
 				};
 			}
 		}
+		
+
+		String[] boardBoxesPlayer = new String[8];
+		
+		
+		int index = (game.getBoard().getNumberOfTowers() * game.getBoard().getTower(0).getNumberOfFloors()) + 1;
+		int box = 0;
+		for(int i = 0; i < 8; i++) {
+			if(box < game.getBoard().getBoardBoxes().size()) {
+				if(game.getBoard().getBoardBox(box).getId() == (i + index)) {
+					color = game.getBoard().getBoardBox(box).getPlayerColor();
+					switch(color) {
+					case "Yellow" :
+						boardBoxesPlayer[i] = "|   yellow    |";
+						break;
+					case "Red" :
+						boardBoxesPlayer[i] = "|     red     |";
+						break;
+					case "Blue" :
+						boardBoxesPlayer[i] = "|    blue     |";
+						break;
+					case "Green" :
+						boardBoxesPlayer[i] = "|   green     |";
+						break;
+					case "" :
+						boardBoxesPlayer[i] = "|      -      |";
+						break;
+					};
+				}
+				else {
+					boardBoxesPlayer[i] = "|      -      |";
+					box--;
+				}
+			}
+			else {
+				boardBoxesPlayer[i] = "|      -      |";
+			}
+			box++;
+		}
 		//END of the setup of the parameters that will be shown in the board
 		
 		output.println("THIS IS THE BOARD OF LORENZO IL MAGNIFICO:");
@@ -313,8 +352,9 @@ public class ConsoleView implements View {
 		output.println("|   | Penality: - |  | Penality: 3 |  | Penality: - |  | Penality: 3 |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
+		output.printf("|   %s  %s  %s  %s   |\n", boardBoxesPlayer[0], boardBoxesPlayer[1], boardBoxesPlayer[2], boardBoxesPlayer[3]);
 		output.println("|   |_____________|  |_____________|  |_____________|  |_____________|   |");
-		output.println("|          1                2                1                2          |");
+		output.println("|                                                                        |");
 		output.println("|------------------------------------------------------------------------|");
 		output.println("|                             MARKET SPACES                              |");
 		output.println("|    _____________    _____________    _____(4)_____    _____(4)_____    |");
@@ -327,8 +367,9 @@ public class ConsoleView implements View {
 		output.println("|   |             |  |             |  |   2 money   |  |counsil priv.|   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
+		output.printf("|   %s  %s  %s  %s   |\n", boardBoxesPlayer[4], boardBoxesPlayer[5], boardBoxesPlayer[6], boardBoxesPlayer[7]);
 		output.println("|   |_____________|  |_____________|  |_____________|  |_____________|   |");
-		output.println("|          1                2                3                4          |");
+		output.println("|                                                                        |");
 		output.println("|------------------------------------------------------------------------|");
 		output.println("|        COUNSIL SPACE - ID 25                       DICE                |");
 		output.println("|    ______________________________         _____    _____    _____      |");

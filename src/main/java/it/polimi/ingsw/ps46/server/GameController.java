@@ -111,7 +111,7 @@ public class GameController implements Observer, ViewEventVisitor {
 			
 			roundSetup();
 			
-			for(int turn = 1; turn <= 4; turn++) {
+			for(int turn = game.getCurrentPhase(); turn < game.getPHASES_PER_ROUND(); turn++) {
 				turnSetup();
 				game.setGameState(GameState.GET_PLAYER_ACTION);
 				for(Player player : game.getPlayers()) {
@@ -275,12 +275,16 @@ public class GameController implements Observer, ViewEventVisitor {
 			actionSpace = game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace();
 		}
 		else {
-			actionSpace = game.getBoard().getBoardBox(actionSpaceID - 1 - (game.getBoard().getNumberOfTowers() * game.getBoard().getTower(0).getNumberOfFloors()));
+			for(ActionSpace boardBox : game.getBoard().getBoardBoxes()) {
+				if(boardBox.getId() == actionSpaceID) {
+					actionSpace = boardBox;
+					break;
+				}
+			}
 		}	
 		int familyMemberValue = familyMember.getValueFamilyMember().getValue();
 		//increases the value of the family member with the servants
 		familyMember.setValueOfFamilyMember(new Dice(familyMemberValue+servants));
-		System.out.println("Value: " + (familyMemberValue+servants));
 		player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").sub(new Servants(servants));
 		
 		Action action = new MoveToActionSpaceAction(game, player, familyMember, actionSpace);

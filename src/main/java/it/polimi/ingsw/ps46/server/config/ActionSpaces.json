@@ -152,7 +152,7 @@
 		}
 	},
 	{
-		"type" : "Counsil",
+		"type" : "Council",
 		"id" : 25,
 		"minPlayers" : 2,
 		"requiredFamilyMemberValue" : 
