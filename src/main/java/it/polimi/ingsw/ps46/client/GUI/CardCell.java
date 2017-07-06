@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
 
 public class CardCell extends Cell<Card> {
@@ -15,19 +16,26 @@ public class CardCell extends Cell<Card> {
 	private static final long serialVersionUID = 5769254098690808463L;
 
 	public CardCell() {
-		imageList = new ArrayList<Image> (97);
+		imageList = new ArrayList<Image> ();
 		this.setEnabled(true);
 	}
 
 	/**
 	 *  Paints a card accordingly to the model set for that tower floor.
 	 */
-	
-	public void update(Graphics g) {
-		// TODO Auto-generated method stub
-		// super.paint(g);
+	@Override
+	public void update() {
+		
+		repaint();
 		
 		this.removeAll();
+		
+		repaint();
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
 		for (Card c : itemList) {
 			int index = CardNames.find(c.getCardName());
 			Image img = imageList.get(index);
@@ -35,7 +43,8 @@ public class CardCell extends Cell<Card> {
 				img = loadCard(index);
 				imageList.set(index, img);   //ma si può mettere una carta in una pos qualunque di un array?
 			}
-			ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(g.getClipBounds().width, g.getClipBounds().height, Image.SCALE_SMOOTH));
+			//ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(g.getClipBounds().width, g.getClipBounds().height, Image.SCALE_SMOOTH));
+			ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(70, 70, Image.SCALE_SMOOTH));
 			this.setIcon(imageIcon);
 		}
 	}
@@ -53,12 +62,14 @@ public class CardCell extends Cell<Card> {
 		}
 		return img;
 	}
-
+	
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
+	public void add(Card card) {
+		itemList.add(card);
+		update();
 		
 	}
+	
 }
 
 final class CardNames {

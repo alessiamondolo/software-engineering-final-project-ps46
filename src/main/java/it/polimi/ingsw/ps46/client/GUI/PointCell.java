@@ -48,7 +48,7 @@ public class PointCell extends Cell<Player> {
 		
 		}
 		
-		//repaint();
+		repaint();
 	}
 	
 	public void update(String fmColor) {
@@ -58,13 +58,12 @@ public class PointCell extends Cell<Player> {
 		for (Player p : itemList) {
 			Token t = new Token(p.getColor(), fmColor);
 			t.setPreferredSize(computeTokenSize());
-			System.out.println(t.getPreferredSize());
 			this.setLayout(new FlowLayout(CENTER, ((int) this.getPreferredSize().getWidth()/3), (int) this.getPreferredSize().getHeight()/2));
 			this.add(t);
 			
 			
 		}
-		//repaint();
+		repaint();
 	}
 	
 	@Override
