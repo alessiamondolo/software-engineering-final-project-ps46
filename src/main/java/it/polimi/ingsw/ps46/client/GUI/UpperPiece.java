@@ -128,7 +128,7 @@ public class UpperPiece extends JPanel {
 				}
 				
 				if (12 < fmPosition && fmPosition < 17){
-					i = 0;
+					i = 3;
 					PointCell position = (PointCell) toTowers.get(i).getActionCells().get(16 - fmPosition);
 					position.add(player, fmColor);   
 				}

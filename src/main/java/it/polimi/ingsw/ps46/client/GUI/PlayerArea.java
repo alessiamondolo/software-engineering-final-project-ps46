@@ -31,8 +31,8 @@ public class PlayerArea extends JPanel {
 	private Game game;
 	
 	private JTabbedPane dashboardArea = new JTabbedPane();
-	private JPanel turnOrder = new JPanel();
-	private JPanel familyMembers = new JPanel();
+	private TurnPanel turnOrder;
+	private FMPanel fmPanel;
 	private JTabbedPane leaderCardPanel = new JTabbedPane();
 	private ArrayList<PlayerDashboard> dashboards = new ArrayList<PlayerDashboard>();
 	private ArrayList<JPanel> lCardsPanels = new ArrayList<JPanel>();
@@ -45,6 +45,7 @@ public class PlayerArea extends JPanel {
 	private ArrayList<CardCell> player4LeaderCardCells = new ArrayList <CardCell>();
 	private double controlAreaWidth;
 	private double controlAreaHeight;
+	private infoArea infoPanel;
 
 	
 	public PlayerArea(Dimension playerAreaDimension, Game game) {
@@ -58,6 +59,7 @@ public class PlayerArea extends JPanel {
 		this.setLayout(new BorderLayout());
 		
 		createDashboardArea();
+		//metodosoloperprova();
 		createZoomBox();
 		createControlArea();
 		createInfoArea();
@@ -70,7 +72,7 @@ public class PlayerArea extends JPanel {
 	
 	private void createDashboardArea() {
 		
-/*		int nr = this.game.getNumberPlayers();
+	int nr = this.game.getNumberPlayers();
 		
 		for (int i = 0; i < nr; i++) {
 			
@@ -92,9 +94,30 @@ public class PlayerArea extends JPanel {
 		
 		dashboardArea.setSelectedIndex(0);
 		
-		this.add(dashboardArea, BorderLayout.NORTH);*/
+		this.add(dashboardArea, BorderLayout.NORTH);
 	
 	}
+	
+	private void metodosoloperprova() {
+		
+		this.dashboardAreaDimension = new Dimension ((int) playerAreaDimension.getWidth(), 
+                (int) (playerAreaDimension.getHeight()*9/27));
+		dashboardArea.setPreferredSize(dashboardAreaDimension);
+		Player p = new Player(4);
+		for (int i = 0; i < 4; i ++) {
+			dashboards.add(new PlayerDashboard(playerAreaDimension, p));
+		}
+		for (int i = 0; i < 4; i++) {
+			
+			dashboardArea.addTab("Player " +(i + 1), null, dashboards.get(i), null);
+		}
+		
+		dashboardArea.setSelectedIndex(0);
+		
+		this.add(dashboardArea, BorderLayout.NORTH);
+	}
+	
+	
 	
 	private void createZoomBox() {
 		
@@ -119,6 +142,8 @@ public class PlayerArea extends JPanel {
 		double pHeight = playerAreaDimension.getHeight();
 		this.controlAreaWidth = (pWidth*83)/208;
 		this.controlAreaHeight = (pHeight*5)/6;
+		this.setOpaque(true);
+		this.setBackground(new Color(200, 134, 145, 123));
 	
 		JPanel controlArea = new JPanel();
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
@@ -135,11 +160,15 @@ public class PlayerArea extends JPanel {
 		leaderCardPanel.setMaximumSize(leaderCardPanel.getPreferredSize());
 		leaderCardPanel.setMinimumSize(leaderCardPanel.getPreferredSize());
 		
-		controlArea.add(familyMembers);
-		familyMembers.setBorder(border);
+		Dimension dimension = new Dimension( (int) controlAreaWidth, (int) controlAreaHeight/4);
+		this.fmPanel = new FMPanel(dimension);
+		fmPanel.setPreferredSize(dimension);
 		
+		controlArea.add(fmPanel);
+		
+		this.turnOrder = new TurnPanel(dimension);
 		controlArea.add(turnOrder);
-		turnOrder.setBorder(border);
+		turnOrder.setMaximumSize(leaderCardPanel.getPreferredSize());
 		
 		addLeaderTabs(controlAreaWidth, controlAreaHeight);
 	}
@@ -148,12 +177,11 @@ public class PlayerArea extends JPanel {
 		
 		double pWidth = playerAreaDimension.getWidth();
 		double pHeight = playerAreaDimension.getHeight();
+		Dimension dimension = new Dimension((int) (pWidth), (int) (pHeight)/6);
 		
-		JPanel infoArea = new JPanel();
-		Border border = BorderFactory.createLineBorder(Color.RED, 1);
-		infoArea.setBorder(border);
-		infoArea.setPreferredSize(new Dimension((int) (pWidth), (int) (pHeight)/6));
-		this.add(infoArea, BorderLayout.SOUTH);
+		this.infoPanel = new infoArea(dimension);
+		infoPanel.setPreferredSize(dimension);
+		this.add(infoPanel, BorderLayout.SOUTH);
 	}
 	
 	private void addLeaderTabs(double width, double height) {
@@ -161,9 +189,11 @@ public class PlayerArea extends JPanel {
 		int i;
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
 	
-		for ( int x = 0; x < 4; x++) {   //game.getNumberPlayers();
+		for ( int x = 0; x < game.getNumberPlayers(); x++) {   //game.getNumberPlayers()
 			
 			JPanel playerLeaderCards = new JPanel();
+			playerLeaderCards.setOpaque(true);
+			playerLeaderCards.setBackground(new Color(213, 50, 90, 123));
 			playerLeaderCards.setPreferredSize(new Dimension((int) width, (int) height/6));
 			playerLeaderCards.setBorder(border);
 			lCardsPanels.add(playerLeaderCards);
@@ -177,9 +207,9 @@ public class PlayerArea extends JPanel {
 					player1LeaderCardCells.add(cardCell);
 				} else if ( x == 1) {
 					player2LeaderCardCells.add(cardCell);
-				} else if ( x == 2 ) {                //&& game.getNumberPlayers() == 3
+				} else if ( x == 2 && game.getNumberPlayers() == 3) {  //&& game.getNumberPlayers() == 3
 					player3LeaderCardCells.add(cardCell);
-				} else if ( x == 3 ) {         //&& game.getNumberPlayers() == 4
+				} else if ( x == 3 && game.getNumberPlayers() == 4) {   // && game.getNumberPlayers() == 4
 					player4LeaderCardCells.add(cardCell);
 				}
 				
@@ -201,6 +231,10 @@ public class PlayerArea extends JPanel {
 		for ( PlayerDashboard pd : dashboards) {
 			pd.update(this.game);
 		}
+		
+		fmPanel.update(game);
+		turnOrder.update(game);
+		infoPanel.update(game);
 		
 		//TODO da pensare a come visualizzare e fare update delle carte leader. Complesso.
 		// deve coesistere anche con la modalità di gioco basic advanced

@@ -77,6 +77,11 @@ public abstract class Cell<T> extends JButton {
 		update();
 	}
 	
+	public void removeAll() {
+		itemList.clear();
+		
+	}
+	
 	public ArrayList<T> getItemList() {
 		return this.itemList;
 	}

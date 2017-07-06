@@ -269,24 +269,25 @@ public class MainBoard extends JPanel {
 		this.game = game; 
 		
 		this.militaryTower.updateMilitaryPoints(this.game, this.tokenDimension);
-	
-		//List <Player> players  = new ArrayList <Player> ();
-		//players = game.getPlayers();
 		
 		for (Player player : game.getPlayers()) {
+			
 			int vp = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("VictoryPoints").getQuantity();
 			for (int i = 0; i < victoryPointCells.size(); i++) {
 				PointCell pc = victoryPointCells.get(i);
-				if (i != vp) pc.remove(player);
-				else pc.add(player); 
-				//pc.paint();  //e player color come parametri
-			}
-		}	
-	
-		
-		centralPiece.updateCentralPiece(game);
-
-		
+				
+				ArrayList<Player> players = pc.getItemList();
+				for ( Player cellPlayer : players) {
+					if ( player.getIdPlayer() == cellPlayer.getIdPlayer()) {
+						pc.remove(cellPlayer);
+					}
+				}
+				
+				if (i == vp) pc.add(player);
+			} 
+			
+		}		
+		centralPiece.updateCentralPiece(game);	
 	}
 
 }
