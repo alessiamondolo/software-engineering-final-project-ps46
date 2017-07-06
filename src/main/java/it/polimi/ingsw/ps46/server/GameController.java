@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps46.server;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -9,6 +10,7 @@ import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.resources.Servants;
+import it.polimi.ingsw.ps46.server.resources.VictoryPoints;
 
 
 /**
@@ -120,6 +122,8 @@ public class GameController implements Observer, ViewEventVisitor {
 				vaticanReport();
 			endRound();
 		}
+		
+		finalScores();
 				
 	}
 
@@ -328,6 +332,35 @@ public class GameController implements Observer, ViewEventVisitor {
 					councilPalaceOrder.add(player);
 			}
 		game.setNextTurnOrder(councilPalaceOrder);
+	}
+	
+	private void finalScores() {
+		Map<Integer, VictoryPoints> finalScores = game.getFinalScores();
+		for(Player player : game.getPlayers()) {
+			//Add final victory points from venture cards
+			for(Card card : player.getPersonalBoard().getVentureDeck()) {
+				card.use(game);
+			}
+			
+			//Get points from victory points
+			VictoryPoints victoryPoints = new VictoryPoints(player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("VictoryPoints").getQuantity());
+			
+			//Add final victory points from number of resources
+			int resources = 0;
+			resources += player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Wood").getQuantity();
+			resources += player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Stones").getQuantity();
+			resources += player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Money").getQuantity();
+			resources += player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").getQuantity();
+			victoryPoints.add(new VictoryPoints(resources/5));
+			
+			//Add final victory points from cards
+			victoryPoints.add(game.getVictoryPointsFromTerritoryCards().get(player.getPersonalBoard().getTerritoryDeck().size()));
+			victoryPoints.add(game.getVictoryPointsFromCharacterCards().get(player.getPersonalBoard().getCharacterDeck().size()));
+			
+			finalScores.put(new Integer(player.getIdPlayer()), victoryPoints);
+		}
+		
+		game.setFinalScores(finalScores);
 	}
 
 }

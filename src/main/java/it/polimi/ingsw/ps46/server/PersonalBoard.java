@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps46.server;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
@@ -30,8 +29,7 @@ public class PersonalBoard implements Serializable {
 	
 	private ResourceSet playerResources = null; 
 	
-	private LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards = new LinkedHashMap<Integer, Integer>();
-	private LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards = new LinkedHashMap<Integer, Integer>();
+	
 	
 	/*
 	public PersonalBoard(LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards, LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards) {
@@ -141,22 +139,6 @@ public class PersonalBoard implements Serializable {
 	
 	public void setResources(ResourceSet resources) {
 		playerResources = resources;
-	}
-
-	public LinkedHashMap<Integer, Integer> getVictoryPointsFromTerritoryCards() {
-		return victoryPointsFromTerritoryCards;
-	}
-
-	private void setVictoryPointsFromTerritoryCards(LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards) {
-		this.victoryPointsFromTerritoryCards = victoryPointsFromTerritoryCards;
-	}
-
-	public LinkedHashMap<Integer, Integer> getVictoryPointsFromCharacterCards() {
-		return victoryPointsFromCharacterCards;
-	}
-
-	private void setVictoryPointsFromCharacterCards(LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards) {
-		this.victoryPointsFromCharacterCards = victoryPointsFromCharacterCards;
 	}
 
 
