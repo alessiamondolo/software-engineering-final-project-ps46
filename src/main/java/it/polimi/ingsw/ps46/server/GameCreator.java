@@ -13,7 +13,7 @@ public class GameCreator implements Runnable {
 	private HashMap<Socket, ObjectInputStream> readers;
 	
 	private Game game;	
-	private View view;
+	private VirtualView view;
 	private GameController controller;
 	
 	public GameCreator(ArrayList<Socket> clients, HashMap<Socket, ObjectOutputStream> writers, HashMap<Socket, ObjectInputStream> readers) {

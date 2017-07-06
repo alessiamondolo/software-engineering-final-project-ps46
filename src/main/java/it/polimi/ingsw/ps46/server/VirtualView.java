@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 
@@ -20,7 +21,7 @@ import it.polimi.ingsw.ps46.server.card.BuildingCard;
  * @author Alessia Mondolo
  * @version 1.1
  */
-public class VirtualView extends View {
+public class VirtualView extends Observable implements Observer, EventVisitor {
 
 	private ArrayList<Socket> clients;
 	private HashMap<Socket, ObjectOutputStream> writers;
