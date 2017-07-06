@@ -78,6 +78,7 @@ public class MoveToActionSpaceAction implements Action {
 						game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
 						
 						actionSpace.updateAvailability();
+						actionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
 						familyMember.setPositionOfFamilyMember(actionSpace.getId());
 						familyMember.use();
 						return true;

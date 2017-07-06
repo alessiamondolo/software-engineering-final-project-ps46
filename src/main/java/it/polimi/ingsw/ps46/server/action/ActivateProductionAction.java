@@ -74,6 +74,7 @@ public class ActivateProductionAction implements Action {
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(personalBoardResourceSet);
 			//setting occupied this actionSpace and used the familyMember
 			productionActionSpace.updateAvailability();
+			productionActionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
 			familyMemberUsed.setPositionOfFamilyMember(productionActionSpace.getId());
 			familyMemberUsed.use();
 			
@@ -115,7 +116,7 @@ public class ActivateProductionAction implements Action {
 			penality = new Dice(0);
 
 		temporaryDice.subDice( penality );
-		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "ProductionActions" ));
+		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "ProductionAction" ));
 		
 	
 		if( !game.getCurrentPlayer().getDiceMalus().isEmpty() )

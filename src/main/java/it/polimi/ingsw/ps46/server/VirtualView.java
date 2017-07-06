@@ -106,7 +106,7 @@ public class VirtualView extends View {
 			printBoard();
 			break;
 		case THROWN_DICE :
-			printBoard();
+			//printBoard();
 			break;
 		case SET_NEXT_TURN_ORDER :
 			showNextTurnOrder();

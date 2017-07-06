@@ -72,6 +72,7 @@ public class ActivateHarvestAction implements Action {
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(personalBoardResourceSet);
 			//setting occupied this actionSpace and used the familyMember
 			harvestActionSpace.updateAvailability();
+			harvestActionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
 			familyMemberUsed.setPositionOfFamilyMember(harvestActionSpace.getId());
 			familyMemberUsed.use();
 			
@@ -113,7 +114,7 @@ public class ActivateHarvestAction implements Action {
 			penality = new Dice(0);
 		
 		temporaryDice.subDice( penality );
-		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "HarvestActions" ));
+		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "HarvestAction" ));
 		
 		
 		if( !game.getCurrentPlayer().getDiceMalus().isEmpty() )

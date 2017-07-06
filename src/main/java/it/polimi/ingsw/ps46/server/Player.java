@@ -72,8 +72,8 @@ public class Player implements Serializable {
 		bonus.put("BuildingCards", initializationDice);
 		bonus.put("VentureCards", initializationDice);
 		bonus.put("CharactersCards", initializationDice);
-		bonus.put("ProductionActions", initializationDice);
-		bonus.put("HarvestActions", initializationDice);
+		bonus.put("ProductionAction", initializationDice);
+		bonus.put("HarvestAction", initializationDice);
 		
 		
 		discount = new HashMap<String, ResourceSet>();
@@ -174,7 +174,8 @@ public class Player implements Serializable {
 	public void updateBonus(String bonusName, Dice updateValue) {
 		int current = 0;
 		Dice currentValue = new Dice(current);
-		currentValue = bonus.get(bonusName);
+		if(bonus.get(bonusName) != null)
+			currentValue = bonus.get(bonusName);
 		currentValue.sumDice(updateValue);
 		
 		bonus.put(bonusName, currentValue);
