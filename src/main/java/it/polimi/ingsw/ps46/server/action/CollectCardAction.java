@@ -1,11 +1,11 @@
 package it.polimi.ingsw.ps46.server.action;
 
+
 import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
-import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.Money;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -24,10 +24,6 @@ public class CollectCardAction implements Action {
 	private FamilyMember familyMemberUsed;
 
 	private Card card;
-	//private TerritoryCard territoryCard;
-	//private CharacterCard characterCard;
-	//private BuildingCard buildingCard;
-	//private VentureCard ventureCard;
 	private final static Money TOWERFEE = new Money(3);
 	
 
@@ -38,31 +34,13 @@ public class CollectCardAction implements Action {
 		this.familyMemberUsed = familyMemberUsed;
 		
 		card = game.getBoard().getCardOfTheTowerFloor( actionSpace.getId() );
-
-		/*switch ( game.getBoard().getColorOfTower(actionSpace.getIdLocalActionSpaces()) ) {
-		
-		case "green":
-			
-			break;
-		case "blue":
-			
-			break;	
-		case "yellow":
-			
-			break;
-		case "purple":
-
-			break;
-		
-		default:
-			break;
-		}*/
 	}
 	
 	
 	 /**
 	  * This method execute the action of collect a card after the operation of checking done by isValid method:<br>
 	  *  <ul>
+	  *  <li>If the card to collect is a character one, active the permanent effect (bonus/malus of the card)
 	  *  <li>Active the immediate effect of the new card.</li>
 	  *  <li>Collect it into the personalBoard of the player.</li>
 	  *  <li>Set as used the family member and occupied the actionSpace.</li>
@@ -71,8 +49,22 @@ public class CollectCardAction implements Action {
 	@Override
 	public boolean execute() {
 		if(isLegal()) {	
-			card.use(game);
+			if (game.getBoard().getColorOfTower(actionSpace.getId()) == "blue")
+					card.use(game);
+			
+			//checking the leaderCard Effect of "Santa Rita"
+			if(game.getCurrentPlayer().getLeaderCards().containsKey("Santa Rita") && (game.getCurrentPlayer().getLeaderCards().get("Santa Rita").isActive()) ){
+				if (game.getCurrentPlayer().getDecreaseResourcesMalus() != null) {
+					DecreaseResourcesMalus temporaryDecreaseResourcesMalus = new DecreaseResourcesMalus(game.getCurrentPlayer().getDecreaseResourcesMalus());
+					game.getCurrentPlayer().setDecreaseResourcesMalus(null);
+					card.getImmediateEffects().activateEffect(game); //TODO andrebbero aggiunti solo money, stone, wood, servants x2
+					game.getCurrentPlayer().setDecreaseResourcesMalus(temporaryDecreaseResourcesMalus);
+					}
+				else
+					card.getImmediateEffects().activateEffect(game);
+				}				
 			card.collectCard(game);
+						
 			
 			int tower = (actionSpace.getId() - 1) / game.getBoard().getNumberOfTowers();
 			int floor = (actionSpace.getId() - 1) % game.getBoard().getNumberOfTowers();
@@ -107,7 +99,7 @@ public class CollectCardAction implements Action {
 		//I'm copying player's resourceSet just to can activate the effect of the increaseResourcesEffect
 		//(it's acting on the player resourceSet)
 		ResourceSet temporaryPlayerResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet());
-		
+		//checking the leaderCard Effect of "Filippo Brunelleschi"
 		if (!isTheTowerEmpty) {
 			if(!game.getCurrentPlayer().getLeaderCards().containsKey("Filippo Brunelleschi") || !(game.getCurrentPlayer().getLeaderCards().get("Filippo Brunelleschi").isActive()) ){
 				if(!temporaryPlayerResourceSet.greaterOrEqual(TOWERFEE)) return false;
@@ -117,21 +109,29 @@ public class CollectCardAction implements Action {
 		}
 		
 		ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());
-		if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
-		{
-			for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
-				if (decreaseResourcesMalus.getName() == "DecreaseResourcesMalus"){
-					
-					temporaryEffectResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
-				}	
+		if (game.getCurrentPlayer().getDecreaseResourcesMalus() != null) {
+			
+			temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
 			}
-		}
-		temporaryPlayerResourceSet.add(temporaryEffectResourceSet);
 		
-		if(!temporaryPlayerResourceSet.greaterOrEqual(card.getCost())) {
-			return false;
+		temporaryPlayerResourceSet.add(temporaryEffectResourceSet);
+		//checking the leaderCard Effect of "Pico della Mirandola"
+		
+		ResourceSet temporaryCost = new ResourceSet(card.getCost());
+		if (game.getCurrentPlayer().getLeaderCards().containsKey("Pico della Mirandola") && (game.getCurrentPlayer().getLeaderCards().get("Pico della Mirandola").isActive()) ){
+			Money moneyDiscounted = new Money(3);
+			if ( temporaryCost.getResourcesMap().get("Money").getQuantity() < 3) {
+				temporaryCost.getResourcesMap().get("Money").setQuantity(0);
+				//altrimenti per come è stata pensata la classe "sub" delle risorse..
+				//se ho un costo 2 - 3 = 2? (non fa nulla) ---> così invece imposto il risultato a 0
+			}
+			else
+				temporaryCost.sub(moneyDiscounted);
 		}
-		temporaryPlayerResourceSet.sub(card.getCost());
+		if (!temporaryPlayerResourceSet.greaterOrEqual(temporaryCost))
+			return false;	
+		
+		temporaryPlayerResourceSet.sub(temporaryCost);
 		
 		
 		game.getCurrentPlayer().getPersonalBoard().setResources(temporaryPlayerResourceSet);

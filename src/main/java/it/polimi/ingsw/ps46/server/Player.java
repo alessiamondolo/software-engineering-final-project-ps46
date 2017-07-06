@@ -37,10 +37,10 @@ public class Player implements Serializable {
 	private Map<String, ResourceSet> optionalDiscount;
 	
 	private boolean preacherEffect = false; 	//TODO Implementare l'effetto nel gioco	
-	
+
+	private DecreaseResourcesMalus decreaseResourcesMalus; 
 	private ArrayList<DiceMalusEffect> diceMalus;
 	private ArrayList<GenericMalusEffect> genericMalus;
-	private ArrayList<DecreaseResourcesMalus> decreaseResourcesMalus;
 	private DecreaseResourcesAtFinalMalus decreaseAtFinalMalus;
 
 
@@ -79,9 +79,9 @@ public class Player implements Serializable {
 		discount = new HashMap<String, ResourceSet>();
 		optionalDiscount = new HashMap<String, ResourceSet>();
 		
+		decreaseResourcesMalus = new DecreaseResourcesMalus();
 		diceMalus = new ArrayList<DiceMalusEffect>();
 		genericMalus = new ArrayList<GenericMalusEffect>();
-		decreaseResourcesMalus = new ArrayList<DecreaseResourcesMalus>();
 		decreaseAtFinalMalus = new DecreaseResourcesAtFinalMalus();
 		
 		
@@ -99,7 +99,6 @@ public class Player implements Serializable {
 		
 		// excommunicationMalus of the third era.
 		excommunicationMalus.put("notCountingVictoryPointsFromCards", new GenericMalusEffect() );
-		excommunicationMalus.put("loseOneVictoryPointEveryXResource", new DecreaseResourcesMalus() );
 		excommunicationMalus.put("loseOneVictoryPointEveryXResource", new DecreaseResourcesAtFinalMalus() );
 		*/
 	}
@@ -292,11 +291,15 @@ public class Player implements Serializable {
 	//DECREASE RESOURCES MALUS - GETTER//
 	////////////////////////////////////
 	
-	public ArrayList<DecreaseResourcesMalus> getDecreaseResourcesMalus() {
+	public DecreaseResourcesMalus getDecreaseResourcesMalus() {
 		return decreaseResourcesMalus;
 	}
+	
+	public void setDecreaseResourcesMalus(DecreaseResourcesMalus decreaseResourcesMalus) {
+		this.decreaseResourcesMalus = decreaseResourcesMalus;
 
-
+	}
+	
 	//DECREASE AT FINAL MALUS - GETTER AND SETTER//
 	//////////////////////////////////////////////
 	

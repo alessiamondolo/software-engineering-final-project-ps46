@@ -25,10 +25,10 @@ public class LeaderCard {
 	 * Federico da Montefeltro: setValueToOneColoredFamilyMemberEffect ---> TODO scelta del giocatore
 	 * Lorenzo de Medici: copyOneLeaderCardEffectOnceEffect --->TODO scelta del giocatore
 	 * Cesare Borgia: NoRequiredMilitaryPointsEffect DONE
-	 * Santa Rita: ResourcesX2Effect 
-	 * Pico della Mirandola: CardsDiscountedEffect 
+	 * Santa Rita: ResourcesX2Effect PP 
+	 * Pico della Mirandola: CardsDiscountedEffect -3 Money DONE
 	 * ANTONIOOOOOOOOOOOOOOOOOOOO
-	 * Sisto IV da implementare
+	 * Sisto IV TODO da implementare con il rapporto del vaticano
 	 */
 	
 	public LeaderCard(String name, Effect leaderEffect, boolean isPermanent, LinkedHashMap<String,Integer> requiredCards, ResourceSet requiredResources) {

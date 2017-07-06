@@ -360,10 +360,10 @@
 			"Era" : 3,
 			"permanentMalus" : 
 			{
-				"malusType": "DecreaseResourcesMalus",
+				"malusType": "DecreaseResourcesAtFinalMalus",
 				"doublechoice": false,
 				
-				"name" : "DecreaseResourcesMalus",
+				"name" : "loseOneVictoryPointEveryXResource",
 				"decreasedResources": [	
 					{
 						"id" : "Wood",
@@ -397,18 +397,21 @@
 						"id" : "CounsilPrivilage",
 						"quantity" : 0
 					}
-				]
+				],
+				"from" : "VictoryPoints"
+				
 			}
+			
 	},
 	{		
-	
+
 			"Era" : 3,
 			"permanentMalus" : 
 			{
-				"malusType": "DecreaseResourcesMalus",
+				"malusType": "DecreaseResourcesAtFinalMalus",
 				"doublechoice": false,
 				
-				"name" : "DecreaseResourcesMalus",
+				"name" : "loseOneVictoryPointEveryXResource",
 				"decreasedResources": [	
 					{
 						"id" : "Wood",
@@ -442,8 +445,11 @@
 						"id" : "CounsilPrivilage",
 						"quantity" : 0
 					}
-				]
+				],
+				"from" : "MilitaryPoints"
+				
 			}
+			
 	},
 	{		
 
@@ -453,7 +459,7 @@
 				"malusType": "DecreaseResourcesAtFinalMalus",
 				"doublechoice": false,
 				
-				"name" : "DecreaseResourcesAtFinalMalus",
+				"name" : "loseOneVictoryPointEveryXResource",
 				"decreasedResources": [	
 					{
 						"id" : "Wood",
@@ -501,7 +507,7 @@
 				"malusType": "DecreaseResourcesAtFinalMalus",
 				"doublechoice": false,
 				
-				"name" : "DecreaseResourcesAtFinalMalus",
+				"name" : "loseOneVictoryPointEveryXResource",
 				"decreasedResources": [	
 					{
 						"id" : "Wood",

@@ -3,6 +3,10 @@ package it.polimi.ingsw.ps46.server.card;
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Game;
 
+/**
+ * 
+ * @author Andrea.Masi
+ */
 public class SetValueFamilyMemberEffect implements Effect {
 
 	private String whichFamilyMember;

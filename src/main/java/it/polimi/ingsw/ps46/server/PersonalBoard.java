@@ -31,12 +31,11 @@ public class PersonalBoard implements Serializable {
 	private ArrayList<CharacterCard> characterCards = new ArrayList<CharacterCard>();
 	
 	private ResourceSet playerResources = null; 
-	
+	//TODO da mettere nel game
 	//private LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards = new LinkedHashMap<Integer, Integer>(); TODO???
 	//private LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards = new LinkedHashMap<Integer, Integer>(); TODO???
 	
-	//public PersonalBoard(LinkedHashMap<Integer, Integer> victoryPointsFromTerritoryCards, LinkedHashMap<Integer, Integer> victoryPointsFromCharacterCards) {
-	public PersonalBoard() {
+	public PersonalBoard() {//TODO DA FILE IS BETTER
 		requiredMilitaryPointsForTerritoryCardsMap = new LinkedHashMap<>();
 		requiredMilitaryPointsForTerritoryCardsMap.put(3, new MilitaryPoints(3));
 		requiredMilitaryPointsForTerritoryCardsMap.put(4, new MilitaryPoints(7));

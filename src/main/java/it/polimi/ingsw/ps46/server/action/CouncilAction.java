@@ -43,15 +43,11 @@ public class CouncilAction implements Action {
 			}
 						
 			ResourceSet temporaryEffectResourceSet = new ResourceSet(councilActionSpace.getEffectOfActionSpace().getAdditionalResources());
-			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
-			{
-				for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
-					if (decreaseResourcesMalus.getName() == "DecreaseResourcesMalus"){
-						
-						temporaryEffectResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
-					}	
+			if (game.getCurrentPlayer().getDecreaseResourcesMalus() != null) {
+				
+				temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
 				}
-			}
+			
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
 			
 			councilActionSpace.updateAvailability();
