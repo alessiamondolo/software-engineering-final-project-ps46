@@ -60,7 +60,7 @@ public class LowerPiece extends JPanel {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weightx = 1;
-		gbc.weighty = 0.65;
+		gbc.weighty = 0.63;
 		gbc.fill = GridBagConstraints.BOTH;
 		this.add(upperPanel, gbc);	
 		

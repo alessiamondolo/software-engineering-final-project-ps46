@@ -77,6 +77,8 @@ public class PlayerDashboard extends JPanel {
 		this.add(bonusTile);
 		this.dashboard = createDashboard(); 
 		this.add(dashboard);
+		this.setOpaque(true);
+		this.setBackground(new Color(213, 50, 90, 123));
 			
 	}
 
@@ -88,6 +90,8 @@ public class PlayerDashboard extends JPanel {
 	private JPanel createDashboard() {
 		
 		JPanel dashboard = new JPanel();
+		dashboard.setOpaque(true);
+		dashboard.setBackground(new Color(200, 134, 145, 123));
 		dashboard.setPreferredSize(dashboardDimension);
 		GridBagLayout gbl = new GridBagLayout();
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
@@ -143,6 +147,8 @@ public class PlayerDashboard extends JPanel {
 				gbc.gridheight = 1;
 				gbc.weighty = 0.60;
 				cardcell.setPreferredSize(new Dimension( (int) dashboardWidth/12, (int) (2*dashboardHeight)/8));
+				
+			
 				cardcell.setMaximumSize(cardcell.getPreferredSize());
 				cardcell.setMinimumSize(cardcell.getPreferredSize());
 			}
