@@ -286,21 +286,8 @@ public class MainBoard extends JPanel {
 				if (i == vp) pc.add(player);
 			} 
 			
-		}	
-		
-		PointCell pc = victoryPointCells.get(0);
-		ArrayList <Player> a = pc.getItemList();
-		int i = 0;
-		System.out.println("Stampo giocatori dentro la cella 0");
-		for (Player p : a) {
-			System.out.println("pl: " +p.getUsername()+ " nr " +String.valueOf(i));
-			i++;
-		}
-		System.out.println("Ho finito di stamparli");
-		
-		centralPiece.updateCentralPiece(game);
-
-		
+		}		
+		centralPiece.updateCentralPiece(game);	
 	}
 
 }

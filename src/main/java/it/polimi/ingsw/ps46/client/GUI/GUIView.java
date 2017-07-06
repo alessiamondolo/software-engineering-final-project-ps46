@@ -133,6 +133,7 @@ public class GUIView implements View {
 		gameWindow.update(this.game);
 		gameWindow.pack();
 		gameWindow.setVisible(true);
+		gameWindow.repaint();
 		
 	}
 	
@@ -228,12 +229,10 @@ public class GUIView implements View {
 	@Override
 	public String getPlayerUserame() {
 		
-		System.out.println("Sono appena arrivato in getplayerusername");
 		if (!(welcomeWindow instanceof WelcomeWindow))
 			return "";
 	
 		welcomeWindow.setPlayerUsername();
-		System.out.println("ho appena invocato la setplayer username dalla guiview");
 		welcomeWindow.pack();
 		welcomeWindow.setLocationRelativeTo(null);
 		welcomeWindow.setVisible(true);
@@ -241,7 +240,6 @@ public class GUIView implements View {
 		GUIView.setColor(null);
 		synchronized (monitor) {
 			while (username == null) {
-				System.out.println("Sto aspettando username");
 				try {
 					monitor.wait();
 				} catch (InterruptedException e) {
@@ -261,7 +259,6 @@ public class GUIView implements View {
 	}
 	@Override
 	public String getPlayerColor(ArrayList<String> colors) {
-		System.out.println("sono arrivato a chiedere il colore");
 		
 		if (!(welcomeWindow instanceof WelcomeWindow))
 			return "";
@@ -286,7 +283,6 @@ public class GUIView implements View {
 			}
 		}
 		
-		System.out.println(GUIView.color);
 		welcomeWindow.dispose();
 		return GUIView.color;
 	}
@@ -301,7 +297,7 @@ public class GUIView implements View {
 		printBoard();
 	}
 
-	private volatile static int action;
+	private volatile static int action = 0;
 	protected static void setAction(int action) {
 		GUIView.action = action;
 	}
@@ -312,7 +308,10 @@ public class GUIView implements View {
 		
 		/* WAIT */
 		synchronized (monitor) {
+			System.out.println("Sto per entrare nel while, action vale; " +GUIView.action);
 			while (GUIView.action == 0) {
+				System.out.println("sono dentro while");
+				System.out.println("Sono dentro while e aspetto azione da " + game.getCurrentPlayer().getUsername());
 				try {
 					monitor.wait();
 				} catch (InterruptedException e) {
@@ -321,7 +320,7 @@ public class GUIView implements View {
 				}
 			}
 		}
-		
+		System.out.println("sono fuori da while e action vale" +GUIView.action);
 		/* GET */
 		return GUIView.action;
 	}
@@ -332,8 +331,22 @@ public class GUIView implements View {
 	}
 	@Override
 	public String getFamilyMember() {
-		// TODO Auto-generated method stub
-		return "White";
+		/* INIT */
+		GUIView.setFamilyMember("");
+		
+		/* WAIT */
+		synchronized (monitor) {
+			while (GUIView.familyMember == "") {
+				try {
+					monitor.wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		/* GET */
+		return GUIView.familyMember;
 	}
 
 	private volatile static int servants;

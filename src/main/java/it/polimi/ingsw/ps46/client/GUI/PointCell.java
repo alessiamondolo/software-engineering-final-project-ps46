@@ -94,8 +94,8 @@ public class PointCell extends Cell<Player> {
 	//probabilmente questo metodo non serve piu
 	private Dimension computeTokenSize() {
 		
-		double width = this.getPreferredSize().getWidth()/6;
-		double height = this.getPreferredSize().getHeight()/6;
+		double width = this.getPreferredSize().getWidth()/4;
+		double height = this.getPreferredSize().getHeight()/4;
 
 
 		int size = (int)Math.max(width, height);
@@ -117,8 +117,8 @@ public class PointCell extends Cell<Player> {
 	}
 
 	private Dimension computeTokenSize(Dimension dimension) {
-		double width = dimension.getWidth()/8;   //valori drastici da migliorare 
-		double height = dimension.getHeight()/8;   //
+		double width = dimension.getWidth()/4;   //valori drastici da migliorare 
+		double height = dimension.getHeight()/4;   //
 		
 		int size = (int)Math.max(width, height);
 		return new Dimension(size, size);

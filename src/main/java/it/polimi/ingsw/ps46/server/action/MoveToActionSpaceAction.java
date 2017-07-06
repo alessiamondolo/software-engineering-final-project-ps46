@@ -63,7 +63,7 @@ public class MoveToActionSpaceAction implements Action {
 					Action nextAction = new ActivateHarvestAction(game, actionSpace, familyMember);
 					return nextAction.execute();
 				}
-				case "MarketActionSpace" : {
+				case "Market" : {
 					if(!actionSpace.getEffectOfActionSpace().getAdditionalResources().getResourcesMap().containsKey("CounsilPrivilege")){
 						//check sui malus
 						ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());
@@ -79,6 +79,7 @@ public class MoveToActionSpaceAction implements Action {
 						game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
 						
 						actionSpace.updateAvailability();
+						actionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
 						familyMember.setPositionOfFamilyMember(actionSpace.getId());
 						familyMember.use();
 						return true;
@@ -89,7 +90,7 @@ public class MoveToActionSpaceAction implements Action {
 						return true;
 					}
 				}
-				case "CouncilActionSpace" : {
+				case "Council" : {
 					//TODO interazione col giocatore
 					game.setGameState(GameState.COUNCIL_ACTION);
 					Action nextAction = new CouncilAction(game, actionSpace, familyMember);
@@ -119,6 +120,11 @@ public class MoveToActionSpaceAction implements Action {
 		if (game.getCurrentPlayer().getIdPlayer() != player.getIdPlayer()) {
 			return false;
 		}
+		
+		//The action space has to be a valid action space
+		if(actionSpace == null)
+			return false;
+		
 		//The action space has to be available 
 		if(!(actionSpace.getAvailability())) {
 			if(!(game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico Ariosto") || 
