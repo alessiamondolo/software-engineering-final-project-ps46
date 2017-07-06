@@ -245,13 +245,14 @@ public class PlayerDashboard extends JPanel {
 		this.game = game;
 		
 		updateResource();	
+		System.out.println("sono dentro la update della dash");
 		updateCards();
+		System.out.println("teoricamente ho appena stampato le carte aggiornata");
 	}
 	
 	
 	private void updateResource() {
 		
-		System.out.println("sono " +this.player.getUsername()+ "e sto provando a fare update della dash");
 		int id =  this.player.getIdPlayer();
 		ArrayList<Player> players = (ArrayList<Player>) this.game.getPlayers(); 
 		for (Player player : players) {
@@ -264,20 +265,6 @@ public class PlayerDashboard extends JPanel {
 		GameState gameState = this.game.getGameState();
 		System.out.println(gameState);
 		
-		if (board == null) {
-			System.out.println("Board null");
-		}
-		
-		ResourceSet rs =this.player.getPersonalBoard().getPlayerResourceSet();
-		if (rs == null) {
-			System.out.println("rs null");
-		}
-		
-		LinkedHashMap<String, Resource> rm = this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap();
-		if (rm == null) {
-			System.out.println("rm null, ossia l'ultima invocazione");
-		}
-		
 		LinkedHashMap<String, Resource> map = this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap();
 		moneyValue.setText(String.valueOf(map.get("Money").getQuantity()));
 		woodValue.setText(String.valueOf(map.get("Wood").getQuantity()));
@@ -289,41 +276,36 @@ public class PlayerDashboard extends JPanel {
 	//attenzione eccezioni! cosa succede quando cerco di accedere 
 	
 	private void updateCards() {
+				
+			//update building cards
 		
 			for (int i = 0; i < this.player.getPersonalBoard().getBuildingDeck().size(); i++) {
+				buildingCardCells.get(i).itemList.clear();
 				Card card = this.player.getPersonalBoard().getBuildingDeck().get(i);
-				if (! cards.contains(card)) {
-					cards.add(card);
-					buildingCardCells.get(buildingCardsCounter).add(card);
-					buildingCardsCounter ++;
-				}
+				CardCell cell = buildingCardCells.get(i);
+				cell.add(card);
 			}
 			
 			for (int i = 0; i < this.player.getPersonalBoard().getVentureDeck().size(); i++) {
+				ventureCardCells.get(i).itemList.clear();
 				Card card = this.player.getPersonalBoard().getVentureDeck().get(i);
-				if (! cards.contains(card)) {
-					cards.add(card);
-					ventureCardCells.get(ventureCardsCounter).add(card);
-					ventureCardsCounter ++;
-				}
+				CardCell cell = ventureCardCells.get(i);
+				cell.add(card);
+				System.out.println("sto aggiornando carte impresa");
 			}
 			
 			for (int i = 0; i < this.player.getPersonalBoard().getTerritoryDeck().size(); i++) {
+				territoryCardCells.get(i).itemList.clear();
 				Card card = this.player.getPersonalBoard().getTerritoryDeck().get(i);
-				if (! cards.contains(card)) {
-					cards.add(card);
-					territoryCardCells.get(territoryCardsCounter).add(card);
-					territoryCardsCounter ++;
-				}
+				CardCell cell = territoryCardCells.get(i);
+				cell.add(card);
 			}
 			
 			for (int i = 0; i < this.player.getPersonalBoard().getCharacterDeck().size(); i++) {
+				characterCardCells.get(i).itemList.clear();
 				Card card = this.player.getPersonalBoard().getCharacterDeck().get(i);
-				if (! cards.contains(card)) {
-					cards.add(card);
-					characterCardCells.get(characterCardsCounter).add(card);
-					characterCardsCounter ++;
-				}
+				CardCell cell = characterCardCells.get(i);
+				cell.add(card);
 			}		
 	}
 }
