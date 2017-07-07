@@ -17,4 +17,7 @@ public class Stones extends Resource {
 		super("Stones", quantity);
 	}
 
+	public Stones(Stones beforeStones, Stones afterStones){
+		super(beforeStones, afterStones);
+	}
 }

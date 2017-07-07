@@ -53,6 +53,27 @@ public class ResourceSet implements Serializable {
 			resourcesMap.put(tempId, tempResource);
 		}
 	}
+	
+	/**
+	 * 
+	 * 
+	 * @param beforeResourceSet
+	 * @param afterResourceSet
+	 */
+	public ResourceSet (ResourceSet beforeResourceSet, ResourceSet afterResourceSet){
+		
+		resourcesMap = new LinkedHashMap<String, Resource>();
+		ResourcesFactory factory = new ResourcesFactory();
+		
+		for (String keyStringBefore : beforeResourceSet.getResourcesMap().keySet()) {
+			for (String keyStringAfter : afterResourceSet.getResourcesMap().keySet()) {
+				if(keyStringAfter == keyStringBefore) {
+					Resource differecedResource = factory.getResourceByDifference(beforeResourceSet.getResourcesMap().get(keyStringBefore), afterResourceSet.getResourcesMap().get(keyStringAfter));					
+					resourcesMap.put(keyStringBefore, differecedResource);
+				}
+			}
+		}
+	}
 		
 	
 	
@@ -100,8 +121,7 @@ public class ResourceSet implements Serializable {
 		for(String key : moreResources.getResourcesMap().keySet())
 			//gets the resource of this resourceSet with the same key of the resource received by parameter
 			//and increases it by the resource received by parameter
-			if(key != "CounsilPrivilege")
-				resourcesMap.get(key).add(moreResources.getResourcesMap().get(key));
+			resourcesMap.get(key).add(moreResources.getResourcesMap().get(key));
 	}
 	
 	/**

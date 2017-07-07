@@ -46,20 +46,11 @@ public class IncreaseResourcesEffect implements Effect, Serializable {
 		
 		//this part is used to check if there are excommunication Malus action on the effect
 		
-		if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
-		{
-			for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
-				if (decreaseResourcesMalus.name == "DecreaseResourcesMalus"){
-					
-					temporaryEffectResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
-				}	
+		if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
+			temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
 			}
-		}
-		// POSSIBILE MIGLIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
-		//player resources 2 ; increase +1; decrease -2 ===> risultato 3; 
-		
-		game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
 
+		game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
 	}
 	
 	

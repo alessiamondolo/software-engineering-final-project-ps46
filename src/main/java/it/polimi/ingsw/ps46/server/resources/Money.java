@@ -16,5 +16,9 @@ public class Money extends Resource {
 	public Money(int quantity) {
 		super("Money", quantity);
 	}
+	
+	public Money(Money beforeMoney, Money afterMoney){
+		super(beforeMoney, afterMoney);
+	}
 
 }

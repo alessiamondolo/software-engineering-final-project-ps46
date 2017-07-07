@@ -47,4 +47,59 @@ public class ResourcesFactory {
 		
 	}
 	
+public Resource getResourceByDifference(Resource beforeResource, Resource afterResource) {
+		
+
+		if(beforeResource.getId().equals("Wood") && afterResource.getId().equals("Wood")) {
+			Wood beforeWood = new Wood(beforeResource.getQuantity());
+			Wood afterWood = new Wood(afterResource.getQuantity());
+			return new Wood(beforeWood, afterWood);
+		}
+		
+		else if(beforeResource.getId().equals("Stones") && afterResource.getId().equals("Stones")) {
+			Stones beforeStones = new Stones(beforeResource.getQuantity());
+			Stones afterStones = new Stones(afterResource.getQuantity());
+			return new Stones(beforeStones, afterStones);
+		}
+		
+		else if(beforeResource.getId().equals("Servants") && afterResource.getId().equals("Servants")) {
+			Servants beforeServants = new Servants(beforeResource.getQuantity());
+			Servants afterServants = new Servants(afterResource.getQuantity());
+			return new Servants(beforeServants, afterServants);
+		}
+		
+		else if(beforeResource.getId().equals("Money") && afterResource.getId().equals("Money")) {
+			Money beforeMoney = new Money(beforeResource.getQuantity());
+			Money afterMoney = new Money(afterResource.getQuantity());
+			return new Money(beforeMoney, afterMoney);
+		}
+		
+		else if(beforeResource.getId().equals("FaithPoints") && afterResource.getId().equals("FaithPoints")) {
+			FaithPoints beforeFaithPoints = new FaithPoints(beforeResource.getQuantity());
+			FaithPoints afterFaithPoints = new FaithPoints(afterResource.getQuantity());
+			return new FaithPoints(beforeFaithPoints, afterFaithPoints);
+		}
+		
+		else if(beforeResource.getId().equals("MilitaryPoints") && afterResource.getId().equals("MilitaryPoints")) {
+			MilitaryPoints beforeMilitaryPoints = new MilitaryPoints(beforeResource.getQuantity());
+			MilitaryPoints afterMilitaryPoints = new MilitaryPoints(afterResource.getQuantity());
+			return new MilitaryPoints(beforeMilitaryPoints, afterMilitaryPoints);
+		}
+		
+		else if(beforeResource.getId().equals("VictoryPoints") && afterResource.getId().equals("VictoryPoints")) {
+			VictoryPoints beforeVictoryPoints = new VictoryPoints(beforeResource.getQuantity());
+			VictoryPoints afterVictoryPoints = new VictoryPoints(afterResource.getQuantity());
+			return new VictoryPoints(beforeVictoryPoints, afterVictoryPoints);
+		}
+		
+		else if(beforeResource.getId().equals("CounsilPrivilege") && afterResource.getId().equals("CounsilPrivilege")) {
+			CounsilPrivilege beforeCouncilPrivilage = new CounsilPrivilege(beforeResource.getQuantity());
+			CounsilPrivilege afterCouncilPrivilage = new CounsilPrivilege(afterResource.getQuantity());
+			return new CounsilPrivilege(beforeCouncilPrivilage, afterCouncilPrivilage);
+		}
+		else 
+			return null;
+		
+	}
+	
 }

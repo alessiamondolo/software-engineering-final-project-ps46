@@ -22,7 +22,6 @@ public abstract class Card extends Observable implements Serializable {
 	private final ResourceSet cost;
 	 
 	/**
-	 * 
 	 * Build a new Card object.
 	 */
 	public Card(String cardName,int cardEra, Effect immediateEffects, Effect permanentEffects, ResourceSet cost) {
@@ -64,12 +63,20 @@ public abstract class Card extends Observable implements Serializable {
 			permanentEffects.activateEffect(game);
 	
 	}
+	
+	
 	/**
 	 * This method is used to collect this card object (implemented into the different kind of cards @overriding)
 	 * 
 	 * @param game
 	 */
-	public void collectCard(Game game) {}
+	public void collectCard(Game game) {
+		
+		
+	}
+	
+	
+	
 	
 	@Override
 	public String toString() {

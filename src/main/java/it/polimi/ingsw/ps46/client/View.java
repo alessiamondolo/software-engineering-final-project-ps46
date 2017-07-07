@@ -21,8 +21,6 @@ public interface View {
 	public void printMessage(String message);
 
 	public void welcomeMessage();
-	
-	public String getGameMode();
 
 	public String getPlayerUserame();
 
@@ -49,5 +47,7 @@ public interface View {
 	public int getEffectCoice(Effect effect1, Effect effect2);
 	
 	public void showNextTurnOrder();
+
+	public ArrayList<Integer> getCouncilPrivilege();
 	
 }

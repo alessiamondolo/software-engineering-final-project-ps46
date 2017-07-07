@@ -32,26 +32,21 @@ public class ExchageResourcesEffect implements Effect, Serializable {
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(requiredResources);
 			
 			ResourceSet temporaryEffectResourceSet = new ResourceSet(gainedResources);
-			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty())
-			{
-				for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
-					if (decreaseResourcesMalus.name == "DecreaseResourcesMalus"){
-						
-						temporaryEffectResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
-					}	
+			if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
+				temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
 				}
-			}
-			// POSSIBILE MILGIORAMENTO DEL CODICE PER IMPEDIRE CHE IL MALUS VENGA IGNORATO nel caso di:
-			//player resources 2 ; increase +1; decrease -2 ===> risultato 3; 
-			
+
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
+			
 		}
-		//else throw exception - NotActivableEffect
+			//else throw exception - NotActivableEffect
 	}
+	
 	
 	public boolean canBeActivated(Game game) {
 		return(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().greaterOrEqual(requiredResources));
 	}
+	
 	
 	public String toString() {
 		return "Required resources: " + requiredResources.toString() + "\n" +

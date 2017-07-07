@@ -17,4 +17,8 @@ public class CounsilPrivilege extends Resource {
 		super("CounsilPrivilege", quantity);
 	}
 	
+	public CounsilPrivilege(CounsilPrivilege beforeCounsilPrivilege, CounsilPrivilege afterCounsilPrivilege){
+		super(beforeCounsilPrivilege, afterCounsilPrivilege);
+	}
+	
 }

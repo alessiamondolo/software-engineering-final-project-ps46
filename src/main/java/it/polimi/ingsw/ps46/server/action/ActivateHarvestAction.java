@@ -4,7 +4,6 @@ import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
@@ -61,14 +60,10 @@ public class ActivateHarvestAction implements Action {
 			}
 
 			ResourceSet personalBoardResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getBonusTile().getGainedFromPersonalBoardHarvest());
-			if (!game.getCurrentPlayer().getDecreaseResourcesMalus().isEmpty()){
-				
-				for (DecreaseResourcesMalus decreaseResourcesMalus : game.getCurrentPlayer().getDecreaseResourcesMalus()) {
-					if (decreaseResourcesMalus.getName() == "DecreaseResourcesMalus"){
-						personalBoardResourceSet.sub(decreaseResourcesMalus.getDecreasedResources());
-					}	
-				}
+			if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
+				personalBoardResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());	
 			}
+			
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(personalBoardResourceSet);
 			//setting occupied this actionSpace and used the familyMember
 			harvestActionSpace.updateAvailability();

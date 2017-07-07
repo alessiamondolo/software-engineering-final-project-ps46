@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import it.polimi.ingsw.ps46.server.Game;
 
-
+//TODO da implementare
 /**
  * This Class implements Effect class to describe the behavior of the Card "Preacher".
  * If the boolean of the Malus (present as a player's attribute) is "true" the players movements are different (this effect is developed by the various actions)

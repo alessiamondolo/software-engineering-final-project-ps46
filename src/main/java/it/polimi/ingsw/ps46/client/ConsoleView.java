@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 import it.polimi.ingsw.ps46.utils.ReadInput;
 
 
@@ -70,30 +71,6 @@ public class ConsoleView implements View {
 		output.println("==========================================================================");
 		output.println("==========================================================================");
 		output.println("Welcome to the game Lorenzo Il Magnifico!");
-	}
-	
-	
-	
-	/**
-	 * Gets the game mode in which the client wants to play the game.
-	 * The client can choose between:
-	 * <ul>
-	 * <li>Basic game mode</li>
-	 * <li>Advanced game mode</li>
-	 * </ul>
-	 * 
-	 * @return a string containing the game mode chosen by the client.
-	 */
-	public String getGameMode() {
-		output.println("==========================================================================");
-		output.println("In which game mode do you want to play?");
-		output.println("1. Basic");
-		output.println("2. Advanced");
-		int gameMode = input.IntegerFromConsole(1, 2);
-		if (gameMode == 1)
-			return "BASIC_GAME_MODE";
-		else
-			return "ADVANCED_GAME_MODE";
 	}
 	
 	
@@ -537,6 +514,34 @@ public class ConsoleView implements View {
 		output.println("2. " + effect2.toString());
 		int choice = input.IntegerFromConsole(1, 2);
 		return choice;
+	}
+	
+	
+	
+	public ArrayList<Integer> getCouncilPrivilege() {
+		int privileges = game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity();
+		ArrayList<Integer> councilPrivileges = new ArrayList<Integer>();
+		output.println("You have " + privileges + " council privileges.");
+		while(privileges > 0) {
+			output.println("Which bonus do you choose?");
+			int index = 1;
+			for(ResourceSet resourceSet : game.getCouncilPrivileges()) {
+				output.println(index + ". " + resourceSet.toString());
+				index++;
+			}
+			int choice = input.IntegerFromConsole(1, (index-1));
+			choice--;
+			Integer bonus = new Integer(choice);
+			if(!councilPrivileges.contains(bonus)) {
+				councilPrivileges.add(bonus);
+				privileges--;
+				if(privileges > 0)
+					output.println("You still have " + privileges + " council privileges.");
+			}
+			else
+				output.println("You already have this bonus.");
+		}
+		return councilPrivileges;
 	}
 	
 	
