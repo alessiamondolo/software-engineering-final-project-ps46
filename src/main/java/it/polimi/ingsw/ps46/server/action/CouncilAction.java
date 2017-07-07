@@ -53,7 +53,7 @@ public class CouncilAction implements Action {
 				}
 			}
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
-			
+			//TODO cambio dell'ordine di gioco dei giocatori
 			councilActionSpace.updateAvailability();
 			councilActionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
 			familyMemberUsed.setPositionOfFamilyMember(councilActionSpace.getId());

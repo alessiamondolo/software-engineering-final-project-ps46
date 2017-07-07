@@ -92,6 +92,9 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			case ACTION_NOT_VALID :
 				getPlayerAction();
 				break;
+			case COUNCIL_PRIVILEGE : 
+				getCouncilPrivilege();
+				break;
 			default:
 				break;
 			}
@@ -115,8 +118,9 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			break;
 		}
 	}
-	
-	
+
+
+
 	public void visit(EventEffectChoice eventEffectChoice) {
 		switch(eventEffectChoice.getMessage()) {
 		case EXCHANGE_RESOURCES_CHOICE :
@@ -366,6 +370,32 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			EventEffectChoice event = new EventEffectChoice(NewStateMessage.EXCHANGE_RESOURCES_CHOICE, card);
 			event.setChoice(choice);
 			notifyObservers(event);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	/**
+	 * 
+	 */
+	private void getCouncilPrivilege() {
+		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
+		ObjectOutputStream writer = writers.get(currentSocket);
+		ObjectInputStream reader = readers.get(currentSocket);
+		try {
+			writer.writeObject("GET_COUNCIL_PRIVILEGE");
+			writer.flush();
+			writer.writeObject(game);
+			writer.flush();
+			while(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() > 0) {
+				int choice = (int) reader.readObject();
+				setChanged();
+				notifyObservers(new EventIntInput(choice, InputType.COUNCIL_PRIVILEGE_CHOICE));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

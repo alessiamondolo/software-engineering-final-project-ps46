@@ -47,5 +47,7 @@ public interface View {
 	public int getEffectCoice(Effect effect1, Effect effect2);
 	
 	public void showNextTurnOrder();
+
+	public ArrayList<Integer> getCouncilPrivilege();
 	
 }

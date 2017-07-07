@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps46.server.action.Action;
 import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.resources.CounsilPrivilege;
 import it.polimi.ingsw.ps46.server.resources.Servants;
 import it.polimi.ingsw.ps46.server.resources.VictoryPoints;
 
@@ -64,6 +65,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		case FAMILY_MEMBER_CHOICE :
 			familyMemberName = eventStringInput.getString();
 			break;
+		
 		default:
 			break;
 		}
@@ -78,6 +80,12 @@ public class GameController implements Observer, ViewEventVisitor {
 			break;
 		case SERVANTS_USED : 
 			servants = eventIntInput.getValue();
+			break;
+		case COUNCIL_PRIVILEGE_CHOICE :
+			int privilege = eventIntInput.getValue();
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(game.getCouncilPrivileges().get(privilege));
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(new CounsilPrivilege(1));
+			if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() == 0)
 			break;
 		default:
 			break;
@@ -112,8 +120,9 @@ public class GameController implements Observer, ViewEventVisitor {
 			
 			for(int turn = game.getCurrentPhase(); turn < game.getPHASES_PER_ROUND(); turn++) {
 				turnSetup();
-				game.setGameState(GameState.GET_PLAYER_ACTION);
+				
 				for(Player player : game.getPlayers()) {
+					game.setGameState(GameState.GET_PLAYER_ACTION);
 					game.setCurrentPlayer(player);
 				}
 			}
@@ -287,7 +296,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		//increases the value of the family member with the servants
 		familyMember.setValueOfFamilyMember(new Dice(familyMemberValue+servants));
 		player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").sub(new Servants(servants));
-		
+		 
 		Action action = new MoveToActionSpaceAction(game, player, familyMember, actionSpace);
 		boolean executed = action.execute();
 		if(!executed) {
@@ -298,7 +307,10 @@ public class GameController implements Observer, ViewEventVisitor {
 			game.setGameState(GameState.ACTION_NOT_VALID);
 			game.setCurrentPlayer(player);
 		}
-		
+		if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() > 0) {
+			game.setGameState(GameState.COUNCIL_PRIVILEGE);
+			game.setCurrentPlayer(player);
+		}
 	}
 	
 	
@@ -334,6 +346,11 @@ public class GameController implements Observer, ViewEventVisitor {
 		game.setNextTurnOrder(councilPalaceOrder);
 	}
 	
+	
+	
+	/**
+	 * 
+	 */
 	private void finalScores() {
 		Map<Integer, VictoryPoints> finalScores = game.getFinalScores();
 		for(Player player : game.getPlayers()) {

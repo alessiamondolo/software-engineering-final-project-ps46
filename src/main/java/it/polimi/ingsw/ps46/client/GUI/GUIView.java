@@ -376,5 +376,12 @@ public class GUIView implements View {
 	}
 
 
+	@Override
+	public ArrayList<Integer> getCouncilPrivilege() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 }

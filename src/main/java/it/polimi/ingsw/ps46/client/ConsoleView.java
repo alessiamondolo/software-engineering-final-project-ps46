@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 import it.polimi.ingsw.ps46.utils.ReadInput;
 
 
@@ -513,6 +514,34 @@ public class ConsoleView implements View {
 		output.println("2. " + effect2.toString());
 		int choice = input.IntegerFromConsole(1, 2);
 		return choice;
+	}
+	
+	
+	
+	public ArrayList<Integer> getCouncilPrivilege() {
+		int privileges = game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity();
+		ArrayList<Integer> councilPrivileges = new ArrayList<Integer>();
+		output.println("You have " + privileges + " council privileges.");
+		while(privileges > 0) {
+			output.println("Which bonus do you choose?");
+			int index = 1;
+			for(ResourceSet resourceSet : game.getCouncilPrivileges()) {
+				output.println(index + ". " + resourceSet.toString());
+				index++;
+			}
+			int choice = input.IntegerFromConsole(1, (index-1));
+			choice--;
+			Integer bonus = new Integer(choice);
+			if(!councilPrivileges.contains(bonus)) {
+				councilPrivileges.add(bonus);
+				privileges--;
+				if(privileges > 0)
+					output.println("You still have " + privileges + " council privileges.");
+			}
+			else
+				output.println("You already have this bonus.");
+		}
+		return councilPrivileges;
 	}
 	
 	

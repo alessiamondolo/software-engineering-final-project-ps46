@@ -213,6 +213,20 @@ public class SocketClient implements Runnable {
 				e1.printStackTrace();
 			}
 			break;
+		case "GET_COUNCIL_PRIVILEGE" :
+			try {
+				Game game = (Game) reader.readObject();
+				view.setGame(game);
+				for(Integer privilege : view.getCouncilPrivilege()) {
+					writer.writeObject(privilege.intValue());
+					writer.flush();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
 		case "SHOW_NEXT_TURN_ORDER" :
 			Game game;
 			try {

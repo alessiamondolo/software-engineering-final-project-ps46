@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps46.server.action;
 import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.GameState;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
@@ -91,7 +90,6 @@ public class MoveToActionSpaceAction implements Action {
 				}
 				case "Council" : {
 					//TODO interazione col giocatore
-					game.setGameState(GameState.COUNCIL_ACTION);
 					Action nextAction = new CouncilAction(game, actionSpace, familyMember);
 					return nextAction.execute();
 				}

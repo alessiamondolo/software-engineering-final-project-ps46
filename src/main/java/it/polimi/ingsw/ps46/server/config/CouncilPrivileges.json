@@ -1,0 +1,37 @@
+[
+		[
+			{
+				"id" : "Wood",
+				"quantity" : 1
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 1
+			}
+		],
+		[
+			{
+				"id" : "Servants",
+				"quantity" : 2
+			}
+		],
+		[
+			{
+				"id" : "Money",
+				"quantity" : 2
+			}
+		],
+		[
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 2
+			}
+		],
+		[
+			{
+				"id" : "FaithPoints",
+				"quantity" : 1
+			}
+		]
+]
+

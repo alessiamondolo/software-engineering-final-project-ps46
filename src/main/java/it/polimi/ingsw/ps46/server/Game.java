@@ -57,6 +57,8 @@ public class Game extends Observable implements Serializable {
 	private Map<String, Dice> dice;
 	private ArrayList<BonusTile> bonusTiles = new ArrayList<BonusTile>();
 	
+	private ArrayList<ResourceSet> councilPrivileges;
+	
 	private LinkedHashMap<Integer, VictoryPoints> victoryPointsFromTerritoryCards = new LinkedHashMap<Integer, VictoryPoints>();
 	private LinkedHashMap<Integer, VictoryPoints> victoryPointsFromCharacterCards = new LinkedHashMap<Integer, VictoryPoints>();
 	private Map<Integer, VictoryPoints> finalScores;
@@ -77,6 +79,7 @@ public class Game extends Observable implements Serializable {
 		configDecks();
 		configBoard();
 		configBonusTiles();
+		configCouncilPrivileges();
 		configFinalPoints();
 		
 		finalScores = new LinkedHashMap<Integer, VictoryPoints>();
@@ -153,6 +156,35 @@ public class Game extends Observable implements Serializable {
 		FactoryBoard factoryBoard = FactoryBoard.getFactoryBoard();
 		bonusTiles = factoryBoard.createBonusTiles("BonusTiles.json");
 		giveBonusTiles();
+	}
+	
+	
+	
+	/**
+	 * 
+	 */
+	private void configCouncilPrivileges() {
+		councilPrivileges = new ArrayList<ResourceSet>();
+		JSONParser parser = new JSONParser();
+		MyJSONParser myJSONParser = new MyJSONParser();
+
+		try {
+        	Object obj = parser.parse(new FileReader(configFilesPath + "CouncilPrivileges.json"));
+        	JSONArray resourcesJSON = (JSONArray) obj;        	
+        	
+            Iterator<?> resourcesIterator = resourcesJSON.iterator();
+            while (resourcesIterator.hasNext()) {
+            	JSONArray resourceSetJSON = (JSONArray) resourcesIterator.next();
+            	councilPrivileges.add(myJSONParser.buildResourceSet(resourceSetJSON));
+            }
+            
+		} catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
 	}
 //--------------------------------------------------//
 //-----------END OF CONFIGURATION METHODS-----------//
@@ -379,6 +411,14 @@ public class Game extends Observable implements Serializable {
 		victoryPointsFromCharacterCards.put(new Integer(4), new VictoryPoints(10));
 		victoryPointsFromCharacterCards.put(new Integer(5), new VictoryPoints(15));
 		victoryPointsFromCharacterCards.put(new Integer(6), new VictoryPoints(21));
+	}
+
+	public ArrayList<ResourceSet> getCouncilPrivileges() {
+		return councilPrivileges;
+	}
+
+	public void setCouncilPrivileges(ArrayList<ResourceSet> councilPrivileges) {
+		this.councilPrivileges = councilPrivileges;
 	}
 
 }
