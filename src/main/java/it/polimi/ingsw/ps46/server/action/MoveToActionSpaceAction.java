@@ -5,7 +5,6 @@ import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.GameState;
 import it.polimi.ingsw.ps46.server.Player;
-import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -68,7 +67,7 @@ public class MoveToActionSpaceAction implements Action {
 						//check on malus
 						ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());
 						
-						if (game.getCurrentPlayer().getDecreaseResourcesMalus() != null) {
+						if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
 							temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
 						}
 						

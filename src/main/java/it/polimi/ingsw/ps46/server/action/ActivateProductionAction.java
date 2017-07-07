@@ -6,7 +6,6 @@ import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
-import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -63,7 +62,7 @@ public class ActivateProductionAction implements Action {
 			}
 
 			ResourceSet personalBoardResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getBonusTile().getGainedFromPersonalBoardProduction());
-			if (game.getCurrentPlayer().getDecreaseResourcesMalus() != null) {
+			if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
 				
 				personalBoardResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
 				}

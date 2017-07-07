@@ -16,5 +16,9 @@ public class MilitaryPoints extends Resource {
 	public MilitaryPoints(int quantity) {
 		super("MilitaryPoints", quantity);
 	}
+	
+	public MilitaryPoints(MilitaryPoints beforeMilitaryPoints, MilitaryPoints afterMilitaryPoints){
+		super(beforeMilitaryPoints, afterMilitaryPoints);
+	}
 
 }

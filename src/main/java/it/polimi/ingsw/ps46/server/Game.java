@@ -71,8 +71,7 @@ public class Game extends Observable implements Serializable {
 		configDice();
 		configDecks();
 		configBoard();
-		configBonusTiles();
-		
+		configBonusTiles();	
 	}
 
 	private void newState(Object event) {

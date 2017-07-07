@@ -17,4 +17,8 @@ public class FaithPoints extends Resource {
 		super("FaithPoints", quantity);
 	}
 	
+	public FaithPoints(FaithPoints beforeFaithPoints, FaithPoints afterFaithPoints){
+		super(beforeFaithPoints, afterFaithPoints);
+	}
+	
 }

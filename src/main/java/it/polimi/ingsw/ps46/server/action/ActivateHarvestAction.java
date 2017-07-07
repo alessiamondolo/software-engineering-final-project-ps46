@@ -60,7 +60,7 @@ public class ActivateHarvestAction implements Action {
 			}
 
 			ResourceSet personalBoardResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getBonusTile().getGainedFromPersonalBoardHarvest());
-			if (game.getCurrentPlayer().getDecreaseResourcesMalus() != null) {
+			if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
 				personalBoardResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());	
 			}
 			

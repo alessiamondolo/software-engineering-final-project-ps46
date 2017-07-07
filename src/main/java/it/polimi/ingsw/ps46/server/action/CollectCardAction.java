@@ -5,7 +5,6 @@ import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Card;
-import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.resources.Money;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -54,18 +53,29 @@ public class CollectCardAction implements Action {
 			
 			//checking the leaderCard Effect of "Santa Rita"
 			if(game.getCurrentPlayer().getLeaderCards().containsKey("Santa Rita") && (game.getCurrentPlayer().getLeaderCards().get("Santa Rita").isActive()) ){
-				if (game.getCurrentPlayer().getDecreaseResourcesMalus() != null) {
-					DecreaseResourcesMalus temporaryDecreaseResourcesMalus = new DecreaseResourcesMalus(game.getCurrentPlayer().getDecreaseResourcesMalus());
-					game.getCurrentPlayer().setDecreaseResourcesMalus(null);
-					card.getImmediateEffects().activateEffect(game); //TODO andrebbero aggiunti solo money, stone, wood, servants x2
-					game.getCurrentPlayer().setDecreaseResourcesMalus(temporaryDecreaseResourcesMalus);
-					}
-				else
-					card.getImmediateEffects().activateEffect(game);
-				}				
-			card.collectCard(game);
-						
+				//make a copy of player resourceSet 
+				ResourceSet temporaryResourceSet = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet());
+
+				card.collectCard(game);
+	
+				//seeing the difference between the initial player resourceSet and the modified one.
+				ResourceSet difference = new ResourceSet(temporaryResourceSet, game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet());
 			
+					//if there is a malus, sum the malus into the difference 
+					if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
+						difference.add(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
+					}
+					//setting to 0 all the resources not touched by the effect of the leader card
+					for (String key : difference.getResourcesMap().keySet()) {
+						if((key != "Wood") && (key != "Stones") && (key != "Money") && ( key != "Servants")) {
+							difference.getResourcesMap().get(key).setQuantity(0);
+						}
+					}	
+					game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(difference);
+			}
+			else
+				card.collectCard(game);
+						
 			int tower = (actionSpace.getId() - 1) / game.getBoard().getNumberOfTowers();
 			int floor = (actionSpace.getId() - 1) % game.getBoard().getNumberOfTowers();
 			game.getBoard().getTower(tower).getTowerFloor(floor).setCard(null);
@@ -109,7 +119,7 @@ public class CollectCardAction implements Action {
 		}
 		
 		ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());
-		if (game.getCurrentPlayer().getDecreaseResourcesMalus() != null) {
+		if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
 			
 			temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
 			}

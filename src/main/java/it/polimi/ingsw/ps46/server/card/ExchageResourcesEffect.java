@@ -32,7 +32,7 @@ public class ExchageResourcesEffect implements Effect, Serializable {
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(requiredResources);
 			
 			ResourceSet temporaryEffectResourceSet = new ResourceSet(gainedResources);
-			if (game.getCurrentPlayer().getDecreaseResourcesMalus() != null) {
+			if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
 				temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
 				}
 

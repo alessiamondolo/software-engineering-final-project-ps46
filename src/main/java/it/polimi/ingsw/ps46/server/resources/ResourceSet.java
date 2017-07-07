@@ -53,6 +53,27 @@ public class ResourceSet implements Serializable {
 			resourcesMap.put(tempId, tempResource);
 		}
 	}
+	
+	/**
+	 * 
+	 * 
+	 * @param beforeResourceSet
+	 * @param afterResourceSet
+	 */
+	public ResourceSet (ResourceSet beforeResourceSet, ResourceSet afterResourceSet){
+		
+		resourcesMap = new LinkedHashMap<String, Resource>();
+		ResourcesFactory factory = new ResourcesFactory();
+		
+		for (String keyStringBefore : beforeResourceSet.getResourcesMap().keySet()) {
+			for (String keyStringAfter : afterResourceSet.getResourcesMap().keySet()) {
+				if(keyStringAfter == keyStringBefore) {
+					Resource differecedResource = factory.getResourceByDifference(beforeResourceSet.getResourcesMap().get(keyStringBefore), afterResourceSet.getResourcesMap().get(keyStringAfter));					
+					resourcesMap.put(keyStringBefore, differecedResource);
+				}
+			}
+		}
+	}
 		
 	
 	

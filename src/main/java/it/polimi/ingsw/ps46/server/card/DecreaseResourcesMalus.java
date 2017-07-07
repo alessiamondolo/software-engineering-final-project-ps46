@@ -66,4 +66,5 @@ public class DecreaseResourcesMalus extends MalusEffect {
 	public ResourceSet getDecreasedResources() {
 		return decreasedResources;
 	}
+	
 }

@@ -70,7 +70,7 @@ public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 				temporaryEffectResourceSet.getResourcesMap().get(key).setQuantity(quantity);
 			}
 
-		if (game.getCurrentPlayer().getDecreaseResourcesMalus() != null) {
+		if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
 			temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
 			}
 

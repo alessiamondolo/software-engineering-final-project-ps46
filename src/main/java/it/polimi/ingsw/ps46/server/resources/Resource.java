@@ -29,6 +29,18 @@ public abstract class Resource implements Serializable {
 	}
 	
 	/**
+	 * 
+	 * @param beforeResource
+	 * @param afterResource
+	 */
+	public Resource (Resource beforeResource, Resource afterResource) {
+		if ( beforeResource.getId() == afterResource.getId() ) {
+			quantity = (afterResource.getQuantity() - beforeResource.getQuantity());
+			id = beforeResource.getId();
+		}
+	}
+	
+	/**
 	 * Returns id.
 	 * @return id 
 	 */
@@ -80,6 +92,7 @@ public abstract class Resource implements Serializable {
 		else 
 			return false;
 	}
+	
 
 	public boolean greaterOrEqual(Resource resource) {
 		return (this.quantity >= resource.getQuantity());

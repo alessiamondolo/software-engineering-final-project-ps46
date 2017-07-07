@@ -17,4 +17,7 @@ public class Wood extends Resource {
 		super("Wood", quantity);
 	}
 
+	public Wood(Wood beforeWood, Wood afterWood){
+		super(beforeWood, afterWood);
+	}
 }
