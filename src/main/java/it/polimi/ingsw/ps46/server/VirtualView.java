@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 
@@ -20,7 +21,7 @@ import it.polimi.ingsw.ps46.server.card.BuildingCard;
  * @author Alessia Mondolo
  * @version 1.1
  */
-public class VirtualView extends View {
+public class VirtualView extends Observable implements Observer, EventVisitor {
 
 	private ArrayList<Socket> clients;
 	private HashMap<Socket, ObjectOutputStream> writers;
@@ -73,7 +74,6 @@ public class VirtualView extends View {
 		switch(eventMessage.getMessage()) {
 		case START_GAME :
 			welcomeMessage();
-			getGameMode();
 			break;
 		case CHANGED_CURRENT_PLAYER :
 			GameState gameState = game.getGameState();
@@ -91,6 +91,9 @@ public class VirtualView extends View {
 				break;
 			case ACTION_NOT_VALID :
 				getPlayerAction();
+				break;
+			case COUNCIL_PRIVILEGE : 
+				getCouncilPrivilege();
 				break;
 			default:
 				break;
@@ -115,8 +118,9 @@ public class VirtualView extends View {
 			break;
 		}
 	}
-	
-	
+
+
+
 	public void visit(EventEffectChoice eventEffectChoice) {
 		switch(eventEffectChoice.getMessage()) {
 		case EXCHANGE_RESOURCES_CHOICE :
@@ -138,36 +142,6 @@ public class VirtualView extends View {
 			try {
 				writer.writeObject("WELCOME_MESSAGE");
 				writer.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	
-
-	/**
-	 * Sends to the all the clients a message request to get the game mode that the client wants for the game.
-	 * If the game mode chosen by the client is the advanced mode, it notifies the observers of this.<br>
-	 * The notify is sent only when the game mode chosen is advanced because by default the game mode is the basic mode.
-	 * For this, we need to change the game mode in the model only if it has to be set as advanced.
-	 */
-	private void getGameMode() {
-		for(Socket currentSocket : clients) {
-			ObjectOutputStream writer = writers.get(currentSocket);
-			ObjectInputStream reader = readers.get(currentSocket);
-			try {
-				writer.writeObject("GET_GAME_MODE");
-				writer.flush();
-				try {
-					String gameMode = (String) reader.readObject();
-					if(gameMode == "ADVANCED_GAME_MODE") {
-						setChanged();
-						notifyObservers(new EventMessage(NewStateMessage.ADVANCED_GAME_MODE));
-					}
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -396,6 +370,32 @@ public class VirtualView extends View {
 			EventEffectChoice event = new EventEffectChoice(NewStateMessage.EXCHANGE_RESOURCES_CHOICE, card);
 			event.setChoice(choice);
 			notifyObservers(event);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	/**
+	 * 
+	 */
+	private void getCouncilPrivilege() {
+		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
+		ObjectOutputStream writer = writers.get(currentSocket);
+		ObjectInputStream reader = readers.get(currentSocket);
+		try {
+			writer.writeObject("GET_COUNCIL_PRIVILEGE");
+			writer.flush();
+			writer.writeObject(game);
+			writer.flush();
+			while(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() > 0) {
+				int choice = (int) reader.readObject();
+				setChanged();
+				notifyObservers(new EventIntInput(choice, InputType.COUNCIL_PRIVILEGE_CHOICE));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

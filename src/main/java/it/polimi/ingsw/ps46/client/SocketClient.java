@@ -121,14 +121,6 @@ public class SocketClient implements Runnable {
 			view.welcomeMessage();
 			break;
 		}
-		case "GET_GAME_MODE" :
-			try {
-				writer.writeObject(view.getGameMode());
-				writer.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			break;
 		case "GET_PLAYER_USERNAME" :
 			try {
 				writer.writeObject(view.getPlayerUserame());
@@ -219,6 +211,20 @@ public class SocketClient implements Runnable {
 				e1.printStackTrace();
 			} catch (IOException e1) {
 				e1.printStackTrace();
+			}
+			break;
+		case "GET_COUNCIL_PRIVILEGE" :
+			try {
+				Game game = (Game) reader.readObject();
+				view.setGame(game);
+				for(Integer privilege : view.getCouncilPrivilege()) {
+					writer.writeObject(privilege.intValue());
+					writer.flush();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 			break;
 		case "SHOW_NEXT_TURN_ORDER" :

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -23,6 +24,7 @@ import it.polimi.ingsw.ps46.server.card.FactoryCards;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
+import it.polimi.ingsw.ps46.server.resources.VictoryPoints;
 import it.polimi.ingsw.ps46.utils.MyJSONParser;
 
 
@@ -42,7 +44,6 @@ public class Game extends Observable implements Serializable {
 	private int currentPeriod = 1;
 	private int currentPhase = 0;
 	
-	private boolean advancedMode = false;
 	
 	private int numberPlayers; 
 	private ArrayList<Player> players;
@@ -55,6 +56,12 @@ public class Game extends Observable implements Serializable {
 	private ArrayList<VentureCard> ventureCardsDeck;
 	private Map<String, Dice> dice;
 	private ArrayList<BonusTile> bonusTiles = new ArrayList<BonusTile>();
+	
+	private ArrayList<ResourceSet> councilPrivileges;
+	
+	private LinkedHashMap<Integer, VictoryPoints> victoryPointsFromTerritoryCards = new LinkedHashMap<Integer, VictoryPoints>();
+	private LinkedHashMap<Integer, VictoryPoints> victoryPointsFromCharacterCards = new LinkedHashMap<Integer, VictoryPoints>();
+	private Map<Integer, VictoryPoints> finalScores;
 	
 	private GameState gameState;
 	private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/config/";
@@ -71,7 +78,11 @@ public class Game extends Observable implements Serializable {
 		configDice();
 		configDecks();
 		configBoard();
-		configBonusTiles();	
+		configBonusTiles();
+		configCouncilPrivileges();
+		configFinalPoints();
+		
+		finalScores = new LinkedHashMap<Integer, VictoryPoints>();
 	}
 
 	private void newState(Object event) {
@@ -146,6 +157,35 @@ public class Game extends Observable implements Serializable {
 		bonusTiles = factoryBoard.createBonusTiles("BonusTiles.json");
 		giveBonusTiles();
 	}
+	
+	
+	
+	/**
+	 * 
+	 */
+	private void configCouncilPrivileges() {
+		councilPrivileges = new ArrayList<ResourceSet>();
+		JSONParser parser = new JSONParser();
+		MyJSONParser myJSONParser = new MyJSONParser();
+
+		try {
+        	Object obj = parser.parse(new FileReader(configFilesPath + "CouncilPrivileges.json"));
+        	JSONArray resourcesJSON = (JSONArray) obj;        	
+        	
+            Iterator<?> resourcesIterator = resourcesJSON.iterator();
+            while (resourcesIterator.hasNext()) {
+            	JSONArray resourceSetJSON = (JSONArray) resourcesIterator.next();
+            	councilPrivileges.add(myJSONParser.buildResourceSet(resourceSetJSON));
+            }
+            
+		} catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+	}
 //--------------------------------------------------//
 //-----------END OF CONFIGURATION METHODS-----------//
 //--------------------------------------------------//
@@ -165,10 +205,6 @@ public class Game extends Observable implements Serializable {
 	
 	public int getCurrentRound() {
 		return currentRound;
-	}
-	
-	public boolean getAdvancedMode() {
-		return advancedMode;
 	}
 
 	public Dice getDice(String color) {
@@ -240,10 +276,6 @@ public class Game extends Observable implements Serializable {
 	
 	public void startGame() {
 		newState(new EventMessage(NewStateMessage.START_GAME));
-	}
-	
-	public void setAdvancedMode() {
-		advancedMode = true;
 	}
 	
 	public void giveBonusTiles() {
@@ -344,6 +376,49 @@ public class Game extends Observable implements Serializable {
 	public void setCurrentPhase(int currentPhase) {
 		this.currentPhase = currentPhase;
 		newState(new EventMessage(NewStateMessage.UPDATE_PHASE_INFO));
+	}
+
+	public Map<Integer, VictoryPoints> getFinalScores() {
+		return finalScores;
+	}
+
+	public void setFinalScores(Map<Integer, VictoryPoints> finalScores) {
+		this.finalScores = finalScores;
+		newState(new EventMessage(NewStateMessage.UPDATE_FINAL_SCORES));
+	}
+
+	public LinkedHashMap<Integer, VictoryPoints> getVictoryPointsFromTerritoryCards() {
+		return victoryPointsFromTerritoryCards;
+	}
+
+	public LinkedHashMap<Integer, VictoryPoints> getVictoryPointsFromCharacterCards() {
+		return victoryPointsFromCharacterCards;
+	}
+	
+	private void configFinalPoints() {
+		victoryPointsFromTerritoryCards.put(new Integer(0), new VictoryPoints(0));
+		victoryPointsFromTerritoryCards.put(new Integer(1), new VictoryPoints(0));
+		victoryPointsFromTerritoryCards.put(new Integer(2), new VictoryPoints(0));
+		victoryPointsFromTerritoryCards.put(new Integer(3), new VictoryPoints(1));
+		victoryPointsFromTerritoryCards.put(new Integer(4), new VictoryPoints(4));
+		victoryPointsFromTerritoryCards.put(new Integer(5), new VictoryPoints(10));
+		victoryPointsFromTerritoryCards.put(new Integer(6), new VictoryPoints(20));
+		
+		victoryPointsFromCharacterCards.put(new Integer(0), new VictoryPoints(0));
+		victoryPointsFromCharacterCards.put(new Integer(1), new VictoryPoints(1));
+		victoryPointsFromCharacterCards.put(new Integer(2), new VictoryPoints(3));
+		victoryPointsFromCharacterCards.put(new Integer(3), new VictoryPoints(6));
+		victoryPointsFromCharacterCards.put(new Integer(4), new VictoryPoints(10));
+		victoryPointsFromCharacterCards.put(new Integer(5), new VictoryPoints(15));
+		victoryPointsFromCharacterCards.put(new Integer(6), new VictoryPoints(21));
+	}
+
+	public ArrayList<ResourceSet> getCouncilPrivileges() {
+		return councilPrivileges;
+	}
+
+	public void setCouncilPrivileges(ArrayList<ResourceSet> councilPrivileges) {
+		this.councilPrivileges = councilPrivileges;
 	}
 
 }

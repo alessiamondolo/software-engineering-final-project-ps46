@@ -170,7 +170,6 @@ public class GUIView implements View {
 	protected static void setGameMode(String mode) {
 		GUIView.gameMode = mode;
 	}
-	@Override
 	public String getGameMode() {
 	
 		if (!(welcomeWindow instanceof WelcomeWindow))
@@ -374,6 +373,13 @@ public class GUIView implements View {
 	public int getEffectCoice(Effect effect1, Effect effect2) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	@Override
+	public ArrayList<Integer> getCouncilPrivilege() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

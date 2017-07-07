@@ -42,7 +42,6 @@ public class PersonalBoard implements Serializable {
 		requiredMilitaryPointsForTerritoryCardsMap.put(5, new MilitaryPoints(12));
 		requiredMilitaryPointsForTerritoryCardsMap.put(6, new MilitaryPoints(18));
 	}
-	
     
 	//TODO se non riesce a mettere la carta nel set è perchè ho troppe carte di quel tipo ---> bisogna avvisare il giocatore
 	

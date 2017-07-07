@@ -121,8 +121,7 @@ public class ResourceSet implements Serializable {
 		for(String key : moreResources.getResourcesMap().keySet())
 			//gets the resource of this resourceSet with the same key of the resource received by parameter
 			//and increases it by the resource received by parameter
-			if(key != "CounsilPrivilege")
-				resourcesMap.get(key).add(moreResources.getResourcesMap().get(key));
+			resourcesMap.get(key).add(moreResources.getResourcesMap().get(key));
 	}
 	
 	/**
