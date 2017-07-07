@@ -1,16 +1,9 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.Shape;
-
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import java.io.IOException;
 
 import it.polimi.ingsw.ps46.server.Player;
 
@@ -33,9 +26,12 @@ public class PointCell extends Cell<Player> {
 	
 	public PointCell(int action) {
 		super(action);
-		
 	}
 	
+	public PointCell(String fmColor) {
+		super(fmColor);
+	}
+
 	public void update() {
 		
 		this.removeAllToken();
@@ -56,9 +52,15 @@ public class PointCell extends Cell<Player> {
 		this.removeAllToken();
 		
 		for (Player p : itemList) {
-			Token t = new Token(p.getColor(), fmColor);
+			Token t = null;
+			try {
+				t = new Token(p.getColor(), fmColor);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("Token non generato causa I/0");
+			}
 			t.setPreferredSize(computeTokenSize());
-			this.setLayout(new FlowLayout(CENTER, ((int) this.getPreferredSize().getWidth()/3), (int) this.getPreferredSize().getHeight()/2));
 			this.add(t);
 			
 			
@@ -66,21 +68,12 @@ public class PointCell extends Cell<Player> {
 		repaint();
 	}
 	
-	@Override
-	public void add(Player pl) {
-		itemList.add(pl);
-		update();
-		
-	}
-	
 	public void add(Player player, String fmColor) {
 		itemList.add(player);
 		update(fmColor);
 	}
-	
-
-	
-	public void removeAllToken() {
+		
+	private void removeAllToken() {
 		for (Component c : this.getComponents()) {
 			if (c instanceof Token) {
 				this.remove(c);
@@ -110,6 +103,8 @@ public class PointCell extends Cell<Player> {
 				Dimension dimension = new Dimension((int) g.getClipBounds().getWidth(), (int) g.getClipBounds().getHeight());
 				c.setPreferredSize(computeTokenSize(dimension)); 
 			}
+			
+		repaint();
 			
 		}
 		

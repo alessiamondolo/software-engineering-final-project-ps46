@@ -5,6 +5,8 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -26,6 +28,12 @@ public class Token extends JLabel {
 	private static final long serialVersionUID = 1903309058325267711L;
 	private BufferedImage image = null;
 	
+	private static BufferedImage red_img = null;
+	private static BufferedImage blue_img = null;
+	private static BufferedImage yellow_img = null;
+	private static BufferedImage green_img = null;
+	private static HashMap<String, BufferedImage> hmap = new HashMap<String, BufferedImage>();
+	
 	private Token() {
 		
 	}
@@ -33,93 +41,65 @@ public class Token extends JLabel {
 	public Token(String color) {
 		this();
 		
-		//da migliorare la gestione dell'IO
-		
-		if (color == null) color = "";
-		
-		//teoricamente con concantenazione di stringe non serve neanche lo switch
-		
-		switch(color) {
-		
-		case "Red" :
-			try {
-				image = ImageIO.read(getClass().getResource("img/token/red_token.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			//img = image.getScaledInstance((int) width, (int) height, Image.SCALE_SMOOTH);
-			//ImageIcon imageIcon = new ImageIcon(img);
-			
-			break;
-		
-		case "Blue" :
-			try {
-				image = ImageIO.read(getClass().getResource("img/token/blue_token.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			break;
-		
-		case "Green" :
-			try {
-				image = ImageIO.read(getClass().getResource("img/token/green_token.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			break;
-		
-		case "Yellow" :
-			try {
-				image = ImageIO.read(getClass().getResource("img/token/yellow_token.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			break;
-		default :
-			try {
-				image = ImageIO.read(getClass().getResource("img/token/red_token.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			//serve getscaled instance
-			
+		if (color == null) {
+			System.out.println("E' stato chiesto un familiare con colore null");
+			return;
 		}
-	}
-
-	public Token(String color, String fmColor) {
-		this();
 		
 		try {
-			if (color == null) color = "";
-				
-			switch (fmColor) {
-					
-				case "White" :
-						image = ImageIO.read(getClass().getResource("img/family_member/" +color+ "_WhiteFM.png"));
-					break;
-				case "Black" :
-						image = ImageIO.read(getClass().getResource("img/family_member/" +color+ "_BlackFM.png"));
-					break;
-				case "Orange" :
-						image = ImageIO.read(getClass().getResource("img/family_member/" +color+ "_OrangeFM.png"));
-					break;
-				case "Neutral" :
-						image = ImageIO.read(getClass().getResource("img/family_member/" +color+ "_NeutralFM.png"));
-					break;
-			}
+			switch(color) {
 			
+			case "Red" :
+				if (red_img == null)
+					red_img = getImage("img/token/red_token.png");
+				image = red_img;
+				break;
+			
+			case "Blue" :
+				if (blue_img == null)
+					blue_img = getImage("img/token/blue_token.png");
+				image = blue_img;
+				break;
+			
+			case "Green" :
+				if (green_img == null)
+					green_img = getImage("img/token/green_token.png");
+				image = green_img;
+				break;
+			
+			case "Yellow" :
+				if (yellow_img == null)
+					yellow_img = getImage("img/token/yellow_token.png");
+				image = yellow_img;
+				break;
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
+			repaint();
 		}
-	
+
+	}
+
+	public Token(String color, String fmColor) throws IOException {
+		this();
+		
+		loadFMImages();
+		
+		if (color == null) {
+				System.out.println("E' stato chiesto un familiare con colore null");
+				return;
+		}
+			
+		String key = (color+ "_" +fmColor);
+		image = hmap.get(key);		
+		 
 	}
 	
 	
 	private Rectangle d = null;
 	public void paint(Graphics g) {
+		
+		super.paint (g);
 		
 		if (d == null || d.width != g.getClipBounds().width ||
 				 d.height != g.getClipBounds().height) {
@@ -128,8 +108,30 @@ public class Token extends JLabel {
 			this.setIcon(ii);
 		}
 		
-		super.paint (g);
 	}
 	
+	
+	public BufferedImage getImage(String imagePathName) throws IOException {
+		return ImageIO.read(getClass().getResource(imagePathName));
+	}
+	
+	
+	private void loadFMImages () throws IOException {
+		
+		String [] tokenColors = { "Red", "Blue", "Yellow" , "Green" };
+		String[] fmTypes = { "Neutral", "Black", "White", "Orange" };
+		
+		if ( hmap.isEmpty()) {
+			for ( String color : tokenColors) {
+				for (String fmType : fmTypes ) {
+					
+					BufferedImage fmBImage;
+					fmBImage = getImage("img/family_member/" +color+ "_" +fmType+ "FM.png");
+					hmap.put(color+ "_" +fmType, fmBImage);
+				}
+			}
+		}
+		
+	}
 }
 

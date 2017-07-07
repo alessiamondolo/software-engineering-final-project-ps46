@@ -2,8 +2,6 @@ package it.polimi.ingsw.ps46.client.GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JFrame;
 
@@ -85,6 +83,10 @@ public class GameWindow extends JFrame {
 		this.mainBoard.update(game);
 		this.pack();
 		repaint();
+	}
+	
+	public void setPlayerInfo(String username, String color) {
+		this.setTitle("Lorenzo il Magnifico - player: " + username + " - color: " + color);
 	}
 }
 	

@@ -6,10 +6,7 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import it.polimi.ingsw.ps46.server.FamilyMember;
-import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
-import it.polimi.ingsw.ps46.server.card.Card;
 
 public class ToTower extends JPanel {
 	
@@ -17,8 +14,6 @@ public class ToTower extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 7643108840401757037L;
-	private Game game;
-	private Dimension familyMemberDimension;
 	private ArrayList <PointCell> actionCells = new ArrayList <PointCell> ();
 	
 	public ToTower(int index, double widthSmall, double heightSmall) {
@@ -35,18 +30,21 @@ public class ToTower extends JPanel {
 			cell.setPreferredSize(new Dimension((int) ((9*widthSmall/5)), (int) (heightSmall*16-heightSmall/5)/5));
 			cell.setMaximumSize(getPreferredSize());
 			cell.setMinimumSize(getPreferredSize());
-			//Player player = new Player(1);  //test
-			//player.setColor("Blue");   //test
-			//cell.add(player, "White");   //test
 			
 			this.add(cell);
 			actionCells.add(cell);
 		}
 	}
-	
-	public ArrayList getActionCells() {
-		return actionCells;
-	}
 
+	@Override
+	public void removeAll() {
+		for (PointCell pc : actionCells) {
+			pc.removeAll();
+		}
+	}
+	
+	public void add(Player player, String fmColor, int floor) {
+		actionCells.get(floor).add(player, fmColor);
+	}
 }
 	

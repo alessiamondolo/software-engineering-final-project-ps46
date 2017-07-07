@@ -1,11 +1,9 @@
 package it.polimi.ingsw.ps46.client.GUI;
 import java.awt.Color;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -20,6 +18,7 @@ import it.polimi.ingsw.ps46.server.Game;
 
 public class CentralPiece extends JPanel {
 
+	Game game;
 	private UpperPiece upperPiece;
 	private LowerPiece lowerPiece;
 	
@@ -57,10 +56,11 @@ public class CentralPiece extends JPanel {
 		
 	}
 	
-	public void updateCentralPiece(Game game) {
+	public void update(Game game) {
 	
-		this.upperPiece.updateUpperPiece(game);
-		this.lowerPiece.updateLowerPiece(game);
+		this.game = game;
+		this.upperPiece.update(game);
+		this.lowerPiece.update(game);
 		
 	}
 	

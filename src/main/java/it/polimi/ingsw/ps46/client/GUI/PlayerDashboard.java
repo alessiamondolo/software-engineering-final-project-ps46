@@ -20,19 +20,15 @@ import javax.swing.border.Border;
 
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.GameState;
-import it.polimi.ingsw.ps46.server.PersonalBoard;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.resources.Resource;
-import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
  * A dashboard that allows the player to visualizes resources and cards. 
  * @author lorenzo
  *
  */
-
-// TODO da rendere la dashboard associata ai giocatore, il player che visualizza il terminale deve avere vista preferenziale
 
 public class PlayerDashboard extends JPanel {
 
@@ -57,12 +53,6 @@ public class PlayerDashboard extends JPanel {
 	private ArrayList <CardCell> territoryCardCells = new ArrayList <CardCell> ();
 	private ArrayList <CardCell> ventureCardCells = new ArrayList <CardCell> ();
 	private ArrayList <CardCell> characterCardCells = new ArrayList <CardCell> ();
-	private ArrayList <Card> cards = new ArrayList <Card> ();
-	
-	private int buildingCardsCounter = 0;
-	private int territoryCardsCounter = 0;
-	private int ventureCardsCounter = 0;
-	private int characterCardsCounter = 0;
 	
 	public PlayerDashboard(Dimension playerAreaDimension, Player player) {
 		
@@ -182,20 +172,6 @@ public class PlayerDashboard extends JPanel {
 		gbc.gridy = 0;
 		dashboard.add(dashboardImage, gbc);
 		
-/*		Image img = territoryCardCells.get(0).loadCard(4);
-		Image img1 = ventureCardCells.get(5).loadCard(5);
-		Image img2 = characterCardCells.get(3).loadCard(6);
-		Image img3 = buildingCardCells.get(4).loadCard(78);
-		
-		ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
-		territoryCardCells.get(0).setIcon(imageIcon);
-		imageIcon = new ImageIcon(img1.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
-		ventureCardCells.get(5).setIcon(imageIcon);
-		imageIcon = new ImageIcon(img2.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
-		characterCardCells.get(3).setIcon(imageIcon);
-		imageIcon = new ImageIcon(img3.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
-		buildingCardCells.get(4).setIcon(imageIcon);*/
-		
 		return dashboard;	
 	
 	}
@@ -219,7 +195,7 @@ public class PlayerDashboard extends JPanel {
 		
 		JLabel bonusTile = new JLabel();
 		
-		//if (game == basic) 	TODO
+		//if (game == basic) // TODO
 		
 		BufferedImage image = null;
 		try {
@@ -245,9 +221,11 @@ public class PlayerDashboard extends JPanel {
 		this.game = game;
 		
 		updateResource();	
-		System.out.println("sono dentro la update della dash");
+		
 		updateCards();
-		System.out.println("teoricamente ho appena stampato le carte aggiornata");
+		
+		repaint();
+		
 	}
 	
 	
@@ -256,12 +234,11 @@ public class PlayerDashboard extends JPanel {
 		int id =  this.player.getIdPlayer();
 		ArrayList<Player> players = (ArrayList<Player>) this.game.getPlayers(); 
 		for (Player player : players) {
-			if (player.getIdPlayer() == id) {    //forse non è troppo solido come algoritmo
+			if (player.getIdPlayer() == id) {   
 				this.player = player;
 			}
 		}
 		
-		PersonalBoard board = this.player.getPersonalBoard();
 		GameState gameState = this.game.getGameState();
 		System.out.println(gameState);
 		
@@ -272,8 +249,6 @@ public class PlayerDashboard extends JPanel {
 		servantsValue.setText(String.valueOf(map != null && map.get("Servants") != null ? map.get("Servants").getQuantity() : 0));	
 	}
 	
-	//controllare che le associazioni sugli indici delle strutture dati siano valide
-	//attenzione eccezioni! cosa succede quando cerco di accedere 
 	
 	private void updateCards() {
 				
@@ -291,7 +266,6 @@ public class PlayerDashboard extends JPanel {
 				Card card = this.player.getPersonalBoard().getVentureDeck().get(i);
 				CardCell cell = ventureCardCells.get(i);
 				cell.add(card);
-				System.out.println("sto aggiornando carte impresa");
 			}
 			
 			for (int i = 0; i < this.player.getPersonalBoard().getTerritoryDeck().size(); i++) {

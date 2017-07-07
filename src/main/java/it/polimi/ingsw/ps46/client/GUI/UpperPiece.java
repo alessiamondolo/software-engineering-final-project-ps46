@@ -1,18 +1,10 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.LayoutManager;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
@@ -27,7 +19,10 @@ import it.polimi.ingsw.ps46.server.Player;
 
 public class UpperPiece extends JPanel {
 	
-	private Game game;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1228559942864929434L;
 	private ArrayList<ActionTower> actionTowers = new ArrayList <ActionTower>();
 	private ArrayList<ToTower> toTowers = new ArrayList <ToTower>();
 	
@@ -78,15 +73,12 @@ public class UpperPiece extends JPanel {
 		
 	}
 	
-	void updateUpperPiece(Game game) {
-		
-		this.game = game;
+	public void update(Game game) {
 		
 		//per le carte dovrei allo stesso modo usare la clear?
-		
+		int i = 0;
 		for ( ActionTower tower : actionTowers) {
-			int i = 0;
-			tower.updateTower(game, i);
+			tower.update(game, i);
 			i++;
 		}
 		
@@ -97,40 +89,17 @@ public class UpperPiece extends JPanel {
 		fmColors.add("Neutral");
 		
 		for ( int x = 0; x < 4; x++) {
-			ArrayList <PointCell> actionCells = toTowers.get(x).getActionCells();
-			for (PointCell cell : actionCells) {
-				cell.itemList.clear();
-			}
+			toTowers.get(x).removeAll();
+			
 		}
 		
 		for (String fmColor : fmColors) {
 			for (Player player : game.getPlayers()) {
-				int i;
 				FamilyMember fm = player.getFamilyMember(fmColor);
 				int fmPosition = fm.getPositionOfFamilyMember();
-				
-				if (0 < fmPosition && fmPosition < 5){
-					i = 0;
-					PointCell position = (PointCell) toTowers.get(i).getActionCells().get(4 - fmPosition);
-					position.add(player, fmColor);   
-				}
-				
-				if (4 < fmPosition && fmPosition < 9){
-					i = 1;
-					PointCell position = (PointCell) toTowers.get(i).getActionCells().get(8 - fmPosition);
-					position.add(player, fmColor);   
-				}
-				
-				if (8 < fmPosition && fmPosition < 13){
-					i = 2;
-					PointCell position = (PointCell) toTowers.get(i).getActionCells().get(12 - fmPosition);
-					position.add(player, fmColor);   
-				}
-				
-				if (12 < fmPosition && fmPosition < 17){
-					i = 3;
-					PointCell position = (PointCell) toTowers.get(i).getActionCells().get(16 - fmPosition);
-					position.add(player, fmColor);   
+				if (0 < fmPosition && fmPosition <= 16) {
+					i = fmPosition / 4;
+					toTowers.get(i).add(player, fmColor, 4 - fmPosition%4);
 				}
 			}
 		}
