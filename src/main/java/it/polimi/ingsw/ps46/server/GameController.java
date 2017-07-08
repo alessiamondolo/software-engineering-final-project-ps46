@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps46.server;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -75,6 +76,9 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	public void visit(EventIntInput eventIntInput) {
 		switch(eventIntInput.getType()) {
+		case BONUS_TILE_CHOICE :
+			game.giveBonusTile(game.getCurrentPlayer(), eventIntInput.getValue());
+			break;
 		case PLAYER_ACTION :
 			actionSpaceID = eventIntInput.getValue();
 			break;
@@ -155,6 +159,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		setupInitialOrder();
 		setupPlayersColor();
 		setupInitialResources();
+		setupBonusTiles();
 	}
 
 	
@@ -194,6 +199,14 @@ public class GameController implements Observer, ViewEventVisitor {
 	private void setupInitialResources() {
 		game.setGameState(GameState.SETUP_INITIAL_RESOURCES);
 		game.giveInitialResources();
+	}
+	
+	private void setupBonusTiles() {
+		game.setGameState(GameState.SETUP_BONUS_TILES);
+		Collections.reverse(game.getPlayers());
+		for(Player player : game.getPlayers())
+			game.setCurrentPlayer(player);
+		Collections.reverse(game.getPlayers());
 	}
 	
 	

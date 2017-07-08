@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.ListIterator;
 import java.util.Map;
 
+import it.polimi.ingsw.ps46.server.BonusTile;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
@@ -123,6 +124,25 @@ public class ConsoleView implements View {
 		int color = input.IntegerFromConsole(1, colors.size()) - 1;
 		output.println("Your color will be " + colors.get(color));
 		return colors.get(color);
+	}
+	
+	
+	
+	/**
+	 * 
+	 */
+	public int getBonusTile() {
+		output.println("==========================================================================");
+		output.println("Which bonus tile do you want?");
+		int index = 1;
+		for(BonusTile bonusTile : game.getBonusTiles()){
+			if(bonusTile.isAdvancedPersonalBoard()) {
+				output.println(index + ". " + bonusTile);
+				index++;
+			}
+		}
+		int choice = input.IntegerFromConsole(1, game.getBonusTiles().size()-1);
+		return choice;
 	}
 	
 	
@@ -399,28 +419,30 @@ public class ConsoleView implements View {
 		output.println("This is what you have:");
 		output.println("1. Resources:");
 		output.println(player.getPersonalBoard().getPlayerResourceSet().toString());
-		output.println("2. Territory Cards:");
+		output.println("2. Bonus tile:");
+		output.println(player.getPersonalBoard().getBonusTile());
+		output.println("3. Territory Cards:");
 		if(player.getPersonalBoard().getTerritoryDeck().isEmpty())
 			output.println("You don't have territory cards for now.");
 		else {
 			for (Card card : player.getPersonalBoard().getTerritoryDeck())
 				output.println(card);
 		}
-		output.println("3. Character Cards:");
+		output.println("4. Character Cards:");
 		if(player.getPersonalBoard().getCharacterDeck().isEmpty())
 			output.println("You don't have character cards for now.");
 		else {
 			for (Card card : player.getPersonalBoard().getCharacterDeck())
 				output.println(card);
 		}
-		output.println("4. Building Cards:");
+		output.println("5. Building Cards:");
 		if(player.getPersonalBoard().getBuildingDeck().isEmpty())
 			output.println("You don't have building cards for now.");
 		else {
 			for (Card card : player.getPersonalBoard().getBuildingDeck())
 				output.println(card);
 		}
-		output.println("5. Venture Cards:");
+		output.println("6. Venture Cards:");
 		if(player.getPersonalBoard().getVentureDeck().isEmpty())
 			output.println("You don't have venture cards for now.");
 		else {

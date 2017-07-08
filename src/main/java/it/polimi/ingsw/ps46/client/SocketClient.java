@@ -151,6 +151,16 @@ public class SocketClient implements Runnable {
 				e.printStackTrace();
 			}
 			break;
+		case "GET_BONUS_TILE" :
+			try {
+				view.setGame((Game) reader.readObject());
+				writer.writeObject((int) view.getBonusTile());
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
 		case "SHOW_ROUND_INFO" :
 			try {
 				view.setGame((Game) reader.readObject());

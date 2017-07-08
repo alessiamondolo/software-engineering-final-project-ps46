@@ -84,6 +84,9 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			case SETUP_PLAYERS_COLOR :
 				getPlayerColor(game.getCurrentPlayer().getIdPlayer());
 				break;
+			case SETUP_BONUS_TILES :
+				getBonusTile(game.getCurrentPlayer().getIdPlayer());
+				break;
 			case GET_PLAYER_ACTION : 
 				printCurrentPlayer();
 				printPlayerStatus();
@@ -231,6 +234,34 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		}
 		setChanged();
 		notifyObservers(new EventStringInput(color, InputType.PLAYER_COLOR));
+	}
+	
+	
+	
+	/**
+	 * 
+	 */
+	public void getBonusTile(int id) {
+		int bonusTile = 0;
+		int clientPosition = id - 1;
+		Socket currentSocket = clients.get(clientPosition);
+		ObjectOutputStream writer = writers.get(currentSocket);
+		ObjectInputStream reader = readers.get(currentSocket);
+		try {
+			writer.writeObject("GET_BONUS_TILE");
+			writer.flush();
+			writer.writeObject(game);
+			writer.flush();
+			try {
+				bonusTile = (int) reader.readObject();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		setChanged();
+		notifyObservers(new EventIntInput(bonusTile, InputType.BONUS_TILE_CHOICE));
 	}
 	
 	

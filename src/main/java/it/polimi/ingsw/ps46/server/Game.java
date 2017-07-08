@@ -155,7 +155,6 @@ public class Game extends Observable implements Serializable {
 	private void configBonusTiles() {
 		FactoryBoard factoryBoard = FactoryBoard.getFactoryBoard();
 		bonusTiles = factoryBoard.createBonusTiles("BonusTiles.json");
-		giveBonusTiles();
 	}
 	
 	
@@ -278,10 +277,8 @@ public class Game extends Observable implements Serializable {
 		newState(new EventMessage(NewStateMessage.START_GAME));
 	}
 	
-	public void giveBonusTiles() {
-		for(Player player : players) {
-			player.getPersonalBoard().setBonusTile(bonusTiles.get(0));
-		}
+	public void giveBonusTile(Player player, int bonusTile) {
+		player.getPersonalBoard().setBonusTile(bonusTiles.get(bonusTile));
 	}
 	
 	public void setNextTurnOrder(ArrayList<Player> nextTurnOrder) {

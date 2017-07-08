@@ -383,5 +383,12 @@ public class GUIView implements View {
 	}
 
 
+	@Override
+	public int getBonusTile() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 	
 }
