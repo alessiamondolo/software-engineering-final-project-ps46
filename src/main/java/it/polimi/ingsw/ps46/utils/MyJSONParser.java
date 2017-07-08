@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps46.utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -20,9 +21,11 @@ import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.card.IncreaseResourcesByElementsEffect;
 import it.polimi.ingsw.ps46.server.card.IncreaseResourcesEffect;
 import it.polimi.ingsw.ps46.server.card.PreacherEffect;
+import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.Resource;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 import it.polimi.ingsw.ps46.server.resources.ResourcesFactory;
+import it.polimi.ingsw.ps46.server.resources.VictoryPoints;
 
 public class MyJSONParser {
 	
@@ -253,6 +256,36 @@ public class MyJSONParser {
 		BonusTile bonusTile = new BonusTile(advancedPersonalBoard, requiredFamilyMemberValue, requiredFamilyMemberValue, 
 				gainedFromPersonalBoardProduction, gainedFromPersonalBoardHarvest);
 		return bonusTile;
+	}
+	
+	
+	
+	public LinkedHashMap<Integer, VictoryPoints> buildVictoryPointsMap(JSONArray victoryPointsArray) {
+		LinkedHashMap<Integer, VictoryPoints> victoryPointsMap = new LinkedHashMap<Integer, VictoryPoints>();
+		Iterator<?> i = victoryPointsArray.iterator();
+        while (i.hasNext()) {
+            JSONObject victoryPointsJSON = (JSONObject) i.next();
+            int numberOfCards = ((Long) victoryPointsJSON.get("numberOfCards")).intValue();
+            int points = ((Long) victoryPointsJSON.get("victoryPoints")).intValue();
+            VictoryPoints victoryPoints = new VictoryPoints(points);
+            victoryPointsMap.put(new Integer(numberOfCards), victoryPoints);
+        }
+		return victoryPointsMap;
+	}
+	
+	
+	
+	public LinkedHashMap<Integer, MilitaryPoints> buildRequiredMilitaryPointsForTerritoryCardsMap(JSONArray requiredPointsArray) {
+		LinkedHashMap<Integer, MilitaryPoints> victoryPointsMap = new LinkedHashMap<Integer, MilitaryPoints>();
+		Iterator<?> i = requiredPointsArray.iterator();
+        while (i.hasNext()) {
+            JSONObject requiredPointsJSON = (JSONObject) i.next();
+            int numberOfCards = ((Long) requiredPointsJSON.get("numberOfCards")).intValue();
+            int points = ((Long) requiredPointsJSON.get("militaryPoints")).intValue();
+            MilitaryPoints militaryPoints = new MilitaryPoints(points);
+            victoryPointsMap.put(new Integer(numberOfCards), militaryPoints);
+        }
+		return victoryPointsMap;
 	}
 	
 }

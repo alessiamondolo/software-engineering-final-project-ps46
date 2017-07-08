@@ -68,4 +68,10 @@ public class BonusTile implements Serializable {
 		this.advancedPersonalBoard = advancedPersonalBoard;
 	}
 	
+	@Override
+	public String toString() {
+		return "Production value: " + productionValue + ", resources gained from production: " + gainedFromPersonalBoardProduction.toString() + "\n" +
+				"Harvest value: " + harvestValue + ", resources gained from harvest: " + gainedFromPersonalBoardHarvest.toString();
+	}
+	
 }

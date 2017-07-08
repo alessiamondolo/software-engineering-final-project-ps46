@@ -70,6 +70,6 @@ public class DiceBonusEffectDiscounted extends DiceBonusEffect {
 	}
 	
 	public String toString() {
-		return "Dice bonus: " + bonus.toString() + ", type: " + type + ", resoources discounted: " + resourcesDiscounted.toString();
+		return "Dice bonus: " + bonus.toString() + ", type: " + type + ", resources discounted: " + resourcesDiscounted.toString();
 	}
 }

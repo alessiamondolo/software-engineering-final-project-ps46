@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.ListIterator;
 import java.util.Map;
 
+import it.polimi.ingsw.ps46.server.BonusTile;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
@@ -128,12 +129,30 @@ public class ConsoleView implements View {
 	
 	
 	/**
+	 * 
+	 */
+	public int getBonusTile() {
+		output.println("==========================================================================");
+		output.println("Which bonus tile do you want?");
+		int index = 1;
+		for(BonusTile bonusTile : game.getBonusTiles()){
+			if(bonusTile.isAdvancedPersonalBoard()) {
+				output.println(index + ". " + bonusTile);
+				index++;
+			}
+		}
+		int choice = input.IntegerFromConsole(1, game.getBonusTiles().size()-1);
+		return choice;
+	}
+	
+	
+	
+	/**
 	 * Prints on the output stream the info about the current round.
 	 */
 	public void updateRoundInfo() {
 		output.println("==========================================================================");
 		output.println("We are now playing round " + game.getCurrentRound() + " of period " + game.getCurrentPeriod() + ".");
-		output.println("\n");
 	}
 	
 	
@@ -256,6 +275,7 @@ public class ConsoleView implements View {
 		}
 		//END of the setup of the parameters that will be shown in the board
 		
+		output.println("==========================================================================");
 		output.println("THIS IS THE BOARD OF LORENZO IL MAGNIFICO:");
 		output.println(" ________________________________________________________________________ ");
 		output.println("|                                                                        |");
@@ -363,6 +383,7 @@ public class ConsoleView implements View {
 		int cardNumber = 1;
 		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
 			for (int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
+				output.println("__________________________________________________________________________");
 				output.println(cardNumber + ". Tower " + (tower+1) + ", floor " + (floor+1));
 				Card card = game.getBoard().getTower(tower).getTowerFloor(floor).getCard();
 				if(card != null)
@@ -398,28 +419,30 @@ public class ConsoleView implements View {
 		output.println("This is what you have:");
 		output.println("1. Resources:");
 		output.println(player.getPersonalBoard().getPlayerResourceSet().toString());
-		output.println("2. Territory Cards:");
+		output.println("2. Bonus tile:");
+		output.println(player.getPersonalBoard().getBonusTile());
+		output.println("3. Territory Cards:");
 		if(player.getPersonalBoard().getTerritoryDeck().isEmpty())
 			output.println("You don't have territory cards for now.");
 		else {
 			for (Card card : player.getPersonalBoard().getTerritoryDeck())
 				output.println(card);
 		}
-		output.println("3. Character Cards:");
+		output.println("4. Character Cards:");
 		if(player.getPersonalBoard().getCharacterDeck().isEmpty())
 			output.println("You don't have character cards for now.");
 		else {
 			for (Card card : player.getPersonalBoard().getCharacterDeck())
 				output.println(card);
 		}
-		output.println("4. Building Cards:");
+		output.println("5. Building Cards:");
 		if(player.getPersonalBoard().getBuildingDeck().isEmpty())
 			output.println("You don't have building cards for now.");
 		else {
 			for (Card card : player.getPersonalBoard().getBuildingDeck())
 				output.println(card);
 		}
-		output.println("5. Venture Cards:");
+		output.println("6. Venture Cards:");
 		if(player.getPersonalBoard().getVentureDeck().isEmpty())
 			output.println("You don't have venture cards for now.");
 		else {
@@ -519,7 +542,7 @@ public class ConsoleView implements View {
 	
 	
 	public ArrayList<Integer> getCouncilPrivilege() {
-		int privileges = game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity();
+		int privileges = game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity();
 		ArrayList<Integer> councilPrivileges = new ArrayList<Integer>();
 		output.println("You have " + privileges + " council privileges.");
 		while(privileges > 0) {

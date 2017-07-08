@@ -105,6 +105,9 @@ public class Game extends Observable implements Serializable {
 	
 	
 	
+	/**
+	 * 
+	 */
 	private void configBoard() {
 		FactoryBoard factoryBoard = FactoryBoard.getFactoryBoard();
 		board = factoryBoard.createBoard("Towers.json", "ActionSpaces.json", numberPlayers);
@@ -155,7 +158,6 @@ public class Game extends Observable implements Serializable {
 	private void configBonusTiles() {
 		FactoryBoard factoryBoard = FactoryBoard.getFactoryBoard();
 		bonusTiles = factoryBoard.createBonusTiles("BonusTiles.json");
-		giveBonusTiles();
 	}
 	
 	
@@ -185,6 +187,32 @@ public class Game extends Observable implements Serializable {
 	    } catch (ParseException e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	
+	
+	/**
+	 * 
+	 */
+	private void configFinalPoints() {
+		JSONParser parser = new JSONParser();
+		MyJSONParser myJSONParser = new MyJSONParser();
+
+		try {
+        	Object obj = parser.parse(new FileReader(configFilesPath + "VictoryPointsFromTerritoryCards.json"));
+        	JSONArray victoryPointsArray = (JSONArray) obj;        	
+        	victoryPointsFromTerritoryCards = myJSONParser.buildVictoryPointsMap(victoryPointsArray);
+        	obj = parser.parse(new FileReader(configFilesPath + "VictoryPointsFromCharacterCards.json"));
+        	victoryPointsArray = (JSONArray) obj;        	
+        	victoryPointsFromCharacterCards = myJSONParser.buildVictoryPointsMap(victoryPointsArray);
+		} catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+		
 	}
 //--------------------------------------------------//
 //-----------END OF CONFIGURATION METHODS-----------//
@@ -278,10 +306,8 @@ public class Game extends Observable implements Serializable {
 		newState(new EventMessage(NewStateMessage.START_GAME));
 	}
 	
-	public void giveBonusTiles() {
-		for(Player player : players) {
-			player.getPersonalBoard().setBonusTile(bonusTiles.get(0));
-		}
+	public void giveBonusTile(Player player, int bonusTile) {
+		player.getPersonalBoard().setBonusTile(bonusTiles.get(bonusTile));
 	}
 	
 	public void setNextTurnOrder(ArrayList<Player> nextTurnOrder) {
@@ -360,7 +386,6 @@ public class Game extends Observable implements Serializable {
 		if(!card.getDoubleChoice())
 			card.use(this);
 		else {
-			System.out.println("Andrea culo 1\n");
 			newState(new EventEffectChoice(NewStateMessage.EXCHANGE_RESOURCES_CHOICE, card));
 		}
 	}
@@ -393,24 +418,6 @@ public class Game extends Observable implements Serializable {
 
 	public LinkedHashMap<Integer, VictoryPoints> getVictoryPointsFromCharacterCards() {
 		return victoryPointsFromCharacterCards;
-	}
-	
-	private void configFinalPoints() {
-		victoryPointsFromTerritoryCards.put(new Integer(0), new VictoryPoints(0));
-		victoryPointsFromTerritoryCards.put(new Integer(1), new VictoryPoints(0));
-		victoryPointsFromTerritoryCards.put(new Integer(2), new VictoryPoints(0));
-		victoryPointsFromTerritoryCards.put(new Integer(3), new VictoryPoints(1));
-		victoryPointsFromTerritoryCards.put(new Integer(4), new VictoryPoints(4));
-		victoryPointsFromTerritoryCards.put(new Integer(5), new VictoryPoints(10));
-		victoryPointsFromTerritoryCards.put(new Integer(6), new VictoryPoints(20));
-		
-		victoryPointsFromCharacterCards.put(new Integer(0), new VictoryPoints(0));
-		victoryPointsFromCharacterCards.put(new Integer(1), new VictoryPoints(1));
-		victoryPointsFromCharacterCards.put(new Integer(2), new VictoryPoints(3));
-		victoryPointsFromCharacterCards.put(new Integer(3), new VictoryPoints(6));
-		victoryPointsFromCharacterCards.put(new Integer(4), new VictoryPoints(10));
-		victoryPointsFromCharacterCards.put(new Integer(5), new VictoryPoints(15));
-		victoryPointsFromCharacterCards.put(new Integer(6), new VictoryPoints(21));
 	}
 
 	public ArrayList<ResourceSet> getCouncilPrivileges() {

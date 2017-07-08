@@ -1,0 +1,18 @@
+[
+	{
+		"numberOfCards" : 3,
+		"militaryPoints" : 3
+	},
+	{
+		"numberOfCards" : 4,
+		"militaryPoints" : 7
+	},
+	{
+		"numberOfCards" : 5,
+		"militaryPoints" : 12
+	},
+	{
+		"numberOfCards" : 6,
+		"militaryPoints" : 18
+	}
+]

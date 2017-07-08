@@ -29,7 +29,7 @@
 				"quantity" : 0
 			},
 			{
-				"id" : "CounsilPrivilege",
+				"id" : "CouncilPrivilege",
 				"quantity" : 0
 			}
 		],
@@ -63,7 +63,7 @@
 				"quantity" : 0
 			},
 			{
-				"id" : "CounsilPrivilege",
+				"id" : "CouncilPrivilege",
 				"quantity" : 0
 			}
 		],
@@ -97,7 +97,7 @@
 				"quantity" : 0
 			},
 			{
-				"id" : "CounsilPrivilege",
+				"id" : "CouncilPrivilege",
 				"quantity" : 0
 			}
 		],
@@ -131,7 +131,7 @@
 				"quantity" : 0
 			},
 			{
-				"id" : "CounsilPrivilege",
+				"id" : "CouncilPrivilege",
 				"quantity" : 0
 			}
 		]

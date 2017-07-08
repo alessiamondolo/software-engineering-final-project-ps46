@@ -60,5 +60,26 @@ public class BuildingCard extends Card {
 	public Boolean getDoubleChoice() {
 		return doubleChoice;
 	}
-
+	
+	@Override
+	public String toString() {
+	
+		if(!doubleChoice) {
+			return "Card name: " + getCardName() + "\n" + 
+					"Immediate effect: " + getImmediateEffects() + "\n" +
+					"Permanent effect: " + getPermanentEffects() + "\n" +
+					"Production value: " + productionValue + "\n" +
+					"Cost: " + getCost();
+		}
+		else {
+			return "Card name: " + getCardName() + "\n" + 
+					"Immediate effect: " + getImmediateEffects() + "\n" +
+					"Permanent effect (option 1): " + getPermanentEffects() + "\n" +
+					"Permanent effect (option 2): " + permanentEffectsTwo + "\n" +
+					"Production value: " + productionValue + "\n" +
+					"Cost: " + getCost();
+		}
+		
+	}
+	
 }

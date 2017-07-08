@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps46.server;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -11,9 +13,13 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 public class WaitingList {
 	
-	private static final int TIMEOUT = 6000;
+	private static int TIMEOUT;
 	private Timer timer;
 	
 	private ArrayList<Socket> clients;
@@ -24,6 +30,23 @@ public class WaitingList {
 		clients = new ArrayList<Socket>();
 		writers = new HashMap<Socket, ObjectOutputStream>();
 		readers = new HashMap<Socket, ObjectInputStream>();
+		
+		configTimer();
+	}
+	
+	private void configTimer() {
+		JSONParser parser = new JSONParser();
+		try {
+        	Object obj = parser.parse(new FileReader("./src/main/java/it/polimi/ingsw/ps46/server/config/TimerStartGame.json"));
+        	JSONObject json = (JSONObject) obj;    
+        	TIMEOUT = ((Long) json.get("Timer")).intValue();
+		} catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
 	}
 	
 	public synchronized void add(Socket socket) {

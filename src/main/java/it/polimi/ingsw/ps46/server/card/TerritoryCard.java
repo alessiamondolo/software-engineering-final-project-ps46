@@ -28,13 +28,33 @@ public class TerritoryCard extends Card {
 	
 	@Override
 	public void collectCard(Game game) {
-		immediateEffects.activateEffect(game);
+		if(immediateEffects != null)
+			immediateEffects.activateEffect(game);
 		game.getCurrentPlayer().getPersonalBoard().putTerritoryCardInPlayerSet(this);
 	}
 	
 	
 	public Dice getHarvestValue() {
 		return harvestValue;
+	}
+	
+	@Override
+	public String toString() {
+		if(getImmediateEffects() != null) {
+			return "Card name: " + getCardName() + "\n" + 
+					"Immediate effect: " + getImmediateEffects() + "\n" +
+					"Permanent effect: " + getPermanentEffects() + "\n" +
+					"Harvest value: " + harvestValue + "\n" +
+					"Cost: -";
+		}
+		else {
+			return "Card name: " + getCardName() + "\n" + 
+					"Immediate effect: -\n" +
+					"Permanent effect: " + getPermanentEffects() + "\n" +
+					"Harvest value: " + harvestValue + "\n" +
+					"Cost: -";
+		}
+	
 	}
 	
 }
