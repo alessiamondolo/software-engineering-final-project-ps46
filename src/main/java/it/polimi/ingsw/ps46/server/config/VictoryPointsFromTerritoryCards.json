@@ -1,0 +1,30 @@
+[
+	{
+		"numberOfCards" : 0,
+		"victoryPoints" : 0
+	},
+	{
+		"numberOfCards" : 1,
+		"victoryPoints" : 0
+	},
+	{
+		"numberOfCards" : 2,
+		"victoryPoints" : 0
+	},
+	{
+		"numberOfCards" : 3,
+		"victoryPoints" : 1
+	},
+	{
+		"numberOfCards" : 4,
+		"victoryPoints" : 4
+	},
+	{
+		"numberOfCards" : 5,
+		"victoryPoints" : 10
+	},
+	{
+		"numberOfCards" : 6,
+		"victoryPoints" : 20
+	}
+]
