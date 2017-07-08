@@ -91,8 +91,8 @@ public class IncreaseResourcesByElementsEffect extends IncreaseResourcesEffect {
 	}
 	
 	public String toString() {
-		return additionalResources.toString() + "\n" +
-				"Type: " + type;
+		return "Gained resources: " + additionalResources.toString() +
+				". Multiply gained resources by number of " + type;
 	}
 
 }

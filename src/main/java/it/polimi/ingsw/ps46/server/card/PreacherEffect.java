@@ -35,7 +35,7 @@ public class PreacherEffect implements Effect, Serializable {
 	
 	//TODO rivedere come stampare l'effetto
 	public String toString() {
-		return "Preacher effect";
+		return "You can't move to the 4th floors of the towers.";
 	}
 	
 }
