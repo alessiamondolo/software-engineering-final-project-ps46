@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import javax.swing.JLabel;
  * @author lorenzo
  *
  */
+
 
 
 public class Token extends JLabel {
@@ -51,25 +53,29 @@ public class Token extends JLabel {
 			
 			case "Red" :
 				if (red_img == null)
-					red_img = getImage("img/token/red_token.png");
+					//red_img = getImage("img/token/red_token.png");
+					red_img = getImagePathMode("token/red_token.png");
 				image = red_img;
 				break;
 			
 			case "Blue" :
 				if (blue_img == null)
-					blue_img = getImage("img/token/blue_token.png");
+					//blue_img = getImage("img/token/blue_token.png");
+					blue_img = getImagePathMode("token/blue_token.png");
 				image = blue_img;
 				break;
 			
 			case "Green" :
 				if (green_img == null)
-					green_img = getImage("img/token/green_token.png");
+					//green_img = getImage("img/token/green_token.png");
+					green_img = getImagePathMode("token/green_token.png");
 				image = green_img;
 				break;
 			
 			case "Yellow" :
 				if (yellow_img == null)
-					yellow_img = getImage("img/token/yellow_token.png");
+					//yellow_img = getImage("img/token/yellow_token.png");
+					yellow_img = getImagePathMode("token/yellow_token.png");
 				image = yellow_img;
 				break;
 			}
@@ -115,18 +121,34 @@ public class Token extends JLabel {
 		return ImageIO.read(getClass().getResource(imagePathName));
 	}
 	
+	public static BufferedImage getImagePathMode (String relativePathName) throws IOException {
+		String imagesPath = "./src/main/java/it/polimi/ingsw/ps46/client/GUI/img/";
+		return ImageIO.read(new File(imagesPath + relativePathName));
+	}
+	
 	
 	private void loadFMImages () throws IOException {
 		
 		String [] tokenColors = { "Red", "Blue", "Yellow" , "Green" };
 		String[] fmTypes = { "Neutral", "Black", "White", "Orange" };
 		
-		if ( hmap.isEmpty()) {
+		/*if ( hmap.isEmpty()) { 
 			for ( String color : tokenColors) {
 				for (String fmType : fmTypes ) {
 					
 					BufferedImage fmBImage;
 					fmBImage = getImage("img/family_member/" +color+ "_" +fmType+ "FM.png");
+					hmap.put(color+ "_" +fmType, fmBImage);
+				}
+			}
+		}*/
+		
+		if ( hmap.isEmpty()) {
+			for ( String color : tokenColors) {
+				for (String fmType : fmTypes ) {
+					
+					BufferedImage fmBImage;
+					fmBImage = getImagePathMode("family_member/" +color+ "_" +fmType+ "FM.png");
 					hmap.put(color+ "_" +fmType, fmBImage);
 				}
 			}

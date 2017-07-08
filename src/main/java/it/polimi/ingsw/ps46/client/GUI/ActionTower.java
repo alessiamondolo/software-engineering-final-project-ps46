@@ -69,7 +69,7 @@ public class ActionTower extends JPanel {
 			cc.removeAll();
 			if (card != null) {
 				cc.add(card);
-				String nomeCarta = card.getCardName();
+				
 			}
 		}
 		repaint();

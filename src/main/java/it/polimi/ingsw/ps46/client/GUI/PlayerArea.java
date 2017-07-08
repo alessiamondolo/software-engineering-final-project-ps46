@@ -97,16 +97,16 @@ public class PlayerArea extends JPanel {
 		double pWidth = playerAreaDimension.getWidth();
 		double pHeight = playerAreaDimension.getHeight();
 		
-	    ImageZoom zoom = new ImageZoom(zoomBox);
-	    JPanel chooseZoomPanel = zoom.getUIPanel();
-	    chooseZoomPanel.setPreferredSize(new Dimension((int) pWidth/16, (int) (pHeight*3)/4));
-	    chooseZoomPanel.setMaximumSize(chooseZoomPanel.getPreferredSize());
-	    this.add(chooseZoomPanel, BorderLayout.WEST);
+	    ZoomBox zoom = new ZoomBox();
+	    //JPanel chooseZoomPanel = zoom.getUIPanel();
+	    //chooseZoomPanel.setPreferredSize(new Dimension((int) pWidth/16, (int) (pHeight*3)/4));
+	   // chooseZoomPanel.setMaximumSize(chooseZoomPanel.getPreferredSize());
+	    this.add(zoom, BorderLayout.WEST);
 	    
-	    zoomBox.setPreferredSize(new Dimension((int) (pWidth*7)/13, (int) (pHeight*5)/6));
-	    zoomBox.setMaximumSize(zoomBox.getPreferredSize());
-	    this.add(zoomBox, BorderLayout.CENTER);
-	    this.add(new JScrollPane(zoomBox));
+	    zoom.setPreferredSize(new Dimension((int) (pWidth*31)/52, (int) (pHeight*5)/6));
+	    //zoom.setMaximumSize(zoom.getPreferredSize());
+	    //this.add(zoomBox, BorderLayout.CENTER);
+	    //this.add(new JScrollPane(zoomBox));
 	}
 	
 	private void createControlArea() {
