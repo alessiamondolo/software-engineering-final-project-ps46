@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -7,16 +8,23 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
-import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
 
 public class CardCell extends Cell<Card> {
 	
 	private static final long serialVersionUID = 5769254098690808463L;
-
+	
+	private static ArrayList<Image> imageList = null;
 	public CardCell() {
-		imageList = new ArrayList<Image> ();
+		
+		super();
+		if (imageList == null) {
+			imageList = new ArrayList<Image> (CardNames.names.length);
+			for (int i = 0; i < CardNames.names.length; i++)
+				imageList.add(null);
+		}
 		this.setEnabled(true);
 	}
 
@@ -26,30 +34,28 @@ public class CardCell extends Cell<Card> {
 	@Override
 	public void update() {
 		
-		repaint();
-		
-		this.removeAll();
-		
-		repaint();
+		this.removeAllCards();
+		for (Card card : itemList) {
+			int index = CardNames.find(card.getCardName());
+			System.out.println("Sto cercando la carta" +card.getCardName()+ " con indice " +index);
+			Image img = imageList.get(index);
+			if (img == null) {
+				img = loadCard(index);
+				
+				imageList.set(index, img);  
+			}
+			
+			//ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(g.getClipBounds().width, g.getClipBounds().height, Image.SCALE_SMOOTH));
+			JLabel l = new JLabel();
+			l.setIcon(new ImageIcon(img.getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+			this.add(l);
+		}
 	}
 	
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		for (Card c : itemList) {
-			int index = CardNames.find(c.getCardName());
-			Image img = imageList.get(index);
-			if (img == null) {
-				img = loadCard(index);
-				imageList.set(index, img);   //ma si può mettere una carta in una pos qualunque di un array?
-			}
-			//ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(g.getClipBounds().width, g.getClipBounds().height, Image.SCALE_SMOOTH));
-			ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-			this.setIcon(imageIcon);
-		}
 	}
-	
-	private static ArrayList<Image> imageList;
 	
 	public Image loadCard(int index) {
 		
@@ -63,13 +69,14 @@ public class CardCell extends Cell<Card> {
 		return img;
 	}
 	
-	@Override
-	public void add(Card card) {
-		itemList.add(card);
-		update();
-		
+	private void removeAllCards() {
+		for (Component c : this.getComponents()) {
+			if (c instanceof JLabel) {
+				this.remove(c);
+			}
+				
+		}
 	}
-	
 }
 
 final class CardNames {
@@ -150,7 +157,7 @@ final class CardNames {
 			"Hiring Recruits",
 			"Repairing the Church",
 			"Building the Walls",
-			"Raising a Statue",
+			"Raising a Staute",
 			"Military Campaign",
 			"Hosting Panhandlers",
 			"Fighting Heresies",

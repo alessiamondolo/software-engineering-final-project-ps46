@@ -1,17 +1,30 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class ZoomBox extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6603525180715466499L;
 	BufferedImage image;
     double scale;
   
@@ -55,8 +68,7 @@ public class ZoomBox extends JPanel {
   
     private void loadImage() {
         
-    	String fileName = "img/gameboard.png";
-        try
+    	try
         {
             URL url = getClass().getResource("img/gameboard.png");
             image = ImageIO.read(url);

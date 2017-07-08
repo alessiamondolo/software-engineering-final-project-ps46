@@ -17,4 +17,8 @@ public class Servants extends Resource {
 		super("Servants", quantity);
 	}
 	
+	public Servants(Servants beforeServants, Servants afterServants){
+		super(beforeServants, afterServants);
+	}
+	
 }

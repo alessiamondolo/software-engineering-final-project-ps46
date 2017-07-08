@@ -38,7 +38,7 @@ public class DiceTest {
 		for(int i = 0; i < 100; i++) {
 			dice.throwDice();
 			assertTrue("Il dado n°"+ i + " ha valore: " + dice.getValue() + ". Risultato del assertTrue: " + setOfValues.contains(dice.getValue()), setOfValues.contains(dice.getValue()));
-			System.out.println("Il dado n°"+ i + " ha valore: " + dice.getValue() + ". Risultato del assertTrue: " + setOfValues.contains(dice.getValue()));
+		//	System.out.println("Il dado n°"+ i + " ha valore: " + dice.getValue() + ". Risultato del assertTrue: " + setOfValues.contains(dice.getValue()));
 		}
 	}
 	

@@ -17,4 +17,7 @@ public class VictoryPoints extends Resource {
 		super("VictoryPoints", quantity);
 	}
 	
+	public VictoryPoints(VictoryPoints beforeVictoryPoints, VictoryPoints afterVictoryPoints){
+		super(beforeVictoryPoints, afterVictoryPoints);
+	}
 }

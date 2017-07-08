@@ -17,12 +17,16 @@ import javax.swing.border.Border;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.GameState;
 
-public class infoArea extends JPanel {
+public class InfoArea extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6958571110111410552L;
 	int width;
 	private ArrayList<JLabel> labels = new ArrayList<JLabel>();
 	
-	public infoArea(Dimension dimension) {
+	public InfoArea(Dimension dimension) {
 		
 		this.setOpaque(true);
 		this.setBackground(new Color(200, 134, 145, 123));

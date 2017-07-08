@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps46.client.GUI;
 
 
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,27 +9,14 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
-import it.polimi.ingsw.ps46.server.EventAcceptor;
-import it.polimi.ingsw.ps46.server.EventMessage;
-import it.polimi.ingsw.ps46.server.EventVisitor;
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.NewStateMessage;
 import it.polimi.ingsw.ps46.server.Player;
-import it.polimi.ingsw.ps46.server.resources.Resource;
-import it.polimi.ingsw.ps46.server.resources.ResourceSet;
-import it.polimi.ingsw.ps46.server.resources.VictoryPoints;
-import it.polimi.ingsw.ps46.server.resources.Wood;
 
 /**
  * MainBoard class displays the board through a top-bottom approach:
@@ -270,24 +256,15 @@ public class MainBoard extends JPanel {
 		
 		this.militaryTower.updateMilitaryPoints(this.game, this.tokenDimension);
 		
+		for (PointCell pc : victoryPointCells) {
+			pc.removeAll();
+		}
+		
 		for (Player player : game.getPlayers()) {
-			
 			int vp = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("VictoryPoints").getQuantity();
-			for (int i = 0; i < victoryPointCells.size(); i++) {
-				PointCell pc = victoryPointCells.get(i);
-				
-				ArrayList<Player> players = pc.getItemList();
-				for ( Player cellPlayer : players) {
-					if ( player.getIdPlayer() == cellPlayer.getIdPlayer()) {
-						pc.remove(cellPlayer);
-					}
-				}
-				
-				if (i == vp) pc.add(player);
-			} 
-			
-		}		
-		centralPiece.updateCentralPiece(game);	
+			victoryPointCells.get(vp).add(player); 
+		}
+		centralPiece.update(game);	
 	}
 
 }

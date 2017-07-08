@@ -37,11 +37,25 @@ public class DecreaseResourcesMalus extends MalusEffect {
 		this.decreasedResources = decreasedResources;
 	}
 	
+	
+	/**
+	 * This constructor is used to do a deep clone of an existing decreaseRescourcesMalus.
+	 * 
+	 * @param decreaseResourcesMalusToBeCloned
+	 */
+	public DecreaseResourcesMalus(DecreaseResourcesMalus decreaseResourcesMalusToBeCloned){
+		String clonedName = decreaseResourcesMalusToBeCloned.getName();
+		ResourceSet clonedResourceSet = new ResourceSet(decreaseResourcesMalusToBeCloned.getDecreasedResources());
+		
+		name = clonedName;
+		decreasedResources = clonedResourceSet;
+	}
+	
 
 	@Override
 	public void activationMalus(Game game){
 		
-		game.getCurrentPlayer().getDecreaseResourcesMalus().add(this);
+		game.getCurrentPlayer().setDecreaseResourcesMalus(this);
 	}
 	
 	/**
@@ -52,4 +66,5 @@ public class DecreaseResourcesMalus extends MalusEffect {
 	public ResourceSet getDecreasedResources() {
 		return decreasedResources;
 	}
+	
 }
