@@ -360,7 +360,6 @@ public class Game extends Observable implements Serializable {
 		if(!card.getDoubleChoice())
 			card.use(this);
 		else {
-			System.out.println("Andrea culo 1\n");
 			newState(new EventEffectChoice(NewStateMessage.EXCHANGE_RESOURCES_CHOICE, card));
 		}
 	}

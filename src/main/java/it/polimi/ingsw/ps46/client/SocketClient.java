@@ -228,9 +228,8 @@ public class SocketClient implements Runnable {
 			}
 			break;
 		case "SHOW_NEXT_TURN_ORDER" :
-			Game game;
 			try {
-				game = (Game) reader.readObject();
+				Game game = (Game) reader.readObject();
 				view.setGame(game);
 				view.showNextTurnOrder();
 			} catch (ClassNotFoundException e) {

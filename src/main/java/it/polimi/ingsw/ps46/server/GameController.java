@@ -131,6 +131,7 @@ public class GameController implements Observer, ViewEventVisitor {
 					}
 				}
 			}
+			turnSetup();
 			
 			if(game.getCurrentRound() == game.getROUNDS_PER_PERIOD())
 				vaticanReport();
@@ -311,11 +312,8 @@ public class GameController implements Observer, ViewEventVisitor {
 			
 			game.setGameState(GameState.ACTION_NOT_VALID);
 			game.setCurrentPlayer(player);
-		}/*
-		if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() > 0) {
-			game.setGameState(GameState.COUNCIL_PRIVILEGE);
-			game.setCurrentPlayer(player);
-		}*/
+		}
+		
 	}
 	
 	
@@ -338,6 +336,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
 			for (int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
 				game.getBoard().getTower(tower).getTowerFloor(floor).setCard(null);
+				game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().setPlayerColor("");
 			}
 		}
 		
