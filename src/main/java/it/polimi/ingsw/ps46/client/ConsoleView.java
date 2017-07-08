@@ -542,7 +542,7 @@ public class ConsoleView implements View {
 	
 	
 	public ArrayList<Integer> getCouncilPrivilege() {
-		int privileges = game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity();
+		int privileges = game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity();
 		ArrayList<Integer> councilPrivileges = new ArrayList<Integer>();
 		output.println("You have " + privileges + " council privileges.");
 		while(privileges > 0) {

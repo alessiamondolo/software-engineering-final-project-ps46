@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps46.server.action.Action;
 import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
-import it.polimi.ingsw.ps46.server.resources.CounsilPrivilege;
+import it.polimi.ingsw.ps46.server.resources.CouncilPrivilege;
 import it.polimi.ingsw.ps46.server.resources.Servants;
 import it.polimi.ingsw.ps46.server.resources.VictoryPoints;
 
@@ -88,8 +88,8 @@ public class GameController implements Observer, ViewEventVisitor {
 		case COUNCIL_PRIVILEGE_CHOICE :
 			int privilege = eventIntInput.getValue();
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(game.getCouncilPrivileges().get(privilege));
-			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(new CounsilPrivilege(1));
-			if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() == 0)
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(new CouncilPrivilege(1));
+			if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity() == 0)
 			break;
 		default:
 			break;
@@ -129,7 +129,7 @@ public class GameController implements Observer, ViewEventVisitor {
 					game.setGameState(GameState.GET_PLAYER_ACTION);
 					game.setCurrentPlayer(player);
 					
-					if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() > 0) {
+					if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity() > 0) {
 						game.setGameState(GameState.COUNCIL_PRIVILEGE);
 						game.setCurrentPlayer(player);
 					}

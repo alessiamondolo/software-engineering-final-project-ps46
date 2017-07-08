@@ -422,7 +422,7 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			writer.flush();
 			writer.writeObject(game);
 			writer.flush();
-			while(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() > 0) {
+			while(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity() > 0) {
 				int choice = (int) reader.readObject();
 				setChanged();
 				notifyObservers(new EventIntInput(choice, InputType.COUNCIL_PRIVILEGE_CHOICE));

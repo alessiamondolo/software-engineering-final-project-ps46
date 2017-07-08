@@ -393,7 +393,7 @@
 			],
 			"gainedResources": [
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 1
 				}
 			]
@@ -1086,7 +1086,7 @@
 					"quantity" : 2
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 1
 				}
 			]

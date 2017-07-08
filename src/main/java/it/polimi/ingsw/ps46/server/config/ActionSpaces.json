@@ -145,7 +145,7 @@
 			"additionalResources": 
 			[
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 2
 				}
 			]
@@ -169,7 +169,7 @@
 					"quantity" : 1
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 1
 				}
 			]

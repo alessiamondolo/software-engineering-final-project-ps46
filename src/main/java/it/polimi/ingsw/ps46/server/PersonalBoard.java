@@ -42,9 +42,7 @@ public class PersonalBoard implements Serializable {
 	
 	public PersonalBoard() {
 		requiredMilitaryPointsForTerritoryCardsMap = new LinkedHashMap<>();
-
 		configRequiredMilitaryPointsForTerritoryCardsMap();
-    	System.out.println(requiredMilitaryPointsForTerritoryCardsMap);
 	}
 	
 	private void configRequiredMilitaryPointsForTerritoryCardsMap(){
