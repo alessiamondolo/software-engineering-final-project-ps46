@@ -124,6 +124,11 @@ public class GameController implements Observer, ViewEventVisitor {
 				for(Player player : game.getPlayers()) {
 					game.setGameState(GameState.GET_PLAYER_ACTION);
 					game.setCurrentPlayer(player);
+					
+					if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() > 0) {
+						game.setGameState(GameState.COUNCIL_PRIVILEGE);
+						game.setCurrentPlayer(player);
+					}
 				}
 			}
 			
@@ -306,11 +311,11 @@ public class GameController implements Observer, ViewEventVisitor {
 			
 			game.setGameState(GameState.ACTION_NOT_VALID);
 			game.setCurrentPlayer(player);
-		}
+		}/*
 		if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() > 0) {
 			game.setGameState(GameState.COUNCIL_PRIVILEGE);
 			game.setCurrentPlayer(player);
-		}
+		}*/
 	}
 	
 	

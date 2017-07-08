@@ -75,14 +75,14 @@ public abstract class Card extends Observable implements Serializable {
 	public String toString() {
 		if(permanentEffects != null) {
 		return "Card name: " + cardName + "\n" + 
-				"Immediate effects: " + immediateEffects + "\n" +
-				"Permanent effects: " + permanentEffects + "\n" +
+				"Immediate effect: " + immediateEffects + "\n" +
+				"Permanent effect: " + permanentEffects + "\n" +
 				"Cost: " + cost;
 		}
 		else
 			return "Card name: " + cardName + "\n" + 
-			"Immediate effects: " + immediateEffects + "\n" +
-			"Permanent effects: - \n" +
+			"Immediate effect: " + immediateEffects + "\n" +
+			"Permanent effect: - \n" +
 			"Cost: " + cost;
 	}
 

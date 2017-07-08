@@ -133,7 +133,6 @@ public class ConsoleView implements View {
 	public void updateRoundInfo() {
 		output.println("==========================================================================");
 		output.println("We are now playing round " + game.getCurrentRound() + " of period " + game.getCurrentPeriod() + ".");
-		output.println("\n");
 	}
 	
 	
@@ -256,6 +255,7 @@ public class ConsoleView implements View {
 		}
 		//END of the setup of the parameters that will be shown in the board
 		
+		output.println("==========================================================================");
 		output.println("THIS IS THE BOARD OF LORENZO IL MAGNIFICO:");
 		output.println(" ________________________________________________________________________ ");
 		output.println("|                                                                        |");
@@ -363,6 +363,7 @@ public class ConsoleView implements View {
 		int cardNumber = 1;
 		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
 			for (int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
+				output.println("__________________________________________________________________________");
 				output.println(cardNumber + ". Tower " + (tower+1) + ", floor " + (floor+1));
 				Card card = game.getBoard().getTower(tower).getTowerFloor(floor).getCard();
 				if(card != null)
