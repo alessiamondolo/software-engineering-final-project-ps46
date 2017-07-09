@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps46.server;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -36,11 +35,11 @@ public class Player implements Serializable {
 	private Map<String, ResourceSet> discount;
 	private Map<String, ResourceSet> optionalDiscount;
 	
-	private boolean preacherEffect = false; 	//TODO Implementare l'effetto nel gioco	
+	private boolean preacherEffect = false;
 
 	private DecreaseResourcesMalus decreaseResourcesMalus; 
-	private ArrayList<DiceMalusEffect> diceMalus;
-	private ArrayList<GenericMalusEffect> genericMalus;
+	private Map<String, DiceMalusEffect> diceMalus;
+	private Map<String, GenericMalusEffect> genericMalus;
 	private DecreaseResourcesAtFinalMalus decreaseAtFinalMalus;
 
 
@@ -63,7 +62,7 @@ public class Player implements Serializable {
 		
 		personalBoard = new PersonalBoard();
 		
-		leaderCards = new LinkedHashMap<String, LeaderCard>();
+		leaderCards = new LinkedHashMap<String, LeaderCard>(); //TODO da assegnare facendogli scegliere che carte tenere
 		
 		int init = 0;
 		Dice initializationDice = new Dice(init);
@@ -80,8 +79,8 @@ public class Player implements Serializable {
 		optionalDiscount = new HashMap<String, ResourceSet>();
 		
 		decreaseResourcesMalus = new DecreaseResourcesMalus();
-		diceMalus = new ArrayList<DiceMalusEffect>();
-		genericMalus = new ArrayList<GenericMalusEffect>();
+		diceMalus = new HashMap<String, DiceMalusEffect>();
+		genericMalus = new HashMap<String, GenericMalusEffect>();
 		decreaseAtFinalMalus = new DecreaseResourcesAtFinalMalus();
 		
 		
@@ -238,7 +237,7 @@ public class Player implements Serializable {
 
 	//PREACHER - GETTER AND SETTER//
 	///////////////////////////////
-	public boolean isPreacherEffect() {
+	public boolean isPreacherEffectActive() {
 		return preacherEffect;
 	}
 
@@ -275,7 +274,7 @@ public class Player implements Serializable {
 	//DICE MALUS - GETTER//
 	//////////////////////
 
-	public ArrayList<DiceMalusEffect> getDiceMalus() {
+	public Map<String, DiceMalusEffect> getDiceMalus() {
 		return diceMalus;
 	}
 
@@ -283,7 +282,7 @@ public class Player implements Serializable {
 	//GENERIC MALUS - GETTER//
 	/////////////////////////
 	
-	public ArrayList<GenericMalusEffect> getGenericMalus() {
+	public Map<String ,GenericMalusEffect> getGenericMalus() {
 		return genericMalus;
 	}
 

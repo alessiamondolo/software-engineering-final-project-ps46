@@ -23,6 +23,7 @@ import it.polimi.ingsw.ps46.server.card.CharacterCard;
 import it.polimi.ingsw.ps46.server.card.FactoryCards;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
+import it.polimi.ingsw.ps46.server.resources.FaithPoints;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 import it.polimi.ingsw.ps46.server.resources.VictoryPoints;
 import it.polimi.ingsw.ps46.utils.MyJSONParser;
@@ -42,8 +43,7 @@ public class Game extends Observable implements Serializable {
 	private final int PHASES_PER_ROUND = 4;
 	private int currentRound = 0;
 	private int currentPeriod = 1;
-	private int currentPhase = 0;
-	
+	private int currentPhase = 0;	
 	
 	private int numberPlayers; 
 	private ArrayList<Player> players;
@@ -62,7 +62,10 @@ public class Game extends Observable implements Serializable {
 	private LinkedHashMap<Integer, VictoryPoints> victoryPointsFromTerritoryCards = new LinkedHashMap<Integer, VictoryPoints>();
 	private LinkedHashMap<Integer, VictoryPoints> victoryPointsFromCharacterCards = new LinkedHashMap<Integer, VictoryPoints>();
 	private Map<Integer, VictoryPoints> finalScores;
-	
+	private LinkedHashMap<Integer, VictoryPoints> vaticanReportVictoryPoints;
+	private ArrayList <FaithPoints> faithPointsRequiredForPeriod;
+	private ArrayList <VictoryPoints> victoryPointsForMilitaryPoints;
+
 	private GameState gameState;
 	private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/config/";
 	
@@ -81,7 +84,10 @@ public class Game extends Observable implements Serializable {
 		configBonusTiles();
 		configCouncilPrivileges();
 		configFinalPoints();
-		
+		configVaticanReportVictoryPoints();
+		configFaithPointsRequiredForPeriod();
+		configVictoryPointsForMilitaryPoints();
+
 		finalScores = new LinkedHashMap<Integer, VictoryPoints>();
 	}
 
@@ -214,6 +220,42 @@ public class Game extends Observable implements Serializable {
 	    }
 		
 	}
+	
+	
+	//TODO da file
+	public void configVaticanReportVictoryPoints() {
+		vaticanReportVictoryPoints = new LinkedHashMap<>();
+		vaticanReportVictoryPoints.put(0, new VictoryPoints(0));
+		vaticanReportVictoryPoints.put(1, new VictoryPoints(1));
+		vaticanReportVictoryPoints.put(2, new VictoryPoints(2));
+		vaticanReportVictoryPoints.put(3, new VictoryPoints(3));
+		vaticanReportVictoryPoints.put(4, new VictoryPoints(4));
+		vaticanReportVictoryPoints.put(5, new VictoryPoints(5));
+		vaticanReportVictoryPoints.put(6, new VictoryPoints(7));
+		vaticanReportVictoryPoints.put(7, new VictoryPoints(9));
+		vaticanReportVictoryPoints.put(8, new VictoryPoints(11));
+		vaticanReportVictoryPoints.put(9, new VictoryPoints(13));
+		vaticanReportVictoryPoints.put(10, new VictoryPoints(15));
+		vaticanReportVictoryPoints.put(11, new VictoryPoints(17));
+	}
+	
+	
+	//TODO da file
+		public void configFaithPointsRequiredForPeriod() {
+			faithPointsRequiredForPeriod = new ArrayList<FaithPoints>();
+
+			faithPointsRequiredForPeriod.add( new FaithPoints(3));
+			faithPointsRequiredForPeriod.add( new FaithPoints(4));
+			faithPointsRequiredForPeriod.add( new FaithPoints(5));
+		}
+		
+	//TODO da file
+		public void configVictoryPointsForMilitaryPoints() {
+			victoryPointsForMilitaryPoints = new ArrayList<VictoryPoints>();
+
+			victoryPointsForMilitaryPoints.add( new VictoryPoints(5));
+			victoryPointsForMilitaryPoints.add( new VictoryPoints(3));
+		}
 //--------------------------------------------------//
 //-----------END OF CONFIGURATION METHODS-----------//
 //--------------------------------------------------//
@@ -426,6 +468,19 @@ public class Game extends Observable implements Serializable {
 
 	public void setCouncilPrivileges(ArrayList<ResourceSet> councilPrivileges) {
 		this.councilPrivileges = councilPrivileges;
+	}
+
+	public Map<Integer, VictoryPoints> getVaticanReportVictoryPoints() {
+		return vaticanReportVictoryPoints;
+	}
+	
+	
+	public ArrayList<FaithPoints> getFaithPointsRequiredForPeriod() {
+		return faithPointsRequiredForPeriod;
+	}
+
+	public ArrayList <VictoryPoints> getVictoryPointsForMilitaryPoints() {
+		return victoryPointsForMilitaryPoints;
 	}
 
 }

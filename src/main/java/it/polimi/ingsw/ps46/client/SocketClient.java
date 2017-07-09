@@ -106,6 +106,7 @@ public class SocketClient implements Runnable {
 	 * @param message : the message that needs to be interpreted.
 	 */
 	public void interpreter(String message) {
+		System.out.println("[Message: " + message + "]");
 		switch(message) {
 		case "STORE_YOUR_ID" :
 			try {
@@ -153,10 +154,7 @@ public class SocketClient implements Runnable {
 			break;
 		case "GET_BONUS_TILE" :
 			try {
-				view.setGame((Game) reader.readObject());
 				writer.writeObject((int) view.getBonusTile());
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -225,8 +223,7 @@ public class SocketClient implements Runnable {
 			break;
 		case "GET_COUNCIL_PRIVILEGE" :
 			try {
-				Game game = (Game) reader.readObject();
-				view.setGame(game);
+				view.setGame((Game) reader.readObject());
 				for(Integer privilege : view.getCouncilPrivilege()) {
 					writer.writeObject(privilege.intValue());
 					writer.flush();
@@ -239,14 +236,20 @@ public class SocketClient implements Runnable {
 			break;
 		case "SHOW_NEXT_TURN_ORDER" :
 			try {
-				Game game = (Game) reader.readObject();
-				view.setGame(game);
+				view.setGame((Game) reader.readObject());
 				view.showNextTurnOrder();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
+			break;
+		case "GET_VATICAN_SUPPORT" :
+			try {
+				writer.writeObject((int) view.getVaticanSupport());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			break;
 		case "END_GAME" :
 			listening = false;

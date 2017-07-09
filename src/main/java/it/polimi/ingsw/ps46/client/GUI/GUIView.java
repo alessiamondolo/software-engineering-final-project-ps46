@@ -458,6 +458,12 @@ public class GUIView implements View {
 		return 0;
 	}
 
+	@Override
+	public int getVaticanSupport() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 	
 }
