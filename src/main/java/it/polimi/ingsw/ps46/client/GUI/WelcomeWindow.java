@@ -40,7 +40,7 @@ public class WelcomeWindow extends JFrame {
 	private String playerColor;
 	private String gameMode;
 	JLabel waitLabel;
-	
+
 	
 	
 	private static final long serialVersionUID = 471361046696464958L;
@@ -69,78 +69,15 @@ public class WelcomeWindow extends JFrame {
 		ImageIcon imageIcon = new ImageIcon(img);
 		imageLabel.setIcon(imageIcon);	
 		panel.add(imageLabel, BorderLayout.NORTH);
-		panel.add(okButton, BorderLayout.SOUTH);		
-		
-/*	ArrayList<String> colors = new ArrayList<String>();
-		colors.add("White");
-		colors.add("Blue");
-		this.setPlayerUsername();
-		this.setColors(colors);
-		this.setVisible(true);*/
+		//this.setPlayerUsername();
+		//this.setColors(colors);
+		this.setVisible(true);
 	}
 	
 	
 
 	private JLabel mode = null;
 	private ButtonGroup modeButtonGroup;
-	
-	public void setGameMode() {
-		
-
-		if (mode == null) {
-			mode = new JLabel("Choose game mode:");
-			gameModePanel.add(mode);
-		}
-		
-		modeButtonGroup = new ButtonGroup();
-	
-		WelcomeWindow window = this;
-		
-		okButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Object mon;
-				synchronized (mon = GUIView.getMonitor()) {
-					GUIView.setGameMode(window.gameMode);
-					gameModePanel.remove(mode);
-					panel2.remove(gameModePanel);
-					panel.remove(okButton);
-					mon.notifyAll();
-				}
-			}
-			
-		});
-		
-		
-			JRadioButton button = new JRadioButton("Basic Mode");
-			modeButtonGroup.add(button);
-			
-			JRadioButton button2 = new JRadioButton("Advanced Mode");
-			modeButtonGroup.add(button2);
-
-			button.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					window.gameMode = "BASIC_GAME_MODE";
-				}
-			});
-			
-			button2.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					window.gameMode = "ADVANCED_GAME_MODE";
-				}
-			});
-			
-			gameModePanel.add(button);
-			gameModePanel.add(button2);
-		
-		panel2.add(gameModePanel);
-		panel.add(panel2, BorderLayout.CENTER);
-		
-		
-	}
 	
 	public void setPlayerUsername() {
 		
@@ -154,8 +91,8 @@ public class WelcomeWindow extends JFrame {
 		
 		panel.add(panel2, BorderLayout.CENTER);
 		WelcomeWindow window = this;
-		
-		
+		this.pack();
+		this.setVisible(true);
 		
 		okButton.addActionListener(new ActionListener() {
 
@@ -164,6 +101,7 @@ public class WelcomeWindow extends JFrame {
 				Object mon;
 				synchronized (mon = GUIView.getMonitor()) {
 					window.playerUsername = userText.getText();
+					System.out.println(playerUsername);
 					GUIView.setUsername(window.playerUsername);
 					panel2.remove(userLabel);
 					panel2.remove(userText);
@@ -171,11 +109,13 @@ public class WelcomeWindow extends JFrame {
 					waitLabel = new JLabel("Wait for other players' color choices...");
 					
 					panel2.setLayout(new FlowLayout(FlowLayout.CENTER, 60, 10));
+				
 					panel2.add(waitLabel);
-		
+					
 					repaint();
 					
 					mon.notifyAll();
+					
 				}
 			}
 			
@@ -192,9 +132,11 @@ public class WelcomeWindow extends JFrame {
 		JPanel orderPanel = new JPanel();
 		orderPanel.setLayout(new BorderLayout());
 		
+		
 		JLabel label = new JLabel("Initial Game order:");
 		label.setFont(new Font("Arial", Font.BOLD, 14));
 		orderPanel.add(label, BorderLayout.PAGE_START);
+		panel2.setLayout(new BorderLayout());
 		
 		int position = 1;
 		JPanel players = new JPanel();
@@ -204,7 +146,9 @@ public class WelcomeWindow extends JFrame {
 			players.add(labelPlayer);
 		}
 		orderPanel.add(players, BorderLayout.CENTER);
-		panel2.add(orderPanel);
+		panel2.add(orderPanel, BorderLayout.NORTH);
+		this.pack();
+		this.setVisible(true);
 	}
 	
 	private JPanel panel3 = new JPanel();
@@ -218,7 +162,7 @@ public class WelcomeWindow extends JFrame {
 	
 	public void setColors(ArrayList<String> colors) {
 		
-		panel2.remove(waitLabel);
+		
 		if (colorLabel == null) {
 			colorLabel = new JLabel("Choose your color:");
 			panel3.add(colorLabel);
@@ -261,8 +205,10 @@ public class WelcomeWindow extends JFrame {
 			panel3.add(button);
 		}
 		
-		panel2.add(panel3);
+		panel2.add(panel3, BorderLayout.SOUTH);
 		panel.add(panel2, BorderLayout.CENTER);
+		this.pack();
+		this.setVisible(true);
 		
 	}
 	

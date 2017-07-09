@@ -80,7 +80,7 @@ public class Game extends Observable implements Serializable {
 		configBonusTiles();
 		configCouncilPrivileges();
 		configFinalPoints();
-		
+
 		finalScores = new LinkedHashMap<Integer, VictoryPoints>();
 	}
 

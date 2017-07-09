@@ -39,7 +39,8 @@ public class GenericMalusEffect extends MalusEffect{
 	@Override
 	public void activationMalus(Game game){
 		
-		game.getCurrentPlayer().getGenericMalus().add(this);
+		game.getCurrentPlayer().getGenericMalus().put(name, this);
+
 	}
 	
 	

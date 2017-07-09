@@ -43,7 +43,7 @@ public class DecreaseResourcesAtFinalMalus extends DecreaseResourcesMalus{
 	 * Getter of the class DecreaseResourcesAtFinalMalus. return a String.
 	 * @return from
 	 */
-	public String getType() {
+	public String getFrom() {
 		return from;
 	}
 	

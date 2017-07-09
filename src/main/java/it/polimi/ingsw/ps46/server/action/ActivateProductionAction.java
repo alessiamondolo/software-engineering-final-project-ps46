@@ -6,7 +6,6 @@ import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
-import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
@@ -114,14 +113,14 @@ public class ActivateProductionAction implements Action {
 		temporaryDice.subDice( penality );
 		temporaryDice.sumDice( game.getCurrentPlayer().getBonusMap().get( "ProductionAction" ));
 		
-	
-		if( !game.getCurrentPlayer().getDiceMalus().isEmpty() )
-			for( DiceMalusEffect diceMalusEffect : game.getCurrentPlayer().getDiceMalus() ){
+		if( !game.getCurrentPlayer().getDiceMalus().isEmpty()){
+			for( String string : game.getCurrentPlayer().getDiceMalus().keySet() ){
 				
-				if ( diceMalusEffect.getType() == "ProductionAction" ){
-					temporaryDice.subDice( diceMalusEffect.getMalus() );	
+				if ( game.getCurrentPlayer().getDiceMalus().get(string).getType() == "ProductionAction" ){
+					temporaryDice.subDice( game.getCurrentPlayer().getDiceMalus().get(string).getMalus() );	
 				}
 			}
+		}
 		
 		if(!temporaryDice.greaterOrEqual(game.getCurrentPlayer().getPersonalBoard().getBonusTile().getProductionValue())){
 			return false;

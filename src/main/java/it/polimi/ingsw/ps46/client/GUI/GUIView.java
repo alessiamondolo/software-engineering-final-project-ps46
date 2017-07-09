@@ -136,7 +136,7 @@ public class GUIView implements View {
 	}
 	
 	
-	private volatile static String gameMode;
+/*	private volatile static String gameMode;
 	protected static void setGameMode(String mode) {
 		GUIView.gameMode = mode;
 	}
@@ -163,7 +163,7 @@ public class GUIView implements View {
 			}
 		}	
 		return GUIView.gameMode;
-	}
+	}*/
 	
 	
 	@Override  //eseguita appena dopo aver inserito username 
@@ -172,11 +172,6 @@ public class GUIView implements View {
 		if (!(welcomeWindow instanceof WelcomeWindow))
 			return;
 		welcomeWindow.showInitialOrder(this.game);
-		System.out.println("ho appena invocato la showorder");
-		welcomeWindow.pack();
-		welcomeWindow.setLocationRelativeTo(null);
-		welcomeWindow.setVisible(true);
-		welcomeWindow.repaint();
 	}
 	
 	@Override
@@ -199,13 +194,12 @@ public class GUIView implements View {
 		
 		if (!(welcomeWindow instanceof WelcomeWindow))
 			return "";
-	
-		welcomeWindow.setPlayerUsername();
-		welcomeWindow.pack();
-		welcomeWindow.setLocationRelativeTo(null);
-		welcomeWindow.setVisible(true);
 		
-		GUIView.setColor(null);
+		System.out.println("sto chiedendo nome");
+
+		welcomeWindow.setPlayerUsername();
+		
+		GUIView.setUsername(null);
 		synchronized (monitor) {
 			while (username == null) {
 				try {
@@ -218,6 +212,7 @@ public class GUIView implements View {
 		}	
 		System.out.println(GUIView.username);
 		this.playerUsername = GUIView.username;
+		
 		return GUIView.username;
 	}
 	
@@ -232,12 +227,8 @@ public class GUIView implements View {
 		if (!(welcomeWindow instanceof WelcomeWindow))
 			return "";
 		
-		
+		System.out.println("Sto chiedendo colore");
 		welcomeWindow.setColors(colors);
-		welcomeWindow.pack();
-		welcomeWindow.setLocationRelativeTo(null);
-		welcomeWindow.setVisible(true);
-		welcomeWindow.repaint();
 		
 		GUIView.setColor(null);
 		
@@ -326,10 +317,8 @@ public class GUIView implements View {
 		return GUIView.familyMember;
 	}
 
-//	private volatile static int servants = -1;
-//	protected static void setServants(int servants) {
-//		GUIView.servants = servants;
-//	}
+
+
 	@Override
 	public int getServants() {
 		
@@ -342,11 +331,12 @@ public class GUIView implements View {
 				);
 		    
 			if (answ == null)
-				return 0;
+				return getServants();
 			
 			answ = answ.trim();
 			if (answ == "")
 				return 0;
+			
 			
 			try {
 				

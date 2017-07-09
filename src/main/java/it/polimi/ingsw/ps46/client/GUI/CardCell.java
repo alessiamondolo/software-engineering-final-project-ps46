@@ -3,12 +3,18 @@ package it.polimi.ingsw.ps46.client.GUI;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
+
+import org.json.simple.ItemList;
 
 import it.polimi.ingsw.ps46.server.card.Card;
 
@@ -16,16 +22,18 @@ public class CardCell extends Cell<Card> {
 	
 	private static final long serialVersionUID = 5769254098690808463L;
 	
-	private static ArrayList<Image> imageList = null;
+	static ArrayList<BufferedImage> imageList = null;
 	public CardCell() {
 		
 		super();
 		if (imageList == null) {
-			imageList = new ArrayList<Image> (CardNames.names.length);
+			imageList = new ArrayList<BufferedImage> (CardNames.names.length);
 			for (int i = 0; i < CardNames.names.length; i++)
 				imageList.add(null);
 		}
 		this.setEnabled(true);
+		CardListener listener = new CardListener(itemList);
+		this.addActionListener(listener);
 	}
 
 	/**
@@ -38,14 +46,14 @@ public class CardCell extends Cell<Card> {
 		for (Card card : itemList) {
 			int index = CardNames.find(card.getCardName());
 			System.out.println("Sto cercando la carta" +card.getCardName()+ " con indice " +index);
-			Image img = imageList.get(index);
+			BufferedImage img = imageList.get(index);
 			if (img == null) {
 				img = loadCard(index);
 				
 				imageList.set(index, img);  
 			}
 			
-			//ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(g.getClipBounds().width, g.getClipBounds().height, Image.SCALE_SMOOTH));
+			// TODO ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(g.getClipBounds().width, g.getClipBounds().height, Image.SCALE_SMOOTH));
 			JLabel l = new JLabel();
 			l.setIcon(new ImageIcon(img.getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
 			this.add(l);
@@ -57,12 +65,14 @@ public class CardCell extends Cell<Card> {
 		super.paint(g);
 	}
 	
-	public Image loadCard(int index) {
+	public BufferedImage loadCard(int index) {
 		
-		String path = "img/cards/devcards_f_en_c_" + index + ".png";
-		Image img = null;
+		//String path = "img/cards/devcards_f_en_c_" + index + ".png";
+		String path = "cards/devcards_f_en_c_" + index + ".png";
+		BufferedImage img = null;
 		try {
-			img = ImageIO.read(getClass().getResource(path));
+			img = Token.getImagePathMode(path);
+			//img = ImageIO.read(getClass().getResource(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -77,6 +87,8 @@ public class CardCell extends Cell<Card> {
 				
 		}
 	}
+
+
 }
 
 final class CardNames {
@@ -137,7 +149,7 @@ final class CardNames {
 			"Farmer",
 			"Artisan",
 			"Preacher",
-			"Abbess",
+			"Abess",
 			"Captain",
 			"Architect",
 			"Patron",
@@ -187,4 +199,26 @@ final class CardNames {
 		}
 		return -1;
 	}
+}
+
+
+	class CardListener implements ActionListener {
+		
+		ArrayList<Card> itemList;
+		
+		public CardListener(ArrayList<Card> itemList) {
+			this.itemList = itemList;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if (itemList.isEmpty() == false) {
+				int index = CardNames.find(itemList.get(0).getCardName());
+				BufferedImage img = CardCell.imageList.get(index);
+				ZoomBox.setImage(img);
+			}
+
+		}
+	
 }

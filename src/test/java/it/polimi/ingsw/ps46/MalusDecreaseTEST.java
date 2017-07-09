@@ -1,9 +1,11 @@
 package it.polimi.ingsw.ps46;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.ExchageResourcesEffect;
@@ -294,6 +296,21 @@ public class MalusDecreaseTEST {
 		"____________________________________________________________________________________________________________________");
 		*/
 		
+		ArrayList<Integer> playerOrderForVictoryPoints = new ArrayList<>(4);
+		
+			playerOrderForVictoryPoints.add(12);
+			playerOrderForVictoryPoints.add(7);
+			playerOrderForVictoryPoints.add(50);
+			playerOrderForVictoryPoints.add(1);
+			
+			System.out.println("PRIMA: " + playerOrderForVictoryPoints.toString());
+
+			Collections.sort(playerOrderForVictoryPoints);
+			
+			System.out.println("DOPO: " + playerOrderForVictoryPoints.toString());
+			
+			
+		/*
 		
 		System.out.println("//--------------------------------------------------//");
 		System.out.println("//----------------TESTING SANTA RITA----------------//");
@@ -358,7 +375,21 @@ public class MalusDecreaseTEST {
 			System.out.println("\n" + "STAMPO: ||playerResourceSet|| FINALE" );
 			System.out.println( game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString() + "\n" + 
 			"____________________________________________________________________________________________________________________");
-		}		
+		}	
+		
+		int primo = 1;
+		int resto = 0;
+		
+		System.out.println("primo:" + primo);
+		primo /= 2;
+		System.out.println("primo:" + primo);
+		resto = primo % 2;
+		System.out.println("resto:" + resto);
+		primo*= 2;
+		System.out.println("moltiplicando:" + primo);
+	*/
+
+		
 	}
 	
 	

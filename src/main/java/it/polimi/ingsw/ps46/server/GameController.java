@@ -297,6 +297,10 @@ public class GameController implements Observer, ViewEventVisitor {
 		
 		FamilyMember familyMember = game.getCurrentPlayer().getFamilyMember(familyMemberName);
 		
+		//activation of Ludovico il Moro's effect, setting every colored familyMembers (not already used) to the new DiceValue of 5
+		if((game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico il Moro") && (game.getCurrentPlayer().getLeaderCards().get("Ludovico il Moro").isActive())))
+			player.getLeaderCards().get("Ludovico il Moro").getLeaderEffect().activateEffect(game);
+		
 		ActionSpace actionSpace = null;
 		if(actionSpaceID <= (game.getBoard().getNumberOfTowers() * game.getBoard().getTower(0).getNumberOfFloors())) {
 			int tower = (actionSpaceID - 1) / game.getBoard().getNumberOfTowers();
@@ -311,10 +315,59 @@ public class GameController implements Observer, ViewEventVisitor {
 				}
 			}
 		}	
+		//save the value of the familyMember before all the changes
 		int familyMemberValue = familyMember.getValueFamilyMember().getValue();
-		//increases the value of the family member with the servants
+		
+		//increases the value of the family member with the servants 
+		//check if the specific malus is activated when  the family member value with servants. If it is it costs double.
+		if(!player.getGenericMalus().isEmpty()) {
+			if( player.getGenericMalus().containsKey("doubleServantsCost") ) 
+				servants /= 2;
+		}
 		familyMember.setValueOfFamilyMember(new Dice(familyMemberValue+servants));
-		player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").sub(new Servants(servants));
+		player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").sub(new Servants(servants*2));
+		
+		//check excommunication malus that give -4 on the familyMember Value if you want to collect a type of card
+		if(actionSpace.getType() == "Tower") {
+			if(!player.getDiceMalus().isEmpty()) {
+				if( player.getDiceMalus().containsKey("DiceMalusEffectForCards") ) {
+					for (String string : player.getDiceMalus().keySet() ) {
+						//check if the specific malus is activated on "this type of card" and if the player wants to meve into the same type of tower
+						if( (player.getDiceMalus().get(string).getType() == "TerritoryCards") && (game.getBoard().getColorOfTower(actionSpace.getId()) == "green")) {
+							if( familyMember.getValueFamilyMember().greaterOrEqual(player.getDiceMalus().get(string).getMalus())) {
+								familyMember.getValueFamilyMember().subDice(player.getDiceMalus().get(string).getMalus());
+							}
+							else
+								familyMember.setValueOfFamilyMember(new Dice(0));
+						}
+						
+						else if( player.getDiceMalus().get(string).getType() == "BuildingCards" && (game.getBoard().getColorOfTower(actionSpace.getId()) == "yellow")) {
+							if( familyMember.getValueFamilyMember().greaterOrEqual(player.getDiceMalus().get(string).getMalus())) {
+								familyMember.getValueFamilyMember().subDice(player.getDiceMalus().get(string).getMalus());
+							}
+							else
+								familyMember.setValueOfFamilyMember(new Dice(0));
+						}
+						
+						else if( player.getDiceMalus().get(string).getType() == "VentureCards" && (game.getBoard().getColorOfTower(actionSpace.getId()) == "purple")) {
+							if( familyMember.getValueFamilyMember().greaterOrEqual(player.getDiceMalus().get(string).getMalus())) {
+								familyMember.getValueFamilyMember().subDice(player.getDiceMalus().get(string).getMalus());
+							}
+							else
+								familyMember.setValueOfFamilyMember(new Dice(0));
+						}
+						
+						else if( player.getDiceMalus().get(string).getType() == "CharacterCards" && (game.getBoard().getColorOfTower(actionSpace.getId()) == "blue")) {
+							if( familyMember.getValueFamilyMember().greaterOrEqual(player.getDiceMalus().get(string).getMalus())) {
+								familyMember.getValueFamilyMember().subDice(player.getDiceMalus().get(string).getMalus());
+							}
+							else
+								familyMember.setValueOfFamilyMember(new Dice(0));
+						}
+					}
+				}
+			}
+		}
 		 
 		Action action = new MoveToActionSpaceAction(game, player, familyMember, actionSpace);
 		boolean executed = action.execute();
@@ -376,13 +429,53 @@ public class GameController implements Observer, ViewEventVisitor {
 	private void finalScores() {
 		Map<Integer, VictoryPoints> finalScores = game.getFinalScores();
 		for(Player player : game.getPlayers()) {
+			
+			//Get Victory points earned by the player during the game
+			VictoryPoints victoryPoints = new VictoryPoints(player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("VictoryPoints").getQuantity());
+			
+			//check if there are some malus effect of the type "loseOneVictoryPointEveryXResource" from victory points 
+			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom() == "VictoryPoints")) {
+				int temporaryvalue = victoryPoints.getQuantity();
+				temporaryvalue /= player.getDecreaseAtFinalMalus().getDecreasedResources().getResourcesMap().get("VictoryPoints").getQuantity();
+				victoryPoints.sub(new VictoryPoints(temporaryvalue));
+				}
+			
 			//Add final victory points from venture cards
-			for(Card card : player.getPersonalBoard().getVentureDeck()) {
-				card.use(game);
+			//check if there are some malus effect of the type "notCountingVictoryPointsFromCards"
+			if(player.getGenericMalus().isEmpty() || (!(player.getGenericMalus().isEmpty()) && !(player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards"))) 
+					|| (!(player.getGenericMalus().isEmpty()) && (player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards")) && 
+						(player.getGenericMalus().get("notCountingVictoryPointsFromCards").getType() != "VentureCards"))) {
+				
+					for(Card card : player.getPersonalBoard().getVentureDeck()) {
+						card.use(game);
+					}
 			}
 			
-			//Get points from victory points
-			VictoryPoints victoryPoints = new VictoryPoints(player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("VictoryPoints").getQuantity());
+			//Add final victory points from territory cards
+			//check if there are some malus effect of the type "notCountingVictoryPointsFromCards"
+			if(player.getGenericMalus().isEmpty() || (!(player.getGenericMalus().isEmpty()) && !(player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards"))) 
+					|| (!(player.getGenericMalus().isEmpty()) && (player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards")) && 
+						(player.getGenericMalus().get("notCountingVictoryPointsFromCards").getType() != "TerritoryCards")))
+				victoryPoints.add(game.getVictoryPointsFromTerritoryCards().get(player.getPersonalBoard().getTerritoryDeck().size()));
+			
+			//Add final victory points from character cards
+			//check if there are some malus effect of the type "notCountingVictoryPointsFromCards"
+			if(player.getGenericMalus().isEmpty() || (!(player.getGenericMalus().isEmpty()) && !(player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards"))) 
+					|| (!(player.getGenericMalus().isEmpty()) && (player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards")) && 
+							(player.getGenericMalus().get("notCountingVictoryPointsFromCards").getType() != "CharacterCards")))
+				victoryPoints.add(game.getVictoryPointsFromCharacterCards().get(player.getPersonalBoard().getCharacterDeck().size()));
+			
+			//TODO da completare
+			//Add final victory points from Military points based on the final placement for military points
+			/*ArrayList<Integer> playerOrderForVictoryPoints = new ArrayList<>(game.getNumberPlayers());
+			for (Player playerFor : game.getPlayers()) {
+				playerOrderForVictoryPoints.add(playerFor.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints").getQuantity());
+			}
+			Collections.sort(playerOrderForVictoryPoints); 
+			*/
+			
+			
+			
 			
 			//Add final victory points from number of resources
 			int resources = 0;
@@ -392,9 +485,32 @@ public class GameController implements Observer, ViewEventVisitor {
 			resources += player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").getQuantity();
 			victoryPoints.add(new VictoryPoints(resources/5));
 			
-			//Add final victory points from cards
-			victoryPoints.add(game.getVictoryPointsFromTerritoryCards().get(player.getPersonalBoard().getTerritoryDeck().size()));
-			victoryPoints.add(game.getVictoryPointsFromCharacterCards().get(player.getPersonalBoard().getCharacterDeck().size()));
+			//check if there are some malus effect of the type "loseOneVictoryPointEveryXResource" from playerResourceSet (wood,stones,servants,money)
+			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom() == "PlayerResourceSet"))
+				victoryPoints.sub(new VictoryPoints(resources));
+			
+			
+			//check if there are some malus effect of the type "loseOneVictoryPointEveryXResource" from military points
+			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom() == "MilitaryPoints")) {
+				int temporaryvalue = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints").getQuantity();
+				temporaryvalue *= player.getDecreaseAtFinalMalus().getDecreasedResources().getResourcesMap().get("MilitaryPoints").getQuantity();
+
+				victoryPoints.sub(new VictoryPoints(temporaryvalue));
+			}
+			
+					
+			//check if there are some malus effect of the type "loseOneVictoryPointEveryXResource" from building card cost (wood, stones)
+			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom() == "BuildingCards")) {
+				int woodstonesCost = 0;
+				if(!(player.getPersonalBoard().getBuildingDeck().isEmpty())){
+					for (BuildingCard buildingCard : player.getPersonalBoard().getBuildingDeck()) {
+						woodstonesCost += buildingCard.getCost().getResourcesMap().get("Wood").getQuantity();
+						woodstonesCost += buildingCard.getCost().getResourcesMap().get("Stones").getQuantity();
+					}
+				}
+				victoryPoints.sub(new VictoryPoints(woodstonesCost));
+			}
+			
 			
 			finalScores.put(new Integer(player.getIdPlayer()), victoryPoints);
 		}

@@ -1,9 +1,16 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.io.IOException;
+
+import javax.swing.SwingConstants;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.GroupLayout.Alignment;
 
 import it.polimi.ingsw.ps46.server.Player;
 
@@ -60,9 +67,9 @@ public class PointCell extends Cell<Player> {
 				e.printStackTrace();
 				System.out.println("Token non generato causa I/0");
 			}
-			t.setPreferredSize(computeTokenSize());
+			t.setPreferredSize(FMComputeTokenSize());
+			this.setLayout(new GridBagLayout());
 			this.add(t);
-			
 			
 		}
 		repaint();
@@ -83,7 +90,7 @@ public class PointCell extends Cell<Player> {
 	}
 	
 	
-	//probabilmente questo metodo non serve piu
+	
 	private Dimension computeTokenSize() {
 		
 		double width = this.getPreferredSize().getWidth()/4;
@@ -95,13 +102,20 @@ public class PointCell extends Cell<Player> {
 				
 	}
 	
+	private Dimension FMComputeTokenSize() {
+		
+		double width = this.getPreferredSize().getWidth()*3/4;
+
+		return new Dimension((int) width, (int) width);
+	}
+	
 	public void paint(Graphics g) {
 		super.paint(g);
 		for (Component c : getComponents()) {
 			if (c instanceof Token) {
 				
 				Dimension dimension = new Dimension((int) g.getClipBounds().getWidth(), (int) g.getClipBounds().getHeight());
-				c.setPreferredSize(computeTokenSize(dimension)); 
+				//c.setPreferredSize(computeTokenSize(dimension)); 
 			}
 			
 		repaint();
