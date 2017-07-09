@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps46.server;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -11,6 +13,8 @@ import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.resources.CouncilPrivilege;
+import it.polimi.ingsw.ps46.server.resources.FaithPoints;
+import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.Servants;
 import it.polimi.ingsw.ps46.server.resources.VictoryPoints;
 
@@ -91,6 +95,9 @@ public class GameController implements Observer, ViewEventVisitor {
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(new CouncilPrivilege(1));
 			if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity() == 0)
 			break;
+		case VATICAN_SUPPORT_CHOICE :
+			vaticanReport(eventIntInput.getValue());
+			break;
 		default:
 			break;
 		}
@@ -137,8 +144,12 @@ public class GameController implements Observer, ViewEventVisitor {
 			}
 			turnSetup();
 			
-			if(game.getCurrentRound() == game.getROUNDS_PER_PERIOD())
-				vaticanReport();
+			if(game.getCurrentRound() == game.getROUNDS_PER_PERIOD()) {
+				for(Player player : game.getPlayers()) {
+					game.setGameState(GameState.VATICAN_REPORT);
+					game.setCurrentPlayer(player);
+				}
+			}
 			endRound();
 		}
 		
@@ -387,9 +398,25 @@ public class GameController implements Observer, ViewEventVisitor {
 	/**
 	 * 
 	 */
-	private void vaticanReport() {
-		// TODO Auto-generated method stub
-		//Da implementare con le regole avanzate
+	private void vaticanReport(int playerChoice) {
+		Player player = game.getCurrentPlayer();
+		FaithPoints playerFaithPoints = new FaithPoints(player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("FaithPoints").getQuantity());
+		
+		if ( playerFaithPoints.greaterOrEqual(game.getFaithPointsRequiredForPeriod().get(game.getCurrentPeriod()-1)) ){
+			
+				if (playerChoice == 1){ 
+					player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("VictoryPoints").add(game.getVaticanReportVictoryPoints().get(playerFaithPoints.getQuantity()));
+					player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("FaithPoints").setQuantity(0);
+					if((player.getLeaderCards().containsKey("Sisto IV") && (player.getLeaderCards().get("Sisto IV").isActive())))
+						player.getLeaderCards().get("Sisto IV").getLeaderEffect().activateEffect(game);
+
+				}	
+				else if( playerChoice == 2 )
+					game.getBoard().getExcommunicationTiles().get(game.getCurrentPeriod()-1).getPermanentMalusEffect().activationMalus(game);
+			}
+			
+			else
+				game.getBoard().getExcommunicationTiles().get(game.getCurrentPeriod()-1).getPermanentMalusEffect().activationMalus(game);
 	}
 	
 	
@@ -398,7 +425,7 @@ public class GameController implements Observer, ViewEventVisitor {
 	 * 
 	 */
 	private void endRound() {
-		//Remove all the all the faceup Development Cards from the board
+		//Remove all the all the faceUp Development Cards from the board
 		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
 			for (int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
 				game.getBoard().getTower(tower).getTowerFloor(floor).setCard(null);
@@ -423,6 +450,41 @@ public class GameController implements Observer, ViewEventVisitor {
 	 */
 	private void finalScores() {
 		Map<Integer, VictoryPoints> finalScores = game.getFinalScores();
+		
+		//calculating what is the player's final rate based on the military points and create a map with them victory points ready to be added to the final counting.
+		ArrayList<Integer> playerOrderForMilitaryPoints = new ArrayList<>(game.getNumberPlayers());
+		Map<Integer, MilitaryPoints> idPlayerAndMilitaryPointsMap = new HashMap<>();
+		for (Player playerForIterate : game.getPlayers()) {
+			playerOrderForMilitaryPoints.add(playerForIterate.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints").getQuantity());
+			idPlayerAndMilitaryPointsMap.put(playerForIterate.getIdPlayer(), new MilitaryPoints(playerForIterate.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints").getQuantity()) );
+		}
+		Collections.sort(playerOrderForMilitaryPoints);
+		Collections.reverse(playerOrderForMilitaryPoints);
+					
+		LinkedHashMap <Integer, VictoryPoints> finalOrderPlusVictoryPpoints = new LinkedHashMap<>();
+		int indexVictoryPointsForMilitaryPointsGained = 0;
+		
+		for (int i = 0; i < game.getPlayers().size(); i++){
+			
+			if(indexVictoryPointsForMilitaryPointsGained < game.getVictoryPointsForMilitaryPoints().size()) {
+				int idActualPlayer = 0;
+				//looking for the player who has this amount of points and memorizing his id into idActualPlayer
+				for (Integer integer : idPlayerAndMilitaryPointsMap.keySet()) {
+					if (idPlayerAndMilitaryPointsMap.get(integer).getQuantity() == playerOrderForMilitaryPoints.get(i)){
+						idActualPlayer = integer;
+						idPlayerAndMilitaryPointsMap.remove(integer); //to not create copies of the same player
+					}		
+				}
+				
+				if (playerOrderForMilitaryPoints.get(i) != playerOrderForMilitaryPoints.get(i+1)) {
+					finalOrderPlusVictoryPpoints.put(idActualPlayer, game.getVictoryPointsForMilitaryPoints().get(indexVictoryPointsForMilitaryPointsGained));
+					indexVictoryPointsForMilitaryPointsGained++;		
+				}
+				else 
+					finalOrderPlusVictoryPpoints.put(idActualPlayer, game.getVictoryPointsForMilitaryPoints().get(indexVictoryPointsForMilitaryPointsGained));
+			}
+		}
+		
 		for(Player player : game.getPlayers()) {
 			
 			//Get Victory points earned by the player during the game
@@ -462,12 +524,7 @@ public class GameController implements Observer, ViewEventVisitor {
 			
 			//TODO da completare
 			//Add final victory points from Military points based on the final placement for military points
-			/*ArrayList<Integer> playerOrderForVictoryPoints = new ArrayList<>(game.getNumberPlayers());
-			for (Player playerFor : game.getPlayers()) {
-				playerOrderForVictoryPoints.add(playerFor.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints").getQuantity());
-			}
-			Collections.sort(playerOrderForVictoryPoints); 
-			*/
+			
 			
 			
 			
@@ -492,7 +549,6 @@ public class GameController implements Observer, ViewEventVisitor {
 
 				victoryPoints.sub(new VictoryPoints(temporaryvalue));
 			}
-			
 					
 			//check if there are some malus effect of the type "loseOneVictoryPointEveryXResource" from building card cost (wood, stones)
 			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom() == "BuildingCards")) {

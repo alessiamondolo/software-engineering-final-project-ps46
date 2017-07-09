@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps46;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Game;
@@ -236,7 +238,7 @@ public class MalusDecreaseTEST {
 		"\nValore del Dado: " + buildingCard.getProductionValue().toString());
 		}
 		System.out.println("\n----Fine controllo della lista carte edificio----");
-				
+
 	};
 		
 	
@@ -300,15 +302,41 @@ public class MalusDecreaseTEST {
 		
 			playerOrderForVictoryPoints.add(12);
 			playerOrderForVictoryPoints.add(7);
-			playerOrderForVictoryPoints.add(50);
-			playerOrderForVictoryPoints.add(1);
+			playerOrderForVictoryPoints.add(44);
+			playerOrderForVictoryPoints.add(12);
 			
 			System.out.println("PRIMA: " + playerOrderForVictoryPoints.toString());
 
 			Collections.sort(playerOrderForVictoryPoints);
+			Collections.reverse(playerOrderForVictoryPoints);
 			
 			System.out.println("DOPO: " + playerOrderForVictoryPoints.toString());
 			
+			LinkedHashMap< Integer, VictoryPoints> finalOrderPlusVP = new LinkedHashMap<>();
+			
+			int indexVictoryPointsForMilitaryPoints = 0;
+			
+			for (int i = 0; i < game.getPlayers().size(); i++){
+				if(indexVictoryPointsForMilitaryPoints < game.getVictoryPointsForMilitaryPoints().size()){
+					System.out.println("grandezza dell'arrayList VictoryPointsForMilitaryPoints: " + game.getVictoryPointsForMilitaryPoints().size());
+					if (playerOrderForVictoryPoints.get(i) != playerOrderForVictoryPoints.get(i+1)) {
+						System.out.println("dentro al IF (culo di alessia) con index: " + i);
+						System.out.println("dentro al IF (culo di alessia) con indexVictoryPointsForMilitaryPoints: " + indexVictoryPointsForMilitaryPoints);
+
+						finalOrderPlusVP.put(i, game.getVictoryPointsForMilitaryPoints().get(indexVictoryPointsForMilitaryPoints));
+							indexVictoryPointsForMilitaryPoints++;
+					}
+					else 
+					{
+						System.out.println("dentro al ELSE (culo di alessia) con index: " + i);
+						System.out.println("dentro al ELSE (culo di alessia) con indexVictoryPointsForMilitaryPoints: " + indexVictoryPointsForMilitaryPoints);
+					}
+
+						finalOrderPlusVP.put(i, game.getVictoryPointsForMilitaryPoints().get(indexVictoryPointsForMilitaryPoints));
+				}
+			}
+			System.out.println("DOPODOPO: " + finalOrderPlusVP.toString());
+
 			
 		/*
 		

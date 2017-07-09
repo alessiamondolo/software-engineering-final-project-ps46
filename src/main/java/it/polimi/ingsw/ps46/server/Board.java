@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.card.ExcommunicationTile;
 
 /**
  * This Class contains all the objects of the game board, all the towers and all the actionSpaces.
@@ -17,10 +18,12 @@ public class Board implements Serializable {
 	private int numberOfTowers;
 	private ArrayList<Tower> towers;
 	private ArrayList<ActionSpace> boardBoxes;
+	private ArrayList<ExcommunicationTile> excommunicationTiles; 	//TODO CREARE IL PARSING DELLE EXCOMMUNICATION TILES 
 	
 	/**
 	 * This Class is made by two lists of Tower and boardBoxes. 
 	 */
+	//, ArrayList<ExcommunicationTile> excommunicationTiles
 	public Board(ArrayList<Tower> towers, ArrayList<ActionSpace> boardBoxes){
 		
 		this.towers = towers;
@@ -29,7 +32,7 @@ public class Board implements Serializable {
 			numberOfTowers = towers.size();
 		
 	}
-	
+	//TODO CREARE IL PARSING DELLE EXCOMMUNICATION TILES 
 
 	/**
 	 * Description of the method getTower
@@ -69,7 +72,7 @@ public class Board implements Serializable {
 	 * @param idActionSpace
 	 * @return boolean
 	 */
-	public boolean isEmptyTower(int idActionSpace) { //TODO da testare
+	public boolean isEmptyTower(int idActionSpace) {
 		
 		int towerId = getWhichTowerContain(idActionSpace);
 		if (towerId != -1 ){
@@ -111,7 +114,7 @@ public class Board implements Serializable {
 	 * @param idActionSpace
 	 * @return towerFloor.getCard()
 	 */
-	public Card getCardOfTheTowerFloor(int idActionSpace) { //TODO da testare
+	public Card getCardOfTheTowerFloor(int idActionSpace) {
 		
 		int towerId = getWhichTowerContain(idActionSpace);	
 		
@@ -133,7 +136,7 @@ public class Board implements Serializable {
 	 * @param idActionSpace
 	 * @return tower.getColorOfTheTower()
 	 */
-	public String getColorOfTower (int idActionSpace){ //TODO da testare
+	public String getColorOfTower (int idActionSpace){
 		
 		for (Tower tower : towers) {
 			for (TowerFloor towerFloor : tower.getFloors()) {
@@ -150,5 +153,10 @@ public class Board implements Serializable {
 	public ArrayList<ActionSpace> getBoardBoxes() {
 		return boardBoxes;
 	}
-	
+
+
+	public ArrayList<ExcommunicationTile> getExcommunicationTiles() {
+		return excommunicationTiles;
+	}
+
 }

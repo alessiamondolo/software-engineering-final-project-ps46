@@ -35,7 +35,7 @@ public class Player implements Serializable {
 	private Map<String, ResourceSet> discount;
 	private Map<String, ResourceSet> optionalDiscount;
 	
-	private boolean preacherEffect = false; 	//TODO Implementare l'effetto nel gioco	
+	private boolean preacherEffect = false;
 
 	private DecreaseResourcesMalus decreaseResourcesMalus; 
 	private Map<String, DiceMalusEffect> diceMalus;
@@ -237,7 +237,7 @@ public class Player implements Serializable {
 
 	//PREACHER - GETTER AND SETTER//
 	///////////////////////////////
-	public boolean isPreacherEffect() {
+	public boolean isPreacherEffectActive() {
 		return preacherEffect;
 	}
 
