@@ -46,7 +46,7 @@ public class DiceMalusEffect extends MalusEffect {
 	@Override
 	public void activationMalus(Game game){
 		
-		game.getCurrentPlayer().getDiceMalus().add(this);
+		game.getCurrentPlayer().getDiceMalus().put(name, this);
 	}
 
 	
@@ -57,10 +57,5 @@ public class DiceMalusEffect extends MalusEffect {
 	public Dice getMalus() {
 		return malus;
 	}
-	
-	public int getMalusValue(){
-		
-		return malus.getValue();
-	}
-	
+
 }

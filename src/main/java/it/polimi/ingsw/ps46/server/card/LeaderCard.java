@@ -21,7 +21,7 @@ public class LeaderCard {
 	 * EFFETTI DA IMPLEMENTARE:
 	 * Ludovico Ariosto: putFamilyMemberEverywhereEffect DONE
 	 * Filippo Brunelleschi: noFeeForTowerEffect DONE
-	 * Ludovico il Moro: setValueToAllColoredFamilyMemberEffect ---> TODO +O- DONE creato un effetto che dovrà essere attivato da qualche parte
+	 * Ludovico il Moro: setValueToAllColoredFamilyMemberEffect ---> DONE creato un effetto che viene attivato in gameController
 	 * Federico da Montefeltro: setValueToOneColoredFamilyMemberEffect ---> +O- TODO manca la scelta del giocatore
 	 * Lorenzo de Medici: copyOneLeaderCardEffectOnceEffect --->TODO scelta del giocatore
 	 * Cesare Borgia: NoRequiredMilitaryPointsEffect DONE
@@ -31,7 +31,7 @@ public class LeaderCard {
 	 * Sisto IV TODO da implementare con il rapporto del vaticano 
 	 */
 	
-	public LeaderCard(String name, Effect leaderEffect, boolean isPermanent, LinkedHashMap<String,Integer> requiredCards, ResourceSet requiredResources) {
+	public LeaderCard (String name, Effect leaderEffect, boolean isPermanent, LinkedHashMap<String,Integer> requiredCards, ResourceSet requiredResources) {
 	
 		this.cardName = name;
 		this.leaderEffect = leaderEffect;
@@ -138,13 +138,13 @@ public class LeaderCard {
 		return isActive;
 	}
 
-
+/*
 	private void setAsActiveOrNot() { //TODO sistemare il metodo in base all'uso che ne facciamo
 		if(!isActive) isActive = true;
 		else
 			isActive = false;
 	}
-
+*/
 
 
 	public Effect getLeaderEffect() {

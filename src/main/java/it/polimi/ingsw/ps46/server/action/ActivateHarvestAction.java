@@ -4,7 +4,6 @@ import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -113,10 +112,10 @@ public class ActivateHarvestAction implements Action {
 		
 		
 		if( !game.getCurrentPlayer().getDiceMalus().isEmpty() )
-			for( DiceMalusEffect diceMalusEffect : game.getCurrentPlayer().getDiceMalus() ){
+			for( String string : game.getCurrentPlayer().getDiceMalus().keySet()){
 				
-				if ( diceMalusEffect.getType() == "HarvestAction" ){
-					temporaryDice.subDice( diceMalusEffect.getMalus() );	
+				if ( game.getCurrentPlayer().getDiceMalus().get(string).getType() == "HarvestAction" ){
+					temporaryDice.subDice( game.getCurrentPlayer().getDiceMalus().get(string).getMalus() );	
 				}
 			}
 

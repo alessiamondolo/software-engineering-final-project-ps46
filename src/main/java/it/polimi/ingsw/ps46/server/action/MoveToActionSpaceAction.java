@@ -118,23 +118,29 @@ public class MoveToActionSpaceAction implements Action {
 		if(actionSpace == null)
 			return false;
 		
-		//The action space has to be available 
-		if(!(actionSpace.getAvailability())) {
-			if(!(game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico Ariosto") || 
-					((game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico Ariosto") && !(game.getCurrentPlayer().getLeaderCards().get("Ludovico Ariosto").isActive())))))
+		//Check the malus given by excommunication that avoid you to put your family member on a marketSpace
+		if(actionSpace.getType() == "Market") {
+			if(!(player.getGenericMalus().isEmpty()) && (player.getGenericMalus().containsKey("noMoveToMarketSpace")) ) 
 				return false;
+		}
+		
+		//The action space has to be available 
+		//If there is activated "Ludovico Ariosto" LeaderCard you ignore this requirement
+		if(!(actionSpace.getAvailability()))
+			if(!(game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico Ariosto") || !(game.getCurrentPlayer().getLeaderCards().get("Ludovico Ariosto").isActive())))
+				return false;
+			
 		//If the actionSpace is the green tower, check military points liked with the number of territory cards got by the player.
 		//You can ignore this requirement if you have activated the LeaderCard effect of Cesare Borgia.
 		if (game.getBoard().getColorOfTower(actionSpace.getId()) == "green"){
 			if(!( game.getCurrentPlayer().getLeaderCards().containsKey("Cesare Borgia") || !(game.getCurrentPlayer().getLeaderCards().get("Cesare Borgia").isActive())))
 			{
 				int numberOfCards = game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().size();
-				if(numberOfCards > 2 ) {
-					MilitaryPoints temporaryMilitaryPointsRequired;
-					temporaryMilitaryPointsRequired = game.getCurrentPlayer().getPersonalBoard().getRequiredMilitaryPointsForTerritoryCardsMap().get(numberOfCards);
-					if (!player.getPersonalBoard().getPlayerResourceSet().greaterOrEqual(temporaryMilitaryPointsRequired)) {
-						return false;
-						}
+				if(numberOfCards >= 2 ) {
+				MilitaryPoints temporaryMilitaryPointsRequired;
+				temporaryMilitaryPointsRequired = game.getCurrentPlayer().getPersonalBoard().getRequiredMilitaryPointsForTerritoryCardsMap().get(numberOfCards);					
+				if (!player.getPersonalBoard().getPlayerResourceSet().greaterOrEqual(temporaryMilitaryPointsRequired)) {
+					return false;
 					}
 				}
 			}
