@@ -40,11 +40,13 @@ public class ToTower extends JPanel {
 	public void removeAll() {
 		for (PointCell pc : actionCells) {
 			pc.removeAll();
+			pc.clearFM();
 		}
 	}
 	
 	public void add(Player player, String fmColor, int floor) {
 		actionCells.get(floor).add(player, fmColor);
+		repaint();
 	}
 }
 	

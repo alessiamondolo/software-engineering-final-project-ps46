@@ -1,13 +1,18 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import it.polimi.ingsw.ps46.client.View;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
 /**
@@ -136,37 +141,7 @@ public class GUIView implements View {
 	}
 	
 	
-/*	private volatile static String gameMode;
-	protected static void setGameMode(String mode) {
-		GUIView.gameMode = mode;
-	}
-	public String getGameMode() {
-	
-		if (!(welcomeWindow instanceof WelcomeWindow))
-			return "";
-		welcomeWindow.setGameMode();
-		welcomeWindow.pack();
-		welcomeWindow.setLocationRelativeTo(null);
-		welcomeWindow.setVisible(true);
-		welcomeWindow.repaint();
-		
-		GUIView.setColor(null);
-		synchronized (monitor) {
-			while (gameMode == null) {
-				
-				try {
-					monitor.wait();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}	
-		return GUIView.gameMode;
-	}*/
-	
-	
-	@Override  //eseguita appena dopo aver inserito username 
+	@Override 
 	public void showInitialOrder() {
 	
 		if (!(welcomeWindow instanceof WelcomeWindow))
@@ -205,7 +180,7 @@ public class GUIView implements View {
 				try {
 					monitor.wait();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}
 			}
@@ -237,7 +212,7 @@ public class GUIView implements View {
 				try {
 					monitor.wait();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}
 			}
@@ -279,7 +254,7 @@ public class GUIView implements View {
 				try {
 					monitor.wait();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 			}
@@ -307,7 +282,7 @@ public class GUIView implements View {
 				try {
 					monitor.wait();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 			}
@@ -318,16 +293,32 @@ public class GUIView implements View {
 	}
 
 
-
+	
+	private ImageIcon servantsIcon;
 	@Override
 	public int getServants() {
 		
+		BufferedImage image = null;
+		if (servantsIcon == null) {
+			try {
+				image =  Token.getImagePathMode("mixed/excomm_1_3.png");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			servantsIcon =  new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+		}
+		
 		for (;;) {
-			String answ = JOptionPane.showInputDialog(
+			String answ = (String) JOptionPane.showInputDialog( 
 					gameWindow,
 					"How many servants do you want to use?",
 					"Player " + this.playerUsername + " choose the number of servants",
-					JOptionPane.QUESTION_MESSAGE
+					JOptionPane.QUESTION_MESSAGE,
+					servantsIcon,
+					null,
+					null
 				);
 		    
 			if (answ == null)
@@ -363,21 +354,107 @@ public class GUIView implements View {
 
 	@Override
 	public int getEffectCoice(Effect effect1, Effect effect2) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
-
+	
+	private static final String[] privilegesTypes = { "Wood: 1 - Stones: 1", "Servants: 2", 
+			 												"Money: 2", "MilitaryPoints: 2", "FaithPoints: 1" };
 	@Override
 	public ArrayList<Integer> getCouncilPrivilege() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ArrayList<Integer> councilPrivileges = new ArrayList<Integer>();
+		int privileges = game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity();
+		String message = "You have " + privileges + " council privileges.";
+		JOptionPane.showMessageDialog(gameWindow, message);
+		
+		while(privileges > 0) {
+			
+			boolean choiceDefault = false;
+			int x = 0;
+			System.out.println("ciclo " +x);
+			JFrame frame = new JFrame("Counsil Privilege");
+		    String choice = (String) JOptionPane.showInputDialog(frame, 
+		        "Select the Counsil Privilege",
+		        "Type",
+		        JOptionPane.QUESTION_MESSAGE, 
+		        null, 
+		        privilegesTypes, 
+		        privilegesTypes[0]);
+
+		    // choice will be null if the user clicks Cancel
+		    System.out.printf("Privilege chosen is %s.\n", choice);
+		    frame.pack();
+		    frame.setVisible(true);
+		    
+		    if (choice == null) {
+		    	getCouncilPrivilege();
+		    }
+			
+			int index = 1;
+			for(ResourceSet resourceSet : game.getCouncilPrivileges()) {
+				System.out.println(index + ". " + resourceSet.toString());
+				index++;
+			}
+			
+			Integer bonus = null;
+			
+			switch (choice) {
+				
+			case "Wood: 1 - Stones: 1":
+				bonus = new Integer(0);
+				break;
+				
+			case "Servants: 2":
+				bonus = new Integer(1);
+				break;
+				
+			case "Money: 2":
+				bonus = new Integer(2);
+				break;
+				
+			case "MilitaryPoints: 2":
+				bonus = new Integer(3);
+				break;
+			
+			case "FaithPoints: 1":
+				bonus = new Integer(4);
+				break;
+				
+			default:
+				choiceDefault = true;
+			}
+			
+			if (choiceDefault == false) {
+			if(!councilPrivileges.contains(bonus)) {
+				councilPrivileges.add(bonus);
+				System.out.println("prima del -- ho privilegi: " +privileges);
+						
+				privileges--;
+				
+				if(privileges > 0) {
+					message = ("You still have " + privileges + " council privileges.");
+					JOptionPane.showMessageDialog(gameWindow, message);
+					System.out.println("ho ancora privilegi");
+				}
+			}
+			else {
+				message = ("You already have this privilege");
+				JOptionPane.showMessageDialog(gameWindow, message);
+			}
+			x++;
+			}
+		}
+		
+		
+		return councilPrivileges;
+		  
 	}
 
 
 	@Override
 	public int getBonusTile() {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 

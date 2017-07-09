@@ -68,7 +68,6 @@ public class PlayerDashboard extends JPanel {
 		this.dashboard = createDashboard(); 
 		this.add(dashboard);
 		this.setOpaque(true);
-		this.setBackground(new Color(213, 50, 90, 123));
 			
 	}
 
@@ -220,6 +219,17 @@ public class PlayerDashboard extends JPanel {
 		
 		this.game = game;
 		
+		int id =  this.player.getIdPlayer();
+		ArrayList<Player> players = (ArrayList<Player>) this.game.getPlayers(); 
+		for (Player player : players) {
+			if (player.getIdPlayer() == id) {   
+				this.player = player;
+			}
+		}
+		
+		Color playerColor = convertColor(this.player.getColor());
+		this.setBackground(playerColor);
+		
 		updateResource();	
 		
 		updateCards();
@@ -230,14 +240,6 @@ public class PlayerDashboard extends JPanel {
 	
 	
 	private void updateResource() {
-		
-		int id =  this.player.getIdPlayer();
-		ArrayList<Player> players = (ArrayList<Player>) this.game.getPlayers(); 
-		for (Player player : players) {
-			if (player.getIdPlayer() == id) {   
-				this.player = player;
-			}
-		}
 		
 		GameState gameState = this.game.getGameState();
 		System.out.println(gameState);
@@ -281,5 +283,23 @@ public class PlayerDashboard extends JPanel {
 				CardCell cell = characterCardCells.get(i);
 				cell.add(card);
 			}		
+	}
+	
+	private Color convertColor(String color) {
+		
+		switch(color) {
+		
+		case "Red":
+			return Color.RED;
+		case "Blue":
+			return Color.BLUE;
+		case "Yellow":
+			return Color.YELLOW;
+		case "Green":
+			return Color.GREEN;
+		default:
+			return null;
+		}
+		
 	}
 }
