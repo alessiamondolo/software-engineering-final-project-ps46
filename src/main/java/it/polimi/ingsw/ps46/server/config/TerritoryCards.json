@@ -34,7 +34,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -71,7 +71,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -148,7 +148,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -185,7 +185,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -262,7 +262,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -299,7 +299,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -376,7 +376,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -413,7 +413,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -490,7 +490,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -527,7 +527,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -603,7 +603,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -640,7 +640,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -716,7 +716,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -725,41 +725,6 @@
 		{
 			"additionalResources": [
 				{
-					"id" : "Wood",
-					"quantity" : 0
-				},
-				{
-					"id" : "Stones",
-					"quantity" : 0
-				},
-				{
-					"id" : "Servants",
-					"quantity" : 0
-				},
-				{
-					"id" : "Money",
-					"quantity" : 0
-				},
-				{
-					"id" : "FaithPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "MilitaryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "VictoryPoints",
-					"quantity" : 0
-				},
-				{
-					"id" : "CounsilPrivilege",
-					"quantity" : 0
-				}
-			]
-		},
-		"cost": [
-			{
 				"id" : "Wood",
 				"quantity" : 0
 			},
@@ -782,6 +747,37 @@
 			{
 				"id" : "MilitaryPoints",
 				"quantity" : 2
+			},
+			{
+				"id" : "VictoryPoints",
+				"quantity" : 0
+			}
+			]
+		},
+		"cost": [
+			{
+				"id" : "Wood",
+				"quantity" : 0
+			},
+			{
+				"id" : "Stones",
+				"quantity" : 0
+			},
+			{
+				"id" : "Servants",
+				"quantity" : 0
+			},
+			{
+				"id" : "Money",
+				"quantity" : 0
+			},
+			{
+				"id" : "FaithPoints",
+				"quantity" : 0
+			},
+			{
+				"id" : "MilitaryPoints",
+				"quantity" : 0
 			},
 			{
 				"id" : "VictoryPoints",
@@ -829,7 +825,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -866,7 +862,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 1
 				}
 			]
@@ -942,7 +938,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -979,7 +975,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1055,7 +1051,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1092,7 +1088,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 1
 				}
 			]
@@ -1168,7 +1164,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1205,7 +1201,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1281,7 +1277,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1318,7 +1314,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1394,7 +1390,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1431,7 +1427,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1507,7 +1503,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1544,7 +1540,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1620,7 +1616,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1657,7 +1653,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1733,7 +1729,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1770,7 +1766,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1846,7 +1842,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1883,7 +1879,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1959,7 +1955,7 @@
 					"quantity" : 1
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -1996,7 +1992,7 @@
 					"quantity" : 2
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -2072,7 +2068,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -2109,7 +2105,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -2185,7 +2181,7 @@
 					"quantity" : 3
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -2222,7 +2218,7 @@
 					"quantity" : 1
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -2298,7 +2294,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 1
 				}
 			]
@@ -2335,7 +2331,7 @@
 					"quantity" : 4
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -2411,7 +2407,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -2448,7 +2444,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -2524,7 +2520,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -2561,7 +2557,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -2637,7 +2633,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]
@@ -2674,7 +2670,7 @@
 					"quantity" : 0
 				},
 				{
-					"id" : "CounsilPrivilege",
+					"id" : "CouncilPrivilege",
 					"quantity" : 0
 				}
 			]

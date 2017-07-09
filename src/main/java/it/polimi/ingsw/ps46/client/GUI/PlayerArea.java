@@ -3,16 +3,10 @@ package it.polimi.ingsw.ps46.client.GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.List;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -45,7 +39,7 @@ public class PlayerArea extends JPanel {
 	private ArrayList<CardCell> player4LeaderCardCells = new ArrayList <CardCell>();
 	private double controlAreaWidth;
 	private double controlAreaHeight;
-	private infoArea infoPanel;
+	private InfoArea infoPanel;
 
 	
 	public PlayerArea(Dimension playerAreaDimension, Game game) {
@@ -98,42 +92,21 @@ public class PlayerArea extends JPanel {
 	
 	}
 	
-	private void metodosoloperprova() {
-		
-		this.dashboardAreaDimension = new Dimension ((int) playerAreaDimension.getWidth(), 
-                (int) (playerAreaDimension.getHeight()*9/27));
-		dashboardArea.setPreferredSize(dashboardAreaDimension);
-		Player p = new Player(4);
-		for (int i = 0; i < 4; i ++) {
-			dashboards.add(new PlayerDashboard(playerAreaDimension, p));
-		}
-		for (int i = 0; i < 4; i++) {
-			
-			dashboardArea.addTab("Player " +(i + 1), null, dashboards.get(i), null);
-		}
-		
-		dashboardArea.setSelectedIndex(0);
-		
-		this.add(dashboardArea, BorderLayout.NORTH);
-	}
-	
-	
-	
 	private void createZoomBox() {
 		
 		double pWidth = playerAreaDimension.getWidth();
 		double pHeight = playerAreaDimension.getHeight();
 		
-	    ImageZoom zoom = new ImageZoom(zoomBox);
-	    JPanel chooseZoomPanel = zoom.getUIPanel();
-	    chooseZoomPanel.setPreferredSize(new Dimension((int) pWidth/16, (int) (pHeight*3)/4));
-	    chooseZoomPanel.setMaximumSize(chooseZoomPanel.getPreferredSize());
-	    this.add(chooseZoomPanel, BorderLayout.WEST);
+	    ZoomBox zoom = new ZoomBox();
+	    //JPanel chooseZoomPanel = zoom.getUIPanel();
+	    //chooseZoomPanel.setPreferredSize(new Dimension((int) pWidth/16, (int) (pHeight*3)/4));
+	   // chooseZoomPanel.setMaximumSize(chooseZoomPanel.getPreferredSize());
+	    this.add(zoom, BorderLayout.WEST);
 	    
-	    zoomBox.setPreferredSize(new Dimension((int) (pWidth*7)/13, (int) (pHeight*5)/6));
-	    zoomBox.setMaximumSize(zoomBox.getPreferredSize());
-	    this.add(zoomBox, BorderLayout.CENTER);
-	    this.add(new JScrollPane(zoomBox));
+	    zoom.setPreferredSize(new Dimension((int) (pWidth*31)/52, (int) (pHeight*5)/6));
+	    //zoom.setMaximumSize(zoom.getPreferredSize());
+	    //this.add(zoomBox, BorderLayout.CENTER);
+	    //this.add(new JScrollPane(zoomBox));
 	}
 	
 	private void createControlArea() {
@@ -163,6 +136,7 @@ public class PlayerArea extends JPanel {
 		Dimension dimension = new Dimension( (int) controlAreaWidth, (int) controlAreaHeight/4);
 		this.fmPanel = new FMPanel(dimension);
 		fmPanel.setPreferredSize(dimension);
+		fmPanel.setMaximumSize(leaderCardPanel.getPreferredSize());
 		
 		controlArea.add(fmPanel);
 		
@@ -179,7 +153,7 @@ public class PlayerArea extends JPanel {
 		double pHeight = playerAreaDimension.getHeight();
 		Dimension dimension = new Dimension((int) (pWidth), (int) (pHeight)/6);
 		
-		this.infoPanel = new infoArea(dimension);
+		this.infoPanel = new InfoArea(dimension);
 		infoPanel.setPreferredSize(dimension);
 		this.add(infoPanel, BorderLayout.SOUTH);
 	}
@@ -236,7 +210,8 @@ public class PlayerArea extends JPanel {
 		turnOrder.update(game);
 		infoPanel.update(game);
 		
-		//TODO da pensare a come visualizzare e fare update delle carte leader. Complesso.
+		// TODO da pensare a come visualizzare e fare update delle carte
+		// leader. Complesso.
 		// deve coesistere anche con la modalità di gioco basic advanced
 		
 	}

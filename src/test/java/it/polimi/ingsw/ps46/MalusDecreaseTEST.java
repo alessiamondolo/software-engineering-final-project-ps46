@@ -12,7 +12,7 @@ import it.polimi.ingsw.ps46.server.card.ExchageResourcesEffect;
 import it.polimi.ingsw.ps46.server.card.IncreaseResourcesByElementsEffect;
 import it.polimi.ingsw.ps46.server.card.IncreaseResourcesEffect;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
-import it.polimi.ingsw.ps46.server.resources.CounsilPrivilege;
+import it.polimi.ingsw.ps46.server.resources.CouncilPrivilege;
 import it.polimi.ingsw.ps46.server.resources.FaithPoints;
 import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.Money;
@@ -73,7 +73,7 @@ public class MalusDecreaseTEST {
 		resourcesList.add(new FaithPoints		(INTVALUE2));
 		resourcesList.add(new MilitaryPoints	(INTVALUE2));
 		resourcesList.add(new VictoryPoints		(INTVALUE2));
-		resourcesList.add(new CounsilPrivilege	(INTVALUE2));
+		resourcesList.add(new CouncilPrivilege	(INTVALUE2));
 		
 		System.out.println("STAMPO: ||resourcesList||" + "\n" );
 		for (Resource resource : resourcesList) {
@@ -101,7 +101,7 @@ public class MalusDecreaseTEST {
 		resourcesList.add(new FaithPoints		(INTVALUE3));
 		resourcesList.add(new MilitaryPoints	(INTVALUE3));
 		resourcesList.add(new VictoryPoints		(INTVALUE3));
-		resourcesList.add(new CounsilPrivilege	(INTVALUE3));
+		resourcesList.add(new CouncilPrivilege	(INTVALUE3));
 		
 		immidiateCardResources = new ResourceSet(resourcesList);
 
@@ -119,7 +119,7 @@ public class MalusDecreaseTEST {
 		resourcesList.add(new FaithPoints		(INTVALUE0));
 		resourcesList.add(new MilitaryPoints	(INTVALUE0));
 		resourcesList.add(new VictoryPoints		(INTVALUE0));
-		resourcesList.add(new CounsilPrivilege	(INTVALUE0));
+		resourcesList.add(new CouncilPrivilege	(INTVALUE0));
 		
 		permanentCardResources = new ResourceSet(resourcesList);
 
@@ -138,7 +138,7 @@ public class MalusDecreaseTEST {
 		resourcesList.add(new FaithPoints		(INTVALUE0));
 		resourcesList.add(new MilitaryPoints	(INTVALUE0));
 		resourcesList.add(new VictoryPoints		(INTVALUE0));
-		resourcesList.add(new CounsilPrivilege	(INTVALUE0));
+		resourcesList.add(new CouncilPrivilege	(INTVALUE0));
 		
 		ResourceSet temporaryResourcetForMalus = new ResourceSet(resourcesList);
 		
@@ -200,7 +200,7 @@ public class MalusDecreaseTEST {
 		resourcesList.add(new FaithPoints		(INTVALUE2));
 		resourcesList.add(new MilitaryPoints	(INTVALUE2));
 		resourcesList.add(new VictoryPoints		(INTVALUE2));
-		resourcesList.add(new CounsilPrivilege	(INTVALUE2));
+		resourcesList.add(new CouncilPrivilege	(INTVALUE2));
 		
 		ResourceSet requiredResources = new ResourceSet(resourcesList);
 
@@ -212,7 +212,7 @@ public class MalusDecreaseTEST {
 		resourcesList.add(new FaithPoints		(INTVALUE2));
 		resourcesList.add(new MilitaryPoints	(INTVALUE2));
 		resourcesList.add(new VictoryPoints		(INTVALUE2));
-		resourcesList.add(new CounsilPrivilege	(INTVALUE2));
+		resourcesList.add(new CouncilPrivilege	(INTVALUE2));
 
 		ResourceSet gainedResources = new ResourceSet(resourcesList);
 

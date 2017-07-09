@@ -55,7 +55,7 @@ public class IncreaseResourcesEffect implements Effect, Serializable {
 	
 	
 	public String toString() {
-		return additionalResources.toString();
+		return "Gained resources: " + additionalResources.toString();
 	}
 
 }

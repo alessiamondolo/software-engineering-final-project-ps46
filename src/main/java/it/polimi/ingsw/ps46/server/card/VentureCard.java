@@ -52,5 +52,26 @@ public class VentureCard extends Card {
 	public ResourceSet getRequiredResource() {
 		return requiredResource;
 	}
+	
+	@Override
+	public String toString() {
+	
+		if(!doubleCostChoice) {
+			return "Card name: " + getCardName() + "\n" + 
+					"Immediate effect: " + getImmediateEffects() + "\n" +
+					"Permanent effect: " + getPermanentEffects() + "\n" +
+					"Required resource: " + requiredResource + "\n" +
+					"Cost: " + getCost();
+		}
+		else {
+			return "Card name: " + getCardName() + "\n" + 
+					"Immediate effect: " + getImmediateEffects() + "\n" +
+					"Permanent effect: " + getPermanentEffects() + "\n" +
+					"Permanent effect: " + getPermanentEffects() + "\n" +
+					"Required resource: " + requiredResource + "\n" +
+					"Cost (option 1): " + getCost() + "\n" +
+					"Cost (option 2): " + costTwo;
+		}
+	}
 
 }

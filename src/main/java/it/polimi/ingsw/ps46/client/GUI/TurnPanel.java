@@ -13,6 +13,10 @@ import it.polimi.ingsw.ps46.server.Player;
 
 public class TurnPanel extends JPanel  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1411350549832975159L;
 	private ArrayList<PointCell> turnCells = new ArrayList<PointCell>();
 	
 	public TurnPanel(Dimension dimension) {

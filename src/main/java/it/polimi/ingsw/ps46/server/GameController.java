@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps46.server.action.Action;
 import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
-import it.polimi.ingsw.ps46.server.resources.CounsilPrivilege;
+import it.polimi.ingsw.ps46.server.resources.CouncilPrivilege;
 import it.polimi.ingsw.ps46.server.resources.Servants;
 import it.polimi.ingsw.ps46.server.resources.VictoryPoints;
 
@@ -76,6 +76,9 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	public void visit(EventIntInput eventIntInput) {
 		switch(eventIntInput.getType()) {
+		case BONUS_TILE_CHOICE :
+			game.giveBonusTile(game.getCurrentPlayer(), eventIntInput.getValue());
+			break;
 		case PLAYER_ACTION :
 			actionSpaceID = eventIntInput.getValue();
 			break;
@@ -85,8 +88,8 @@ public class GameController implements Observer, ViewEventVisitor {
 		case COUNCIL_PRIVILEGE_CHOICE :
 			int privilege = eventIntInput.getValue();
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(game.getCouncilPrivileges().get(privilege));
-			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(new CounsilPrivilege(1));
-			if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() == 0)
+			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(new CouncilPrivilege(1));
+			if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity() == 0)
 			break;
 		default:
 			break;
@@ -125,8 +128,14 @@ public class GameController implements Observer, ViewEventVisitor {
 				for(Player player : game.getPlayers()) {
 					game.setGameState(GameState.GET_PLAYER_ACTION);
 					game.setCurrentPlayer(player);
+					
+					if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity() > 0) {
+						game.setGameState(GameState.COUNCIL_PRIVILEGE);
+						game.setCurrentPlayer(player);
+					}
 				}
 			}
+			turnSetup();
 			
 			if(game.getCurrentRound() == game.getROUNDS_PER_PERIOD())
 				vaticanReport();
@@ -150,6 +159,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		setupInitialOrder();
 		setupPlayersColor();
 		setupInitialResources();
+		setupBonusTiles();
 	}
 
 	
@@ -189,6 +199,14 @@ public class GameController implements Observer, ViewEventVisitor {
 	private void setupInitialResources() {
 		game.setGameState(GameState.SETUP_INITIAL_RESOURCES);
 		game.giveInitialResources();
+	}
+	
+	private void setupBonusTiles() {
+		game.setGameState(GameState.SETUP_BONUS_TILES);
+		Collections.reverse(game.getPlayers());
+		for(Player player : game.getPlayers())
+			game.setCurrentPlayer(player);
+		Collections.reverse(game.getPlayers());
 	}
 	
 	
@@ -361,10 +379,7 @@ public class GameController implements Observer, ViewEventVisitor {
 			game.setGameState(GameState.ACTION_NOT_VALID);
 			game.setCurrentPlayer(player);
 		}
-		if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CounsilPrivilege").getQuantity() > 0) {
-			game.setGameState(GameState.COUNCIL_PRIVILEGE);
-			game.setCurrentPlayer(player);
-		}
+		
 	}
 	
 	
@@ -387,6 +402,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
 			for (int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
 				game.getBoard().getTower(tower).getTowerFloor(floor).setCard(null);
+				game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().setPlayerColor("");
 			}
 		}
 		

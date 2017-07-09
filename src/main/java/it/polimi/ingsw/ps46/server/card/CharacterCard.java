@@ -24,4 +24,29 @@ public class CharacterCard extends Card {
 		immediateEffects.activateEffect(game);
 		game.getCurrentPlayer().getPersonalBoard().putCharacterCardInPlayerSet(this);
 	}
+	
+	@Override
+	public String toString() {
+		
+		if(getImmediateEffects() == null && getPermanentEffects() != null) {
+			return "Card name: " + getCardName() + "\n" + 
+					"Immediate effect: -\n" +
+					"Permanent effect: " + getPermanentEffects() + "\n" +
+					"Cost: " + getCost();
+		}
+		else if(getImmediateEffects() != null && getPermanentEffects() == null) {
+			return "Card name: " + getCardName() + "\n" + 
+					"Immediate effect: " + getImmediateEffects() + "\n" +
+					"Permanent effect: -\n" +
+					"Cost: " + getCost();
+		}
+		else {
+			return "Card name: " + getCardName() + "\n" + 
+					"Immediate effect: " + getImmediateEffects() + "\n" +
+					"Permanent effect: " + getPermanentEffects() + "\n" +
+					"Cost: " + getCost();
+		}
+	
+	}
+	
 }

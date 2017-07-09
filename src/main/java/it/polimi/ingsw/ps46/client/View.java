@@ -28,6 +28,8 @@ public interface View {
 
 	public String getPlayerColor(ArrayList<String> colors);
 
+	public int getBonusTile();
+
 	public void updateRoundInfo();
 	
 	public void printBoard();

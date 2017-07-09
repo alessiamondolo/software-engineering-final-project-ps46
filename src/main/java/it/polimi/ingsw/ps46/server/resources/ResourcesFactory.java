@@ -40,8 +40,8 @@ public class ResourcesFactory {
 		else if(resourceType.equals("VictoryPoints"))
 			return new VictoryPoints(quantity);
 		
-		else if(resourceType.equals("CounsilPrivilege"))
-			return new CounsilPrivilege(quantity);
+		else if(resourceType.equals("CouncilPrivilege"))
+			return new CouncilPrivilege(quantity);
 		
 		else return null;
 		
@@ -92,10 +92,10 @@ public Resource getResourceByDifference(Resource beforeResource, Resource afterR
 			return new VictoryPoints(beforeVictoryPoints, afterVictoryPoints);
 		}
 		
-		else if(beforeResource.getId().equals("CounsilPrivilege") && afterResource.getId().equals("CounsilPrivilege")) {
-			CounsilPrivilege beforeCouncilPrivilage = new CounsilPrivilege(beforeResource.getQuantity());
-			CounsilPrivilege afterCouncilPrivilage = new CounsilPrivilege(afterResource.getQuantity());
-			return new CounsilPrivilege(beforeCouncilPrivilage, afterCouncilPrivilage);
+		else if(beforeResource.getId().equals("CouncilPrivilege") && afterResource.getId().equals("CouncilPrivilege")) {
+			CouncilPrivilege beforeCouncilPrivilage = new CouncilPrivilege(beforeResource.getQuantity());
+			CouncilPrivilege afterCouncilPrivilage = new CouncilPrivilege(afterResource.getQuantity());
+			return new CouncilPrivilege(beforeCouncilPrivilage, afterCouncilPrivilage);
 		}
 		else 
 			return null;

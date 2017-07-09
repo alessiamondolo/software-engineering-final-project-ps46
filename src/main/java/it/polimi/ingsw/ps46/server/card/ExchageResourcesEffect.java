@@ -49,8 +49,8 @@ public class ExchageResourcesEffect implements Effect, Serializable {
 	
 	
 	public String toString() {
-		return "Required resources: " + requiredResources.toString() + "\n" +
-				"Gained resources: " + gainedResources.toString();
+		return "Exchange: " + requiredResources.toString() + "\n" +
+				"with: " + gainedResources.toString();
 	}
 
 }

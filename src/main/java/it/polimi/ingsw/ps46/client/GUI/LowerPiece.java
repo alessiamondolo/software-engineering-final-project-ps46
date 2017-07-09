@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps46.client.GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -20,6 +21,10 @@ import it.polimi.ingsw.ps46.server.Player;
 
 public class LowerPiece extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5970007146885071378L;
 	JPanel upperPanel = new JPanel();
 	JPanel faithPanel = new JPanel();
 	JPanel actionPanel = new JPanel();
@@ -213,6 +218,8 @@ public class LowerPiece extends JPanel {
 		actionCells.add(market3);
 		PointCell market4 = new PointCell(24);
 		actionCells.add(market4);
+		councilCell.setLayout( new FlowLayout(FlowLayout.LEFT));
+		
 		actionCells.add(councilCell);
 		
 		market1.setPreferredSize(new Dimension((int) widthSmall*3/2, (int) heightSmall*9/5));
@@ -254,32 +261,33 @@ public class LowerPiece extends JPanel {
 		
 	}
 	
-	public void updateLowerPiece(Game game) {
+	public void update(Game game) {
 		
 		this.game = game;
 		updateFaithPoints();
 		updateExCards();
 		updateActionCell();
 		updateDice();
+		repaint();
 			
 	}
 	
 	private void updateFaithPoints() {
 		
+		for (PointCell pc : faithCells) {
+			pc.removeAll();
+		}
+		
 		for (Player player : game.getPlayers()) {
-			int vp = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("FaithPoints").getQuantity();
-			for (int i = 0; i < faithCells.size(); i++) {
-				PointCell fc = faithCells.get(i); 
-				ArrayList<Player> players = fc.getItemList();
-				for ( Player cellPlayer : players) {
-					if ( player.getIdPlayer() == cellPlayer.getIdPlayer()) {
-						fc.remove(cellPlayer);
-					}
-				}
-				
-				if (i == vp) fc.add(player);	
+			int fp;
+			try {
+				fp = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("FaithPoints").getQuantity();
+			} catch (NullPointerException e) {
+				fp = 0;
 			}
+			faithCells.get(fp).add(player);
 		}	
+		
 	}
 
 	private void  updateExCards() {
@@ -288,6 +296,7 @@ public class LowerPiece extends JPanel {
 			
 			//TODO METODO PER RECUPERARE CARTE SCOMUNICA
 		}
+
 		
 	}
 	
@@ -308,14 +317,17 @@ public class LowerPiece extends JPanel {
 			for (Player player : game.getPlayers()) {
 				
 				FamilyMember fm = player.getFamilyMember(fmColor);
-				int fmPosition = fm.getPositionOfFamilyMember();	
+				int fmPosition = fm.getPositionOfFamilyMember();
+				String giocatore = game.getCurrentPlayer().getUsername();
+				System.out.println("sono due volte " +giocatore+ " ed il mio familiare di colore " +fmColor+ " è in pos " +fmPosition );
 				
 				if (16 < fmPosition) {
 					PointCell actionCell = actionCells.get(fmPosition - 17);
-					actionCell.add(player);
+					actionCell.add(player, fmColor);
 				}
 			}
-		}	
+		}
+		
 	}
 	
 	private void updateDice() {
@@ -325,8 +337,9 @@ public class LowerPiece extends JPanel {
 		Dice orangeD = this.game.getDice("Orange");
 		
 		blackDice.setText(String.valueOf(blackD.getValue()));
-		whiteDice.setText(String.valueOf(blackD.getValue()));
-		orangeDice.setText(String.valueOf(blackD.getValue()));
+		whiteDice.setText(String.valueOf(whiteD.getValue()));
+		orangeDice.setText(String.valueOf(orangeD.getValue()));
+		
 	}
 }
 	

@@ -1,16 +1,13 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.border.Border;
 
 /**
@@ -28,9 +25,9 @@ public abstract class Cell<T> extends JButton {
 	private static final long serialVersionUID = -4753827311083808447L;
 	
 	protected ArrayList<T> itemList;
-	private int action = 0;
 	
 	public Cell () {
+		
 		itemList = new ArrayList<T> ();
 		
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
@@ -39,14 +36,10 @@ public abstract class Cell<T> extends JButton {
 		this.setRolloverEnabled(false);
 		this.setEnabled(false);
 		this.setContentAreaFilled(false);
-		
-		// repaint();
 	}
 	
 	public Cell (int action) {
 		this();
-		
-		this.action = action;
 		
 		this.setEnabled(true);
 		this.addActionListener(new ActionListener() {
@@ -59,12 +52,22 @@ public abstract class Cell<T> extends JButton {
 				}
 			}
 		});
-		
-		// repaint();
 	}
-	
-	public int getCellAction() {
-		return action;
+
+	public Cell (String fmColor) {
+		this();
+		
+		this.setEnabled(true);
+		this.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Object mon;
+				synchronized (mon = GUIView.getMonitor()) {
+					GUIView.setFamilyMember(fmColor);
+					mon.notifyAll();
+				}
+			}
+		});
 	}
 
 	public void add(T el) {
@@ -78,8 +81,10 @@ public abstract class Cell<T> extends JButton {
 	}
 	
 	public void removeAll() {
-		itemList.clear();
-		
+		if (itemList.isEmpty() == false) {
+			itemList.clear();
+			update();
+		}
 	}
 	
 	public ArrayList<T> getItemList() {

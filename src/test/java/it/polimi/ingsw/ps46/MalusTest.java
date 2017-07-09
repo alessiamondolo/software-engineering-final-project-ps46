@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.polimi.ingsw.ps46.server.resources.CounsilPrivilege;
+import it.polimi.ingsw.ps46.server.resources.CouncilPrivilege;
 import it.polimi.ingsw.ps46.server.resources.FaithPoints;
 import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.Money;
@@ -36,7 +36,7 @@ public class MalusTest {
 		resourcesList.add(new FaithPoints		(INTVALUE2));
 		resourcesList.add(new MilitaryPoints	(INTVALUE2));
 		resourcesList.add(new VictoryPoints		(INTVALUE2));
-		resourcesList.add(new CounsilPrivilege	(INTVALUE2));
+		resourcesList.add(new CouncilPrivilege	(INTVALUE2));
 	
 	ResourceSet playerResourceSet = new ResourceSet(resourcesList);
 	}

@@ -1,25 +1,11 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import it.polimi.ingsw.ps46.client.View;
-
-import it.polimi.ingsw.ps46.server.EventMessage;
-import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.Player;
-
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Effect;
 
@@ -38,32 +24,14 @@ public class GUIView implements View {
 	private WelcomeWindow welcomeWindow;
 	private GameWindow gameWindow;
 	private boolean firstTime = true;
-	
-	// TODO Rimuovere, solo per debug
-	private PrintStream output = System.out;
+	private boolean firstTime2 = true;
+	private String playerUsername;
+	private String playerColor;
 	
 	private static Object monitor = new Object();
 	protected static Object getMonitor() {
 		return monitor;
 	}
-	
-	
-/*	public static void main(String[] args) {
-		
-		GUIView g = new GUIView(true);
-		Game game = null;
-		Player p = new Player(1);
-		
-		GameWindow gw = new GameWindow(game);
-		gw.pack();
-		gw.setVisible(true);
-		
-		int a;
-		
-		while ((a=g.getPlayerAction()) != 4) {
-			System.out.println("Action: " + a);
-		}
-	}*/
 	
 	public GUIView () {
 		
@@ -125,11 +93,11 @@ public class GUIView implements View {
 	@Override
 	public void printBoard() {
 		
-		if (!(gameWindow instanceof GameWindow))
-			return;
+		if (firstTime2) {
+			gameWindow.setPlayerInfo(this.playerUsername, this.playerColor);
+			firstTime2 = false;
+		}
 		
-		gameWindow.repaint();
-		gameWindow.setVisible(true);
 		gameWindow.update(this.game);
 		gameWindow.pack();
 		gameWindow.setVisible(true);
@@ -144,6 +112,8 @@ public class GUIView implements View {
 
 		this.game = game;
 		System.out.println("set game è stato chiamato");
+		String player = game.getCurrentPlayer().getUsername();
+		System.out.println("il current player è " +player);
 		
 		if (firstTime) {	
 		
@@ -166,7 +136,7 @@ public class GUIView implements View {
 	}
 	
 	
-	private volatile static String gameMode;
+/*	private volatile static String gameMode;
 	protected static void setGameMode(String mode) {
 		GUIView.gameMode = mode;
 	}
@@ -175,7 +145,6 @@ public class GUIView implements View {
 		if (!(welcomeWindow instanceof WelcomeWindow))
 			return "";
 		welcomeWindow.setGameMode();
-		System.out.println("ho appena invocato la gamemode");
 		welcomeWindow.pack();
 		welcomeWindow.setLocationRelativeTo(null);
 		welcomeWindow.setVisible(true);
@@ -184,7 +153,7 @@ public class GUIView implements View {
 		GUIView.setColor(null);
 		synchronized (monitor) {
 			while (gameMode == null) {
-				System.out.println("Sto aspettando modalità");
+				
 				try {
 					monitor.wait();
 				} catch (InterruptedException e) {
@@ -194,7 +163,7 @@ public class GUIView implements View {
 			}
 		}	
 		return GUIView.gameMode;
-	}
+	}*/
 	
 	
 	@Override  //eseguita appena dopo aver inserito username 
@@ -203,11 +172,6 @@ public class GUIView implements View {
 		if (!(welcomeWindow instanceof WelcomeWindow))
 			return;
 		welcomeWindow.showInitialOrder(this.game);
-		System.out.println("ho appena invocato la showorder");
-		welcomeWindow.pack();
-		welcomeWindow.setLocationRelativeTo(null);
-		welcomeWindow.setVisible(true);
-		welcomeWindow.repaint();
 	}
 	
 	@Override
@@ -230,13 +194,12 @@ public class GUIView implements View {
 		
 		if (!(welcomeWindow instanceof WelcomeWindow))
 			return "";
-	
-		welcomeWindow.setPlayerUsername();
-		welcomeWindow.pack();
-		welcomeWindow.setLocationRelativeTo(null);
-		welcomeWindow.setVisible(true);
 		
-		GUIView.setColor(null);
+		System.out.println("sto chiedendo nome");
+
+		welcomeWindow.setPlayerUsername();
+		
+		GUIView.setUsername(null);
 		synchronized (monitor) {
 			while (username == null) {
 				try {
@@ -248,6 +211,8 @@ public class GUIView implements View {
 			}
 		}	
 		System.out.println(GUIView.username);
+		this.playerUsername = GUIView.username;
+		
 		return GUIView.username;
 	}
 	
@@ -262,12 +227,8 @@ public class GUIView implements View {
 		if (!(welcomeWindow instanceof WelcomeWindow))
 			return "";
 		
-		
+		System.out.println("Sto chiedendo colore");
 		welcomeWindow.setColors(colors);
-		welcomeWindow.pack();
-		welcomeWindow.setLocationRelativeTo(null);
-		welcomeWindow.setVisible(true);
-		welcomeWindow.repaint();
 		
 		GUIView.setColor(null);
 		
@@ -283,6 +244,7 @@ public class GUIView implements View {
 		}
 		
 		welcomeWindow.dispose();
+		this.playerColor = GUIView.color;
 		return GUIView.color;
 	}
 
@@ -302,15 +264,18 @@ public class GUIView implements View {
 	}
 	@Override
 	public int getPlayerAction() {
+		
+		String message = ("Player " + this.playerUsername + " it is your turn. Choose a space action");
+		
 		/* INIT */
 		GUIView.setAction(0);
+	
+		JOptionPane.showMessageDialog(gameWindow, message);
 		
 		/* WAIT */
 		synchronized (monitor) {
-			System.out.println("Sto per entrare nel while, action vale; " +GUIView.action);
 			while (GUIView.action == 0) {
-				System.out.println("sono dentro while");
-				System.out.println("Sono dentro while e aspetto azione da " + game.getCurrentPlayer().getUsername());
+				
 				try {
 					monitor.wait();
 				} catch (InterruptedException e) {
@@ -319,7 +284,7 @@ public class GUIView implements View {
 				}
 			}
 		}
-		System.out.println("sono fuori da while e action vale" +GUIView.action);
+		System.out.println("Ho ricevuto azione " +GUIView.action+ " da " +this.playerUsername);
 		/* GET */
 		return GUIView.action;
 	}
@@ -330,9 +295,12 @@ public class GUIView implements View {
 	}
 	@Override
 	public String getFamilyMember() {
+		
+		String message = "Now choose the family member you want to use for this action";
 		/* INIT */
 		GUIView.setFamilyMember("");
 		
+		JOptionPane.showMessageDialog(gameWindow, message);
 		/* WAIT */
 		synchronized (monitor) {
 			while (GUIView.familyMember == "") {
@@ -345,17 +313,41 @@ public class GUIView implements View {
 			}
 		}
 		/* GET */
+		System.out.println("Ho ricevuto FM " +GUIView.familyMember+ " da " +this.playerUsername);
 		return GUIView.familyMember;
 	}
 
-	private volatile static int servants;
-	protected static void setServants(int servants) {
-		GUIView.servants = servants;
-	}
+
+
 	@Override
 	public int getServants() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		for (;;) {
+			String answ = JOptionPane.showInputDialog(
+					gameWindow,
+					"How many servants do you want to use?",
+					"Player " + this.playerUsername + " choose the number of servants",
+					JOptionPane.QUESTION_MESSAGE
+				);
+		    
+			if (answ == null)
+				return getServants();
+			
+			answ = answ.trim();
+			if (answ == "")
+				return 0;
+			
+			
+			try {
+				
+				System.out.println(this.playerUsername+ " Ha chiesto " +answ+ " servi");
+				return Integer.parseInt(answ);
+				
+			} catch (NumberFormatException e) {
+				this.printMessage("Il testo inserito non è un formato di numero valido");
+			}
+		}
+
 	}
 
 	@Override
@@ -380,6 +372,13 @@ public class GUIView implements View {
 	public ArrayList<Integer> getCouncilPrivilege() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public int getBonusTile() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

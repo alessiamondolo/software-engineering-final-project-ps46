@@ -62,7 +62,7 @@ public class MoveToActionSpaceAction implements Action {
 					return nextAction.execute();
 				}
 				case "Market" : {
-					if(!actionSpace.getEffectOfActionSpace().getAdditionalResources().getResourcesMap().containsKey("CounsilPrivilege")){
+					if(!actionSpace.getEffectOfActionSpace().getAdditionalResources().getResourcesMap().containsKey("CouncilPrivilege")){
 						//check on malus
 						ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());
 						
