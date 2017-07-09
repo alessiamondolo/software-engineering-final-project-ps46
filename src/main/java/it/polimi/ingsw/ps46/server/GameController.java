@@ -77,7 +77,7 @@ public class GameController implements Observer, ViewEventVisitor {
 	public void visit(EventIntInput eventIntInput) {
 		switch(eventIntInput.getType()) {
 		case BONUS_TILE_CHOICE :
-			game.giveBonusTile(game.getCurrentPlayer(), eventIntInput.getValue());
+			game.getCurrentPlayer().getPersonalBoard().setBonusTile(game.getBonusTiles().get(eventIntInput.getValue()));
 			break;
 		case PLAYER_ACTION :
 			actionSpaceID = eventIntInput.getValue();
@@ -119,7 +119,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		setupGame();
 		
 		while((game.getCurrentPeriod() < game.getPERIODS()) || (game.getCurrentRound() < game.getROUNDS_PER_PERIOD())) {
-			
+			game.setGameState(GameState.SETUP_ROUND);
 			roundSetup();
 			
 			for(int turn = game.getCurrentPhase(); turn < game.getPHASES_PER_ROUND(); turn++) {
@@ -217,7 +217,7 @@ public class GameController implements Observer, ViewEventVisitor {
 	 * 
 	 */
 	private void roundSetup() {
-		game.setGameState(GameState.SETUP_ROUND);
+		
 		if(game.getCurrentRound() == game.getROUNDS_PER_PERIOD()) {
 			int period = game.getCurrentPeriod() + 1;
 			game.setCurrentPeriod(period);
@@ -345,12 +345,17 @@ public class GameController implements Observer, ViewEventVisitor {
 	 * 
 	 */
 	private void endRound() {
-		//Remove all the all the faceup Development Cards from the board
+		//Remove all the all the faceup Development Cards from the board and remove the color of the players in the action spaces
 		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
 			for (int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
 				game.getBoard().getTower(tower).getTowerFloor(floor).setCard(null);
 				game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().setPlayerColor("");
 			}
+		}
+		
+		//Remove the color of the players in the action spaces
+		for(ActionSpace actionSpace : game.getBoard().getBoardBoxes()) {
+			actionSpace.setPlayerColor("");
 		}
 		
 		//Change the Turn Order following the order of the Family Members placed in the Council Palace.
