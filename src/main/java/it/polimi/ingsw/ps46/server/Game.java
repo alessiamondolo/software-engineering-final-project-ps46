@@ -43,8 +43,7 @@ public class Game extends Observable implements Serializable {
 	private final int PHASES_PER_ROUND = 4;
 	private int currentRound = 0;
 	private int currentPeriod = 1;
-	private int currentPhase = 0;
-	
+	private int currentPhase = 0;	
 	
 	private int numberPlayers; 
 	private ArrayList<Player> players;

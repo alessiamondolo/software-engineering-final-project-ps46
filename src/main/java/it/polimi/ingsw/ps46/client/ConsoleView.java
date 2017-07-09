@@ -50,6 +50,7 @@ public class ConsoleView implements View {
 	 */
 	public void setGame(Game game) {
 		this.game = game;
+		System.out.println("[Game state: " + game.getGameState() + "]");
 	}
 	
 	
@@ -129,7 +130,9 @@ public class ConsoleView implements View {
 	
 	
 	/**
+	 * Gets which bonus tile the player wants to use for the game.
 	 * 
+	 * @return choice : the index of the bonus tile chosen by the player.
 	 */
 	public int getBonusTile() {
 		output.println("==========================================================================");
@@ -379,6 +382,9 @@ public class ConsoleView implements View {
 		output.println("|________________________________________________________________________|");
 		output.println("\n");
 		
+		output.println("These are the players on the coucil space, ordered by arrival:");
+		//TODO dopo aver sistemato classe action space
+		
 		output.println("These are the cards available on the board:");
 		int cardNumber = 1;
 		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
@@ -415,12 +421,15 @@ public class ConsoleView implements View {
 	public void printPlayerStatus() {
 		Player player = game.getCurrentPlayer();
 		output.println("==========================================================================");
-		output.println("It's now your turn.");
+		output.println("It's now your turn.\n");
 		output.println("This is what you have:");
+		output.println("__________________________________________________________________________");
 		output.println("1. Resources:");
 		output.println(player.getPersonalBoard().getPlayerResourceSet().toString());
+		output.println("__________________________________________________________________________");
 		output.println("2. Bonus tile:");
 		output.println(player.getPersonalBoard().getBonusTile());
+		output.println("__________________________________________________________________________");
 		output.println("3. Territory Cards:");
 		if(player.getPersonalBoard().getTerritoryDeck().isEmpty())
 			output.println("You don't have territory cards for now.");
@@ -428,6 +437,7 @@ public class ConsoleView implements View {
 			for (Card card : player.getPersonalBoard().getTerritoryDeck())
 				output.println(card);
 		}
+		output.println("__________________________________________________________________________");
 		output.println("4. Character Cards:");
 		if(player.getPersonalBoard().getCharacterDeck().isEmpty())
 			output.println("You don't have character cards for now.");
@@ -435,6 +445,7 @@ public class ConsoleView implements View {
 			for (Card card : player.getPersonalBoard().getCharacterDeck())
 				output.println(card);
 		}
+		output.println("__________________________________________________________________________");
 		output.println("5. Building Cards:");
 		if(player.getPersonalBoard().getBuildingDeck().isEmpty())
 			output.println("You don't have building cards for now.");
@@ -442,6 +453,7 @@ public class ConsoleView implements View {
 			for (Card card : player.getPersonalBoard().getBuildingDeck())
 				output.println(card);
 		}
+		output.println("__________________________________________________________________________");
 		output.println("6. Venture Cards:");
 		if(player.getPersonalBoard().getVentureDeck().isEmpty())
 			output.println("You don't have venture cards for now.");
@@ -486,7 +498,7 @@ public class ConsoleView implements View {
 			}
 		}
 		
-		int choice = input.IntegerFromConsole(1, game.getCurrentPlayer().getFamilyMembersMap().size());
+		int choice = input.IntegerFromConsole(1, (index-1));
 		index = 1;
 		String color = null;
 		for(String key : familyMembersAvailable.keySet()) {
@@ -531,6 +543,11 @@ public class ConsoleView implements View {
 	
 	
 	
+	/**
+	 * Gets which of the two optional effects the player wants to activate.
+	 * 
+	 * @return choice : the effect chosen by the player.
+	 */
 	public int getEffectCoice(Effect effect1, Effect effect2) {
 		output.println("Which of these effect do you want to activate?");
 		output.println("1. " + effect1.toString());
@@ -541,6 +558,13 @@ public class ConsoleView implements View {
 	
 	
 	
+	/**
+	 * Gets which council privileges the player wants to get.<br>
+	 * If the player has more than one council privilege, it will get all of them, excluding each time the privileges
+	 * already taken.
+	 * 
+	 * @return councilPrivileges : the list of the council privileges chosen by the player.
+	 */
 	public ArrayList<Integer> getCouncilPrivilege() {
 		int privileges = game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity();
 		ArrayList<Integer> councilPrivileges = new ArrayList<Integer>();
