@@ -389,12 +389,9 @@ public class Game extends Observable implements Serializable {
 		}
 	}
 	
-	public ResourceSet getCardCost(VentureCard card) {
-		if(!card.getdoubleCostChoice())
-			return card.getCost();
-		else {
+	public void getCardCost(VentureCard card) {
+		if(card.getdoubleCostChoice()) {
 			newState(new EventCostChoice(NewStateMessage.CARD_COST_CHOICE, card));
-			return null;
 		}
 	}
 

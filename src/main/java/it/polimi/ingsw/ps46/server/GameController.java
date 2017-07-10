@@ -389,12 +389,10 @@ public class GameController implements Observer, ViewEventVisitor {
 		}
 		
 		if(actionSpace.getType().equals("Tower")) {
-			System.out.println("Sono in una torre");
 			int tower = (actionSpace.getId() - 1) / game.getBoard().getNumberOfTowers();
 			if(tower == 3) {//ventureCard
-				System.out.println("Venture card");
 				if(game.getBoard().getCardOfTheTowerFloor(actionSpace.getId()) != null) {
-					cost = game.getCardCost((VentureCard) game.getBoard().getCardOfTheTowerFloor(actionSpace.getId()));
+					game.getCardCost((VentureCard) game.getBoard().getCardOfTheTowerFloor(actionSpace.getId()));
 				}
 			}
 		}

@@ -112,7 +112,7 @@ public class Board implements Serializable {
 	 * @return towerFloor.getCard()
 	 */
 	public Card getCardOfTheTowerFloor(int idActionSpace) { //TODO da testare
-		System.out.println("ID carta: " + idActionSpace);
+		
 		int towerId = getWhichTowerContain(idActionSpace);	
 		
 		if (towerId != -1 ){
