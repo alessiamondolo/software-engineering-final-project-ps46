@@ -10,7 +10,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
- 
+
+import it.polimi.ingsw.ps46.server.card.ExcommunicationTile;
 import it.polimi.ingsw.ps46.utils.MyJSONParser;
 
 public class FactoryBoard {
@@ -85,6 +86,11 @@ private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/co
         	}
     		//END OF ACTION SPACES PARSER
         	
+        	
+        	//BEGIN OF EXCOMUNICATION TILES PARSER
+			
+        	//END OF EXCOMUNICATION TILES PARSER
+
         	board = new Board(towers, boardBoxes);
         	
         } catch (FileNotFoundException e) {
@@ -125,6 +131,38 @@ private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/co
 		
 		return bonusTiles;
 		
+	}
+	
+
+
+	public ArrayList<ExcommunicationTile> buildExcomunicationTiles(String excomunicationTilesConfigFile) {
+		
+		JSONParser parser = new JSONParser();
+		MyJSONParser myJSONParser = new MyJSONParser();
+		
+    	ArrayList<ExcommunicationTile> excomunicationTiles = new ArrayList<ExcommunicationTile>();
+    	
+		try {
+			Object obj = parser.parse(new FileReader(configFilesPath + excomunicationTilesConfigFile));
+			
+			JSONArray excomunicationTilesJSON = (JSONArray) obj;
+	    	Iterator<?> iterator = excomunicationTilesJSON.iterator();
+	    	while (iterator.hasNext()) {
+	    		
+	    		JSONObject excomunicationTileJSON = (JSONObject) iterator.next();
+	    		ExcommunicationTile excommunicationTile = myJSONParser.buildExcommunicationTile(excomunicationTileJSON);
+	    		excomunicationTiles.add(excommunicationTile);
+	    		
+	    	}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+    	
+		return excomunicationTiles;
 	}
 	
 }

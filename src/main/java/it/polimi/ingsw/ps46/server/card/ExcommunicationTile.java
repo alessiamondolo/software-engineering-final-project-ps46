@@ -45,5 +45,12 @@ public class ExcommunicationTile implements Serializable {
 	public int getId() {
 		return id;
 	}
+	
+	@Override
+	public String toString() {
+		return "ID: " + id + "\n" +
+				"Era: " + era  + "\n" +
+				"Malus: " + permanentMalus;
+	}
 
 }

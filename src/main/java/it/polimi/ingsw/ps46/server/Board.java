@@ -18,12 +18,11 @@ public class Board implements Serializable {
 	private int numberOfTowers;
 	private ArrayList<Tower> towers;
 	private ArrayList<ActionSpace> boardBoxes;
-	private ArrayList<ExcommunicationTile> excommunicationTiles; 	//TODO CREARE IL PARSING DELLE EXCOMMUNICATION TILES 
+	private ArrayList<ExcommunicationTile> excommunicationTiles;
 	
 	/**
 	 * This Class is made by two lists of Tower and boardBoxes. 
 	 */
-	//, ArrayList<ExcommunicationTile> excommunicationTiles
 	public Board(ArrayList<Tower> towers, ArrayList<ActionSpace> boardBoxes){
 		
 		this.towers = towers;
@@ -32,7 +31,8 @@ public class Board implements Serializable {
 			numberOfTowers = towers.size();
 		
 	}
-	//TODO CREARE IL PARSING DELLE EXCOMMUNICATION TILES 
+
+
 
 	/**
 	 * Description of the method getTower
@@ -157,6 +157,10 @@ public class Board implements Serializable {
 
 	public ArrayList<ExcommunicationTile> getExcommunicationTiles() {
 		return excommunicationTiles;
+	}
+	
+	public void setExcommunicationTiles(ArrayList<ExcommunicationTile> excommunicationTiles) {
+		this.excommunicationTiles = excommunicationTiles;
 	}
 
 }

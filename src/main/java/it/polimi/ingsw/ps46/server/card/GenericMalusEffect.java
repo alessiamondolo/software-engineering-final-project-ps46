@@ -47,5 +47,10 @@ public class GenericMalusEffect extends MalusEffect{
 	public String getType() {
 		return type;
 	}
+	
+	@Override
+	public String toString() {
+		return "Name: " + name  + ", type: " + type;
+	}
 
 }

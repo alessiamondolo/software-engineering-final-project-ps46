@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
+import it.polimi.ingsw.ps46.server.card.ExcommunicationTile;
 import it.polimi.ingsw.ps46.server.card.FactoryCards;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
@@ -56,6 +57,7 @@ public class Game extends Observable implements Serializable {
 	private ArrayList<VentureCard> ventureCardsDeck;
 	private Map<String, Dice> dice;
 	private ArrayList<BonusTile> bonusTiles = new ArrayList<BonusTile>();
+	private ArrayList<ExcommunicationTile> excommunicationTiles;
 	
 	private ArrayList<ResourceSet> councilPrivileges;
 	
@@ -117,6 +119,20 @@ public class Game extends Observable implements Serializable {
 	private void configBoard() {
 		FactoryBoard factoryBoard = FactoryBoard.getFactoryBoard();
 		board = factoryBoard.createBoard("Towers.json", "ActionSpaces.json", numberPlayers);
+		excommunicationTiles = factoryBoard.buildExcomunicationTiles("ExcommunicationTile.json");
+
+		//Shuffle excommunication tiles
+		for(int period = 1; period <= PERIODS; period++) {
+			Collections.shuffle(excommunicationTiles.subList((excommunicationTiles.size()/PERIODS)*(period-1), 
+					(excommunicationTiles.size()/PERIODS)*period));
+		}
+		
+		ArrayList<ExcommunicationTile> tiles = new ArrayList<ExcommunicationTile>();
+		for(int period = 1; period <= PERIODS; period++) {
+			tiles.add(excommunicationTiles.get((excommunicationTiles.size()/PERIODS)*(period-1)));
+		}
+		
+		getBoard().setExcommunicationTiles(tiles);
 	}
 	
 	

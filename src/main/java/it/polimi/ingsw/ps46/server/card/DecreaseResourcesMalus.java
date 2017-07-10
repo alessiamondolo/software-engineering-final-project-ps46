@@ -67,4 +67,9 @@ public class DecreaseResourcesMalus extends MalusEffect {
 		return decreasedResources;
 	}
 	
+	@Override
+	public String toString() {
+		return "Name: " + name  + ", decreased resources: " + decreasedResources;
+	}
+	
 }

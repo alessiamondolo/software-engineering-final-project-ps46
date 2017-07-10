@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
  * DecreaseResourcesAtFinalMalus extends DecreaseResourcesMalus. 
@@ -27,7 +28,8 @@ public class DecreaseResourcesAtFinalMalus extends DecreaseResourcesMalus{
 	 *
 	 *@param from
 	 */	
-	public DecreaseResourcesAtFinalMalus(String from){
+	public DecreaseResourcesAtFinalMalus(String name, ResourceSet decreasedResources, String from){
+		super(name, decreasedResources);
 		 this.from = from;
 	}
 	
@@ -47,6 +49,9 @@ public class DecreaseResourcesAtFinalMalus extends DecreaseResourcesMalus{
 		return from;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Name: " + name  + ", decreased resources: " + super.getDecreasedResources() + ", from: " + from;
+	}
 	
 }
