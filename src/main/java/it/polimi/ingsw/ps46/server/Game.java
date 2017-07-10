@@ -122,10 +122,11 @@ public class Game extends Observable implements Serializable {
 		excommunicationTiles = factoryBoard.buildExcomunicationTiles("ExcommunicationTile.json");
 
 		//Shuffle excommunication tiles
+		/*
 		for(int period = 1; period <= PERIODS; period++) {
 			Collections.shuffle(excommunicationTiles.subList((excommunicationTiles.size()/PERIODS)*(period-1), 
 					(excommunicationTiles.size()/PERIODS)*period));
-		}
+		}*/
 		
 		ArrayList<ExcommunicationTile> tiles = new ArrayList<ExcommunicationTile>();
 		for(int period = 1; period <= PERIODS; period++) {
@@ -502,8 +503,12 @@ public class Game extends Observable implements Serializable {
 		return faithPointsRequiredForPeriod;
 	}
 
-	public ArrayList <VictoryPoints> getVictoryPointsForMilitaryPoints() {
+	public ArrayList<VictoryPoints> getVictoryPointsForMilitaryPoints() {
 		return victoryPointsForMilitaryPoints;
+	}
+	
+	public ArrayList<ExcommunicationTile> getExcommunicationTiles() {
+		return excommunicationTiles;
 	}
 
 }

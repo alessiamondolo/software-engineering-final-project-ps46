@@ -102,6 +102,9 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			case VATICAN_REPORT :
 				getVaticanSupport();
 				break;
+			case MISSING_TURN :
+				printMissingTurn();
+				break;
 			default:
 				break;
 			}
@@ -411,6 +414,7 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			writer.flush();
 			writer.writeObject(card.getCostTwo());
 			writer.flush();
+			writer.reset();
 			int choice = (int) reader.readObject();
 			setChanged();
 			EventCostChoice event = new EventCostChoice(NewStateMessage.CARD_COST_CHOICE, card);
@@ -439,6 +443,7 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			writer.flush();
 			writer.writeObject(card.getPermanentEffectsTwo());
 			writer.flush();
+			writer.reset();
 			int choice = (int) reader.readObject();
 			setChanged();
 			EventEffectChoice event = new EventEffectChoice(NewStateMessage.EXCHANGE_RESOURCES_CHOICE, card);
@@ -465,6 +470,7 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			writer.flush();
 			writer.writeObject(game);
 			writer.flush();
+			writer.reset();
 			while(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity() > 0) {
 				int choice = (int) reader.readObject();
 				setChanged();
@@ -522,5 +528,22 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		}
 
 	}	
+	
+	
+	
+	private void printMissingTurn() {
+		for(Socket currentSocket : writers.keySet()) {
+			ObjectOutputStream writer = writers.get(currentSocket);
+			try {
+				writer.writeObject("SHOW_MISSING_TURN");
+				writer.flush();
+				writer.writeObject(game);
+				writer.flush();
+				writer.reset();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 }
