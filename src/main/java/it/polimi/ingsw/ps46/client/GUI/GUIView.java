@@ -298,12 +298,13 @@ public class GUIView implements View {
 	@Override
 	public int getServants() {
 		
+		int playerServants = this.game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").getQuantity();
+		
 		BufferedImage image = null;
 		if (servantsIcon == null) {
 			try {
 				image =  Token.getImagePathMode("mixed/excomm_1_3.png");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -324,6 +325,7 @@ public class GUIView implements View {
 			if (answ == null)
 				return getServants();
 			
+			
 			answ = answ.trim();
 			if (answ == "")
 				return 0;
@@ -331,11 +333,14 @@ public class GUIView implements View {
 			
 			try {
 				
-				System.out.println(this.playerUsername+ " Ha chiesto " +answ+ " servi");
-				return Integer.parseInt(answ);
+				int choice = Integer.parseInt(answ);
+				if ( choice < 0 || choice > playerServants) {
+					this.printMessage("Servants quantity is not valid");
+					return getServants();
+				} else return(choice);
 				
 			} catch (NumberFormatException e) {
-				this.printMessage("Il testo inserito non è un formato di numero valido");
+				this.printMessage("Servants value is not a valid format");
 			}
 		}
 
@@ -354,9 +359,43 @@ public class GUIView implements View {
 
 	@Override
 	public int getEffectCoice(Effect effect1, Effect effect2) {
-		return 0;
-	}
 
+		
+		int result;
+		final String[] effects = { "Upper Effect", "Lower Effect"};
+		String message = ("Look at the card you want to produce with. Which of the two effects you wish to activate?");
+		JOptionPane.showMessageDialog(gameWindow, message);
+		
+		String choice = (String) JOptionPane.showInputDialog(gameWindow, 
+		"Choose Effect",
+		"Effect",
+		JOptionPane.QUESTION_MESSAGE, 
+		null, 
+		effects, 
+		effects[0]);
+				
+		if (choice == null) {
+	    	getEffectCoice(effect1, effect2);
+	    }
+		
+		switch (choice) {
+			
+		case "Upper Effect":
+			result = new Integer(0);
+			break;
+			
+		case "Lower Effect":
+			result = new Integer(1);
+			break;
+		
+		default:
+			return(getEffectCoice(effect1, effect2));
+		}
+		
+		return result;
+	}
+			
+		
 	
 	private static final String[] privilegesTypes = { "Wood: 1 - Stones: 1", "Servants: 2", 
 			 												"Money: 2", "MilitaryPoints: 2", "FaithPoints: 1" };
@@ -460,8 +499,13 @@ public class GUIView implements View {
 
 	@Override
 	public int getVaticanSupport() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		String message = "Do you want to support the church?";
+		int answ = JOptionPane.showConfirmDialog(gameWindow, message);
+		if (answ == JOptionPane.YES_OPTION) return 1;
+		if (answ == JOptionPane.NO_OPTION) return 2;
+		else return getVaticanSupport();
+		
 	}
 
 
