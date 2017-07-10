@@ -13,7 +13,6 @@
 				},
 				"resourcesDiscounted" : false
 			},
-			"isPermanent": "false",	
 			
 			"requiredCards":  [	
 					{
@@ -41,10 +40,9 @@
 			
 			"leaderEffect" : 
 			{
-				"effectType": "putFamilyMemberEverywhereEffect"
+				"effectType": ""
 
 			},
-			"isPermanent": "true",
 					
 			"requiredCards":  [	
 					{
@@ -72,10 +70,9 @@
 			
 			"leaderEffect" : 
 			{
-				"effectType": "noFeeForTowerEffect"
+				"effectType": ""
 
 			},
-			"isPermanent": "true",
 						
 			"requiredCards":  [	
 					{
@@ -110,7 +107,6 @@
 						 }
 
 			},
-			"isPermanent": "true",	
 					
 			"requiredCards":  [],
 			
@@ -190,7 +186,6 @@
 					}
 				]
 			},
-			"isPermanent": "false",
 					
 			"requiredCards":  [],
 			
@@ -270,7 +265,6 @@
 					}
 				]
 			},
-			"isPermanent": "false",
 						
 			"requiredCards":  [],
 					
@@ -350,7 +344,6 @@
 					}
 				]
 			},
-			"isPermanent": "false",
 						
 			"requiredCards":  [],
 					
@@ -403,7 +396,6 @@
 				},
 				"resourcesDiscounted" : false
 			},
-			"isPermanent": "false",
 						
 			"requiredCards":  [	
 					{
@@ -467,7 +459,6 @@
 					}
 				]
 			},
-			"isPermanent": "false",
 						
 			"requiredCards":  [],
 					
@@ -517,7 +508,6 @@
 								"value": 5
 							}
 			},
-			"isPermanent": "true",
 						
 			"requiredCards":  [	
 					{
@@ -553,7 +543,6 @@
 						 }
 
 			},
-			"isPermanent": "true",		
 			
 			"requiredCards":  [	
 					{
@@ -587,7 +576,6 @@
 								"value": 6
 							}
 			},
-			"isPermanent": "false",
 						
 			"requiredCards":  [	
 					{
@@ -615,10 +603,9 @@
 			
 			"leaderEffect" : 
 			{
-				"effectType": "copyOneLeaderCardEffectOnceEffect"
+				"effectType": ""
 
 			},
-			"isPermanent": "true",
 					
 			"requiredCards":  [],
 
@@ -698,7 +685,6 @@
 					}
 				]
 			},
-			"isPermanent": "true",
 					
 			"requiredCards":  [],
 			
@@ -742,11 +728,10 @@
 			
 			"leaderEffect" : 
 			{
-				"effectType": "NoRequiredMilitaryPointsEffect"
+				"effectType": ""
 
 			},
-			"isPermanent": "true",
-					
+								
 			"requiredCards":  [	
 					{
 						"cardType" : "TerritoryCards",
@@ -806,10 +791,9 @@
 			
 			"leaderEffect" : 
 			{
-				"effectType": "ResourcesX2Effect"
+				"effectType": ""
 
 			},
-			"isPermanent": "true",
 					
 			"requiredCards":  [],
 
@@ -889,7 +873,6 @@
 					}
 				]
 			},
-			"isPermanent": "false",
 					
 			"requiredCards":  [	
 					{
@@ -953,7 +936,6 @@
 					}
 				]
 			},
-			"isPermanent": "false",
 					
 			"requiredCards":  [	
 					{
@@ -1017,7 +999,6 @@
 					}
 				]
 			},
-			"isPermanent": "false",
 					
 			"requiredCards":  [],
 			
@@ -1061,10 +1042,9 @@
 			
 			"leaderEffect" : 
 			{
-				"effectType": "CardsDiscountedEffect"
+				"effectType": ""
 
 			},
-			"isPermanent": "true",
 					
 			"requiredCards":  [	
 					{

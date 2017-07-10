@@ -59,5 +59,9 @@ public interface View {
 	public int getVaticanSupport();
 
 	public int getExtraMove(ExtraMoveEffect effect);
+
+	public ArrayList<Integer> getActivationLeaderCards();
+
+	public ArrayList<Integer> getDiscardLeaderCards();
 	
 }

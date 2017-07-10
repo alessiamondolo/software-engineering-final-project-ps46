@@ -507,6 +507,24 @@ public class Game extends Observable implements Serializable {
 		return victoryPointsForMilitaryPoints;
 	}
 	
+	public boolean checkIfHasLeaderCardsActivable(){
+		
+		for (String string : getCurrentPlayer().getLeaderCards().keySet()) {
+			if(getCurrentPlayer().getLeaderCards().get(string).isActivable(this))
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean checkIfCouldDiscardLeaderCards(){
+		
+		for (String string : getCurrentPlayer().getLeaderCards().keySet()) {
+			if(!(getCurrentPlayer().getLeaderCards().get(string).isActive()) )
+				return true;
+		}
+		return false;
+	}
+
 	public ArrayList<ExcommunicationTile> getExcommunicationTiles() {
 		return excommunicationTiles;
 	}

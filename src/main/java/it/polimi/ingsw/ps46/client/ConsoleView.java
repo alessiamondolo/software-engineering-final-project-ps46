@@ -626,8 +626,6 @@ public class ConsoleView implements View {
 	}
 
 
-
-	@Override
 	public int getVaticanSupport() {
 		
 		output.println("==========================================================================");
@@ -697,4 +695,94 @@ public class ConsoleView implements View {
 		return move;
 	}
 
+
+	public ArrayList<Integer> getActivationLeaderCards() {
+		int numberOfLeaderCardActivable = 0;
+		ArrayList<Integer> leaderCardsActivated = new ArrayList<Integer>();
+		
+		for(String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+			if(game.getCurrentPlayer().getLeaderCards().get(string).isActivable(game)){
+				numberOfLeaderCardActivable++;
+				}
+		}
+		output.println("You have " + numberOfLeaderCardActivable + " Leader Cards activable.");
+		
+		while(numberOfLeaderCardActivable > 0) {
+			int index = 0;
+			
+			output.println("Do you want to activate a Leader Card?");
+			output.println(index + ". I don't want to activate any Leader Card");
+			index++;
+			for(String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+				if(game.getCurrentPlayer().getLeaderCards().get(string).isActivable(game)){
+					output.println(index + ". " + string);
+					index++;
+					}
+			}
+			int choice = input.IntegerFromConsole(0, (index-1)); // in attesa di un input da 0 a 4
+			Integer leaderCard = new Integer(choice);
+			if(leaderCard != 0){
+				if(!leaderCardsActivated.contains(leaderCard)) {
+					leaderCardsActivated.add(leaderCard);
+					numberOfLeaderCardActivable--;
+					if(numberOfLeaderCardActivable > 0)
+						output.println("You still have " + numberOfLeaderCardActivable + " Leader Cards activable.");
+				}
+				else
+					output.println("You already have activated this Leader Card.");
+			}
+			else 
+			{
+				leaderCardsActivated.add(leaderCard);
+				break;
+			}
+		}
+		return leaderCardsActivated;
+	}
+	
+	
+
+	public ArrayList<Integer> getDiscardLeaderCards(){
+		int numberOfLeaderCardCouldDiscard = 0;
+		ArrayList<Integer> leaderCardsDiscarded = new ArrayList<Integer>();
+		
+		for(String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+			if(!(game.getCurrentPlayer().getLeaderCards().get(string).isActive()) ){
+				numberOfLeaderCardCouldDiscard++;
+				}
+		}
+		output.println("You could discard " + numberOfLeaderCardCouldDiscard + " Leader Cards.");
+		
+		while(numberOfLeaderCardCouldDiscard > 0) {
+			int index = 0;
+			
+			output.println("Do you want to discard a Leader Card to get a council privilege?");
+			output.println(index + ". I don't want to discard any Leader Card");
+			index++;
+			for(String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+				if(!(game.getCurrentPlayer().getLeaderCards().get(string).isActive()) ){
+					output.println(index + ". " + string);
+					index++;
+					}
+			}
+			int choice = input.IntegerFromConsole(0, (index-1)); // in attesa di un input da 0 a 4
+			Integer leaderCardDiscarded = new Integer(choice);
+			if(leaderCardDiscarded != 0){
+				if(!leaderCardsDiscarded.contains(leaderCardDiscarded)) {
+					leaderCardsDiscarded.add(leaderCardDiscarded);
+					numberOfLeaderCardCouldDiscard--;
+					if(numberOfLeaderCardCouldDiscard > 0)
+						output.println("You could discard " + numberOfLeaderCardCouldDiscard + " Leader Cards.");
+				}
+				else
+					output.println("You already have discarded this Leader Card.");
+			}
+			else 
+			{
+				leaderCardsDiscarded.add(leaderCardDiscarded);
+				break;
+			}
+		}
+		return leaderCardsDiscarded;
+	}
 }

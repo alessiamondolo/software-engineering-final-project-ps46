@@ -521,6 +521,17 @@ public class GUIView implements View {
 		return 0;
 	}
 
+	public ArrayList<Integer> getActivationLeaderCards() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Integer> getDiscardLeaderCards() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	
 }

@@ -268,6 +268,19 @@ public class SocketClient implements Runnable {
 				e.printStackTrace();
 			}
 			break;
+		case "GET_ACTIVATION_LEADER_CARDS" :
+			try {
+				view.setGame((Game) reader.readObject()); // riceve il game e lo passa alla view
+				for(Integer leaderCard : view.getActivationLeaderCards()) {
+					writer.writeObject(leaderCard.intValue());
+					writer.flush();
+				} 
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
 		case "SHOW_MISSING_TURN" :
 			try {
 				Game game = (Game) reader.readObject();
@@ -297,8 +310,20 @@ public class SocketClient implements Runnable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
-			
-			break;
+			break;	
+		case "GET_DISCARD_LEADER_CARDS" : 
+			try {
+				view.setGame((Game) reader.readObject());
+				for(Integer leaderCard : view.getDiscardLeaderCards()) {
+					writer.writeObject(leaderCard.intValue());
+					writer.flush();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
+			break;	
 		case "END_GAME" :
 			listening = false;
 			break;
@@ -307,5 +332,4 @@ public class SocketClient implements Runnable {
 			break;
 		}
 	}
-	
 }
