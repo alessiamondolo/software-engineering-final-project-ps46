@@ -84,7 +84,9 @@ public class GameController implements Observer, ViewEventVisitor {
 	public void visit(EventIntInput eventIntInput) {
 		switch(eventIntInput.getType()) {
 		case BONUS_TILE_CHOICE :
-			game.getCurrentPlayer().getPersonalBoard().setBonusTile(game.getBonusTiles().get(eventIntInput.getValue()));
+			int choice = eventIntInput.getValue();
+			game.getCurrentPlayer().getPersonalBoard().setBonusTile(new BonusTile(game.getBonusTiles().get(choice)));
+			game.getBonusTiles().remove(choice);
 			break;
 		case PLAYER_ACTION :
 			actionSpaceID = eventIntInput.getValue();

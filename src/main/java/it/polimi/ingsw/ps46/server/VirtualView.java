@@ -266,6 +266,9 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		try {
 			writer.writeObject("GET_BONUS_TILE");
 			writer.flush();
+			writer.writeObject(game);
+			writer.flush();
+			writer.reset();
 			try {
 				bonusTile = (int) reader.readObject();
 			} catch (ClassNotFoundException e) {

@@ -130,10 +130,7 @@ public class CollectCardAction implements Action {
 		}
 		
 		//checking the leaderCard Effect of "Pico della Mirandola"
-		if(cost != null)
-			System.out.println(cost.toString());
 		if(cost == null) {
-			System.out.println("Cost null");
 			cost = card.getCost();
 		}
 		ResourceSet temporaryCost = new ResourceSet(cost);
