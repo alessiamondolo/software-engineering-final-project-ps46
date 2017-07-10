@@ -623,4 +623,19 @@ public class ConsoleView implements View {
 		}		
 	}
 
+
+
+	@Override
+	public int getVaticanSupport() {
+		
+		output.println("==========================================================================");
+		output.println("Do you want to support the Church?");
+		output.println("1. Yes");
+		output.println("2. No");
+
+
+		int choice = input.IntegerFromConsole(1, 2);
+		return choice;
+	}
+
 }

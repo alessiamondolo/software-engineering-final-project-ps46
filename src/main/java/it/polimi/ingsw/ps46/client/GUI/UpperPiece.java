@@ -75,18 +75,13 @@ public class UpperPiece extends JPanel {
 	
 	public void update(Game game) {
 		
-		//per le carte dovrei allo stesso modo usare la clear?
 		int i = 0;
 		for ( ActionTower tower : actionTowers) {
 			tower.update(game, i);
 			i++;
 		}
 		
-		ArrayList <String> fmColors = new ArrayList <String>();
-		fmColors.add("White");
-		fmColors.add("Black");
-		fmColors.add("Orange");
-		fmColors.add("Neutral");
+		String[] fmColors = {"White", "Black", "Orange", "Neutral"};
 		
 		for ( int x = 0; x < 4; x++) {
 			toTowers.get(x).removeAll();
@@ -99,6 +94,10 @@ public class UpperPiece extends JPanel {
 				int fmPosition = fm.getPositionOfFamilyMember();
 				if (0 < fmPosition && fmPosition <= 16) {
 					i = fmPosition / 4;
+					if (fmPosition%4 == 0) {
+						i --;
+						toTowers.get(i).add(player, fmColor, 0);
+					} else 
 					toTowers.get(i).add(player, fmColor, 4 - fmPosition%4);
 				}
 			}

@@ -302,14 +302,11 @@ public class LowerPiece extends JPanel {
 	
 	private void updateActionCell() {
 		
-		ArrayList <String> fmColors = new ArrayList <String>();
-		fmColors.add("White");
-		fmColors.add("Black");
-		fmColors.add("Orange");
-		fmColors.add("Neutral");
+		String[] fmColors = {"White", "Black", "Orange", "Neutral"};
 
 		for (PointCell cell : actionCells) {
-				cell.itemList.clear();
+				cell.removeAll();
+				cell.clearFM();
 			}
 		
 		

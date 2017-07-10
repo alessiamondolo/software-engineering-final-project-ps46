@@ -120,13 +120,15 @@ public class CollectCardAction implements Action {
 
 		}
 		
+		//checking preacher character card effect on the additional Resources of actionSpaces the 3rd and 4th tower floor.
 		ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());
-		if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
-			
-			temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
-			}
+		if (!(game.getCurrentPlayer().isPreacherEffectActive()) ) {
+			if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
+				temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
+				}
+			temporaryPlayerResourceSet.add(temporaryEffectResourceSet);
+		}
 		
-		temporaryPlayerResourceSet.add(temporaryEffectResourceSet);
 		//checking the leaderCard Effect of "Pico della Mirandola"
 		if(cost != null)
 			System.out.println(cost.toString());

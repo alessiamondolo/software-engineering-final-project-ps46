@@ -66,10 +66,12 @@ public class MilitaryTower extends JPanel {
 			int mp;
 			try {
 				mp = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints").getQuantity();
+				System.out.println("sono " +player.getUsername()+ " e ho punti militari " +mp);
 			} catch (NullPointerException e) {
 				mp = 0;
 			}
 			militaryPointCells.get(25 - mp).add(player);
 		}	
+		repaint();
 	}
 }

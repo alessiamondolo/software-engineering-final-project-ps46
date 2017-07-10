@@ -28,7 +28,7 @@ public class LeaderCard {
 	 * Santa Rita: ResourcesX2Effect DONE
 	 * Pico della Mirandola: CardsDiscountedEffect -3 Money DONE
 	 * ANTONIOOOOOOOOOOOOOOOOOOOO
-	 * Sisto IV TODO da implementare con il rapporto del vaticano 
+	 * Sisto IV TODO da implementare con il rapporto del vaticano DONE
 	 */
 	
 	public LeaderCard (String name, Effect leaderEffect, boolean isPermanent, LinkedHashMap<String,Integer> requiredCards, ResourceSet requiredResources) {

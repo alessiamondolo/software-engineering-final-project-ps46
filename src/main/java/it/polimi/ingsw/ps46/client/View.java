@@ -54,5 +54,7 @@ public interface View {
 	public void showNextTurnOrder();
 
 	public ArrayList<Integer> getCouncilPrivilege();
+
+	public int getVaticanSupport();
 	
 }

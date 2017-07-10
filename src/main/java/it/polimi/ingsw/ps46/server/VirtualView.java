@@ -99,6 +99,9 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			case COUNCIL_PRIVILEGE : 
 				getCouncilPrivilege();
 				break;
+			case VATICAN_REPORT :
+				getVaticanSupport();
+				break;
 			default:
 				break;
 			}
@@ -490,5 +493,31 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			}
 		}
 	}
+	
+
+
+	private void getVaticanSupport() {
+		
+		int vaticanSupport = 0;
+		for(Socket currentSocket : clients) {
+			ObjectOutputStream writer = writers.get(currentSocket);
+			ObjectInputStream reader = readers.get(currentSocket);
+			try {
+				writer.writeObject("GET_VATICAN_SUPPORT");
+				writer.flush();
+				writer.reset();
+				try {
+					vaticanSupport = (int) reader.readObject();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			setChanged();
+			notifyObservers(new EventIntInput(vaticanSupport, InputType.VATICAN_SUPPORT_CHOICE));
+		}
+
+	}	
 	
 }

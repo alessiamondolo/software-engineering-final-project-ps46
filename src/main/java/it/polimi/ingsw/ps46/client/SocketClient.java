@@ -257,6 +257,13 @@ public class SocketClient implements Runnable {
 				e.printStackTrace();
 			} 
 			break;
+		case "GET_VATICAN_SUPPORT" :
+			try {
+				writer.writeObject((int) view.getVaticanSupport());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
 		case "END_GAME" :
 			listening = false;
 			break;
