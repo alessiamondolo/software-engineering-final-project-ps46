@@ -508,6 +508,12 @@ public class GUIView implements View {
 		
 	}
 
+	@Override
+	public int getCostCoice(ResourceSet cost1, ResourceSet cost2) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 	
 }

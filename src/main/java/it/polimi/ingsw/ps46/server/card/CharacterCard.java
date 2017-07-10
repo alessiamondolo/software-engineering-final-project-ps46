@@ -21,9 +21,11 @@ public class CharacterCard extends Card {
 	
 	@Override
 	public void collectCard(Game game) {
-		immediateEffects.activateEffect(game);
+		if(immediateEffects != null)
+			immediateEffects.activateEffect(game);
 		game.getCurrentPlayer().getPersonalBoard().putCharacterCardInPlayerSet(this);
 	}
+	
 	
 	@Override
 	public String toString() {

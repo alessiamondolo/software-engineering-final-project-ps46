@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
  * This class implements the client that communicates with the server with Sockets.
@@ -154,8 +155,11 @@ public class SocketClient implements Runnable {
 			break;
 		case "GET_BONUS_TILE" :
 			try {
+				view.setGame((Game) reader.readObject());
 				writer.writeObject((int) view.getBonusTile());
 			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 			break;
@@ -208,6 +212,18 @@ public class SocketClient implements Runnable {
 			break;
 		case "PREVIOUS_ACTION_NOT_VALID" :
 			view.printMessage("The action you chose is not valid, please try again.\n");
+			break;
+		case "GET_COST_CHOICE" : 
+			try {
+				ResourceSet cost1 = (ResourceSet) reader.readObject();
+				ResourceSet cost2 = (ResourceSet) reader.readObject();
+				writer.writeObject(view.getCostCoice(cost1, cost2));
+				writer.flush();
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "GET_EFFECT_CHOICE" : 
 			try {

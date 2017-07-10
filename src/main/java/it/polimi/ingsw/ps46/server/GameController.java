@@ -12,7 +12,9 @@ import it.polimi.ingsw.ps46.server.action.Action;
 import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.CouncilPrivilege;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 import it.polimi.ingsw.ps46.server.resources.FaithPoints;
 import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.Servants;
@@ -31,6 +33,7 @@ public class GameController implements Observer, ViewEventVisitor {
 	private int actionSpaceID = 0;
 	private String familyMemberName = null;
 	private int servants = 0;
+	private ResourceSet cost = null;
 
 
 	/**
@@ -81,7 +84,9 @@ public class GameController implements Observer, ViewEventVisitor {
 	public void visit(EventIntInput eventIntInput) {
 		switch(eventIntInput.getType()) {
 		case BONUS_TILE_CHOICE :
-			game.getCurrentPlayer().getPersonalBoard().setBonusTile(game.getBonusTiles().get(eventIntInput.getValue()));
+			int choice = eventIntInput.getValue();
+			game.getCurrentPlayer().getPersonalBoard().setBonusTile(new BonusTile(game.getBonusTiles().get(choice)));
+			game.getBonusTiles().remove(choice);
 			break;
 		case PLAYER_ACTION :
 			actionSpaceID = eventIntInput.getValue();
@@ -110,6 +115,22 @@ public class GameController implements Observer, ViewEventVisitor {
 		case EXCHANGE_RESOURCES_CHOICE :
 			BuildingCard card = eventEffectChoice.getCard();
 			card.useOptional(eventEffectChoice.getChoice(), game);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	
+	
+	public void visit(EventCostChoice eventCostChoice) {
+		switch(eventCostChoice.getMessage()) {
+		case CARD_COST_CHOICE :
+			VentureCard card = eventCostChoice.getCard();
+			if(eventCostChoice.getChoice() == 1)
+				cost = card.getCost();
+			else 
+				cost = card.getCostTwo();
 			break;
 		default:
 			break;
@@ -379,9 +400,22 @@ public class GameController implements Observer, ViewEventVisitor {
 				}
 			}
 		}
-		 
-		Action action = new MoveToActionSpaceAction(game, player, familyMember, actionSpace);
+		
+		if(actionSpace.getType().equals("Tower")) {
+			int tower = (actionSpace.getId() - 1) / game.getBoard().getNumberOfTowers();
+			if(tower == 3) {//ventureCard
+				if(game.getBoard().getCardOfTheTowerFloor(actionSpace.getId()) != null) {
+					game.getCardCost((VentureCard) game.getBoard().getCardOfTheTowerFloor(actionSpace.getId()));
+				}
+			}
+		}
+		
+		Action action = new MoveToActionSpaceAction(game, player, familyMember, actionSpace, cost);
 		boolean executed = action.execute();
+		actionSpaceID = 0;
+		familyMemberName = null;
+		servants = 0;
+		cost = null;
 		if(!executed) {
 			//restores original value of the family member
 			familyMember.setValueOfFamilyMember(new Dice(familyMemberValue));
@@ -481,7 +515,7 @@ public class GameController implements Observer, ViewEventVisitor {
 						idPlayerAndMilitaryPointsMap.remove(integer); //to not create copies of the same player
 					}		
 				}
-				
+				//filling the map with the player's id and how many victory points has got by militarypoints
 				if (playerOrderForMilitaryPoints.get(i) != playerOrderForMilitaryPoints.get(i+1)) {
 					finalOrderPlusVictoryPpoints.put(idActualPlayer, game.getVictoryPointsForMilitaryPoints().get(indexVictoryPointsForMilitaryPointsGained));
 					indexVictoryPointsForMilitaryPointsGained++;		
@@ -528,11 +562,12 @@ public class GameController implements Observer, ViewEventVisitor {
 							(player.getGenericMalus().get("notCountingVictoryPointsFromCards").getType() != "CharacterCards")))
 				victoryPoints.add(game.getVictoryPointsFromCharacterCards().get(player.getPersonalBoard().getCharacterDeck().size()));
 			
-			//TODO da completare
 			//Add final victory points from Military points based on the final placement for military points
-			
-			
-			
+			if(finalOrderPlusVictoryPpoints.containsKey(player.getIdPlayer()) ) {
+				
+				player.getPersonalBoard().getPlayerResourceSet().add(finalOrderPlusVictoryPpoints.get(player.getIdPlayer()));
+				
+			}
 			
 			
 			//Add final victory points from number of resources

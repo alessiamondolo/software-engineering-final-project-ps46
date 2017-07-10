@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.Money;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -21,16 +22,18 @@ public class CollectCardAction implements Action {
 	private ActionSpace actionSpace;
 	private boolean isTheTowerEmpty = false;
 	private FamilyMember familyMemberUsed;
+	private ResourceSet cost;
 
 	private Card card;
 	private final static Money TOWERFEE = new Money(3);
 	
 
-	public CollectCardAction(Game game, ActionSpace actionSpace, FamilyMember familyMemberUsed) {
+	public CollectCardAction(Game game, ActionSpace actionSpace, FamilyMember familyMemberUsed, ResourceSet cost) {
 		this.game = game;
 		this.actionSpace = actionSpace;
 		isTheTowerEmpty = game.getBoard().isEmptyTower( actionSpace.getId() );
 		this.familyMemberUsed = familyMemberUsed;
+		this.cost = cost;
 		
 		card = game.getBoard().getCardOfTheTowerFloor( actionSpace.getId() );
 	}
@@ -115,7 +118,16 @@ public class CollectCardAction implements Action {
 				if(!temporaryPlayerResourceSet.greaterOrEqual(TOWERFEE)) return false;
 				temporaryPlayerResourceSet.sub(TOWERFEE);
 			}
-
+		}
+		
+		//if the card is a ventureCard check if there is a is a requiredResource necessary to collect the card 
+		if (game.getBoard().getColorOfTower(actionSpace.getId()) == "green"){
+			
+			VentureCard ventureCard = (VentureCard)card;
+			if (ventureCard.getRequiredResource() != null){
+				if (!(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().greaterOrEqual(ventureCard.getRequiredResource())) )
+					return false;
+			}
 		}
 		
 		//checking preacher character card effect on the additional Resources of actionSpaces the 3rd and 4th tower floor.
@@ -128,7 +140,10 @@ public class CollectCardAction implements Action {
 		}
 		
 		//checking the leaderCard Effect of "Pico della Mirandola"
-		ResourceSet temporaryCost = new ResourceSet(card.getCost());
+		if(cost == null) {
+			cost = card.getCost();
+		}
+		ResourceSet temporaryCost = new ResourceSet(cost);
 		if (game.getCurrentPlayer().getLeaderCards().containsKey("Pico della Mirandola") && (game.getCurrentPlayer().getLeaderCards().get("Pico della Mirandola").isActive()) ){
 			Money moneyDiscounted = new Money(3);
 			if ( temporaryCost.getResourcesMap().get("Money").getQuantity() < 3) {

@@ -44,6 +44,7 @@ public class BuildingCard extends Card {
 	
 	@Override
 	public void collectCard(Game game) {
+		//all building cards have immediate effect
 		immediateEffects.activateEffect(game);
 		game.getCurrentPlayer().getPersonalBoard().putBuildingCardInPlayerSet(this);
 	}

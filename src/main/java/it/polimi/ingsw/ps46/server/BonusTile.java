@@ -25,6 +25,18 @@ public class BonusTile implements Serializable {
 		
 	}
 	
+	/**
+	 * This constructor is used to create a deep copy of a bonus tile passed as a parameter.
+	 * 
+	 * @param bonusTileToBeCloned
+	 */
+	public BonusTile(BonusTile bonusTileToBeCloned){
+		advancedPersonalBoard = bonusTileToBeCloned.isAdvancedPersonalBoard();
+		productionValue = bonusTileToBeCloned.getProductionValue();
+		harvestValue = bonusTileToBeCloned.getHarvestValue();
+		gainedFromPersonalBoardProduction = bonusTileToBeCloned.getGainedFromPersonalBoardProduction();
+		gainedFromPersonalBoardHarvest = bonusTileToBeCloned.getGainedFromPersonalBoardHarvest();
+	}
 	
 	public Dice getProductionValue() {
 		return productionValue;
