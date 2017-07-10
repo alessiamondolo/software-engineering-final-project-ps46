@@ -32,6 +32,8 @@ public class VentureCard extends Card {
 	
 	@Override
 	public void collectCard(Game game) {
+		//all venture cards have immediate effect
+
 		immediateEffects.activateEffect(game);
 		game.getCurrentPlayer().getPersonalBoard().putVentureCardInPlayerSet(this);
 	}

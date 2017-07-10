@@ -438,6 +438,7 @@ public class Game extends Observable implements Serializable {
 		}
 	}
 
+
 	public int getPHASES_PER_ROUND() {
 		return PHASES_PER_ROUND;
 	}

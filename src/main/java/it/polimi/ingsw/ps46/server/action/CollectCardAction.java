@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.Money;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -117,7 +118,16 @@ public class CollectCardAction implements Action {
 				if(!temporaryPlayerResourceSet.greaterOrEqual(TOWERFEE)) return false;
 				temporaryPlayerResourceSet.sub(TOWERFEE);
 			}
-
+		}
+		
+		//if the card is a ventureCard check if there is a is a requiredResource necessary to collect the card 
+		if (game.getBoard().getColorOfTower(actionSpace.getId()) == "green"){
+			
+			VentureCard ventureCard = (VentureCard)card;
+			if (ventureCard.getRequiredResource() != null){
+				if (!(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().greaterOrEqual(ventureCard.getRequiredResource())) )
+					return false;
+			}
 		}
 		
 		//checking preacher character card effect on the additional Resources of actionSpaces the 3rd and 4th tower floor.
