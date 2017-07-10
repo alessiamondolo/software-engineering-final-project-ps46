@@ -5,5 +5,7 @@ public interface EventVisitor {
 	void visit(EventMessage eventMessage);
 
 	void visit(EventEffectChoice eventEffectChoice);
+
+	void visit(EventCostChoice eventCostChoice);
 	
 }

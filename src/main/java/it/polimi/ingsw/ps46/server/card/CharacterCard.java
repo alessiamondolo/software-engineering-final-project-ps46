@@ -25,6 +25,7 @@ public class CharacterCard extends Card {
 		game.getCurrentPlayer().getPersonalBoard().putCharacterCardInPlayerSet(this);
 	}
 	
+	
 	@Override
 	public String toString() {
 		

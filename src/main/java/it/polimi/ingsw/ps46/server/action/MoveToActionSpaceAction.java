@@ -19,13 +19,15 @@ public class MoveToActionSpaceAction implements Action {
 	private Player player;
 	private FamilyMember familyMember;
 	private ActionSpace actionSpace;
+	private ResourceSet cost;
 	
 	
-	public MoveToActionSpaceAction(Game game, Player player, FamilyMember familyMember, ActionSpace actionSpace) {
+	public MoveToActionSpaceAction(Game game, Player player, FamilyMember familyMember, ActionSpace actionSpace, ResourceSet cost) {
 		this.game = game;
 		this.player = player;
 		this.familyMember = familyMember;
 		this.actionSpace = actionSpace;
+		this.cost = cost;
 	}
 	
 	
@@ -50,7 +52,7 @@ public class MoveToActionSpaceAction implements Action {
 			//TODO check modifications to this method
 			switch(actionSpace.getType()) {
 				case "Tower" : {//NO INTERAZIONE
-					Action nextAction = new CollectCardAction(game, actionSpace, familyMember);
+					Action nextAction = new CollectCardAction(game, actionSpace, familyMember, cost);
 					return nextAction.execute();
 				}
 				case "Production" : {

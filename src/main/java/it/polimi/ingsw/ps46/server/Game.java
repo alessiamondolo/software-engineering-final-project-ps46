@@ -388,6 +388,15 @@ public class Game extends Observable implements Serializable {
 			newState(new EventEffectChoice(NewStateMessage.EXCHANGE_RESOURCES_CHOICE, card));
 		}
 	}
+	
+	public ResourceSet getCardCost(VentureCard card) {
+		if(!card.getdoubleCostChoice())
+			return card.getCost();
+		else {
+			newState(new EventCostChoice(NewStateMessage.CARD_COST_CHOICE, card));
+			return null;
+		}
+	}
 
 	public int getPHASES_PER_ROUND() {
 		return PHASES_PER_ROUND;

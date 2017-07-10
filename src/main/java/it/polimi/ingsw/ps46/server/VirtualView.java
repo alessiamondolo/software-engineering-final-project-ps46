@@ -11,6 +11,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
+import it.polimi.ingsw.ps46.server.card.VentureCard;
 
 
 /**
@@ -133,9 +134,21 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			break;
 		}
 	}
+	
+	
+	
+	public void visit(EventCostChoice eventCostChoice) {
+		switch(eventCostChoice.getMessage()) {
+		case CARD_COST_CHOICE :
+			getCostChoice(eventCostChoice.getCard());
+			break;
+		default:
+			break;
+		}
+	}
 
-	
-	
+
+
 	/**
 	 * Sends to the all the clients a message request to print the welcome message for the game.
 	 */
@@ -379,8 +392,34 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
-	 * @param effect2 
-	 * @param effect1 
+	 * 
+	 */
+	public void getCostChoice(VentureCard card) {
+		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
+		ObjectOutputStream writer = writers.get(currentSocket);
+		ObjectInputStream reader = readers.get(currentSocket);
+		try {
+			writer.writeObject("GET_COST_CHOICE");
+			writer.flush();
+			writer.writeObject(card.getCost());
+			writer.flush();
+			writer.writeObject(card.getCostTwo());
+			writer.flush();
+			int choice = (int) reader.readObject();
+			setChanged();
+			EventCostChoice event = new EventCostChoice(NewStateMessage.CARD_COST_CHOICE, card);
+			event.setChoice(choice);
+			notifyObservers(event);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	/**
 	 * 
 	 */
 	public void getEffectChoice(BuildingCard card) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
 /**
@@ -45,6 +46,8 @@ public interface View {
 	public int getServants();
 	
 	public void printPlayerAction();
+
+	public int getCostCoice(ResourceSet cost1, ResourceSet cost2);
 
 	public int getEffectCoice(Effect effect1, Effect effect2);
 	
