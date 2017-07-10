@@ -80,6 +80,7 @@ public abstract class Cell<T> extends JButton {
 		update();
 	}
 	
+	@Override
 	public void removeAll() {
 		if (itemList.isEmpty() == false) {
 			itemList.clear();

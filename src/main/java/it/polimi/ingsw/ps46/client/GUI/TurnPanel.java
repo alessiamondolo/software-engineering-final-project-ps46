@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps46.client.GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -29,11 +30,13 @@ public class TurnPanel extends JPanel  {
 		for (int i = 0; i < 4; i++) {
 					
 				PointCell turnCell = new PointCell();
+				//turnCell.setLayout(new GridBagLayout());
 				turnCell.setBackground(Color.lightGray);
 				turnCell.setOpaque(true);
 				turnCells.add(turnCell);
 				turnCell.setPreferredSize((new Dimension(dimension.width/5,dimension.height/3)));
 				this.add(turnCell);
+				
 		}
 			
 	}
@@ -50,7 +53,7 @@ public class TurnPanel extends JPanel  {
 			Player player = players.get(i);
 			cell.add(player);
 		}
-		
+		repaint();
 	}
 	
 }

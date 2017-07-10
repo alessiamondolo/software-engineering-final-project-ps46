@@ -12,7 +12,9 @@ import it.polimi.ingsw.ps46.server.action.Action;
 import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.CouncilPrivilege;
+import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 import it.polimi.ingsw.ps46.server.resources.FaithPoints;
 import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.Servants;
@@ -31,6 +33,7 @@ public class GameController implements Observer, ViewEventVisitor {
 	private int actionSpaceID = 0;
 	private String familyMemberName = null;
 	private int servants = 0;
+	private ResourceSet cost = null;
 
 
 	/**
@@ -110,6 +113,22 @@ public class GameController implements Observer, ViewEventVisitor {
 		case EXCHANGE_RESOURCES_CHOICE :
 			BuildingCard card = eventEffectChoice.getCard();
 			card.useOptional(eventEffectChoice.getChoice(), game);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	
+	
+	public void visit(EventCostChoice eventCostChoice) {
+		switch(eventCostChoice.getMessage()) {
+		case CARD_COST_CHOICE :
+			VentureCard card = eventCostChoice.getCard();
+			if(eventCostChoice.getChoice() == 1)
+				cost = card.getCost();
+			else 
+				cost = card.getCostTwo();
 			break;
 		default:
 			break;
@@ -379,9 +398,22 @@ public class GameController implements Observer, ViewEventVisitor {
 				}
 			}
 		}
-		 
-		Action action = new MoveToActionSpaceAction(game, player, familyMember, actionSpace);
+		
+		if(actionSpace.getType().equals("Tower")) {
+			int tower = (actionSpace.getId() - 1) / game.getBoard().getNumberOfTowers();
+			if(tower == 3) {//ventureCard
+				if(game.getBoard().getCardOfTheTowerFloor(actionSpace.getId()) != null) {
+					game.getCardCost((VentureCard) game.getBoard().getCardOfTheTowerFloor(actionSpace.getId()));
+				}
+			}
+		}
+		
+		Action action = new MoveToActionSpaceAction(game, player, familyMember, actionSpace, cost);
 		boolean executed = action.execute();
+		actionSpaceID = 0;
+		familyMemberName = null;
+		servants = 0;
+		cost = null;
 		if(!executed) {
 			//restores original value of the family member
 			familyMember.setValueOfFamilyMember(new Dice(familyMemberValue));

@@ -22,16 +22,18 @@ public class CollectCardAction implements Action {
 	private ActionSpace actionSpace;
 	private boolean isTheTowerEmpty = false;
 	private FamilyMember familyMemberUsed;
+	private ResourceSet cost;
 
 	private Card card;
 	private final static Money TOWERFEE = new Money(3);
 	
 
-	public CollectCardAction(Game game, ActionSpace actionSpace, FamilyMember familyMemberUsed) {
+	public CollectCardAction(Game game, ActionSpace actionSpace, FamilyMember familyMemberUsed, ResourceSet cost) {
 		this.game = game;
 		this.actionSpace = actionSpace;
 		isTheTowerEmpty = game.getBoard().isEmptyTower( actionSpace.getId() );
 		this.familyMemberUsed = familyMemberUsed;
+		this.cost = cost;
 		
 		card = game.getBoard().getCardOfTheTowerFloor( actionSpace.getId() );
 	}
@@ -138,7 +140,13 @@ public class CollectCardAction implements Action {
 		}
 		
 		//checking the leaderCard Effect of "Pico della Mirandola"
-		ResourceSet temporaryCost = new ResourceSet(card.getCost());
+		if(cost != null)
+			System.out.println(cost.toString());
+		if(cost == null) {
+			System.out.println("Cost null");
+			cost = card.getCost();
+		}
+		ResourceSet temporaryCost = new ResourceSet(cost);
 		if (game.getCurrentPlayer().getLeaderCards().containsKey("Pico della Mirandola") && (game.getCurrentPlayer().getLeaderCards().get("Pico della Mirandola").isActive()) ){
 			Money moneyDiscounted = new Money(3);
 			if ( temporaryCost.getResourcesMap().get("Money").getQuantity() < 3) {

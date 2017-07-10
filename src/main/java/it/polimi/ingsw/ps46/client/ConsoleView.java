@@ -529,6 +529,21 @@ public class ConsoleView implements View {
 		int servants = input.IntegerFromConsole(0, myServants);
 		return servants;
 	}
+	
+	
+	
+	/**
+	 * Gets which of the two optional costs the player wants to pay.
+	 * 
+	 * @return choice : the cost chosen by the player.
+	 */
+	public int getCostCoice(ResourceSet cost1, ResourceSet cost2) {
+		output.println("Which of these costs do you want to pay for the card?");
+		output.println("1. " + cost1.toString());
+		output.println("2. " + cost2.toString());
+		int choice = input.IntegerFromConsole(1, 2);
+		return choice;
+	}
 
 	
 	

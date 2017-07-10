@@ -9,12 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
-
-import org.json.simple.ItemList;
 
 import it.polimi.ingsw.ps46.server.card.Card;
 
@@ -23,7 +19,8 @@ public class CardCell extends Cell<Card> {
 	private static final long serialVersionUID = 5769254098690808463L;
 	
 	static ArrayList<BufferedImage> imageList = null;
-	public CardCell() {
+	
+	public CardCell () {
 		
 		super();
 		if (imageList == null) {
@@ -32,8 +29,20 @@ public class CardCell extends Cell<Card> {
 				imageList.add(null);
 		}
 		this.setEnabled(true);
-		CardListener listener = new CardListener(itemList);
-		this.addActionListener(listener);
+		this.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				
+				if (itemList.isEmpty() == false) {
+					int index = CardNames.find(itemList.get(0).getCardName());
+					BufferedImage img = CardCell.imageList.get(index);
+					ZoomBox.setImage(img);
+				}
+			}
+			
+		});
 	}
 
 	/**
@@ -202,23 +211,3 @@ final class CardNames {
 }
 
 
-	class CardListener implements ActionListener {
-		
-		ArrayList<Card> itemList;
-		
-		public CardListener(ArrayList<Card> itemList) {
-			this.itemList = itemList;
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			if (itemList.isEmpty() == false) {
-				int index = CardNames.find(itemList.get(0).getCardName());
-				BufferedImage img = CardCell.imageList.get(index);
-				ZoomBox.setImage(img);
-			}
-
-		}
-	
-}

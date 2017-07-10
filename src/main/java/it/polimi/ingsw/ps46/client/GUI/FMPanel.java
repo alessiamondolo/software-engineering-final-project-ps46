@@ -33,7 +33,6 @@ public class FMPanel extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setOpaque(true);
-		panel.setBackground(new Color(213, 50, 90, 123));
 		title = new JLabel("", SwingConstants.CENTER);
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 		title.setBorder(border);

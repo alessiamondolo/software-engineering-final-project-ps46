@@ -242,13 +242,13 @@ public class FactoryCards {
                 Effect permanentEffects = null;
                 switch(effectType) {
                 case "DiceBonusEffect" :
-                	immediateEffects = myJSONParser.buildDiceBonusEffect(effectJSON);
+                	permanentEffects = myJSONParser.buildDiceBonusEffect(effectJSON);
                 	break;
                 case "DiceBonusEffectDiscounted" :
-                	immediateEffects = myJSONParser.buildDiceBonusEffectDiscounted(effectJSON);
+                	permanentEffects = myJSONParser.buildDiceBonusEffectDiscounted(effectJSON);
                 	break;
                 case "PreacherEffect" :
-                	immediateEffects = myJSONParser.buildPreacherEffect(effectJSON);
+                	permanentEffects = myJSONParser.buildPreacherEffect(effectJSON);
                 	break;
                 }
                 //END of parsing of permanentEffect field
@@ -331,7 +331,7 @@ public class FactoryCards {
                 
                 //BEGIN of parsing of costTwo field
                 ResourceSet costTwo;
-                if(doubleCostChoice = false)
+                if(doubleCostChoice == false)
                 	costTwo = null;
                 else {
                 	costArray = (JSONArray) jsonObject.get("costTwo");

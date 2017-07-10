@@ -8,4 +8,6 @@ public interface ViewEventVisitor {
 	void visit(EventIntInput eventIntInput);
 
 	void visit(EventEffectChoice eventEffectChoice);
+
+	void visit(EventCostChoice eventCostChoice);
 }

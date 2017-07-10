@@ -29,22 +29,21 @@ public class PlayerArea extends JPanel {
 	private FMPanel fmPanel;
 	private JTabbedPane leaderCardPanel = new JTabbedPane();
 	private ArrayList<PlayerDashboard> dashboards = new ArrayList<PlayerDashboard>();
-	private ArrayList<JPanel> lCardsPanels = new ArrayList<JPanel>();
-	private ZoomBox zoomBox = new ZoomBox();
+	private ArrayList<LeaderCardBox> lCardsBoxes = new ArrayList<LeaderCardBox>();
 	private Dimension playerAreaDimension = new Dimension();
 	private Dimension dashboardAreaDimension = new Dimension();
-	private ArrayList<CardCell> player1LeaderCardCells = new ArrayList <CardCell>();
-	private ArrayList<CardCell> player2LeaderCardCells = new ArrayList <CardCell>();
-	private ArrayList<CardCell> player3LeaderCardCells = new ArrayList <CardCell>();
-	private ArrayList<CardCell> player4LeaderCardCells = new ArrayList <CardCell>();
+
 	private double controlAreaWidth;
 	private double controlAreaHeight;
 	private InfoArea infoPanel;
+	ArrayList<String> playersnames = new ArrayList<String>();
 
 	
 	public PlayerArea(Dimension playerAreaDimension, Game game) {
 		
+		
 		this.game = game;
+		
 		this.playerAreaDimension = playerAreaDimension;
 		this.setPreferredSize(playerAreaDimension);
 		Border border = BorderFactory.createLineBorder(Color.RED, 1);
@@ -53,7 +52,6 @@ public class PlayerArea extends JPanel {
 		this.setLayout(new BorderLayout());
 		
 		createDashboardArea();
-		//metodosoloperprova();
 		createZoomBox();
 		createControlArea();
 		createInfoArea();
@@ -70,9 +68,9 @@ public class PlayerArea extends JPanel {
 		
 		for (int i = 0; i < nr; i++) {
 			
+			playersnames.add(game.getPlayers().get(i).getUsername());
 			Player player = this.game.getPlayers().get(i);
 			PlayerDashboard playerDashboard = new PlayerDashboard(playerAreaDimension, player);
-			System.out.println("Sto creando la dashboard di " +player.getUsername());
 			dashboards.add(playerDashboard);
 		}
 		
@@ -83,7 +81,7 @@ public class PlayerArea extends JPanel {
 		
 		for (int i = 0; i < dashboards.size(); i++) {
 			
-			dashboardArea.addTab("Player " +(i + 1), null, dashboards.get(i), null);
+			dashboardArea.addTab(playersnames.get(i), null, dashboards.get(i), null);
 		}
 		
 		dashboardArea.setSelectedIndex(0);
@@ -97,7 +95,7 @@ public class PlayerArea extends JPanel {
 		double pWidth = playerAreaDimension.getWidth();
 		double pHeight = playerAreaDimension.getHeight();
 		
-	    ZoomBox zoom = new ZoomBox();
+	    ZoomBox zoom = ZoomBox.getZoomBox();
 	    //JPanel chooseZoomPanel = zoom.getUIPanel();
 	    //chooseZoomPanel.setPreferredSize(new Dimension((int) pWidth/16, (int) (pHeight*3)/4));
 	   // chooseZoomPanel.setMaximumSize(chooseZoomPanel.getPreferredSize());
@@ -165,34 +163,19 @@ public class PlayerArea extends JPanel {
 	
 		for ( int x = 0; x < game.getNumberPlayers(); x++) {   //game.getNumberPlayers()
 			
-			JPanel playerLeaderCards = new JPanel();
+			Player player = this.game.getPlayers().get(x);
+			LeaderCardBox playerLeaderCards = new LeaderCardBox(player, width, height);
 			playerLeaderCards.setOpaque(true);
 			playerLeaderCards.setBackground(new Color(213, 50, 90, 123));
 			playerLeaderCards.setPreferredSize(new Dimension((int) width, (int) height/6));
 			playerLeaderCards.setBorder(border);
-			lCardsPanels.add(playerLeaderCards);
+			lCardsBoxes.add(playerLeaderCards);
 			
-			for (i = 0; i < 4; i++) {
-				CardCell cardCell = new CardCell();
-				cardCell.setPreferredSize(new Dimension( (int) width/5, (int) height/6));
-				playerLeaderCards.add(cardCell);
-				
-				if ( x == 0 ) {
-					player1LeaderCardCells.add(cardCell);
-				} else if ( x == 1) {
-					player2LeaderCardCells.add(cardCell);
-				} else if ( x == 2 && game.getNumberPlayers() == 3) {  //&& game.getNumberPlayers() == 3
-					player3LeaderCardCells.add(cardCell);
-				} else if ( x == 3 && game.getNumberPlayers() == 4) {   // && game.getNumberPlayers() == 4
-					player4LeaderCardCells.add(cardCell);
-				}
-				
-			}
 		}	
 		
-		for ( i = 0; i < lCardsPanels.size(); i++) {
+		for ( i = 0; i < lCardsBoxes.size(); i++) {
 			
-			leaderCardPanel.addTab("P " +(i + 1), null, lCardsPanels.get(i), null);
+			leaderCardPanel.addTab(playersnames.get(i), null, lCardsBoxes.get(i), null);
 		
 		}
 	
@@ -206,13 +189,13 @@ public class PlayerArea extends JPanel {
 			pd.update(this.game);
 		}
 		
+		/*for ( LeaderCardBox lBox : lCardsBoxes) {
+			lBox.update(this.game);
+		}*/
+		
 		fmPanel.update(game);
 		turnOrder.update(game);
 		infoPanel.update(game);
-		
-		// TODO da pensare a come visualizzare e fare update delle carte
-		// leader. Complesso.
-		// deve coesistere anche con la modalità di gioco basic advanced
 		
 	}
 	
