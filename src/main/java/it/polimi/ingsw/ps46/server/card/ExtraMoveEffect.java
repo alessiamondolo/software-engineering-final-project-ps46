@@ -38,30 +38,7 @@ public class ExtraMoveEffect implements Effect, Serializable {
 	 * Description of the method activateEffect.
 	 */
 	public void activateEffect(Game game) {
-		//TODO da finire
-		switch (extraMoveType) {
-		case "ActivateHarvestAction":
-			//ActivateHarvestAction newHarvestAction = new ActivateHarvestAction(); //del valore di value (un dado)
-			//newHarvestAction.execute();
-			//ATTENDENDO ALESSIA per completare questa classe
-			//#SpacMan
-			
-			break;
-		
-		case "ActivateProdutionAction":
-			
-			break;	
-		
-		case "MoveToActionSpaceAction":
-			game.getCurrentPlayer();//DA PENSARE BENE su quali caselle il player potrà muoversi.
-			
-			break;
-	
-			
-		default:
-			break;
-		}
-		
+		game.extraMove(this);		
 	}
 	
 	

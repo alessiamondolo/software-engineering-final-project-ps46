@@ -48,6 +48,7 @@ public class CouncilAction implements Action {
 				}
 			
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
+			
 			councilActionSpace.updateAvailability();
 			councilActionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
 			familyMemberUsed.setPositionOfFamilyMember(councilActionSpace.getId());

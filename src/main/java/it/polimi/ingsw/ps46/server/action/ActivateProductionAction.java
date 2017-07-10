@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.GameState;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -68,10 +69,12 @@ public class ActivateProductionAction implements Action {
 			
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(personalBoardResourceSet);
 			//setting occupied this actionSpace and used the familyMember
-			productionActionSpace.updateAvailability();
-			productionActionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
-			familyMemberUsed.setPositionOfFamilyMember(productionActionSpace.getId());
-			familyMemberUsed.use();
+			if(!game.getGameState().equals(GameState.EXTRA_MOVE)) {
+				productionActionSpace.updateAvailability();
+				productionActionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
+				familyMemberUsed.setPositionOfFamilyMember(productionActionSpace.getId());
+				familyMemberUsed.use();
+			}
 			
 			return true;
 		}

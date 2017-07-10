@@ -13,6 +13,7 @@ import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 import it.polimi.ingsw.ps46.utils.ReadInput;
 
@@ -564,6 +565,7 @@ public class ConsoleView implements View {
 	 * @return choice : the effect chosen by the player.
 	 */
 	public int getEffectCoice(Effect effect1, Effect effect2) {
+		output.println("==========================================================================");
 		output.println("Which of these effect do you want to activate?");
 		output.println("1. " + effect1.toString());
 		output.println("2. " + effect2.toString());
@@ -636,6 +638,63 @@ public class ConsoleView implements View {
 
 		int choice = input.IntegerFromConsole(1, 2);
 		return choice;
+	}
+
+
+
+
+	public int getExtraMove(ExtraMoveEffect effect) {
+		int move = 0;
+		switch(effect.getType()) {
+		case "ActivateHarvestAction":
+			output.println("You can perform a Harvest action at value " + effect.getValueOfTheExtraMove() +
+					" without placing a Family Member (you can change the action value with servants and card effects).");
+			output.println("Where do you want to move? (Insert the ID of the action space)");
+			move = input.IntegerFromConsole(17, 18);
+			break;
+		case "ActivateProdutionAction":
+			output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+					" without placing a Family Member (you can change the action value with servants and card effects).");
+			output.println("Where do you want to move? (Insert the ID of the action space)");
+			move = input.IntegerFromConsole(19, 20);
+			break;
+		case "MoveToActionSpaceAction": {
+			switch(effect.getWhichActionSpace()) {
+			case "AllTowers" :
+				output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+						" to take va card of any type without placing a Family Member (you can change the action value with servants and card effects).");
+				output.println("Where do you want to move? (Insert the ID of the action space)");
+				move = input.IntegerFromConsole(1, 16);
+				break;
+			case "GreenTower" :
+				output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+						" to take a territory card without placing a Family Member (you can change the action value with servants and card effects).");
+				output.println("Where do you want to move? (Insert the ID of the action space)");
+				move = input.IntegerFromConsole(1, 4);
+				break;
+			case "YellowTower" :
+				output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+						" to take a building card without placing a Family Member (you can change the action value with servants and card effects).");
+				output.println("Where do you want to move? (Insert the ID of the action space)");
+				move = input.IntegerFromConsole(9, 12);
+				break;
+			case "BlueTower" :
+				output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+						" to take a character card without placing a Family Member (you can change the action value with servants and card effects).");
+				output.println("Where do you want to move? (Insert the ID of the action space)");
+				move = input.IntegerFromConsole(5, 8);
+				break;
+			case "PurpleTower" :
+				output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+						" to take a venture card without placing a Family Member (you can change the action value with servants and card effects).");
+				output.println("Where do you want to move? (Insert the ID of the action space)");
+				move = input.IntegerFromConsole(13, 16);
+				break;
+			}
+			}
+		}
+		
+		return move;
 	}
 
 }

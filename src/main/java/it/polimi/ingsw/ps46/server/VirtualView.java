@@ -11,6 +11,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
+import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 
 
@@ -105,6 +106,9 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			case MISSING_TURN :
 				printMissingTurn();
 				break;
+			case EXTRA_MOVE :
+				getPlayerAction();
+				break;
 			default:
 				break;
 			}
@@ -147,6 +151,19 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		switch(eventCostChoice.getMessage()) {
 		case CARD_COST_CHOICE :
 			getCostChoice(eventCostChoice.getCard());
+			break;
+		default:
+			break;
+		}
+	}
+
+
+
+	@Override
+	public void visit(EventExtraMove eventExtraMove) {
+		switch(eventExtraMove.getMessage()) {
+		case EXTRA_MOVE :
+			getExtraMove(eventExtraMove.getExtraMoveEffect());
 			break;
 		default:
 			break;
@@ -543,6 +560,37 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+
+
+	private void getExtraMove(ExtraMoveEffect extraMoveEffect) {
+		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
+		ObjectOutputStream writer = writers.get(currentSocket);
+		ObjectInputStream reader = readers.get(currentSocket);
+		try {
+			writer.writeObject("GET_EXTRA_MOVE");
+			writer.flush();
+			writer.writeObject(game);
+			writer.flush();
+			writer.writeObject(extraMoveEffect);
+			writer.flush();
+			writer.reset();
+			try {					
+				int actionSpaceID = (int) reader.readObject();
+				setChanged();
+				notifyObservers(new EventIntInput(actionSpaceID, InputType.PLAYER_ACTION));
+				int servants = (int) reader.readObject();
+				setChanged();
+				notifyObservers(new EventIntInput(servants, InputType.SERVANTS_USED));
+				setChanged();
+				notifyObservers(new EventExtraMove(NewStateMessage.EXTRA_MOVE, extraMoveEffect));
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	

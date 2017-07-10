@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps46.server.action.Action;
 import it.polimi.ingsw.ps46.server.action.MoveToActionSpaceAction;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.Card;
+import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.CouncilPrivilege;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
@@ -31,10 +32,11 @@ public class GameController implements Observer, ViewEventVisitor {
 	private Game game;
 	
 	private int actionSpaceID = 0;
-	private String familyMemberName = null;
+	private FamilyMember familyMember = null;
 	private int servants = 0;
 	private ResourceSet cost = null;
 	private ArrayList<Player> missingTurnPlayers = new ArrayList<Player>();
+	private ExtraMoveEffect extraMove = null;
 
 
 	/**
@@ -72,7 +74,7 @@ public class GameController implements Observer, ViewEventVisitor {
 			game.getCurrentPlayer().setColor(eventStringInput.getString());
 			break;
 		case FAMILY_MEMBER_CHOICE :
-			familyMemberName = eventStringInput.getString();
+			familyMember = game.getCurrentPlayer().getFamilyMember(eventStringInput.getString());
 			break;
 		
 		default:
@@ -132,6 +134,22 @@ public class GameController implements Observer, ViewEventVisitor {
 				cost = card.getCost();
 			else 
 				cost = card.getCostTwo();
+			break;
+		default:
+			break;
+		}
+	}
+
+
+
+	@Override
+	public void visit(EventExtraMove eventExtraMove) {
+		switch(eventExtraMove.getMessage()) {
+		case EXTRA_MOVE :
+			extraMove = eventExtraMove.getExtraMoveEffect();
+			familyMember = new FamilyMember("");
+			familyMember.setValueOfFamilyMember(eventExtraMove.getExtraMoveEffect().getValueOfTheExtraMove());
+			startAction();
 			break;
 		default:
 			break;
@@ -349,8 +367,6 @@ public class GameController implements Observer, ViewEventVisitor {
 	private void startAction() {
 		Player player = game.getCurrentPlayer();
 		
-		FamilyMember familyMember = game.getCurrentPlayer().getFamilyMember(familyMemberName);
-		
 		//activation of Ludovico il Moro's effect, setting every colored familyMembers (not already used) to the new DiceValue of 5
 		if((game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico il Moro") && (game.getCurrentPlayer().getLeaderCards().get("Ludovico il Moro").isActive())))
 			player.getLeaderCards().get("Ludovico il Moro").getLeaderEffect().activateEffect(game);
@@ -435,16 +451,22 @@ public class GameController implements Observer, ViewEventVisitor {
 		Action action = new MoveToActionSpaceAction(game, player, familyMember, actionSpace, cost);
 		boolean executed = action.execute();
 		actionSpaceID = 0;
-		familyMemberName = null;
 		servants = 0;
 		cost = null;
+		//TODO check solo non extra move 
 		if(!executed) {
+
 			//restores original value of the family member
 			familyMember.setValueOfFamilyMember(new Dice(familyMemberValue));
+			familyMember = null;
 			player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").add(new Servants(servants));
 			
-			game.setGameState(GameState.ACTION_NOT_VALID);
-			game.setCurrentPlayer(player);
+			if(!game.getGameState().equals(GameState.EXTRA_MOVE)) {
+				game.setGameState(GameState.ACTION_NOT_VALID);
+				game.setCurrentPlayer(player);
+			}
+			else
+				extraMove.activateEffect(game);
 		}
 		
 	}
