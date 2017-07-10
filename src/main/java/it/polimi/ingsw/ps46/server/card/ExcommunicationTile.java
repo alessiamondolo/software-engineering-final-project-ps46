@@ -13,12 +13,14 @@ public class ExcommunicationTile implements Serializable {
 	
 	private static final long serialVersionUID = -4348291631021816102L;
 	
+	private int id;
 	private int era;
 	private MalusEffect permanentMalus;
 	
 	
-	public ExcommunicationTile (int era, MalusEffect permanentMalus){
+	public ExcommunicationTile (int id, int era, MalusEffect permanentMalus){
 		
+		this.id = id;
 		this.era = era;
 		this.permanentMalus = permanentMalus; 
 		
@@ -39,5 +41,9 @@ public class ExcommunicationTile implements Serializable {
 		return permanentMalus;
 	}
 
+
+	public int getId() {
+		return id;
+	}
 
 }

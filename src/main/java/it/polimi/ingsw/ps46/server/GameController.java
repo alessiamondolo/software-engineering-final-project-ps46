@@ -481,7 +481,7 @@ public class GameController implements Observer, ViewEventVisitor {
 						idPlayerAndMilitaryPointsMap.remove(integer); //to not create copies of the same player
 					}		
 				}
-				
+				//filling the map with the player's id and how many victory points has got by militarypoints
 				if (playerOrderForMilitaryPoints.get(i) != playerOrderForMilitaryPoints.get(i+1)) {
 					finalOrderPlusVictoryPpoints.put(idActualPlayer, game.getVictoryPointsForMilitaryPoints().get(indexVictoryPointsForMilitaryPointsGained));
 					indexVictoryPointsForMilitaryPointsGained++;		
@@ -528,11 +528,12 @@ public class GameController implements Observer, ViewEventVisitor {
 							(player.getGenericMalus().get("notCountingVictoryPointsFromCards").getType() != "CharacterCards")))
 				victoryPoints.add(game.getVictoryPointsFromCharacterCards().get(player.getPersonalBoard().getCharacterDeck().size()));
 			
-			//TODO da completare
 			//Add final victory points from Military points based on the final placement for military points
-			
-			
-			
+			if(finalOrderPlusVictoryPpoints.containsKey(player.getIdPlayer()) ) {
+				
+				player.getPersonalBoard().getPlayerResourceSet().add(finalOrderPlusVictoryPpoints.get(player.getIdPlayer()));
+				
+			}
 			
 			
 			//Add final victory points from number of resources
