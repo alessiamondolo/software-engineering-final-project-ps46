@@ -34,6 +34,7 @@ public class GameController implements Observer, ViewEventVisitor {
 	private String familyMemberName = null;
 	private int servants = 0;
 	private ResourceSet cost = null;
+	private ArrayList<Player> missingTurnPlayers = new ArrayList<Player>();
 
 
 	/**
@@ -218,6 +219,20 @@ public class GameController implements Observer, ViewEventVisitor {
 						game.setGameState(GameState.ACTIVATION_LEADER_CARDS);
 						game.setCurrentPlayer(player);
 					}
+					if(game.getCurrentPhase()==1 && !(player.getGenericMalus().isEmpty()) && (player.getGenericMalus().containsKey("passYourFirstMove"))) {
+						missingTurnPlayers.add(player);
+						game.setGameState(GameState.MISSING_TURN);
+						game.setCurrentPlayer(player);
+					}
+					else {
+						newTurn(player);
+					}
+					
+				}
+				while(!missingTurnPlayers.isEmpty()) {
+					Player player = missingTurnPlayers.get(0);
+					missingTurnPlayers.remove(0);
+					newTurn(player);
 				}
 			}
 			turnSetup();
@@ -375,6 +390,20 @@ public class GameController implements Observer, ViewEventVisitor {
 		}
 	}
 	
+	
+	
+	/**
+	 * 
+	 */
+	private void newTurn(Player player) {
+		game.setGameState(GameState.GET_PLAYER_ACTION);
+		game.setCurrentPlayer(player);
+		
+		if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity() > 0) {
+			game.setGameState(GameState.COUNCIL_PRIVILEGE);
+			game.setCurrentPlayer(player);
+		}
+	}
 	
 	
 	

@@ -14,12 +14,18 @@ import it.polimi.ingsw.ps46.server.BonusTile;
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Tower;
 import it.polimi.ingsw.ps46.server.TowerFloor;
+import it.polimi.ingsw.ps46.server.card.DecreaseResourcesAtFinalMalus;
+import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.DiceBonusEffect;
 import it.polimi.ingsw.ps46.server.card.DiceBonusEffectDiscounted;
+import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
 import it.polimi.ingsw.ps46.server.card.ExchageResourcesEffect;
+import it.polimi.ingsw.ps46.server.card.ExcommunicationTile;
 import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
+import it.polimi.ingsw.ps46.server.card.GenericMalusEffect;
 import it.polimi.ingsw.ps46.server.card.IncreaseResourcesByElementsEffect;
 import it.polimi.ingsw.ps46.server.card.IncreaseResourcesEffect;
+import it.polimi.ingsw.ps46.server.card.MalusEffect;
 import it.polimi.ingsw.ps46.server.card.PreacherEffect;
 import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.Resource;
@@ -286,6 +292,46 @@ public class MyJSONParser {
             victoryPointsMap.put(new Integer(numberOfCards), militaryPoints);
         }
 		return victoryPointsMap;
+	}
+	
+	
+	
+	public ExcommunicationTile buildExcommunicationTile(JSONObject excommunicationTileJSON) {
+		int id = ((Long) excommunicationTileJSON.get("id")).intValue();
+		int era = ((Long) excommunicationTileJSON.get("Era")).intValue();
+		JSONObject permanentMalusJSON = (JSONObject) excommunicationTileJSON.get("permanentMalus");
+		String malusType = (String) permanentMalusJSON.get("malusType");
+		//TODO check doubleChoice
+		//boolean doublechoice = (boolean) permanentMalusJSON.get("doublechoice");
+		String name = (String) permanentMalusJSON.get("name");
+		MalusEffect malusEffect = null;
+		switch(malusType) {
+		case "DecreaseResourcesMalus" :
+			JSONArray decreasedResourcesArray = (JSONArray) permanentMalusJSON.get("decreasedResources");
+	        ResourceSet decreasedResources = buildResourceSet(decreasedResourcesArray);
+	        malusEffect = new DecreaseResourcesMalus(name, decreasedResources);
+			break;
+		case "DiceMalusEffect" :
+			String type = (String) permanentMalusJSON.get("type");
+			JSONObject diceJSON = (JSONObject) permanentMalusJSON.get("malus");
+			Dice malus = buildDice(diceJSON);
+			malusEffect = new DiceMalusEffect(name, type, malus);
+			break;
+		case "GenericMalusEffect" :
+			type = (String) permanentMalusJSON.get("type");
+			malusEffect = new GenericMalusEffect(name, type);
+			break;
+		case "DecreaseResourcesAtFinalMalus" :
+			decreasedResourcesArray = (JSONArray) permanentMalusJSON.get("decreasedResources");
+	        decreasedResources = buildResourceSet(decreasedResourcesArray);
+	        String from = (String) permanentMalusJSON.get("from");
+	        malusEffect = new DecreaseResourcesAtFinalMalus(name, decreasedResources, from);
+	        break;
+		default :
+			break;
+		}
+		ExcommunicationTile excommunicationTile = new ExcommunicationTile(id, era, malusEffect);
+		return excommunicationTile;
 	}
 	
 }

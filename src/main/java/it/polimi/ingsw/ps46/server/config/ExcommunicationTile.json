@@ -8,38 +8,10 @@
 				"doublechoice": false,
 				
 				"name" : "DecreaseResourcesMalus",
-				"decreasedResources": [	
-					{
-						"id" : "Wood",
-						"quantity" : 0
-					},
-					{
-						"id" : "Stones",
-						"quantity" : 0
-					},
-					{
-						"id" : "Servants",
-						"quantity" : 0
-					},
-					{
-						"id" : "Money",
-						"quantity" : 0
-					},
-					{
-						"id" : "FaithPoints",
-						"quantity" : 0
-					},
+				"decreasedResources": [
 					{
 						"id" : "MilitaryPoints",
 						"quantity" : 1
-					},
-					{
-						"id" : "VictoryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "CounsilPrivilage",
-						"quantity" : 0
 					}
 				]
 			}
@@ -53,38 +25,10 @@
 				"doublechoice": false,
 				
 				"name" : "DecreaseResourcesMalus",
-				"decreasedResources": [	
-					{
-						"id" : "Wood",
-						"quantity" : 0
-					},
-					{
-						"id" : "Stones",
-						"quantity" : 0
-					},
-					{
-						"id" : "Servants",
-						"quantity" : 0
-					},
+				"decreasedResources": [
 					{
 						"id" : "Money",
 						"quantity" : 1
-					},
-					{
-						"id" : "FaithPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "MilitaryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "VictoryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "CounsilPrivilage",
-						"quantity" : 0
 					}
 				]
 			}
@@ -98,38 +42,10 @@
 				"doublechoice": false,
 				
 				"name" : "DecreaseResourcesMalus",
-				"decreasedResources": [	
-					{
-						"id" : "Wood",
-						"quantity" : 0
-					},
-					{
-						"id" : "Stones",
-						"quantity" : 0
-					},
+				"decreasedResources": [
 					{
 						"id" : "Servants",
 						"quantity" : 1
-					},
-					{
-						"id" : "Money",
-						"quantity" : 0
-					},
-					{
-						"id" : "FaithPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "MilitaryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "VictoryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "CounsilPrivilage",
-						"quantity" : 0
 					}
 				]
 			}
@@ -151,30 +67,6 @@
 					{
 						"id" : "Stones",
 						"quantity" : 1
-					},
-					{
-						"id" : "Servants",
-						"quantity" : 0
-					},
-					{
-						"id" : "Money",
-						"quantity" : 0
-					},
-					{
-						"id" : "FaithPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "MilitaryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "VictoryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "CounsilPrivilage",
-						"quantity" : 0
 					}
 				]
 			}
@@ -229,7 +121,7 @@
 			"Era" : 2,
 			"permanentMalus" : 
 			{
-				"malusType": "DiceMalusEffectForCards",
+				"malusType": "DiceMalusEffect",
 				
 				"name": "DiceMalusEffectForCards",
 				
@@ -244,7 +136,7 @@
 			"Era" : 2,
 			"permanentMalus" : 
 			{
-				"malusType": "DiceMalusEffectForCards",
+				"malusType": "DiceMalusEffect",
 				
 				"name": "DiceMalusEffectForCards",
 				
@@ -259,7 +151,7 @@
 			"Era" : 2,
 			"permanentMalus" : 
 			{
-				"malusType": "DiceMalusEffectForCards",
+				"malusType": "DiceMalusEffect",
 				
 				"name": "DiceMalusEffectForCards",
 				
@@ -274,7 +166,7 @@
 			"Era" : 2,
 			"permanentMalus" : 
 			{
-				"malusType": "DiceMalusEffectForCards",
+				"malusType": "DiceMalusEffect",
 				
 				"name": "DiceMalusEffectForCards",
 				
@@ -365,38 +257,10 @@
 				"doublechoice": false,
 				
 				"name" : "loseOneVictoryPointEveryXResource",
-				"decreasedResources": [	
-					{
-						"id" : "Wood",
-						"quantity" : 0
-					},
-					{
-						"id" : "Stones",
-						"quantity" : 0
-					},
-					{
-						"id" : "Servants",
-						"quantity" : 0
-					},
-					{
-						"id" : "Money",
-						"quantity" : 0
-					},
-					{
-						"id" : "FaithPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "MilitaryPoints",
-						"quantity" : 0
-					},
+				"decreasedResources": [
 					{
 						"id" : "VictoryPoints",
 						"quantity" : 5
-					},
-					{
-						"id" : "CounsilPrivilage",
-						"quantity" : 0
 					}
 				],
 				"from" : "VictoryPoints"
@@ -413,38 +277,10 @@
 				"doublechoice": false,
 				
 				"name" : "loseOneVictoryPointEveryXResource",
-				"decreasedResources": [	
-					{
-						"id" : "Wood",
-						"quantity" : 0
-					},
-					{
-						"id" : "Stones",
-						"quantity" : 0
-					},
-					{
-						"id" : "Servants",
-						"quantity" : 0
-					},
-					{
-						"id" : "Money",
-						"quantity" : 0
-					},
-					{
-						"id" : "FaithPoints",
-						"quantity" : 0
-					},
+				"decreasedResources": [
 					{
 						"id" : "MilitaryPoints",
 						"quantity" : 1
-					},
-					{
-						"id" : "VictoryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "CounsilPrivilage",
-						"quantity" : 0
 					}
 				],
 				"from" : "MilitaryPoints"
@@ -469,30 +305,6 @@
 					{
 						"id" : "Stones",
 						"quantity" : 1
-					},
-					{
-						"id" : "Servants",
-						"quantity" : 0
-					},
-					{
-						"id" : "Money",
-						"quantity" : 0
-					},
-					{
-						"id" : "FaithPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "MilitaryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "VictoryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "CounsilPrivilage",
-						"quantity" : 0
 					}
 				],
 				"from" : "BuildingCards"
@@ -525,22 +337,6 @@
 					{
 						"id" : "Money",
 						"quantity" : 1
-					},
-					{
-						"id" : "FaithPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "MilitaryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "VictoryPoints",
-						"quantity" : 0
-					},
-					{
-						"id" : "CounsilPrivilage",
-						"quantity" : 0
 					}
 				],
 				"from" : "PlayerResourceSet"

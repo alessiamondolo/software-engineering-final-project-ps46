@@ -49,7 +49,6 @@ public class DiceMalusEffect extends MalusEffect {
 		game.getCurrentPlayer().getDiceMalus().put(name, this);
 	}
 
-	
 	public String getType() {
 		return type;
 	}
@@ -57,5 +56,11 @@ public class DiceMalusEffect extends MalusEffect {
 	public Dice getMalus() {
 		return malus;
 	}
+	
+	@Override
+	public String toString() {
+		return "Name: " + name  + ", type: " + type + ", malus: " + malus;
+	}
+
 
 }
