@@ -73,14 +73,16 @@ public class GameController implements Observer, ViewEventVisitor {
 		case FAMILY_MEMBER_CHOICE :
 			familyMemberName = eventStringInput.getString();
 			break;
+		case FAMILY_MEMBER_DICE_BONUS_CHOICE :
+			familyMemberChosenForLeaderCard(eventStringInput.getString());
+			break;
 		
 		default:
 			break;
 		}
 	}
-	
-	
-	
+
+
 	public void visit(EventIntInput eventIntInput) {
 		switch(eventIntInput.getType()) {
 		case BONUS_TILE_CHOICE :
@@ -100,6 +102,12 @@ public class GameController implements Observer, ViewEventVisitor {
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(new CouncilPrivilege(1));
 			if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity() == 0)
 			break;
+		case ACTIVATION_LEADER_CARDS_CHOICE :
+			activationLeaderCards(eventIntInput.getValue());
+			break;
+		case DISCARD_LEADER_CARDS_CHOICE :
+			discardLeaderCards(eventIntInput.getValue());
+			break;
 		case VATICAN_SUPPORT_CHOICE :
 			vaticanReport(eventIntInput.getValue());
 			break;
@@ -110,6 +118,35 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	
 	
+	private void discardLeaderCards(int playerChoice) {
+		int index = 1;
+		for (String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+			if( index == playerChoice ){
+				game.getCurrentPlayer().getLeaderCards().remove(string);
+				game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(new CouncilPrivilege(1));
+			}
+			index++;
+		}
+		
+	}
+
+
+	//qui arriva già il comando " attiva la carta corrispondente all'int value "
+	//attivare gli effetti immediati delle carte
+	//metterle come attive
+	private void activationLeaderCards(int playerChoice) {
+		
+		int index = 1;
+		for (String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+			if( index == playerChoice ){
+				game.getCurrentPlayer().getLeaderCards().get(string).use(game);
+			}
+			index++;
+		}
+	}
+
+
+
 	public void visit(EventEffectChoice eventEffectChoice) {
 		switch(eventEffectChoice.getMessage()) {
 		case EXCHANGE_RESOURCES_CHOICE :
@@ -154,11 +191,31 @@ public class GameController implements Observer, ViewEventVisitor {
 				turnSetup();
 				
 				for(Player player : game.getPlayers()) {
+					if(game.checkIfCouldDiscardLeaderCards()) {
+						game.setGameState(GameState.DISCARD_LEADER_CARDS);
+						game.setCurrentPlayer(player);
+					}
+					if(game.checkIfHasLeaderCardsActivable()) {
+						game.setGameState(GameState.ACTIVATION_LEADER_CARDS);
+						game.setCurrentPlayer(player);
+					}
+					
 					game.setGameState(GameState.GET_PLAYER_ACTION);
 					game.setCurrentPlayer(player);
 					
 					if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity() > 0) {
 						game.setGameState(GameState.COUNCIL_PRIVILEGE);
+						game.setCurrentPlayer(player);
+					}
+					
+					if(game.checkIfCouldDiscardLeaderCards()) {
+						game.setGameState(GameState.DISCARD_LEADER_CARDS);
+						game.setCurrentPlayer(player);
+						}
+					//setto qui le azioni delle carte leader
+					//se ha carte attivabili, creare un metodo che faccia il check...
+					if(game.checkIfHasLeaderCardsActivable()) {
+						game.setGameState(GameState.ACTIVATION_LEADER_CARDS);
 						game.setCurrentPlayer(player);
 					}
 				}
@@ -328,6 +385,19 @@ public class GameController implements Observer, ViewEventVisitor {
 		Player player = game.getCurrentPlayer();
 		
 		FamilyMember familyMember = game.getCurrentPlayer().getFamilyMember(familyMemberName);
+		//checking if there are activated some bonus on the value of the family members (given by Sigismondo Malatesta)
+		if(game.getCurrentPlayer().getBonusMap().containsKey("NeutralFamilyMember")){
+			if(familyMember.getColor() == "Neutral"){
+				familyMember.getValueFamilyMember().sumDice(game.getCurrentPlayer().getBonusMap().get("NeutralFamilyMember"));
+			}
+		}
+		
+		//checking if there are activated some bonus on the value of the family members (given by Lucrezia Borgia)
+		if(game.getCurrentPlayer().getBonusMap().containsKey("ColoredFamilyMember")){
+			if(familyMember.getColor() != "Neutral"){
+				familyMember.getValueFamilyMember().sumDice(game.getCurrentPlayer().getBonusMap().get("ColoredFamilyMember"));
+			}
+		}
 		
 		//activation of Ludovico il Moro's effect, setting every colored familyMembers (not already used) to the new DiceValue of 5
 		if((game.getCurrentPlayer().getLeaderCards().containsKey("Ludovico il Moro") && (game.getCurrentPlayer().getLeaderCards().get("Ludovico il Moro").isActive())))
@@ -424,7 +494,6 @@ public class GameController implements Observer, ViewEventVisitor {
 			game.setGameState(GameState.ACTION_NOT_VALID);
 			game.setCurrentPlayer(player);
 		}
-		
 	}
 	
 	
@@ -454,6 +523,10 @@ public class GameController implements Observer, ViewEventVisitor {
 	}
 	
 	
+	private void familyMemberChosenForLeaderCard(String familyMemberChosen) {
+		// TODO Auto-generated method stub
+		//Player player = game.getCurrentPlayer();
+	}
 	
 	/**
 	 * 
@@ -480,6 +553,14 @@ public class GameController implements Observer, ViewEventVisitor {
 				if(!councilPalaceOrder.contains(player))
 					councilPalaceOrder.add(player);
 			}
+		
+		//Face down every Leader Card of every Player at the end of the turn
+		for (Player player: game.getPlayers()) {
+			for (String string : player.getLeaderCards().keySet()) {
+				 player.getLeaderCards().get(string).setAsInactive();
+			}
+		}
+		
 		game.setNextTurnOrder(councilPalaceOrder);
 	}
 	
@@ -608,6 +689,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		}
 		
 		game.setFinalScores(finalScores);
+		
 	}
-
+	
 }

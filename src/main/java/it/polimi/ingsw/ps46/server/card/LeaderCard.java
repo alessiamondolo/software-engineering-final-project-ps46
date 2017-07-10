@@ -13,7 +13,6 @@ public class LeaderCard {
 	private LinkedHashMap <String, Integer> requiredCards; 
 	private ResourceSet requiredResources;
 	private Effect leaderEffect;
-	private boolean isPermanent = false;
 	private boolean isActive = false;
 	
 	
@@ -28,16 +27,15 @@ public class LeaderCard {
 	 * Santa Rita: ResourcesX2Effect DONE
 	 * Pico della Mirandola: CardsDiscountedEffect -3 Money DONE
 	 * ANTONIOOOOOOOOOOOOOOOOOOOO
-	 * Sisto IV TODO da implementare con il rapporto del vaticano DONE
+	 * Sisto IV da implementare con il rapporto del vaticano DONE
 	 */
 	
-	public LeaderCard (String name, Effect leaderEffect, boolean isPermanent, LinkedHashMap<String,Integer> requiredCards, ResourceSet requiredResources) {
+	public LeaderCard (String name, Effect leaderEffect, LinkedHashMap<String,Integer> requiredCards, ResourceSet requiredResources) {
 	
 		this.cardName = name;
 		this.leaderEffect = leaderEffect;
 		this.requiredCards = requiredCards;
 		this.requiredResources = requiredResources;
-		this.isPermanent = isPermanent;
 		
 	}
 	
@@ -115,9 +113,17 @@ public class LeaderCard {
 			return false;
 			}
 		}
-		return true;
+		if(isActive == false)
+			return true;
+		else
+			return false;
 	}
 
+	public void use(Game game){
+		if (leaderEffect != null)
+			leaderEffect.activateEffect(game);
+		setAsActive();
+	}
 
 	
 
@@ -138,23 +144,16 @@ public class LeaderCard {
 		return isActive;
 	}
 
-/*
-	private void setAsActiveOrNot() { //TODO sistemare il metodo in base all'uso che ne facciamo
-		if(!isActive) isActive = true;
-		else
-			isActive = false;
+	public void setAsActive(){
+		isActive = true;
 	}
-*/
+	public void setAsInactive(){
+		isActive = false;
+	}
 
 
 	public Effect getLeaderEffect() {
 		return leaderEffect;
 	}
 
-
-
-	public boolean isPermanent() {
-		return isPermanent;
-	}
-	
 }

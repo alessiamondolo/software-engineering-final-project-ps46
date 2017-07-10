@@ -56,5 +56,9 @@ public interface View {
 	public ArrayList<Integer> getCouncilPrivilege();
 
 	public int getVaticanSupport();
+
+	public ArrayList<Integer> getActivationLeaderCards();
+
+	public ArrayList<Integer> getDiscardLeaderCards();
 	
 }

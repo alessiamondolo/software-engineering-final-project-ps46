@@ -26,9 +26,6 @@ public class ExchageResourcesEffect implements Effect, Serializable {
 	public void activateEffect(Game game) {
 		if(canBeActivated(game)) {
 			
-			
-			//TODO SCELTA DI QUALE EXCHANGE RESOURCES EFFETTUARE?
-			
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().sub(requiredResources);
 			
 			ResourceSet temporaryEffectResourceSet = new ResourceSet(gainedResources);

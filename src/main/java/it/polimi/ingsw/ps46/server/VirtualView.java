@@ -102,6 +102,12 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			case VATICAN_REPORT :
 				getVaticanSupport();
 				break;
+			case ACTIVATION_LEADER_CARDS :
+				getActivationLeaderCard();
+				break;
+			case DISCARD_LEADER_CARDS :
+				getDiscardLeaderCard();
+				break;
 			default:
 				break;
 			}
@@ -239,6 +245,7 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			writer.flush();
 			writer.writeObject(colors);
 			writer.flush();
+			writer.reset();
 			try {
 				color = (String) reader.readObject();
 				colors.remove(color);
@@ -398,7 +405,8 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
-	 * 
+	 *		TODO	writer.reset();
+
 	 */
 	public void getCostChoice(VentureCard card) {
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
@@ -522,5 +530,58 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		}
 
 	}	
+	
+	private void getActivationLeaderCard(){
+		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
+		ObjectOutputStream writer = writers.get(currentSocket);
+		ObjectInputStream reader = readers.get(currentSocket);
+		try {
+			writer.writeObject("GET_ACTIVATION_LEADER_CARDS");
+			writer.flush();
+			writer.writeObject(game);
+			writer.flush();
+			writer.reset();
+			//finchè ci sono carte leader attivabili e non già attivate)
+			while(game.checkIfHasLeaderCardsActivable()) {
+				int choice = (int) reader.readObject();
+				setChanged();
+				if (choice != 0)
+					notifyObservers(new EventIntInput(choice, InputType.ACTIVATION_LEADER_CARDS_CHOICE));
+				else
+					break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	private void getDiscardLeaderCard(){ 
+		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
+		ObjectOutputStream writer = writers.get(currentSocket);
+		ObjectInputStream reader = readers.get(currentSocket);
+		try {
+			writer.writeObject("GET_ACTIVATION_LEADER_CARDS");
+			writer.flush();
+			writer.writeObject(game);
+			writer.flush();
+			writer.reset();
+			//finchè ci sono carte leader ancora non attive e quindi scartabili)
+			while(game.checkIfCouldDiscardLeaderCards()) {
+				int choice = (int) reader.readObject();
+				setChanged();
+				if (choice != 0)
+					notifyObservers(new EventIntInput(choice, InputType.DISCARD_LEADER_CARDS_CHOICE));
+				else
+					break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }
