@@ -174,6 +174,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		
 		setupGame();
 		
+		
 		while((game.getCurrentPeriod() < game.getPERIODS()) || (game.getCurrentRound() < game.getROUNDS_PER_PERIOD())) {
 			game.setGameState(GameState.SETUP_ROUND);
 			roundSetup();
@@ -210,7 +211,7 @@ public class GameController implements Observer, ViewEventVisitor {
 			endRound();
 		}
 		
-		finalScores();
+		finalScores(); 
 				
 	}
 
@@ -696,6 +697,9 @@ public class GameController implements Observer, ViewEventVisitor {
 	private void finalScores() {
 		Map<Integer, VictoryPoints> finalScores = game.getFinalScores();
 		
+		
+		
+		
 		//calculating what is the player's final rate based on the military points and create a map with them victory points ready to be added to the final counting.
 		ArrayList<Integer> playerOrderForMilitaryPoints = new ArrayList<>(game.getNumberPlayers());
 		Map<Integer, MilitaryPoints> idPlayerAndMilitaryPointsMap = new LinkedHashMap<>();
@@ -706,7 +710,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		Collections.sort(playerOrderForMilitaryPoints);
 		Collections.reverse(playerOrderForMilitaryPoints);
 					
-		LinkedHashMap <Integer, VictoryPoints> finalOrderPlusVictoryPpoints = new LinkedHashMap<>();
+		LinkedHashMap <Integer, VictoryPoints> finalOrderPlusVictoryPoints = new LinkedHashMap<>();
 		int indexVictoryPointsForMilitaryPointsGained = 0;
 		
 		for (int i = 0; i < game.getPlayers().size(); i++){
@@ -718,15 +722,18 @@ public class GameController implements Observer, ViewEventVisitor {
 					if (idPlayerAndMilitaryPointsMap.get(integer).getQuantity() == playerOrderForMilitaryPoints.get(i)){
 						idActualPlayer = integer;
 						idPlayerAndMilitaryPointsMap.remove(integer); //to not create copies of the same player
+						break;
 					}		
 				}
 				//filling the map with the player's id and how many victory points has got by militarypoints
-				if (playerOrderForMilitaryPoints.get(i) != playerOrderForMilitaryPoints.get(i+1)) {
-					finalOrderPlusVictoryPpoints.put(idActualPlayer, game.getVictoryPointsForMilitaryPoints().get(indexVictoryPointsForMilitaryPointsGained));
-					indexVictoryPointsForMilitaryPointsGained++;		
+				if(i+1 < game.getPlayers().size()) {
+					if (playerOrderForMilitaryPoints.get(i) != playerOrderForMilitaryPoints.get(i+1)) {
+						finalOrderPlusVictoryPoints.put(idActualPlayer, game.getVictoryPointsForMilitaryPoints().get(indexVictoryPointsForMilitaryPointsGained));
+						indexVictoryPointsForMilitaryPointsGained++;		
+					}
+					else 
+						finalOrderPlusVictoryPoints.put(idActualPlayer, game.getVictoryPointsForMilitaryPoints().get(indexVictoryPointsForMilitaryPointsGained));
 				}
-				else 
-					finalOrderPlusVictoryPpoints.put(idActualPlayer, game.getVictoryPointsForMilitaryPoints().get(indexVictoryPointsForMilitaryPointsGained));
 			}
 		}
 		
@@ -768,9 +775,9 @@ public class GameController implements Observer, ViewEventVisitor {
 				victoryPoints.add(game.getVictoryPointsFromCharacterCards().get(player.getPersonalBoard().getCharacterDeck().size()));
 			
 			//Add final victory points from Military points based on the final placement for military points
-			if(finalOrderPlusVictoryPpoints.containsKey(player.getIdPlayer()) ) {
+			if(finalOrderPlusVictoryPoints.containsKey(player.getIdPlayer()) ) {
 				
-				player.getPersonalBoard().getPlayerResourceSet().add(finalOrderPlusVictoryPpoints.get(player.getIdPlayer()));
+				player.getPersonalBoard().getPlayerResourceSet().add(finalOrderPlusVictoryPoints.get(player.getIdPlayer()));
 				
 			}
 			
@@ -811,8 +818,31 @@ public class GameController implements Observer, ViewEventVisitor {
 			
 			finalScores.put(new Integer(player.getIdPlayer()), victoryPoints);
 		}
-		
 		game.setFinalScores(finalScores);
+		
+		
+		LinkedHashMap<Integer, ArrayList<Player>> finalScoresOrder = new LinkedHashMap<Integer, ArrayList<Player>>();
+		ArrayList<Integer> points = new ArrayList<Integer>();
+		for(Integer id : game.getFinalScores().keySet()) {
+			points.add(new Integer(game.getFinalScores().get(id).getQuantity()));
+		}
+		Collections.sort(points);
+		Collections.reverse(points);
+		while(points.size() > 0) {
+			if(!game.getFinalScores().containsKey(points.get(0))) {
+				ArrayList<Player> players = new ArrayList<Player>();
+				for(Player player : game.getPlayers()) {
+					if(game.getFinalScores().get(new Integer(player.getIdPlayer())).getQuantity() == points.get(0).intValue()) {
+						players.add(player);
+					}
+				}
+				finalScoresOrder.put(points.get(0), players);
+			}
+			points.remove(0);
+		}
+		
+		game.setFinalScoresOrder(finalScoresOrder);
+		
 		
 	}
 	

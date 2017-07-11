@@ -323,6 +323,16 @@ public class SocketClient implements Runnable {
 				e.printStackTrace();
 			} 
 			break;	
+		case "SHOW_FINAL_SCORES" :
+			try {
+				view.setGame((Game) reader.readObject());
+				view.showFinalScores();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
+			break;
 		case "END_GAME" :
 			listening = false;
 			break;

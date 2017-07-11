@@ -562,6 +562,12 @@ public class GUIView implements View {
 		return null;
 	}
 
+	@Override
+	public void showFinalScores() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	
 }

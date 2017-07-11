@@ -71,6 +71,7 @@ public class Game extends Observable implements Serializable {
 	private LinkedHashMap<Integer, VictoryPoints> vaticanReportVictoryPoints;
 	private ArrayList <FaithPoints> faithPointsRequiredForPeriod;
 	private ArrayList <VictoryPoints> victoryPointsForMilitaryPoints;
+	private LinkedHashMap<Integer, ArrayList<Player>> finalScoresOrder = null ;
 
 	private GameState gameState;
 	private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/config/";
@@ -517,7 +518,8 @@ public class Game extends Observable implements Serializable {
 
 	public void setFinalScores(Map<Integer, VictoryPoints> finalScores) {
 		this.finalScores = finalScores;
-		newState(new EventMessage(NewStateMessage.UPDATE_FINAL_SCORES));
+		//newState(new EventMessage(NewStateMessage.UPDATE_FINAL_SCORES));
+		//newState(new EventMessage(NewStateMessage.END_GAME));
 	}
 
 	public LinkedHashMap<Integer, VictoryPoints> getVictoryPointsFromTerritoryCards() {
@@ -574,6 +576,16 @@ public class Game extends Observable implements Serializable {
 	public void extraMove(ExtraMoveEffect effect) {
 		setGameState(GameState.EXTRA_MOVE);
 		newState(new EventExtraMove(NewStateMessage.EXTRA_MOVE, effect));
+	}
+
+	public LinkedHashMap<Integer, ArrayList<Player>> getFinalScoresOrder() {
+		return finalScoresOrder;
+	}
+
+	public void setFinalScoresOrder(LinkedHashMap<Integer, ArrayList<Player>> finalScoresOrder) {
+		this.finalScoresOrder = finalScoresOrder;
+		newState(new EventMessage(NewStateMessage.UPDATE_FINAL_SCORES));
+		newState(new EventMessage(NewStateMessage.END_GAME));
 	}
 
 }
