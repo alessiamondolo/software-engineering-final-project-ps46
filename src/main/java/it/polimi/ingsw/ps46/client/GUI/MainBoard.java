@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -46,7 +45,7 @@ public class MainBoard extends JPanel {
 		this.board = createBoard(boardDimension);
 		this.add(board);
 		
-		//provaTokenModel();
+	
 		
 		
 	}

@@ -29,8 +29,7 @@ public class MilitaryTower extends JPanel {
 		this.setBorder(border);
 		this.setOpaque(false);
 		this.setPreferredSize(new Dimension((int) (2*width), (int) (29*height)));	
-		System.out.println(String.valueOf(width));
-		System.out.println(String.valueOf(height));
+		
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));    
 		
@@ -66,7 +65,7 @@ public class MilitaryTower extends JPanel {
 			int mp;
 			try {
 				mp = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints").getQuantity();
-				System.out.println("sono " +player.getUsername()+ " e ho punti militari " +mp);
+				
 			} catch (NullPointerException e) {
 				mp = 0;
 			}

@@ -115,7 +115,7 @@ public class PointCell extends Cell<Player> {
 		int size;
 		
 		if (this.getPreferredSize().width > 2*this.getPreferredSize().height) {
-			System.out.println("Sono largo il doppio");
+		
 			this.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
 			size = (int)Math.min(width, height);
 		}

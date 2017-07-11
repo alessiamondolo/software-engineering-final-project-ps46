@@ -66,15 +66,10 @@ public class FMPanel extends JPanel {
 		}
 		
 		for ( int i = 0; i < FMCells.size(); i++) {
-			
-			int period = game.getCurrentPeriod();
-			String username = game.getCurrentPlayer().getUsername();
-			
+					
 			PointCell cell = FMCells.get(i);
 			FamilyMember fm = player.getFamilyMember(fmTypes[i]);
-			System.out.println("Siamo nel periodo " +period+ "ed il current player è: " +username);
-			System.out.println("Family Member: " + fm.getColor());
-			System.out.println("Used: " + fm.isUsed());
+			
 			if (!fm.isUsed()) {
 				cell.add(player, fmTypes[i]);
 			}

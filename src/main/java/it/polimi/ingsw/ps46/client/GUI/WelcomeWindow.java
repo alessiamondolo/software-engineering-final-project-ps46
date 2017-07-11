@@ -47,10 +47,6 @@ public class WelcomeWindow extends JFrame {
 	
 	private static final long serialVersionUID = 471361046696464958L;
 	
-/*	public static void main(String[] args) {
-		
-		new WelcomeWindow();	
-	}*/
 
 	public WelcomeWindow() {
 		
@@ -189,7 +185,7 @@ public class WelcomeWindow extends JFrame {
 				Object mon;
 				synchronized (mon = GUIView.getMonitor()) {
 					window.playerUsername = userText.getText();
-					System.out.println(playerUsername);
+				
 					GUIView.setUsername(window.playerUsername);
 					panel2.remove(userLabel);
 					panel2.remove(userText);

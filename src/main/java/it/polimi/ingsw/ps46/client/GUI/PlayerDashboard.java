@@ -30,7 +30,7 @@ import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.resources.Resource;
 
 /**
- * A dashboard that allows the player to visualizes resources and cards. 
+ * A dashboard that allows the player to visualizes his and others resources and cards. 
  * @author lorenzo
  *
  */
@@ -209,8 +209,7 @@ public class PlayerDashboard extends JPanel {
 
 		Image bt;
 		int bTile = this.player.getPersonalBoard().getBonusTile().getId();
-		System.out.println(this.player.getUsername());
-		System.out.println("Io sono "+this.player.getUsername()+ " e ho bt " +this.player.getPersonalBoard().getBonusTile());
+	
 		this.bonusTile.setPreferredSize(new Dimension((int) bonusTileWidth, (int) dashboardHeight*8/9) );
 		
 		String path = "mixed/personalbonustile_" + bTile + ".png";
@@ -271,8 +270,6 @@ public class PlayerDashboard extends JPanel {
 	
 	private void updateResource() {
 		
-		GameState gameState = this.game.getGameState();
-		System.out.println(gameState);
 		
 		LinkedHashMap<String, Resource> map = this.player.getPersonalBoard().getPlayerResourceSet().getResourcesMap();
 		moneyValue.setText(String.valueOf(map.get("Money").getQuantity()));

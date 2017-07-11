@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import it.polimi.ingsw.ps46.client.View;
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Effect;
 import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
@@ -279,7 +281,7 @@ public class GUIView implements View {
 		}
 		
 		/* GET */
-		System.out.println("Sto inviando azione " +GUIView.action);
+		
 		return GUIView.action;
 	}
 	
@@ -313,7 +315,7 @@ public class GUIView implements View {
 			}
 		}
 		/* GET */
-		System.out.println("sto inviando" +GUIView.familyMember);
+		
 		return GUIView.familyMember;
 	}
 
@@ -563,7 +565,7 @@ public class GUIView implements View {
 		}
 		
 		welcomeWindow.dispose();
-		System.out.println("gui view bonus tile scelta :" +GUIView.bonusTile);
+		
 		return GUIView.bonusTile;
 	}
 	
@@ -593,8 +595,45 @@ public class GUIView implements View {
 	
 	@Override
 	public int getExtraMove(ExtraMoveEffect effect) {
-		// TODO Auto-generated method stub
-		return 0;
+		int move = 0;
+		switch(effect.getType()) {
+		case "ActivateHarvestAction":
+		
+			return(17);
+			
+		case "ActivateProdutionAction":
+			
+			return(19);
+			
+		
+		case "MoveToActionSpaceAction": {
+			
+			switch(effect.getWhichActionSpace()) {
+			case "AllTowers" :
+				return(1);
+				
+			
+			case "GreenTower" :
+				
+				return(1);
+			
+			
+			case "YellowTower" :
+			
+				return(9);
+				
+			case "BlueTower" :
+			
+				return(5);
+				
+			case "PurpleTower" :
+				
+				return(13);	
+			}
+			}
+		}
+		
+		return move;
 	}
 	
 	
@@ -605,7 +644,7 @@ public class GUIView implements View {
 	@Override
 	public ArrayList<Integer> getActivationLeaderCards() {
 		ArrayList<Integer> leaderCardsActivated = new ArrayList<Integer>();
-		System.out.println("sono dentro activate leader cards");
+	
 		leaderCardsActivated.add(new Integer(0));
 		
 		return leaderCardsActivated;
@@ -617,7 +656,7 @@ public class GUIView implements View {
 	@Override
 	public ArrayList<Integer> getDiscardLeaderCards() {
 		ArrayList<Integer> leaderCardsDiscarded = new ArrayList<Integer>();
-		System.out.println("sono dentro discard leader cards");
+	
 		leaderCardsDiscarded.add(new Integer(0));
 		
 		return leaderCardsDiscarded;
@@ -625,8 +664,9 @@ public class GUIView implements View {
 
 	@Override
 	public void showFinalScores() {
-		// TODO Auto-generated method stub
+		
 		printBoard();
+		
 	}
 
 

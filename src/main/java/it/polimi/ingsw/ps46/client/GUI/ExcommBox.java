@@ -107,7 +107,7 @@ class ExcommCardCell extends Cell<ExcommunicationTile> {
 		this.removeAllCards();
 		for (ExcommunicationTile card : itemList) {
 			int index = card.getId();
-			System.out.println("Sto cercando la carta " +card.getId() + " con indice " + index);
+			
 			BufferedImage img = excommImageList.get(index);
 			if (img == null) {
 				img = loadCard(index);
