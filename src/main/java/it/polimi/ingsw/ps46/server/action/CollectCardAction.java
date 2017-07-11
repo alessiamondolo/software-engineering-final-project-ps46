@@ -4,6 +4,7 @@ package it.polimi.ingsw.ps46.server.action;
 import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.GameState;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.Money;
@@ -51,6 +52,20 @@ public class CollectCardAction implements Action {
 	@Override
 	public boolean execute() {
 		if(isLegal()) {	
+			
+				int tower = (actionSpace.getId() - 1) / game.getBoard().getNumberOfTowers();
+				int floor = (actionSpace.getId() - 1) % game.getBoard().getNumberOfTowers();
+				game.getBoard().getTower(tower).getTowerFloor(floor).setCard(null);
+			if(!game.getGameState().equals(GameState.EXTRA_MOVE)) {
+				game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().setPlayerColor(game.getCurrentPlayer().getColor());
+				
+				//setting occupied this actionSpace and used the familyMember
+				actionSpace.updateAvailability();
+
+				familyMemberUsed.setPositionOfFamilyMember(actionSpace.getId());
+				familyMemberUsed.use();
+			}
+			
 			if (game.getBoard().getColorOfTower(actionSpace.getId()) == "blue")
 					card.use(game);
 			
@@ -79,16 +94,6 @@ public class CollectCardAction implements Action {
 			else
 				card.collectCard(game);
 						
-			int tower = (actionSpace.getId() - 1) / game.getBoard().getNumberOfTowers();
-			int floor = (actionSpace.getId() - 1) % game.getBoard().getNumberOfTowers();
-			game.getBoard().getTower(tower).getTowerFloor(floor).setCard(null);
-			game.getBoard().getTower(tower).getTowerFloor(floor).getActionSpace().setPlayerColor(game.getCurrentPlayer().getColor());
-			
-			//setting occupied this actionSpace and used the familyMember
-			actionSpace.updateAvailability();
-
-			familyMemberUsed.setPositionOfFamilyMember(actionSpace.getId());
-			familyMemberUsed.use();
 			
 			return true;	
 		}

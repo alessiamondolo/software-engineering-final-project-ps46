@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import it.polimi.ingsw.ps46.client.View;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
@@ -542,6 +543,23 @@ public class GUIView implements View {
 	public int getCostCoice(ResourceSet cost1, ResourceSet cost2) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getExtraMove(ExtraMoveEffect effect) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<Integer> getActivationLeaderCards() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Integer> getDiscardLeaderCards() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

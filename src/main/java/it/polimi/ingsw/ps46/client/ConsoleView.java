@@ -13,6 +13,7 @@ import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 import it.polimi.ingsw.ps46.utils.ReadInput;
 
@@ -564,6 +565,7 @@ public class ConsoleView implements View {
 	 * @return choice : the effect chosen by the player.
 	 */
 	public int getEffectCoice(Effect effect1, Effect effect2) {
+		output.println("==========================================================================");
 		output.println("Which of these effect do you want to activate?");
 		output.println("1. " + effect1.toString());
 		output.println("2. " + effect2.toString());
@@ -624,8 +626,6 @@ public class ConsoleView implements View {
 	}
 
 
-
-	@Override
 	public int getVaticanSupport() {
 		
 		output.println("==========================================================================");
@@ -638,4 +638,151 @@ public class ConsoleView implements View {
 		return choice;
 	}
 
+
+
+
+	public int getExtraMove(ExtraMoveEffect effect) {
+		int move = 0;
+		switch(effect.getType()) {
+		case "ActivateHarvestAction":
+			output.println("You can perform a Harvest action at value " + effect.getValueOfTheExtraMove() +
+					" without placing a Family Member (you can change the action value with servants and card effects).");
+			output.println("Where do you want to move? (Insert the ID of the action space)");
+			move = input.IntegerFromConsole(17, 18);
+			break;
+		case "ActivateProdutionAction":
+			output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+					" without placing a Family Member (you can change the action value with servants and card effects).");
+			output.println("Where do you want to move? (Insert the ID of the action space)");
+			move = input.IntegerFromConsole(19, 20);
+			break;
+		case "MoveToActionSpaceAction": {
+			switch(effect.getWhichActionSpace()) {
+			case "AllTowers" :
+				output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+						" to take va card of any type without placing a Family Member (you can change the action value with servants and card effects).");
+				output.println("Where do you want to move? (Insert the ID of the action space)");
+				move = input.IntegerFromConsole(1, 16);
+				break;
+			case "GreenTower" :
+				output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+						" to take a territory card without placing a Family Member (you can change the action value with servants and card effects).");
+				output.println("Where do you want to move? (Insert the ID of the action space)");
+				move = input.IntegerFromConsole(1, 4);
+				break;
+			case "YellowTower" :
+				output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+						" to take a building card without placing a Family Member (you can change the action value with servants and card effects).");
+				output.println("Where do you want to move? (Insert the ID of the action space)");
+				move = input.IntegerFromConsole(9, 12);
+				break;
+			case "BlueTower" :
+				output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+						" to take a character card without placing a Family Member (you can change the action value with servants and card effects).");
+				output.println("Where do you want to move? (Insert the ID of the action space)");
+				move = input.IntegerFromConsole(5, 8);
+				break;
+			case "PurpleTower" :
+				output.println("You can perform a Production action at value " + effect.getValueOfTheExtraMove() +
+						" to take a venture card without placing a Family Member (you can change the action value with servants and card effects).");
+				output.println("Where do you want to move? (Insert the ID of the action space)");
+				move = input.IntegerFromConsole(13, 16);
+				break;
+			}
+			}
+		}
+		
+		return move;
+	}
+
+
+	public ArrayList<Integer> getActivationLeaderCards() {
+		int numberOfLeaderCardActivable = 0;
+		ArrayList<Integer> leaderCardsActivated = new ArrayList<Integer>();
+		
+		for(String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+			if(game.getCurrentPlayer().getLeaderCards().get(string).isActivable(game)){
+				numberOfLeaderCardActivable++;
+				}
+		}
+		output.println("You have " + numberOfLeaderCardActivable + " Leader Cards activable.");
+		
+		while(numberOfLeaderCardActivable > 0) {
+			int index = 0;
+			
+			output.println("Do you want to activate a Leader Card?");
+			output.println(index + ". I don't want to activate any Leader Card");
+			index++;
+			for(String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+				if(game.getCurrentPlayer().getLeaderCards().get(string).isActivable(game)){
+					output.println(index + ". " + string);
+					index++;
+					}
+			}
+			int choice = input.IntegerFromConsole(0, (index-1)); // in attesa di un input da 0 a 4
+			Integer leaderCard = new Integer(choice);
+			if(leaderCard != 0){
+				if(!leaderCardsActivated.contains(leaderCard)) {
+					leaderCardsActivated.add(leaderCard);
+					numberOfLeaderCardActivable--;
+					if(numberOfLeaderCardActivable > 0)
+						output.println("You still have " + numberOfLeaderCardActivable + " Leader Cards activable.");
+				}
+				else
+					output.println("You already have activated this Leader Card.");
+			}
+			else 
+			{
+				leaderCardsActivated.add(leaderCard);
+				break;
+			}
+		}
+		return leaderCardsActivated;
+	}
+	
+	
+
+	public ArrayList<Integer> getDiscardLeaderCards(){
+		int numberOfLeaderCardCouldDiscard = 0;
+		ArrayList<Integer> leaderCardsDiscarded = new ArrayList<Integer>();
+		
+		for(String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+			if(!(game.getCurrentPlayer().getLeaderCards().get(string).isActive()) ){
+				numberOfLeaderCardCouldDiscard++;
+				}
+		}
+		output.println("You could discard " + numberOfLeaderCardCouldDiscard + " Leader Cards.");
+		
+		while(numberOfLeaderCardCouldDiscard > 0) {
+			int index = 0;
+			
+			output.println("Do you want to discard a Leader Card to get a council privilege?");
+			output.println(index + ". I don't want to discard any Leader Card");
+			index++;
+			for(String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+				if(!(game.getCurrentPlayer().getLeaderCards().get(string).isActive()) ){
+					output.println(index + ". " + string);
+					index++;
+					}
+			}
+			int choice = input.IntegerFromConsole(0, (index-1)); // in attesa di un input da 0 a 4
+			Integer leaderCardDiscarded = new Integer(choice);
+			if(leaderCardDiscarded != 0){
+				if(!leaderCardsDiscarded.contains(leaderCardDiscarded)) {
+					leaderCardsDiscarded.add(leaderCardDiscarded);
+					numberOfLeaderCardCouldDiscard--;
+					if(numberOfLeaderCardCouldDiscard > 0)
+						output.println("You could discard " + numberOfLeaderCardCouldDiscard + " Leader Cards.");
+				}
+				else
+					output.println("You already have discarded this Leader Card.");
+			}
+			else 
+			{
+				leaderCardsDiscarded.add(leaderCardDiscarded);
+				break;
+			}
+		}
+		return leaderCardsDiscarded;
+	}
 }

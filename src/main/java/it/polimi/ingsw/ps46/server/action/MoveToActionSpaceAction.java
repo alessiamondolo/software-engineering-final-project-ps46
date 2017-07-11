@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps46.server.action;
 import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.GameState;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
@@ -49,9 +50,9 @@ public class MoveToActionSpaceAction implements Action {
 	public boolean execute() {
 		
 		if(isLegal()) {
-			//TODO check modifications to this method
+			
 			switch(actionSpace.getType()) {
-				case "Tower" : {//NO INTERAZIONE
+				case "Tower" : {
 					Action nextAction = new CollectCardAction(game, actionSpace, familyMember, cost);
 					return nextAction.execute();
 				}
@@ -64,30 +65,23 @@ public class MoveToActionSpaceAction implements Action {
 					return nextAction.execute();
 				}
 				case "Market" : {
-					if(!actionSpace.getEffectOfActionSpace().getAdditionalResources().getResourcesMap().containsKey("CouncilPrivilege")){
-						//check on malus
-						ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());
-						
-						if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
-							temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
-						}
-						
-						game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
-						
-						actionSpace.updateAvailability();
-						actionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
-						familyMember.setPositionOfFamilyMember(actionSpace.getId());
-						familyMember.use();
-						return true;
+					//check on malus
+					ResourceSet temporaryEffectResourceSet = new ResourceSet(actionSpace.getEffectOfActionSpace().getAdditionalResources());
+					
+					if (game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources() != null) {
+						temporaryEffectResourceSet.sub(game.getCurrentPlayer().getDecreaseResourcesMalus().getDecreasedResources());
 					}
-					else 
-					{
-						//TODO ci sono i due bonus del consiglio da prendere
-						return true;
-					}
+					
+					game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(temporaryEffectResourceSet);
+					
+					actionSpace.updateAvailability();
+					actionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
+					familyMember.setPositionOfFamilyMember(actionSpace.getId());
+					familyMember.use();
+					return true;
+					
 				}
 				case "Council" : {
-					//TODO interazione col giocatore
 					Action nextAction = new CouncilAction(game, actionSpace, familyMember);
 					return nextAction.execute();
 				}
@@ -149,9 +143,13 @@ public class MoveToActionSpaceAction implements Action {
 		}
 
 		//The family member has to be available - it can't be in other action spaces
-		if((familyMember.isUsed())) {
-			return false;
+		//We ignore this only if the player is doing an extra move without placing a familyMember
+		if(!game.getGameState().equals(GameState.EXTRA_MOVE)) {
+			if((familyMember.isUsed())) {
+				return false;
+			}
 		}
+		
 		//The value of the family member that needs to be moved to the action space, summed with the number of servants
 		// added to the family member, has to be greater or equal than the value of the dice of the action space
 		if(familyMember.getValueFamilyMember().getValue() < actionSpace.getRequiredFamilyMemberValue().getValue()) {

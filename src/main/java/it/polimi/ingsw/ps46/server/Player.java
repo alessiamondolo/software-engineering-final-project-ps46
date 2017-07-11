@@ -26,7 +26,7 @@ public class Player implements Serializable {
 	private String username;
 	private String color;
 	
-	private Map<String, LeaderCard> leaderCards;
+	private LinkedHashMap<String, LeaderCard> leaderCards;
 	
 	private PersonalBoard personalBoard;
 	

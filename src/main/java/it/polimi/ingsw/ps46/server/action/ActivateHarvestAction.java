@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps46.server.ActionSpace;
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
+import it.polimi.ingsw.ps46.server.GameState;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
@@ -65,10 +66,12 @@ public class ActivateHarvestAction implements Action {
 			
 			game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(personalBoardResourceSet);
 			//setting occupied this actionSpace and used the familyMember
-			harvestActionSpace.updateAvailability();
-			harvestActionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
-			familyMemberUsed.setPositionOfFamilyMember(harvestActionSpace.getId());
-			familyMemberUsed.use();
+			if(!game.getGameState().equals(GameState.EXTRA_MOVE)) {
+				harvestActionSpace.updateAvailability();
+				harvestActionSpace.setPlayerColor(game.getCurrentPlayer().getColor());
+				familyMemberUsed.setPositionOfFamilyMember(harvestActionSpace.getId());
+				familyMemberUsed.use();
+			}
 			
 			return true;
 		}

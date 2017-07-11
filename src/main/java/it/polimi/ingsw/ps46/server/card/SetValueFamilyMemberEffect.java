@@ -19,7 +19,8 @@ public class SetValueFamilyMemberEffect implements Effect {
 		
 	}
 	
-	//TODO da qualche parte andrà attivato questo effetto! ma priva va controllato se la carta è attivabile tramite il metodo opportuno 
+	//TODO da qualche parte andrà attivato questo effetto! 
+	// ma priva va controllato se la carta è attivabile tramite il metodo opportuno DONE
 	@Override
 	public void activateEffect(Game game) {
 		if(whichFamilyMember == "allColored"){

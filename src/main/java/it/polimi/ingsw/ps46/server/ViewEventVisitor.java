@@ -10,4 +10,6 @@ public interface ViewEventVisitor {
 	void visit(EventEffectChoice eventEffectChoice);
 
 	void visit(EventCostChoice eventCostChoice);
+
+	void visit(EventExtraMove eventExtraMove);
 }

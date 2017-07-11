@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 /**
@@ -107,7 +108,7 @@ public class SocketClient implements Runnable {
 	 * @param message : the message that needs to be interpreted.
 	 */
 	public void interpreter(String message) {
-		System.out.println("[Message: " + message + "]");
+		//System.out.println("[Message: " + message + "]");
 		switch(message) {
 		case "STORE_YOUR_ID" :
 			try {
@@ -267,6 +268,19 @@ public class SocketClient implements Runnable {
 				e.printStackTrace();
 			}
 			break;
+		case "GET_ACTIVATION_LEADER_CARDS" :
+			try {
+				view.setGame((Game) reader.readObject()); // riceve il game e lo passa alla view
+				for(Integer leaderCard : view.getActivationLeaderCards()) {
+					writer.writeObject(leaderCard.intValue());
+					writer.flush();
+				} 
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
 		case "SHOW_MISSING_TURN" :
 			try {
 				Game game = (Game) reader.readObject();
@@ -281,6 +295,35 @@ public class SocketClient implements Runnable {
 				e.printStackTrace();
 			}
 			break;
+		case "GET_EXTRA_MOVE" :
+			try {
+				view.printMessage("You've got an extra move!");
+				view.setGame((Game) reader.readObject());
+				int idActionSpace = view.getExtraMove((ExtraMoveEffect) reader.readObject());
+				writer.writeObject(idActionSpace);
+				writer.flush();
+				writer.writeObject(view.getServants());
+				writer.flush();
+				writer.reset();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
+			break;	
+		case "GET_DISCARD_LEADER_CARDS" : 
+			try {
+				view.setGame((Game) reader.readObject());
+				for(Integer leaderCard : view.getDiscardLeaderCards()) {
+					writer.writeObject(leaderCard.intValue());
+					writer.flush();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
+			break;	
 		case "END_GAME" :
 			listening = false;
 			break;
@@ -289,5 +332,4 @@ public class SocketClient implements Runnable {
 			break;
 		}
 	}
-	
 }

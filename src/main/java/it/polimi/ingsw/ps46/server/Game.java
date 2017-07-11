@@ -21,6 +21,7 @@ import org.json.simple.parser.ParseException;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
 import it.polimi.ingsw.ps46.server.card.ExcommunicationTile;
+import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.card.FactoryCards;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
@@ -122,11 +123,10 @@ public class Game extends Observable implements Serializable {
 		excommunicationTiles = factoryBoard.buildExcomunicationTiles("ExcommunicationTile.json");
 
 		//Shuffle excommunication tiles
-		/*
 		for(int period = 1; period <= PERIODS; period++) {
 			Collections.shuffle(excommunicationTiles.subList((excommunicationTiles.size()/PERIODS)*(period-1), 
 					(excommunicationTiles.size()/PERIODS)*period));
-		}*/
+		}
 		
 		ArrayList<ExcommunicationTile> tiles = new ArrayList<ExcommunicationTile>();
 		for(int period = 1; period <= PERIODS; period++) {
@@ -507,8 +507,31 @@ public class Game extends Observable implements Serializable {
 		return victoryPointsForMilitaryPoints;
 	}
 	
+	public boolean checkIfHasLeaderCardsActivable(){
+		
+		for (String string : getCurrentPlayer().getLeaderCards().keySet()) {
+			if(getCurrentPlayer().getLeaderCards().get(string).isActivable(this))
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean checkIfCouldDiscardLeaderCards(){
+		
+		for (String string : getCurrentPlayer().getLeaderCards().keySet()) {
+			if(!(getCurrentPlayer().getLeaderCards().get(string).isActive()) )
+				return true;
+		}
+		return false;
+	}
+
 	public ArrayList<ExcommunicationTile> getExcommunicationTiles() {
 		return excommunicationTiles;
+	}
+	
+	public void extraMove(ExtraMoveEffect effect) {
+		setGameState(GameState.EXTRA_MOVE);
+		newState(new EventExtraMove(NewStateMessage.EXTRA_MOVE, effect));
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.card.Effect;
+import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
@@ -56,5 +57,11 @@ public interface View {
 	public ArrayList<Integer> getCouncilPrivilege();
 
 	public int getVaticanSupport();
+
+	public int getExtraMove(ExtraMoveEffect effect);
+
+	public ArrayList<Integer> getActivationLeaderCards();
+
+	public ArrayList<Integer> getDiscardLeaderCards();
 	
 }

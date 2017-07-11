@@ -11,6 +11,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
+import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 
 
@@ -102,8 +103,17 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			case VATICAN_REPORT :
 				getVaticanSupport();
 				break;
+			case ACTIVATION_LEADER_CARDS :
+				getActivationLeaderCard();
+				break;
+			case DISCARD_LEADER_CARDS :
+				getDiscardLeaderCard();
+				break;
 			case MISSING_TURN :
 				printMissingTurn();
+				break;
+			case EXTRA_MOVE :
+				getPlayerAction();
 				break;
 			default:
 				break;
@@ -147,6 +157,19 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		switch(eventCostChoice.getMessage()) {
 		case CARD_COST_CHOICE :
 			getCostChoice(eventCostChoice.getCard());
+			break;
+		default:
+			break;
+		}
+	}
+
+
+
+	@Override
+	public void visit(EventExtraMove eventExtraMove) {
+		switch(eventExtraMove.getMessage()) {
+		case EXTRA_MOVE :
+			getExtraMove(eventExtraMove.getExtraMoveEffect());
 			break;
 		default:
 			break;
@@ -242,6 +265,7 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			writer.flush();
 			writer.writeObject(colors);
 			writer.flush();
+			writer.reset();
 			try {
 				color = (String) reader.readObject();
 				colors.remove(color);
@@ -401,7 +425,8 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
-	 * 
+	 *		TODO	writer.reset();
+
 	 */
 	public void getCostChoice(VentureCard card) {
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
@@ -529,7 +554,58 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 
 	}	
 	
+	private void getActivationLeaderCard(){
+		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
+		ObjectOutputStream writer = writers.get(currentSocket);
+		ObjectInputStream reader = readers.get(currentSocket);
+		try {
+			writer.writeObject("GET_ACTIVATION_LEADER_CARDS");
+			writer.flush();
+			writer.writeObject(game);
+			writer.flush();
+			writer.reset();
+			//finchè ci sono carte leader attivabili e non già attivate)
+			while(game.checkIfHasLeaderCardsActivable()) {
+				int choice = (int) reader.readObject();
+				setChanged();
+				if (choice != 0)
+					notifyObservers(new EventIntInput(choice, InputType.ACTIVATION_LEADER_CARDS_CHOICE));
+				else
+					break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 	
+	
+	private void getDiscardLeaderCard(){ 
+		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
+		ObjectOutputStream writer = writers.get(currentSocket);
+		ObjectInputStream reader = readers.get(currentSocket);
+		try {
+			writer.writeObject("GET_ACTIVATION_LEADER_CARDS");
+			writer.flush();
+			writer.writeObject(game);
+			writer.flush();
+			writer.reset();
+			//finchè ci sono carte leader ancora non attive e quindi scartabili)
+			while(game.checkIfCouldDiscardLeaderCards()) {
+				int choice = (int) reader.readObject();
+				setChanged();
+				if (choice != 0)
+					notifyObservers(new EventIntInput(choice, InputType.DISCARD_LEADER_CARDS_CHOICE));
+				else
+					break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private void printMissingTurn() {
 		for(Socket currentSocket : writers.keySet()) {
@@ -543,6 +619,37 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+
+
+	private void getExtraMove(ExtraMoveEffect extraMoveEffect) {
+		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
+		ObjectOutputStream writer = writers.get(currentSocket);
+		ObjectInputStream reader = readers.get(currentSocket);
+		try {
+			writer.writeObject("GET_EXTRA_MOVE");
+			writer.flush();
+			writer.writeObject(game);
+			writer.flush();
+			writer.writeObject(extraMoveEffect);
+			writer.flush();
+			writer.reset();
+			try {					
+				int actionSpaceID = (int) reader.readObject();
+				setChanged();
+				notifyObservers(new EventIntInput(actionSpaceID, InputType.PLAYER_ACTION));
+				int servants = (int) reader.readObject();
+				setChanged();
+				notifyObservers(new EventIntInput(servants, InputType.SERVANTS_USED));
+				setChanged();
+				notifyObservers(new EventExtraMove(NewStateMessage.EXTRA_MOVE, extraMoveEffect));
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
