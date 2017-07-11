@@ -193,7 +193,7 @@ public class PlayerDashboard extends JPanel {
 	private ImageIcon returndashboardImage() {
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(getClass().getResource("img/dashboard/dashboard.jpg"));
+			image = Token.getImagePathMode("dashboard/dashboard.jpg");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -211,7 +211,6 @@ public class PlayerDashboard extends JPanel {
 		int bTile = this.player.getPersonalBoard().getBonusTile().getId();
 		System.out.println(this.player.getUsername());
 		System.out.println("Io sono "+this.player.getUsername()+ " e ho bt " +this.player.getPersonalBoard().getBonusTile());
-		System.out.println(" ANDREA CULO " +bTile);
 		this.bonusTile.setPreferredSize(new Dimension((int) bonusTileWidth, (int) dashboardHeight*8/9) );
 		
 		String path = "mixed/personalbonustile_" + bTile + ".png";
@@ -223,7 +222,7 @@ public class PlayerDashboard extends JPanel {
 			e.printStackTrace();
 		}
 	
-		bt = PlayerDashboard.bonusTileImg.getScaledInstance((int) bonusTileWidth, (int) dashboardHeight*8/9, Image.SCALE_SMOOTH);
+		bt = PlayerDashboard.bonusTileImg.getScaledInstance((int) bonusTileWidth, (int) dashboardHeight, Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(bt);
 		this.bonusTile.setIcon(imageIcon);
 

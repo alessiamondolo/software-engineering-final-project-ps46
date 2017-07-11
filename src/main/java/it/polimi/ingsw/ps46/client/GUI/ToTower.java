@@ -8,6 +8,13 @@ import javax.swing.JPanel;
 
 import it.polimi.ingsw.ps46.server.Player;
 
+/**
+ * Container of four point cells which map the board action spaces that allow the player to
+ * access to a tower.  
+ * @author lorenzo
+ *
+ */
+
 public class ToTower extends JPanel {
 	
 	/**
@@ -43,6 +50,13 @@ public class ToTower extends JPanel {
 			pc.clearFM();
 		}
 	}
+	
+	/**
+	 * Add a family member to the tower's action cells.
+	 * @param player : the player who intends to place his family member
+	 * @param fmColor : the type of family member, its dice's value 
+	 * @param floor : the tower's floor in which the family member needs to be added
+	 */
 	
 	public void add(Player player, String fmColor, int floor) {
 		actionCells.get(floor).add(player, fmColor);

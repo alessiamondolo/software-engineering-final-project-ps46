@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps46.server.card;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps46.server.Dice;
 import it.polimi.ingsw.ps46.server.Game;
 
@@ -7,8 +9,9 @@ import it.polimi.ingsw.ps46.server.Game;
  * 
  * @author Andrea.Masi
  */
-public class SetValueFamilyMemberEffect implements Effect {
+public class SetValueFamilyMemberEffect implements Effect, Serializable {
 
+	private static final long serialVersionUID = 7997213090019269795L;
 	private String whichFamilyMember;
 	private Dice newValue; 
 	

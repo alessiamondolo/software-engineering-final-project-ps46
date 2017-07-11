@@ -19,14 +19,16 @@ import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.ExcommunicationTile;
 
+/**
+ * A container to store excommunication cards
+ * @author lorenzo
+ *
+ */
 public class ExcommBox extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8106470391591568439L;
 	private ExcommCardCell excommCardCell;
-	// private PointCell pointCell;
+	
 	private int era;
 	
 	public ExcommBox(int era) {
@@ -35,10 +37,6 @@ public class ExcommBox extends JPanel {
 		
 		excommCardCell = new ExcommCardCell();
 		excommCardCell.setContentAreaFilled(false);
-		// pointCell = new PointCell();
-		// pointCell.setContentAreaFilled(false);
-		
-		// this.add(pointCell);
 		this.add(excommCardCell);
 		
 		this.setBorder(null);
@@ -47,18 +45,16 @@ public class ExcommBox extends JPanel {
 	
 	@Override
 	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
+		
 		super.paint(g);
 		
 		Rectangle bounds = g.getClipBounds();
 		excommCardCell.setBounds(bounds);
-		// bounds.height /= 2;
-		// pointCell.setBounds(bounds);
+
 	}
 	
 	public void update(Game game) {
 		
-		// pointCell.removeAll();
 		
 		excommCardCell.removeAll();
 		

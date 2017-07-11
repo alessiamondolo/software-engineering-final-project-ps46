@@ -117,9 +117,9 @@ public class Token extends JLabel {
 	}
 	
 	
-	public BufferedImage getImage(String imagePathName) throws IOException {
+/*	public BufferedImage getImage(String imagePathName) throws IOException {
 		return ImageIO.read(getClass().getResource(imagePathName));
-	}
+	}*/
 	
 	public static BufferedImage getImagePathMode (String relativePathName) throws IOException {
 		String imagesPath = "./src/main/java/it/polimi/ingsw/ps46/client/GUI/img/";
@@ -132,16 +132,7 @@ public class Token extends JLabel {
 		String [] tokenColors = { "Red", "Blue", "Yellow" , "Green" };
 		String[] fmTypes = { "Neutral", "Black", "White", "Orange" };
 		
-		/*if ( hmap.isEmpty()) { 
-			for ( String color : tokenColors) {
-				for (String fmType : fmTypes ) {
-					
-					BufferedImage fmBImage;
-					fmBImage = getImage("img/family_member/" +color+ "_" +fmType+ "FM.png");
-					hmap.put(color+ "_" +fmType, fmBImage);
-				}
-			}
-		}*/
+	
 		
 		if ( hmap.isEmpty()) {
 			for ( String color : tokenColors) {

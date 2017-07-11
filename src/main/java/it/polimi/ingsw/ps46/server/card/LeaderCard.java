@@ -1,14 +1,15 @@
 package it.polimi.ingsw.ps46.server.card;
 
 import java.util.Map;
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
-public class LeaderCard {
+public class LeaderCard implements Serializable {
 	
-	
+	private static final long serialVersionUID = -2466278746354123237L;
 	private String cardName;
 	private LinkedHashMap <String, Integer> requiredCards; 
 	private ResourceSet requiredResources;

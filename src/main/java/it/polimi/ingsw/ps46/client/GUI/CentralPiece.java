@@ -10,7 +10,7 @@ import javax.swing.border.Border;
 import it.polimi.ingsw.ps46.server.Game;
 
 /**
- * The central part of the Board which is then again structured in two subpanels:
+ * The central part of the Board which, again, has two children:
  * an @UpperPiece and a @LowerPiece
  * @author lorenzo
  *
@@ -55,6 +55,10 @@ public class CentralPiece extends JPanel {
 		this.add(lowerPiece);
 		
 	}
+	/**
+	 * Update the contents showed in the subpanels accordingly to game values
+	 * @param game
+	 */
 	
 	public void update(Game game) {
 	

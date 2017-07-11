@@ -11,9 +11,11 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 
 /**
- * An abstract cell of the board. The board is made of different cells characterized
- * by different functionalities and attributes. Each concrete implementations needs 
- * to define the setAvailability method based on the cell type specific requirements. 
+ * An abstract parameterized cell of the board. It has an arrayList to store and visualize 
+ * player's tokens that are placed inside. 
+ * The board is made of two sub types of cell, 
+ * each one needs to implement the abstract method update in order to display the token 
+ * that are stored in the attribute itemList
  * @author lorenzo
  *
  */
@@ -26,6 +28,9 @@ public abstract class Cell<T> extends JButton {
 	
 	protected ArrayList<T> itemList;
 	
+	/**
+	 * Basic constructor that sets the fundamental layout
+	 */
 	public Cell () {
 		
 		itemList = new ArrayList<T> ();
@@ -37,6 +42,14 @@ public abstract class Cell<T> extends JButton {
 		this.setEnabled(false);
 		this.setContentAreaFilled(false);
 	}
+	
+	/**
+	 * Specific constructor used to create cells that need to send information 
+	 * to the external infrastructure. An action listener to catch clicks is added
+	 * to the cell.
+	 * @param action : the value of the int cell needs to be specified in order 
+	 * for the cell to know what to send back whenever clicked 
+	 */
 	
 	public Cell (int action) {
 		this();
@@ -53,7 +66,11 @@ public abstract class Cell<T> extends JButton {
 			}
 		});
 	}
-
+	
+	/**
+	 *	Used to specify what Family Member the user wants to use to complete an action.
+	 * @param fmColor : the type of family member, its dice's value
+	 */
 	public Cell (String fmColor) {
 		this();
 		

@@ -183,9 +183,9 @@ public class PlayerArea extends JPanel {
 			pd.update(this.game);
 		}
 		
-		/*for ( LeaderCardBox lBox : lCardsBoxes) {
+		for ( LeaderCardBox lBox : lCardsBoxes) {
 			lBox.update(this.game);
-		}*/
+		}
 		
 		fmPanel.update(game);
 		turnOrder.update(game);
