@@ -119,7 +119,7 @@ public class ActivateProductionAction implements Action {
 		if( !game.getCurrentPlayer().getDiceMalus().isEmpty()){
 			for( String string : game.getCurrentPlayer().getDiceMalus().keySet() ){
 				
-				if ( game.getCurrentPlayer().getDiceMalus().get(string).getType() == "ProductionAction" ){
+				if ( game.getCurrentPlayer().getDiceMalus().get(string).getType().equals( "ProductionAction") ){
 					temporaryDice.subDice( game.getCurrentPlayer().getDiceMalus().get(string).getMalus() );	
 				}
 			}

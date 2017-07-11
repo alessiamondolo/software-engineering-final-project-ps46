@@ -66,7 +66,7 @@ public class CollectCardAction implements Action {
 				familyMemberUsed.use();
 			}
 			
-			if (game.getBoard().getColorOfTower(actionSpace.getId()) == "blue")
+			if (game.getBoard().getColorOfTower(actionSpace.getId()).equals("blue"))
 					card.use(game);
 			
 			//checking the leaderCard Effect of "Santa Rita"
@@ -85,7 +85,7 @@ public class CollectCardAction implements Action {
 					}
 					//setting to 0 all the resources not touched by the effect of the leader card
 					for (String key : difference.getResourcesMap().keySet()) {
-						if((key != "Wood") && (key != "Stones") && (key != "Money") && ( key != "Servants")) {
+						if(!(key.equals("Wood")) && !(key.equals("Stones")) && !(key.equals("Money")) && !(key.equals ("Servants"))) {
 							difference.getResourcesMap().get(key).setQuantity(0);
 						}
 					}	
@@ -126,7 +126,7 @@ public class CollectCardAction implements Action {
 		}
 		
 		//if the card is a ventureCard check if there is a is a requiredResource necessary to collect the card 
-		if (game.getBoard().getColorOfTower(actionSpace.getId()) == "green"){
+		if (game.getBoard().getColorOfTower(actionSpace.getId()).equals("green")){
 			
 			VentureCard ventureCard = (VentureCard)card;
 			if (ventureCard.getRequiredResource() != null){
@@ -154,7 +154,6 @@ public class CollectCardAction implements Action {
 			if ( temporaryCost.getResourcesMap().get("Money").getQuantity() < 3) {
 				temporaryCost.getResourcesMap().get("Money").setQuantity(0);
 				//altrimenti per come è stata pensata la classe "sub" delle risorse..
-				//se ho un costo 2 - 3 = 2? (non fa nulla) ---> così invece imposto il risultato a 0
 			}
 			else
 				temporaryCost.sub(moneyDiscounted);

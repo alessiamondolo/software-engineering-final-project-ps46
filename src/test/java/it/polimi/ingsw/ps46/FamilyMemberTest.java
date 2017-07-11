@@ -83,13 +83,13 @@ public class FamilyMemberTest {
 	public void sumTest() {
 		
 		for (String string : bonus.keySet()) {
-			if(string == "neutral")
+			if(string.equals( "neutral"))
 				familyMemberNeutral.getValueFamilyMember().sumDice(bonus.get(string));
-			if(string == "orange")
+			if(string.equals( "orange"))
 				familyMemberOrange.getValueFamilyMember().sumDice(bonus.get(string));
-			if(string == "black")
+			if(string.equals( "black"))
 				familyMemberBlack.getValueFamilyMember().sumDice(bonus.get(string));
-			if(string == "white")
+			if(string.equals( "white"))
 				familyMemberWhite.getValueFamilyMember().sumDice(bonus.get(string));
 		}
 		

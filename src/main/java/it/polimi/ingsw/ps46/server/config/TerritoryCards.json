@@ -2513,11 +2513,11 @@
 				},
 				{
 					"id" : "MilitaryPoints",
-					"quantity" : 2
+					"quantity" : 0
 				},
 				{
 					"id" : "VictoryPoints",
-					"quantity" : 0
+					"quantity" : 2
 				},
 				{
 					"id" : "CouncilPrivilege",

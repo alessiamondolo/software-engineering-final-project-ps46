@@ -30,21 +30,19 @@ import it.polimi.ingsw.ps46.server.resources.Wood;
  * TESTING CLASS MalusDecreaseTEST.
  * per settare la classe in modo che funzioni bisogna cambiare il costruttore di Game a public e
  * aggiungere questa linea di codice nel costruttore di Game
- * 		////////////////////////////////////////////////////////////////////////
-		 currentPlayer = new Player(1); // AGGIUNTO PER IL TESTING DA TOGLIERE//
-		////////////////////////////////////////////////////////////////////////	
+ * 			
  * 
  * @author Andrea.Masi
  */
 
 
-public class MalusDecreaseTEST {
+public class GenericTest {
 
-	private Game game;
+	private Game game = new Game(2);
 	private ResourceSet playerResourceSet;
 
 	
-	private ResourceSet immidiateCardResources;
+	private ResourceSet immediateCardResources;
 	private ResourceSet permanentCardResources;
 
 	private TerritoryCard territoryCard;
@@ -54,18 +52,18 @@ public class MalusDecreaseTEST {
 	private static final int INTVALUE1 = 1;
 	private static final int INTVALUE2 = 2;
 	private static final int INTVALUE3 = 3;
+	private static final int INTVALUE4 = 4;
 
 	
 	/**
 	 * Constructor of the TEST class MalusDecreaseTEST
 	 */
-	public MalusDecreaseTEST() {
+	public GenericTest() {
 		
-		game = new Game(2);
 		
 		//CREATING RESOURCESET FOR PLAYER RESOURCESET//
 		//////////////////////////////////////////////
-		
+		game.setCurrentPlayer(game.getPlayers().get(0));
 		ArrayList<Resource> resourcesList = new ArrayList<>();
 		
 		resourcesList.add(new Wood				(INTVALUE2));
@@ -105,10 +103,10 @@ public class MalusDecreaseTEST {
 		resourcesList.add(new VictoryPoints		(INTVALUE3));
 		resourcesList.add(new CouncilPrivilege	(INTVALUE3));
 		
-		immidiateCardResources = new ResourceSet(resourcesList);
+		immediateCardResources = new ResourceSet(resourcesList);
 
 		System.out.println("\n" + "STAMPO: ||immediateCardResources||");
-		System.out.println( immidiateCardResources.toString() + "\n");	
+		System.out.println( immediateCardResources.toString() + "\n");	
 		
 		
 		//CREATING RESOURCESET FOR CARD PERMANENT EFFECT//
@@ -165,7 +163,7 @@ public class MalusDecreaseTEST {
 		
 		//SETTING CARD TERRITORY PROPERTIES & EFFECTS//
 		//////////////////////////////////////////////
-		IncreaseResourcesEffect increaseResourcesImmEffect = new IncreaseResourcesEffect(immidiateCardResources);
+		IncreaseResourcesEffect increaseResourcesImmEffect = new IncreaseResourcesEffect(immediateCardResources);
 		IncreaseResourcesEffect increaseResourcesPerEffect = new IncreaseResourcesEffect(permanentCardResources);
 
 		territoryCard = new TerritoryCard("TerritoryCard", 1, increaseResourcesImmEffect, increaseResourcesPerEffect, playerResourceSet, new Dice()){};
@@ -223,10 +221,10 @@ public class MalusDecreaseTEST {
 		System.out.println("\n" + "STAMPO: ||GAINED resources||" + "\n" );
 		System.out.println( gainedResources.toString());	
 		
-		IncreaseResourcesByElementsEffect increaseResourcesByElementsEffect = new IncreaseResourcesByElementsEffect(immidiateCardResources, "TerritoryCards");
+		IncreaseResourcesByElementsEffect increaseResourcesByElementsEffect = new IncreaseResourcesByElementsEffect(immediateCardResources, "TerritoryCards");
 		ExchageResourcesEffect exchageResourcesEffect = new ExchageResourcesEffect(requiredResources, gainedResources);
 	
-		buildingCard = new BuildingCard("BuildingCard", 1, increaseResourcesByElementsEffect, doubleChoise, exchageResourcesEffect, new ExchageResourcesEffect(immidiateCardResources, permanentCardResources), playerResourceSet, new Dice()){};
+		buildingCard = new BuildingCard("BuildingCard", 1, increaseResourcesByElementsEffect, doubleChoise, exchageResourcesEffect, new ExchageResourcesEffect(immediateCardResources, permanentCardResources), playerResourceSet, new Dice()){};
 		game.getCurrentPlayer().getPersonalBoard().putBuildingCardInPlayerSet(buildingCard);
 
 		System.out.println("\n----PLAYER BUILDING CARDs----\n");
@@ -247,11 +245,12 @@ public class MalusDecreaseTEST {
 	//--------------------------------------------------//
 	
 	public void testingMethod(){
-		
+		game.setCurrentPlayer(game.getPlayers().get(0));
+
 		System.out.println("\n----FINE SETTAGGIO----\n\n\n");	
 		System.out.println("\n----INIZIO TESTING----");		
 		
-		/*
+		
 		ResourceSet clone = new ResourceSet(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet());
 	
 		System.out.println("\n" + "STAMPO: ||IL CLONE DEL playerResourceSet||" );
@@ -277,7 +276,7 @@ public class MalusDecreaseTEST {
 		System.out.println("\n" + "STAMPO: ||playerResourceSet|| DOPO l'attivazione dell'effetto Immediato (seconda volta)" );
 		System.out.println( game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().toString() + "\n");	
 		
-		
+		/*
 		for (BuildingCard buildingCard : game.getCurrentPlayer().getPersonalBoard().getBuildingDeck()) {
 				buildingCard.getImmediateEffects().activateEffect(game);	
 		}
@@ -433,7 +432,7 @@ public class MalusDecreaseTEST {
 	
 	public static void main(String[] args) {
 	
-		MalusDecreaseTEST test = new MalusDecreaseTEST();
+		GenericTest test = new GenericTest();
 		test.testingMethod();
 	}
 	
@@ -444,11 +443,11 @@ public class MalusDecreaseTEST {
 	//-------------------------------------------------------------//
 
 	public ResourceSet getAdditionalCardResources() {
-		return immidiateCardResources;
+		return immediateCardResources;
 	}
 
 	public void setAdditionalCardResources(ResourceSet additionalCardResources) {
-		this.immidiateCardResources = additionalCardResources;
+		this.immediateCardResources = additionalCardResources;
 	}
 
 	public ResourceSet getPlayerResourceSet() {

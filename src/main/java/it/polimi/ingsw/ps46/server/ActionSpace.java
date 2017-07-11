@@ -50,10 +50,19 @@ public class ActionSpace implements Serializable {
 		}
 	}
 	
+	///////////////SETTER METHODS//////////////////
+	//////////////////////////////////////////////
 	public void setAsAvailable() {
 			available = true;
 	}
 
+
+	public void setPlayerColor(String playerColor) {
+		this.playerColor = playerColor;
+	}
+	
+	///////////////GETTER METHODS//////////////////
+	//////////////////////////////////////////////
 	
 	/**
 	 * Description of the method getRequiredFamilyMemberValue().
@@ -105,10 +114,5 @@ public class ActionSpace implements Serializable {
 		return playerColor;
 	}
 
-
-
-	public void setPlayerColor(String playerColor) {
-		this.playerColor = playerColor;
-	}
 	
 }

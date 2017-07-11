@@ -6,7 +6,8 @@ import org.junit.runner.notification.Failure;
 public class TestRunner {
    public static void main(String[] args) {
       
-	   Result result = JUnitCore.runClasses(PersonalBoardTest.class);
+	   Result result = JUnitCore.runClasses(MalusTest.class);
+
 		
       for (Failure failure : result.getFailures()) {
           System.out.println("\n====================ATTENTION==========================");

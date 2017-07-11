@@ -17,8 +17,9 @@ public class ResourceSet implements Serializable {
 	private static final long serialVersionUID = 786707586186550634L;
 	
 	private LinkedHashMap<String, Resource> resourcesMap;
-
 	
+	/////////////////CONSTRUCTORS//////////////////
+	//////////////////////////////////////////////
 	/**
 	 * Creates a new ResourceSet object by reading a list of Resource objects and filling the hashmap
 	 * with the ID of the resource as Key and the resource itself as value.
@@ -33,6 +34,7 @@ public class ResourceSet implements Serializable {
 			resourcesMap.put(resource.getId(), resource);
 		}
 	}
+	
 	
 	/**
 	 * This constructor is used to create a deep copy of a resourceSet passed parameter called resourceSetToBeCloned.
@@ -54,6 +56,7 @@ public class ResourceSet implements Serializable {
 		}
 	}
 	
+	
 	/**
 	 * This constructor create a new resourceSet calculating the difference between two different resourceSet
 	 * 
@@ -67,23 +70,17 @@ public class ResourceSet implements Serializable {
 		
 		for (String keyStringBefore : beforeResourceSet.getResourcesMap().keySet()) {
 			for (String keyStringAfter : afterResourceSet.getResourcesMap().keySet()) {
-				if(keyStringAfter == keyStringBefore) {
+				if(keyStringAfter.equals(keyStringBefore)) {
 					Resource differecedResource = factory.getResourceByDifference(beforeResourceSet.getResourcesMap().get(keyStringBefore), afterResourceSet.getResourcesMap().get(keyStringAfter));					
 					resourcesMap.put(keyStringBefore, differecedResource);
 				}
 			}
 		}
 	}
-		
+
 	
 	/////////////////////METHODS///////////////////
 	//////////////////////////////////////////////
-	
-	public LinkedHashMap<String, Resource> getResourcesMap() {
-		
-		return resourcesMap;
-	}
-
 	/**
 	 * Increases the value of the resource of the ResourceSet that has the same ID as the resource received as parameter.
 	 * 
@@ -93,6 +90,7 @@ public class ResourceSet implements Serializable {
 		resourcesMap.get(moreResources.getId()).add(moreResources);
 	}
 	
+	
 	/**
 	 * Decreases the value of the resource of the ResourceSet that has the same ID as the resource received as parameter.
 	 * 
@@ -101,6 +99,7 @@ public class ResourceSet implements Serializable {
 	public boolean sub(Resource lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource > myResource
 		return resourcesMap.get(lessResources.getId()).sub(lessResources);
 	}
+	
 	
 	/**
 	 * Returns true if the the value of the resource of the ResourceSet that has the same ID as the resource received as parameter 
@@ -126,6 +125,7 @@ public class ResourceSet implements Serializable {
 			resourcesMap.get(key).add(moreResources.getResourcesMap().get(key));
 	}
 	
+	
 	/**
 	 * Decreases the value of the resources of the ResourceSet that has the same ID as the resources in the ResourceSet 
 	 * received as parameter.
@@ -147,6 +147,7 @@ public class ResourceSet implements Serializable {
 			return false;
 	}
 	
+	
 	/**
 	 * Returns true if the the value of all the resources of the ResourceSet that has the same ID as the resources in the ResourceSet 
 	 * received as parameter is greater or equal than all the resources of the resourceSet received as parameter.
@@ -165,13 +166,13 @@ public class ResourceSet implements Serializable {
 	}
 	
 	
-	
 	public ArrayList<Resource> toArray() {
 		ArrayList<Resource> array = new ArrayList<Resource>();
 		for(String key : getResourcesMap().keySet())
 			array.add(resourcesMap.get(key));
 		return array;
 	}
+	
 	
 	@Override
 	public String toString() {
@@ -184,4 +185,9 @@ public class ResourceSet implements Serializable {
 		return stringBuilder.toString();
 	}
 	
+	
+	public LinkedHashMap<String, Resource> getResourcesMap() {
+	
+		return resourcesMap;
+	}
 }
