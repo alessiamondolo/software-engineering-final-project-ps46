@@ -265,6 +265,7 @@ public class Game extends Observable implements Serializable {
 				player.getLeaderCards().put(leaderCard.getCardName(), leaderCard);
 				index++;
 			}
+			System.out.println(player.getUsername() + "\n" + player.getLeaderCards() + "\n");
 		}
 	}
 	

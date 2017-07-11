@@ -167,7 +167,6 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 
 
 
-	@Override
 	public void visit(EventExtraMove eventExtraMove) {
 		switch(eventExtraMove.getMessage()) {
 		case EXTRA_MOVE :
@@ -285,6 +284,7 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	/**
 	 * 
+	 *  
 	 */
 	public void getBonusTile(int id) {
 		int bonusTile = 0;
@@ -587,7 +587,7 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		ObjectOutputStream writer = writers.get(currentSocket);
 		ObjectInputStream reader = readers.get(currentSocket);
 		try {
-			writer.writeObject("GET_ACTIVATION_LEADER_CARDS");
+			writer.writeObject("GET_DISCARD_LEADER_CARDS");
 			writer.flush();
 			writer.writeObject(game);
 			writer.flush();

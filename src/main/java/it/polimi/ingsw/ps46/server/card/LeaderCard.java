@@ -49,25 +49,25 @@ public class LeaderCard implements Serializable {
 			if (cardName != "Lucrezia Borgia"){
 				for (String string : requiredCards.keySet()) {
 					
-					if (string == "TerritoryCards"){
+					if (string.equals("TerritoryCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().size() < requiredCards.get(string)){
 							return false;
 						}
 					}
 					
-					if (string == "BuldingCards"){
+					if (string.equals("BuldingCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getBuildingDeck().size() < requiredCards.get(string)){
 							return false;
 						}
 					}
 					
-					if (string == "VentureCards"){
+					if (string.equals("VentureCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getVentureDeck().size() < requiredCards.get(string)){
 							return false;
 						}
 					}
 					
-					if (string == "CharacterCards"){
+					if (string.equals("CharacterCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getCharacterDeck().size() < requiredCards.get(string)){
 							return false;
 						}	
@@ -78,29 +78,28 @@ public class LeaderCard implements Serializable {
 			{
 				boolean cardOrChecked = false;
 				for (String string : requiredCards.keySet()) {
-					
-					if (string == "TerritoryCards"){
+					if (string.equals("TerritoryCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;
 						}
 					}
 					
-					if (string == "BuldingCards"){
+					if (string.equals("BuldingCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getBuildingDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;
 						}
 					}
 					
-					if (string == "VentureCards"){
+					if (string.equals("VentureCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getVentureDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;
 						}
 					}
 					
-					if (string == "CharacterCards"){
+					if (string.equals("CharacterCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getCharacterDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;

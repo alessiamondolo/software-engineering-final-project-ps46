@@ -553,13 +553,17 @@ public class GUIView implements View {
 
 	public ArrayList<Integer> getActivationLeaderCards() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		array.add(new Integer(0));
+		return array;
 	}
 
 	@Override
 	public ArrayList<Integer> getDiscardLeaderCards() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		array.add(new Integer(0));
+		return array;
 	}
 
 	@Override
