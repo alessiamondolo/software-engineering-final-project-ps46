@@ -128,9 +128,6 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		case UPDATE_PHASE_INFO :
 			printBoard();
 			break;
-		case THROWN_DICE :
-			//printBoard();
-			break;
 		case SET_NEXT_TURN_ORDER :
 			showNextTurnOrder();
 			break;	
@@ -425,8 +422,7 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
-	 *		TODO	writer.reset();
-
+	 * 
 	 */
 	public void getCostChoice(VentureCard card) {
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);

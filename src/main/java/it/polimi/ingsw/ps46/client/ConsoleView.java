@@ -51,7 +51,6 @@ public class ConsoleView implements View {
 	 */
 	public void setGame(Game game) {
 		this.game = game;
-		System.out.println("[Game state: " + game.getGameState() + "]");
 	}
 	
 	
@@ -352,8 +351,8 @@ public class ConsoleView implements View {
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   | Penality: - |  | Penality: 3 |  | Penality: - |  | Penality: 3 |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
-		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
-		output.printf("|   %s  %s  %s  %s   |\n", boardBoxesPlayer[0], boardBoxesPlayer[1], boardBoxesPlayer[2], boardBoxesPlayer[3]);
+		output.println("|   |   Player:   |  |  Players:   |  |   Player:   |  |  Players:   |   |");
+		output.printf("|   %s  %s  %s  %s   |\n", boardBoxesPlayer[0], "| see below   |", boardBoxesPlayer[2], "| see below   |");
 		output.println("|   |_____________|  |_____________|  |_____________|  |_____________|   |");
 		output.println("|                                                                        |");
 		output.println("|------------------------------------------------------------------------|");
@@ -383,9 +382,49 @@ public class ConsoleView implements View {
 		output.println("|________________________________________________________________________|");
 		output.println("\n");
 		
-		output.println("These are the players on the coucil space, ordered by arrival:");
-		//TODO dopo aver sistemato classe action space
+		output.println("==========================================================================");
+		if(!game.getCouncilPalaceOrder().isEmpty()) {
+			output.println("These are the players on the coucil space, ordered by arrival:");
+			int indexPlayer = 1;
+			for(Player player : game.getCouncilPalaceOrder()) {
+				output.println(indexPlayer + ". " + player.getColor());
+				indexPlayer++;
+			}
+		}
+		else 
+			output.println("There are no players in the council space for now.");
 		
+		if(game.getNumberPlayers() > 2) {
+			output.println("==========================================================================");
+			output.println("These are the players on the production space with ID 18:");
+			int indexPlayer = 1;
+			for (Player player : game.getPlayers()) {
+				for(String colorKey : player.getFamilyMembersMap().keySet()) {
+					FamilyMember familyMember = player.getFamilyMember(colorKey);
+					int position = familyMember.getPositionOfFamilyMember();
+					if(position == 18) {
+						output.println(indexPlayer + ". " + player.getColor());
+						indexPlayer++;
+					}
+				}
+			}
+			
+			output.println("==========================================================================");
+			output.println("These are the players on the harvest space with ID 20:");
+			indexPlayer = 1;
+			for (Player player : game.getPlayers()) {
+				for(String colorKey : player.getFamilyMembersMap().keySet()) {
+					FamilyMember familyMember = player.getFamilyMember(colorKey);
+					int position = familyMember.getPositionOfFamilyMember();
+					if(position == 20)
+						output.println(indexPlayer + ". " + player.getColor());
+				}
+			}
+		}
+		
+		
+		
+		output.println("==========================================================================");
 		output.println("These are the cards available on the board:");
 		int cardNumber = 1;
 		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
@@ -626,13 +665,21 @@ public class ConsoleView implements View {
 	}
 
 
+	
+	/**
+	 * Gets if the player wants or not to support the church.
+	 * 
+	 * @return choice :<br>
+	 * <ul>
+	 * <li>1, if the player wants to support the church</li>
+	 * <li>2, if the player doesn't want to support the church</li>
+	 * </ul>
+	 */
 	public int getVaticanSupport() {
-		
 		output.println("==========================================================================");
 		output.println("Do you want to support the Church?");
 		output.println("1. Yes");
 		output.println("2. No");
-
 
 		int choice = input.IntegerFromConsole(1, 2);
 		return choice;
@@ -640,7 +687,11 @@ public class ConsoleView implements View {
 
 
 
-
+	/**
+	 * Gets the ID of the action space where the client wants to move during his extra move.
+	 * 
+	 * @return move : the ID of the action space.
+	 */
 	public int getExtraMove(ExtraMoveEffect effect) {
 		int move = 0;
 		switch(effect.getType()) {
@@ -696,6 +747,12 @@ public class ConsoleView implements View {
 	}
 
 
+	
+	/**
+	 * Gets which leader cards the player wants to activate.
+	 * 
+	 * @return leaderCardsActivated : list of the indexes of the leader cards to activate
+	 */
 	public ArrayList<Integer> getActivationLeaderCards() {
 		int numberOfLeaderCardActivable = 0;
 		ArrayList<Integer> leaderCardsActivated = new ArrayList<Integer>();
@@ -742,6 +799,11 @@ public class ConsoleView implements View {
 	
 	
 
+	/**
+	 * Gets which leader cards the player wants to discard in exchange of a coucil privilege.
+	 * 
+	 * @return leaderCardsDiscarded : list of the indexes of the leader cards to discard
+	 */
 	public ArrayList<Integer> getDiscardLeaderCards(){
 		int numberOfLeaderCardCouldDiscard = 0;
 		ArrayList<Integer> leaderCardsDiscarded = new ArrayList<Integer>();

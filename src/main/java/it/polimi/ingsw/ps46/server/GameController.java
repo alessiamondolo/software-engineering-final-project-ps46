@@ -210,33 +210,7 @@ public class GameController implements Observer, ViewEventVisitor {
 				turnSetup();
 				
 				for(Player player : game.getPlayers()) {
-					if(game.checkIfCouldDiscardLeaderCards()) {
-						game.setGameState(GameState.DISCARD_LEADER_CARDS);
-						game.setCurrentPlayer(player);
-					}
-					if(game.checkIfHasLeaderCardsActivable()) {
-						game.setGameState(GameState.ACTIVATION_LEADER_CARDS);
-						game.setCurrentPlayer(player);
-					}
 					
-					game.setGameState(GameState.GET_PLAYER_ACTION);
-					game.setCurrentPlayer(player);
-					
-					if(game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("CouncilPrivilege").getQuantity() > 0) {
-						game.setGameState(GameState.COUNCIL_PRIVILEGE);
-						game.setCurrentPlayer(player);
-					}
-					
-					if(game.checkIfCouldDiscardLeaderCards()) {
-						game.setGameState(GameState.DISCARD_LEADER_CARDS);
-						game.setCurrentPlayer(player);
-						}
-					//setto qui le azioni delle carte leader
-					//se ha carte attivabili, creare un metodo che faccia il check...
-					if(game.checkIfHasLeaderCardsActivable()) {
-						game.setGameState(GameState.ACTIVATION_LEADER_CARDS);
-						game.setCurrentPlayer(player);
-					}
 					if(game.getCurrentPhase()==1 && !(player.getGenericMalus().isEmpty()) && (player.getGenericMalus().containsKey("passYourFirstMove"))) {
 						missingTurnPlayers.add(player);
 						game.setGameState(GameState.MISSING_TURN);
@@ -414,6 +388,16 @@ public class GameController implements Observer, ViewEventVisitor {
 	 * 
 	 */
 	private void newTurn(Player player) {
+		
+		if(game.checkIfCouldDiscardLeaderCards()) {
+			game.setGameState(GameState.DISCARD_LEADER_CARDS);
+			game.setCurrentPlayer(player);
+		}
+		if(game.checkIfHasLeaderCardsActivable()) {
+			game.setGameState(GameState.ACTIVATION_LEADER_CARDS);
+			game.setCurrentPlayer(player);
+		}
+		
 		game.setGameState(GameState.GET_PLAYER_ACTION);
 		game.setCurrentPlayer(player);
 		
@@ -421,6 +405,18 @@ public class GameController implements Observer, ViewEventVisitor {
 			game.setGameState(GameState.COUNCIL_PRIVILEGE);
 			game.setCurrentPlayer(player);
 		}
+		
+		if(game.checkIfCouldDiscardLeaderCards()) {
+			game.setGameState(GameState.DISCARD_LEADER_CARDS);
+			game.setCurrentPlayer(player);
+			}
+		//setto qui le azioni delle carte leader
+		//se ha carte attivabili, creare un metodo che faccia il check...
+		if(game.checkIfHasLeaderCardsActivable()) {
+			game.setGameState(GameState.ACTIVATION_LEADER_CARDS);
+			game.setCurrentPlayer(player);
+		}
+		
 	}
 	
 	
@@ -533,7 +529,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		actionSpaceID = 0;
 		servants = 0;
 		cost = null;
-		//TODO check solo non extra move 
+
 		if(!executed) {
 
 			//restores original value of the family member

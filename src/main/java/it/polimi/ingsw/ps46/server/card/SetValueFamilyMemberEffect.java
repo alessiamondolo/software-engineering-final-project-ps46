@@ -50,4 +50,10 @@ public class SetValueFamilyMemberEffect implements Effect {
 		return newValue;
 	}
 	
+	@Override
+	public String toString() {
+		return "Which family member: " + whichFamilyMember + "\n" +
+				"New value: " + newValue;
+	}
+	
 }

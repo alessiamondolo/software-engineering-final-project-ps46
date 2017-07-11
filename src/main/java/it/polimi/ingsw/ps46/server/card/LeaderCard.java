@@ -14,6 +14,7 @@ public class LeaderCard {
 	private ResourceSet requiredResources;
 	private Effect leaderEffect;
 	private boolean isActive = false;
+	private boolean isPermanent;
 	
 	
 	/*
@@ -30,12 +31,13 @@ public class LeaderCard {
 	 * Sisto IV da implementare con il rapporto del vaticano DONE
 	 */
 	
-	public LeaderCard (String name, Effect leaderEffect, LinkedHashMap<String,Integer> requiredCards, ResourceSet requiredResources) {
+	public LeaderCard (String name, Effect leaderEffect, LinkedHashMap<String,Integer> requiredCards, ResourceSet requiredResources, boolean isPermanent) {
 	
 		this.cardName = name;
 		this.leaderEffect = leaderEffect;
 		this.requiredCards = requiredCards;
 		this.requiredResources = requiredResources;
+		this.isPermanent = isPermanent;
 		
 	}
 	
@@ -154,6 +156,22 @@ public class LeaderCard {
 
 	public Effect getLeaderEffect() {
 		return leaderEffect;
+	}
+
+
+
+	public boolean isPermanent() {
+		return isPermanent;
+	}
+	
+	@Override
+	public String toString() {
+		return "Name : " + cardName + "\n" +
+				"Required cards: " + requiredCards + "\n" +
+				"Required resources: " + requiredResources + requiredCards + "\n" +
+				"Effect: " + leaderEffect + "\n" +
+				"Is active: " + isActive + "\n" +
+				"Is permanent: " + isPermanent;
 	}
 
 }
