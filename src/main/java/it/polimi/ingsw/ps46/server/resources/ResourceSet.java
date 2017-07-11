@@ -55,7 +55,7 @@ public class ResourceSet implements Serializable {
 	}
 	
 	/**
-	 * 
+	 * This constructor create a new resourceSet calculating the difference between two different resourceSet
 	 * 
 	 * @param beforeResourceSet
 	 * @param afterResourceSet
@@ -76,6 +76,8 @@ public class ResourceSet implements Serializable {
 	}
 		
 	
+	/////////////////////METHODS///////////////////
+	//////////////////////////////////////////////
 	
 	public LinkedHashMap<String, Resource> getResourcesMap() {
 		
@@ -96,7 +98,7 @@ public class ResourceSet implements Serializable {
 	 * 
 	 * @param Resource
 	 */
-	public boolean sub (Resource lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource > myResource
+	public boolean sub(Resource lessResources) {//da aggiungere check per risorsa non esistente nella mappa o lessResource > myResource
 		return resourcesMap.get(lessResources.getId()).sub(lessResources);
 	}
 	

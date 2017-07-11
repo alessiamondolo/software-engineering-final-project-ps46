@@ -43,9 +43,29 @@ public class DiceTest {
 	
 	
 	@Test
+	public void testSub() {
+		
+		Dice dice1 = new Dice(7);
+		Dice dice2 = new Dice(5);
+		
+		dice1.subDice(dice2);
+		
+		assertEquals(2, dice1.getValue());
+		
+		Dice dice3 = new Dice(15);
+		Dice dice4 = new Dice(22);
+		
+		dice3.subDice(dice4);
+		
+		assertEquals(0, dice3.getValue());
+
+	}
+
+	
+	@Test
 	public void testToString() {
 		Dice dice = new Dice(2);
 		assertEquals(2, dice.getValue());
-		System.out.println(dice.toString());
+		System.out.println("Print of the dice; " + dice.toString());
 	}
 }

@@ -5,12 +5,22 @@ import org.junit.runner.notification.Failure;
 
 public class TestRunner {
    public static void main(String[] args) {
-      Result result = JUnitCore.runClasses(DiceTest.class);
+      
+	   Result result = JUnitCore.runClasses(ResourceSetTest.class);
 		
       for (Failure failure : result.getFailures()) {
-         System.out.println("Il risultato del TestRunner: " + failure.toString());
+          System.out.println("\n====================ATTENTION==========================");
+         System.out.println("\nEND OF THE TEST WITH NEGATIVE RESULT:\n" + failure.toString());
       }
-		
-      System.out.println("Il risultato del TestRunner: " + result.wasSuccessful());
+      System.out.println("\n=======================================================");
+      System.out.println("RESULT OF THE TEST");
+      System.out.println("=======================================================");
+
+
+      if (result.wasSuccessful())
+      System.out.println("\nEND OF THE TEST WITH RESULT: 'SUCCESSFUL'");
+      else
+          System.out.println("\nTEST ABORTED FOR SOME: 'FAILURE'");
+
    }
 }
