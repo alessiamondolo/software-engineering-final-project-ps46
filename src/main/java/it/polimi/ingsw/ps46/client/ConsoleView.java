@@ -852,7 +852,9 @@ public class ConsoleView implements View {
 
 
 
-	@Override
+	/**
+	 * Prints on the output stream the final score the game.
+	 */
 	public void showFinalScores() {
 		output.println("==========================================================================");
 		output.println("This is the final score of the game:");
