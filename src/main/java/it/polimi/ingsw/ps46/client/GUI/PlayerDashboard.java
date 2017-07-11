@@ -2,9 +2,12 @@ package it.polimi.ingsw.ps46.client.GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,11 +16,13 @@ import java.util.LinkedHashMap;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
+import it.polimi.ingsw.ps46.server.BonusTile;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.GameState;
 import it.polimi.ingsw.ps46.server.Player;
@@ -37,12 +42,16 @@ public class PlayerDashboard extends JPanel {
 	private Game game;
 	private Player player;
 	private JPanel dashboard;
-	private JLabel bonusTile;
+	private JButton bonusTile = new JButton();
+	
+	private boolean bTileloaded = false;
 	
 	private Dimension dashboardDimension;
 	private double dashboardHeight;
 	private double dashboardWidth;
 	private double bonusTileWidth;
+	
+	private static BufferedImage bonusTileImg;
 	
 	private JLabel moneyValue = new JLabel();
 	private JLabel woodValue = new JLabel();
@@ -58,13 +67,19 @@ public class PlayerDashboard extends JPanel {
 		
 		this.player = player;
 		this.dashboardHeight = (playerAreaDimension.getHeight()*8)/28;
-		this.dashboardWidth = (playerAreaDimension.getWidth()*12)/13;
+		this.dashboardWidth = (playerAreaDimension.getWidth()*11)/13;
 		this.bonusTileWidth = (playerAreaDimension.getWidth()*3)/65;
 		
 		this.dashboardDimension = new Dimension((int) dashboardWidth, (int) dashboardHeight);
 		
-		this.bonusTile= createBonusTile();
-		this.add(bonusTile);
+		this.bonusTile.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					ZoomBox.setImage(PlayerDashboard.bonusTileImg);	
+			}
+			
+		});
+		
 		this.dashboard = createDashboard(); 
 		this.add(dashboard);
 		this.setOpaque(true);
@@ -190,22 +205,27 @@ public class PlayerDashboard extends JPanel {
 	}
 	
 	
-	private JLabel createBonusTile() {
+	private JButton createBonusTile() {
+
+		Image bt;
+		int bTile = this.player.getPersonalBoard().getBonusTile().getId();
+		System.out.println(this.player.getUsername());
+		System.out.println("Io sono "+this.player.getUsername()+ " e ho bt " +this.player.getPersonalBoard().getBonusTile());
+		System.out.println(" ANDREA CULO " +bTile);
+		this.bonusTile.setPreferredSize(new Dimension((int) bonusTileWidth, (int) dashboardHeight*8/9) );
 		
-		JLabel bonusTile = new JLabel();
-		
-		//if (game == basic) // TODO
-		
-		BufferedImage image = null;
+		String path = "mixed/personalbonustile_" + bTile + ".png";
+
 		try {
-			image = ImageIO.read(getClass().getResource("img/mixed/personalbonustile_1.png"));
+			PlayerDashboard.bonusTileImg = Token.getImagePathMode(path);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	
-		Image img = image.getScaledInstance((int) bonusTileWidth, (int) dashboardHeight, Image.SCALE_SMOOTH);
-		ImageIcon imageIcon = new ImageIcon(img);
-		bonusTile.setIcon(imageIcon);
+		bt = PlayerDashboard.bonusTileImg.getScaledInstance((int) bonusTileWidth, (int) dashboardHeight*8/9, Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(bt);
+		this.bonusTile.setIcon(imageIcon);
 
 		return bonusTile;
 		
@@ -226,6 +246,17 @@ public class PlayerDashboard extends JPanel {
 				this.player = player;
 			}
 		}
+
+		
+		if ( bTileloaded == false) {
+			
+			this.bonusTile= createBonusTile();
+			this.add(bonusTile);
+		
+			bTileloaded = true;
+			
+		}
+	
 		
 		Color playerColor = convertColor(this.player.getColor());
 		this.setBackground(playerColor);

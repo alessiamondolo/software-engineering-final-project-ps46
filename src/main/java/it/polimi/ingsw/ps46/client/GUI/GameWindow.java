@@ -25,6 +25,7 @@ public class GameWindow extends JFrame {
 	private MainBoard mainBoard;
 	private PlayerArea playerArea;
 	private Game game;
+	private int bonusTile = -1;
 	
 	public GameWindow(Game game) {
 		

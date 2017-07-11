@@ -9,14 +9,16 @@ public class BonusTile implements Serializable {
 
 	private static final long serialVersionUID = 5161001177516211182L;
 	
+	private int id;
 	private boolean advancedPersonalBoard;
 	private Dice productionValue;
 	private Dice harvestValue;
 	private ResourceSet gainedFromPersonalBoardProduction;
 	private ResourceSet gainedFromPersonalBoardHarvest;
 	
-	public BonusTile(boolean advancedPersonalBoard, Dice productionValue, Dice harvestValue, ResourceSet gainedFromPersonalBoardProduction, ResourceSet gainedFromPersonalBoardHarvest) {
+	public BonusTile(int id, boolean advancedPersonalBoard, Dice productionValue, Dice harvestValue, ResourceSet gainedFromPersonalBoardProduction, ResourceSet gainedFromPersonalBoardHarvest) {
 		
+		this.setId(id);
 		this.setAdvancedPersonalBoard(advancedPersonalBoard);
 		this.setProductionValue(productionValue);
 		this.setHarvestValue(harvestValue);
@@ -84,6 +86,14 @@ public class BonusTile implements Serializable {
 	public String toString() {
 		return "Production value: " + productionValue + ", resources gained from production: " + gainedFromPersonalBoardProduction.toString() + "\n" +
 				"Harvest value: " + harvestValue + ", resources gained from harvest: " + gainedFromPersonalBoardHarvest.toString();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

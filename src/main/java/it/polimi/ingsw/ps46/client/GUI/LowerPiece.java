@@ -25,16 +25,16 @@ public class LowerPiece extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 5970007146885071378L;
-	JPanel upperPanel = new JPanel();
+	private JPanel upperPanel = new JPanel();
 	JPanel faithPanel = new JPanel();
 	JPanel actionPanel = new JPanel();
+	private ArrayList <ExcommBox> excommBoxes = new ArrayList <ExcommBox> (3);
+	private ArrayList <PointCell> actionCells = new ArrayList <PointCell> ();
 	private ArrayList <PointCell> faithCells = new ArrayList <PointCell> ();
 	double width;
 	double height;
 	Game game;
 	Dimension tokenDimension;
-	ArrayList <CardCell> excommCards = new ArrayList<CardCell>();
-	ArrayList <PointCell> actionCells = new ArrayList<PointCell>();
 	double widthSmall;
 	double heightSmall;
 	PointCell councilCell = new PointCell(25);
@@ -94,26 +94,13 @@ public class LowerPiece extends JPanel {
 		upperPanel.setLayout(null);
 
 		Insets insets = upperPanel.getInsets();
-		for (int i = 0; i < 3; i++) {
-			if (i == 0) {
-			excommCards.add(new CardCell());
-			excommCards.get(i).setPreferredSize(new Dimension((int) widthSmall*7/5, (int) heightSmall*5/2));
-			upperPanel.add(excommCards.get(i));
-			Dimension size = excommCards.get(i).getPreferredSize();
-			excommCards.get(i).setBounds((int) widthSmall*13/5 + insets.left, (int) heightSmall*2 + insets.top, size.width, size.height);	
-			} else if (i == 1) {
-				excommCards.add(new CardCell());
-				excommCards.get(i).setPreferredSize(new Dimension((int) widthSmall*8/5, (int) heightSmall*11/4));
-				upperPanel.add(excommCards.get(i));
-				Dimension size = excommCards.get(i).getPreferredSize();
-				excommCards.get(i).setBounds((int) widthSmall*21/5 + insets.left, (int) heightSmall*2 + insets.top, size.width, size.height);	
-			} else {
-				excommCards.add(new CardCell());
-				excommCards.get(i).setPreferredSize(new Dimension(35,50));
-				upperPanel.add(excommCards.get(i));
-				Dimension size = excommCards.get(i).getPreferredSize();
-				excommCards.get(i).setBounds((int) widthSmall*147/25 + insets.left, (int) heightSmall*2 + insets.top, size.width, size.height);	
-			}
+		for (int era = 1; era <= 3; era++) {
+			ExcommBox excommBox = new ExcommBox(era);
+			excommBox.setPreferredSize(new Dimension((int) widthSmall*7/5, (int) heightSmall*5/2));
+			Dimension size = excommBox.getPreferredSize();
+			excommBox.setBounds((int) widthSmall*7/5 * (era+1) + insets.left, (int) heightSmall*2 + insets.top, size.width, size.height);	
+			upperPanel.add(excommBox);
+			excommBoxes.add(excommBox);
 		}
 		
 		upperPanel.add(councilCell);
@@ -292,9 +279,8 @@ public class LowerPiece extends JPanel {
 
 	private void  updateExCards() {
 		
-		for (int i = 0; i < excommCards.size(); i++) {
-			
-			//TODO METODO PER RECUPERARE CARTE SCOMUNICA
+		for (ExcommBox box : excommBoxes) {
+			box.update(game);
 		}
 
 		
@@ -316,7 +302,6 @@ public class LowerPiece extends JPanel {
 				FamilyMember fm = player.getFamilyMember(fmColor);
 				int fmPosition = fm.getPositionOfFamilyMember();
 				String giocatore = game.getCurrentPlayer().getUsername();
-				System.out.println("sono due volte " +giocatore+ " ed il mio familiare di colore " +fmColor+ " è in pos " +fmPosition );
 				
 				if (16 < fmPosition) {
 					PointCell actionCell = actionCells.get(fmPosition - 17);

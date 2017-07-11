@@ -180,7 +180,7 @@ public class Game extends Observable implements Serializable {
 	 */
 	private void configBonusTiles() {
 		FactoryBoard factoryBoard = FactoryBoard.getFactoryBoard();
-		bonusTiles = factoryBoard.createBonusTiles("BonusTiles.json");
+		bonusTiles = factoryBoard.createBonusTiles("BonusTiles.json");			
 	}
 	
 	

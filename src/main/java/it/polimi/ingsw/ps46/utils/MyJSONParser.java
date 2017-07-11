@@ -252,6 +252,7 @@ public class MyJSONParser {
 
 
 	public BonusTile buildBonusTile(JSONObject bonusTileJSON) {
+		int id = ((Long) bonusTileJSON.get("personalBoardNumber")).intValue();
 		boolean advancedPersonalBoard = (boolean) bonusTileJSON.get("advancedPersonalBoard");
 		JSONObject diceJSON = (JSONObject) bonusTileJSON.get("requiredFamilyMemberValue");
 		Dice requiredFamilyMemberValue = buildDice(diceJSON);
@@ -259,7 +260,7 @@ public class MyJSONParser {
         ResourceSet gainedFromPersonalBoardProduction = buildResourceSet(gainedFromPersonalBoardProductionArray);
         JSONArray gainedFromPersonalBoardHarvestArray = (JSONArray) bonusTileJSON.get("gainedFromPersonalBoardHarvest");
         ResourceSet gainedFromPersonalBoardHarvest = buildResourceSet(gainedFromPersonalBoardHarvestArray);
-		BonusTile bonusTile = new BonusTile(advancedPersonalBoard, requiredFamilyMemberValue, requiredFamilyMemberValue, 
+		BonusTile bonusTile = new BonusTile(id, advancedPersonalBoard, requiredFamilyMemberValue, requiredFamilyMemberValue, 
 				gainedFromPersonalBoardProduction, gainedFromPersonalBoardHarvest);
 		return bonusTile;
 	}

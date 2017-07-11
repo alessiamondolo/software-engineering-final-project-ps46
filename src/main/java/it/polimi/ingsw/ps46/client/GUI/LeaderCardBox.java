@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps46.client.GUI;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,11 +17,14 @@ import javax.swing.JPanel;
 
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
-import it.polimi.ingsw.ps46.server.card.Card;
 import it.polimi.ingsw.ps46.server.card.LeaderCard;
 
 public class LeaderCardBox extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8460971081553511650L;
 	private ArrayList <LeaderCardCell> leaderCards;
 	private ArrayList<JButton> actionButtons;
 	private Game game;
@@ -49,7 +51,20 @@ public class LeaderCardBox extends JPanel {
 			button.setPreferredSize(new Dimension( (int) width/5, (int) height/20));
 			button.setFont(new Font("Arial", Font.PLAIN, 10));
 			this.add(button);
-			
+			int code = i+40; // TODO
+			button.addActionListener(new ActionListener() {
+				
+				private int action = code;
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Object mon;
+					synchronized (mon = GUIView.getMonitor()) {
+						GUIView.setAction(action);
+						mon.notifyAll();
+					}
+				}
+			});
 		}
 		
 		
@@ -65,22 +80,21 @@ public class LeaderCardBox extends JPanel {
 			if (player.getIdPlayer() == id) {   
 				this.player = player;
 			}
-		}	
+		}
 		
 		ArrayList <LeaderCard> cards = new ArrayList <LeaderCard>();
 		
 		for(String key : this.player.getLeaderCards().keySet()) {
 			cards.add(this.player.getLeaderCards().get(key));
 		}
+		int i = 0;
 		for ( LeaderCardCell cell : leaderCards) {
 			
-			int i = 0;
 			LeaderCard card = cards.get(i);
 			cell.removeAll();
 			if (card != null) {
 				cell.add(card);
-				
-			}		
+			}
 			i ++;
 		}
 		
@@ -91,50 +105,52 @@ public class LeaderCardBox extends JPanel {
 class LeaderCardCell extends Cell<LeaderCard> {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2476812680969015433L;
 	static ArrayList<BufferedImage>	leaderImageList = null;
 	
 	public LeaderCardCell () {
 			
-			super();
-			if (leaderImageList == null) {
-				leaderImageList = new ArrayList<BufferedImage> (LeaderCardNames.leaderNames.length);
-				for (int i = 0; i < LeaderCardNames.leaderNames.length; i++)
-					leaderImageList.add(null);
-			}
-			this.setEnabled(true);
-			this.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-				
-					
-					if (itemList.isEmpty() == false) {
-						int index = LeaderCardNames.find(itemList.get(0).getCardName());
-						BufferedImage img = LeaderCardCell.leaderImageList.get(index);
-						ZoomBox.setImage(img);
-					}
-				}
-				
-			});
+		super();
+		if (leaderImageList == null) {
+			leaderImageList = new ArrayList<BufferedImage> (LeaderCardNames.leaderNames.length);
+			for (int i = 0; i < LeaderCardNames.leaderNames.length; i++)
+				leaderImageList.add(null);
 		}
-	
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
+		this.setEnabled(true);
+		this.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				
+				if (itemList.isEmpty() == false) {
+					int index = LeaderCardNames.find(itemList.get(0).getCardName());
+					BufferedImage img = LeaderCardCell.leaderImageList.get(index);
+					ZoomBox.setImage(img);
+				}
+			}
+			
+		});
 	}
-	
+
 	@Override
 	public void update() {
 		
 		this.removeAllCards();
 		for (LeaderCard card : itemList) {
-			int index = CardNames.find(card.getCardName());
+			int index = 0;
+			if (card.isPermanent() || !card.isActive()) {
+				index = CardNames.find(card.getCardName());
+			}
 			System.out.println("Sto cercando la carta" +card.getCardName()+ " con indice " +index);
 			BufferedImage img = leaderImageList.get(index);
 			if (img == null) {
 				img = loadCard(index);
 				
-				leaderImageList.set(index, img);  
+				leaderImageList.set(index, img);
 			}
 			
 			// TODO ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(g.getClipBounds().width, g.getClipBounds().height, Image.SCALE_SMOOTH));
@@ -147,7 +163,12 @@ class LeaderCardCell extends Cell<LeaderCard> {
 	
 	public BufferedImage loadCard(int index) {
 		
-		String path = "leaders_card/leaders_f_f_c_0" + index + ".jpg";
+		String path;
+		if (index == 0) {
+			path = "leaders_card/leaders_b_c_00.jpg";
+		} else {
+			path = "leaders_card/leaders_f_c_" + String.format("%02d", index) + ".jpg";
+		}
 		BufferedImage img = null;
 		try {
 			img = Token.getImagePathMode(path);
@@ -170,6 +191,7 @@ class LeaderCardCell extends Cell<LeaderCard> {
 }
 
 final class LeaderCardNames {
+	
 	static String leaderNames[] = {
 			"",
 			"Francesco Sforza",
