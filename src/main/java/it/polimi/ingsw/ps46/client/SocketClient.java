@@ -108,7 +108,7 @@ public class SocketClient implements Runnable {
 	 * @param message : the message that needs to be interpreted.
 	 */
 	public void interpreter(String message) {
-		//System.out.println("[Message: " + message + "]");
+		System.out.println("[Message: " + message + "]");
 		switch(message) {
 		case "STORE_YOUR_ID" :
 			try {

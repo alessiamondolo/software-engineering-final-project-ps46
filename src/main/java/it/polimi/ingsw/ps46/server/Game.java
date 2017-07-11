@@ -426,7 +426,6 @@ public class Game extends Observable implements Serializable {
 			for(Player player : players)
 				player.getFamilyMember(key).setValueOfFamilyMember(dice.get(key));
 		}
-		newState(new EventMessage(NewStateMessage.THROWN_DICE));
 	}
 	
 	public void addToCouncilPalaceOrder(Player player) {

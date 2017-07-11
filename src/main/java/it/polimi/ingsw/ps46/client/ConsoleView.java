@@ -352,8 +352,8 @@ public class ConsoleView implements View {
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
 		output.println("|   | Penality: - |  | Penality: 3 |  | Penality: - |  | Penality: 3 |   |");
 		output.println("|   |-------------|  |-------------|  |-------------|  |-------------|   |");
-		output.println("|   |   Player:   |  |   Player:   |  |   Player:   |  |   Player:   |   |");
-		output.printf("|   %s  %s  %s  %s   |\n", boardBoxesPlayer[0], boardBoxesPlayer[1], boardBoxesPlayer[2], boardBoxesPlayer[3]);
+		output.println("|   |   Player:   |  |  Players:   |  |   Player:   |  |  Players:   |   |");
+		output.printf("|   %s  %s  %s  %s   |\n", boardBoxesPlayer[0], "| see below   |", boardBoxesPlayer[2], "| see below   |");
 		output.println("|   |_____________|  |_____________|  |_____________|  |_____________|   |");
 		output.println("|                                                                        |");
 		output.println("|------------------------------------------------------------------------|");
@@ -383,9 +383,49 @@ public class ConsoleView implements View {
 		output.println("|________________________________________________________________________|");
 		output.println("\n");
 		
-		output.println("These are the players on the coucil space, ordered by arrival:");
-		//TODO dopo aver sistemato classe action space
+		output.println("==========================================================================");
+		if(!game.getCouncilPalaceOrder().isEmpty()) {
+			output.println("These are the players on the coucil space, ordered by arrival:");
+			int indexPlayer = 1;
+			for(Player player : game.getCouncilPalaceOrder()) {
+				output.println(indexPlayer + ". " + player.getColor());
+				indexPlayer++;
+			}
+		}
+		else 
+			output.println("There are no players in the council space for now.");
 		
+		if(game.getNumberPlayers() > 2) {
+			output.println("==========================================================================");
+			output.println("These are the players on the production space with ID 18:");
+			int indexPlayer = 1;
+			for (Player player : game.getPlayers()) {
+				for(String colorKey : player.getFamilyMembersMap().keySet()) {
+					FamilyMember familyMember = player.getFamilyMember(colorKey);
+					int position = familyMember.getPositionOfFamilyMember();
+					if(position == 18) {
+						output.println(indexPlayer + ". " + player.getColor());
+						indexPlayer++;
+					}
+				}
+			}
+			
+			output.println("==========================================================================");
+			output.println("These are the players on the harvest space with ID 20:");
+			indexPlayer = 1;
+			for (Player player : game.getPlayers()) {
+				for(String colorKey : player.getFamilyMembersMap().keySet()) {
+					FamilyMember familyMember = player.getFamilyMember(colorKey);
+					int position = familyMember.getPositionOfFamilyMember();
+					if(position == 20)
+						output.println(indexPlayer + ". " + player.getColor());
+				}
+			}
+		}
+		
+		
+		
+		output.println("==========================================================================");
 		output.println("These are the cards available on the board:");
 		int cardNumber = 1;
 		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {

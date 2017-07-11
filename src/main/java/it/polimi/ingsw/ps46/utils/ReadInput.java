@@ -28,10 +28,8 @@ public class ReadInput {
 			try {
 				consoleInput = Integer.parseInt(input.readLine());
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("The input is not valid, please try again.");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(consoleInput>=lowerNumber && consoleInput <= higherNumber)
@@ -47,7 +45,6 @@ public class ReadInput {
 			try {
 				consoleInput = input.readLine();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
