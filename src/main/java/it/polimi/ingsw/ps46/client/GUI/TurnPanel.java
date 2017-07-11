@@ -12,6 +12,12 @@ import javax.swing.border.BevelBorder;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 
+/**
+ * A container to visualize current turn order
+ * @author lorenzo
+ *
+ */
+
 public class TurnPanel extends JPanel  {
 
 	/**
@@ -30,7 +36,7 @@ public class TurnPanel extends JPanel  {
 		for (int i = 0; i < 4; i++) {
 					
 				PointCell turnCell = new PointCell();
-				//turnCell.setLayout(new GridBagLayout());
+				
 				turnCell.setBackground(Color.lightGray);
 				turnCell.setOpaque(true);
 				turnCells.add(turnCell);

@@ -148,7 +148,7 @@ class LeaderCardCell extends Cell<LeaderCard> {
 			if (card.isActive() || !card.isActive()) {
 				index = LeaderCardNames.find(card.getCardName());
 			}
-			System.out.println("Sto cercando la carta" +card.getCardName()+ " con indice " +index);
+			
 			BufferedImage img = leaderImageList.get(index);
 			if (img == null) {
 				img = loadCard(index);

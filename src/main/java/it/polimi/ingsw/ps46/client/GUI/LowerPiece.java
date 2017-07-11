@@ -114,10 +114,9 @@ public class LowerPiece extends JPanel {
 		
 		faithPanel.setLayout(new BoxLayout(faithPanel, BoxLayout.X_AXIS));
 		
-		System.out.println(width);
-		System.out.println(height);
+		
 		double cellWidth = (this.width)/16;
-		System.out.println(this.width/16);
+		
 		double cellHeight = this.height/40;
 		
 		
@@ -301,7 +300,7 @@ public class LowerPiece extends JPanel {
 				
 				FamilyMember fm = player.getFamilyMember(fmColor);
 				int fmPosition = fm.getPositionOfFamilyMember();
-				String giocatore = game.getCurrentPlayer().getUsername();
+			
 				
 				if (16 < fmPosition) {
 					PointCell actionCell = actionCells.get(fmPosition - 17);

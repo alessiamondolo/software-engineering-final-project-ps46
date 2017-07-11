@@ -29,9 +29,6 @@ public class GameWindow extends JFrame {
 	
 	public GameWindow(Game game) {
 		
-		// da mettere un check che le dimensioni dei component siano < di quelle della Wind
-		//così sto però dando per scontata la risoluzione dell'utente
-		
 		this.game = game;
 		int mainWindowWidth = 1400;  //1400 o 1200
 		int mainWindowHeight = 900;   //900 o 700
