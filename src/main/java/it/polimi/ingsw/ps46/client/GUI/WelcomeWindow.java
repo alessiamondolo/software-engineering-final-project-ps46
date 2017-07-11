@@ -63,7 +63,7 @@ public class WelcomeWindow extends JFrame {
 		this.imageLabel = new JLabel();
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(getClass().getResource("img/dashboard_back/punchboard_b_c_03.jpg"));
+			image = Token.getImagePathMode("dashboard_back/punchboard_b_c_03.jpg");
 		} catch (IOException e) {	
 			e.printStackTrace();
 		}

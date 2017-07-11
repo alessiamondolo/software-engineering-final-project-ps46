@@ -208,7 +208,7 @@ public class MainBoard extends JPanel {
 		
 		 BufferedImage image = null;
 		try {
-			image = ImageIO.read(getClass().getResource("img/gameboard.png"));
+			image = Token.getImagePathMode("gameboard.png");
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -219,29 +219,6 @@ public class MainBoard extends JPanel {
 	    return imageIcon;
 		
 	}
-	
-	//metodo di prova per testare i token
-	
-/*	public void provaTokenModel() {
-				
-		List<Resource> list = new ArrayList<Resource>();
-		list.add(new VictoryPoints(10));
-		Player player = new Player(2);
-		player.setColor("Red");
-		ResourceSet set = new ResourceSet(list);
-		
-		player.getPersonalBoard().setResources(set);
-		//player.getPersonalBoard().getPlayerResourceSet().add(new Wood (10));
-		player.getPersonalBoard().getPlayerResourceSet().add(new VictoryPoints (10));
-		
-		int vp = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("VictoryPoints").getQuantity();
-		for (int i = 0; i < victoryPointCells.size(); i++) {
-			PointCell pc = victoryPointCells.get(i);
-			if (i != vp) pc.remove(player);
-			else pc.add(player); 
-			//pc.paint();    crea problemi
-		}
-	}*/
 
 
 	/**

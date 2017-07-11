@@ -15,16 +15,15 @@ import it.polimi.ingsw.ps46.server.TowerFloor;
 import it.polimi.ingsw.ps46.server.card.Card;
 
 /**
- * Board area where cards get displayed. An ActionTower is made of four TowerActionCell
+ * Board area where cards area are displayed. An ActionTower is made of four CardCell
  * arranged in a top-down BoxLayout.
  * @author lorenzo
  *
  */
+
 public class ActionTower extends JPanel {
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 7840687245711696423L;
 	private ArrayList <CardCell> cardCells = new ArrayList <CardCell> ();
   
@@ -47,6 +46,13 @@ public class ActionTower extends JPanel {
 		
 	}
 	
+	/**
+	 * Set tower layout configurations
+	 * 
+	 * @param widthSmall : to set container size
+	 * @param heightSmall : to set container size
+	 */
+	
 	private void setActionTower(double widthSmall, double heightSmall) {
 		
 		this.setPreferredSize(new Dimension((int) ((7*widthSmall/3)), (int) (heightSmall*16-heightSmall/5)));
@@ -58,6 +64,12 @@ public class ActionTower extends JPanel {
 	
 	}
 
+	/**
+	 * Updates the tower's cards
+	 * @param game : new game object with updated data
+	 * @param i : the index of the tower to be updated
+	 */
+	
 	public void update(Game game, int i) {
 		Tower t = game.getBoard().getTower(i);
 		

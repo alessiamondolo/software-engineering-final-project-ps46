@@ -30,6 +30,7 @@ public class LeaderCardBox extends JPanel {
 	private Game game;
 	private Player player;
 	
+	
 	public LeaderCardBox(Player player, double width, double height) {
 		
 		this.leaderCards = new ArrayList <LeaderCardCell>();
@@ -51,20 +52,22 @@ public class LeaderCardBox extends JPanel {
 			button.setPreferredSize(new Dimension( (int) width/5, (int) height/20));
 			button.setFont(new Font("Arial", Font.PLAIN, 10));
 			this.add(button);
-			int code = i+40; // TODO
+			
+			// TODO
 			button.addActionListener(new ActionListener() {
+			
 				
-				private int action = code;
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					Object mon;
 					synchronized (mon = GUIView.getMonitor()) {
-						GUIView.setAction(action);
-						mon.notifyAll();
+					
 					}
 				}
 			});
+			
+			button.setEnabled(false);
 		}
 		
 		
@@ -142,8 +145,8 @@ class LeaderCardCell extends Cell<LeaderCard> {
 		this.removeAllCards();
 		for (LeaderCard card : itemList) {
 			int index = 0;
-			if (card.isPermanent() || !card.isActive()) {
-				index = CardNames.find(card.getCardName());
+			if (card.isActive() || !card.isActive()) {
+				index = LeaderCardNames.find(card.getCardName());
 			}
 			System.out.println("Sto cercando la carta" +card.getCardName()+ " con indice " +index);
 			BufferedImage img = leaderImageList.get(index);
@@ -198,7 +201,7 @@ final class LeaderCardNames {
 			"Ludovico Ariosto",
 			"Filippo Brunelleschi",
 			"Federico da Montefeltro",
-			"Girolamo Savonarola",
+			"Girolamo Savoranola",
 			"Giovanni dalle Bande Nere",
 			"Sandro Botticelli",
 			"Michelangelo Buonarroti",

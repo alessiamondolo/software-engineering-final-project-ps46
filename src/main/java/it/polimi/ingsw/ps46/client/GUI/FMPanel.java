@@ -3,8 +3,6 @@ package it.polimi.ingsw.ps46.client.GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -18,11 +16,13 @@ import it.polimi.ingsw.ps46.server.FamilyMember;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 
+/**
+ * A container that stores the yet-to-be used family members
+ * @author lorenzo
+ *
+ */
 public class FMPanel extends JPanel {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7824922132057951490L;
 	private ArrayList<PointCell> FMCells = new ArrayList<PointCell>();
 	private JLabel title;

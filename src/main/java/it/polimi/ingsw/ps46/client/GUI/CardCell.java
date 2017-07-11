@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
 import java.awt.Component;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -14,11 +15,24 @@ import javax.swing.JLabel;
 
 import it.polimi.ingsw.ps46.server.card.Card;
 
+/**
+ * A class to model the behaviour of cells that hold cards. It inherits cells common features
+ * from the supertype. 
+ * The static attribute imageList holds the list of the images so far loaded from files in order
+ * to speed up I/O processing
+ * @author lorenzo
+ *
+ */
+
 public class CardCell extends Cell<Card> {
 	
 	private static final long serialVersionUID = 5769254098690808463L;
 	
 	static ArrayList<BufferedImage> imageList = null;
+	
+	/**
+	 * Each CardCell is provided with an action listener to trigger a zoom method
+	 */
 	
 	public CardCell () {
 		
@@ -46,15 +60,16 @@ public class CardCell extends Cell<Card> {
 	}
 
 	/**
-	 *  Paints a card accordingly to the model set for that tower floor.
+	 *  Checks which image card needs to be displayed
 	 */
+	
 	@Override
 	public void update() {
 		
 		this.removeAllCards();
 		for (Card card : itemList) {
 			int index = CardNames.find(card.getCardName());
-			System.out.println("Sto cercando la carta" +card.getCardName()+ " con indice " +index);
+			
 			BufferedImage img = imageList.get(index);
 			if (img == null) {
 				img = loadCard(index);
@@ -74,19 +89,28 @@ public class CardCell extends Cell<Card> {
 		super.paint(g);
 	}
 	
+	/**
+	 * Load card images from I/O 
+	 * @param index : used to build the correct file path 
+	 * @return
+	 */
+	
 	public BufferedImage loadCard(int index) {
 		
-		//String path = "img/cards/devcards_f_en_c_" + index + ".png";
 		String path = "cards/devcards_f_en_c_" + index + ".png";
 		BufferedImage img = null;
 		try {
 			img = Token.getImagePathMode(path);
-			//img = ImageIO.read(getClass().getResource(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return img;
 	}
+	
+	/**
+	 * Remove card images JLabel to make sure no longer needed cards are held by the
+	 * CardCell
+	 */
 	
 	private void removeAllCards() {
 		for (Component c : this.getComponents()) {
@@ -99,6 +123,14 @@ public class CardCell extends Cell<Card> {
 
 
 }
+
+/**
+ * Used to map Card names with the correct index used in the loadCard method.
+ * Card names are stored in a String vector ordered in the same way of the imageList 
+ * attribute and of the images files, this way loading operations are facilitated
+ * @author lorenzo
+ *
+ */
 
 final class CardNames {
 	static String names[] = {
@@ -200,6 +232,12 @@ final class CardNames {
 			"Sacred War",
 			"Support to the Pope"	
 	};
+	
+	/**
+	 * Used to navigate with the cards' names vector
+	 * @param name : the name of the card that needs to be retrieved
+	 * @return : the corresponding index
+	 */
 	
 	static int find(String name) {
 		for (int i = 0; i < names.length; i++) {
