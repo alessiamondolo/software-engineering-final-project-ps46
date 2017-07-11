@@ -117,7 +117,7 @@ public class ActivateHarvestAction implements Action {
 		if( !game.getCurrentPlayer().getDiceMalus().isEmpty() )
 			for( String string : game.getCurrentPlayer().getDiceMalus().keySet()){
 				
-				if ( game.getCurrentPlayer().getDiceMalus().get(string).getType() == "HarvestAction" ){
+				if ( game.getCurrentPlayer().getDiceMalus().get(string).getType().equals("HarvestAction") ){
 					temporaryDice.subDice( game.getCurrentPlayer().getDiceMalus().get(string).getMalus() );	
 				}
 			}

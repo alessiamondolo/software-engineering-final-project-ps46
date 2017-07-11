@@ -18,7 +18,6 @@ public class Dice implements Serializable {
 	
 	
 	/**
- 	* Description of the constructor Dice.
  	* This constructor is used to create a new Dice element of a random value using the method throwDice();
  	*/
 	public Dice(){
@@ -28,7 +27,6 @@ public class Dice implements Serializable {
 	
 	
 	/**
-	 * Description of the constructor Dice(int).
 	 * This constructor is used to create a new Dice element with a preset value.
 	 * 
 	 * @param newValue
@@ -37,9 +35,9 @@ public class Dice implements Serializable {
 		value = newValue;
 	}
 	
-	
+	///////////////////METHODS////////////////////
+	//////////////////////////////////////////////
 	/**
-	 * Description of the method throwDice
 	 * This method is used to create a random value between 1-6
 	 * 
 	 * @return value: _Int_ the result of the throw.
@@ -51,19 +49,8 @@ public class Dice implements Serializable {
 		value = x.intValue();
 	}
 
-
-	/**
-	 * Description of the method getValue()
-	 * 
-	 * @return value 
-	 */
-	public int getValue() {
-		return value;
-	}
-	
 	
 	/**
-	 * Description of the method greaterOrEqual
 	 * This method compares two different Dice
 	 * 
 	 * @param diceValue
@@ -82,7 +69,6 @@ public class Dice implements Serializable {
 	
 	
 	/**
-	 * Description of the method sumDice
 	 * This method sum the value of two dice
 	 * 
 	 * @param dice2
@@ -94,7 +80,6 @@ public class Dice implements Serializable {
 	
 	
 	/**
-	 * Description of the method subDice
 	 * This method sub the value of two dice, it's avoid having the resultant dice with a negative value (0 is the minimum)
 	 * 
 	 * @param dice2
@@ -108,9 +93,7 @@ public class Dice implements Serializable {
 	}
 	
 	
-	
 	/**
-	 * Description of the method toString()
 	 * Return the value of the dice as a string.
 	 */
 	
@@ -119,6 +102,19 @@ public class Dice implements Serializable {
 	public String toString(){
 		return Integer.toString(value);
 	}
+	
+	///////////////GETTER METHODS//////////////////
+	//////////////////////////////////////////////
+
+	/**
+	 * Description of the method getValue()
+	 * 
+	 * @return value 
+	 */
+	public int getValue() {
+		return value;
+	}
+	
 
 }
 

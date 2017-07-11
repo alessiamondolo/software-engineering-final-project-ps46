@@ -23,20 +23,17 @@ public class SetValueFamilyMemberEffect implements Effect {
 	// ma priva va controllato se la carta è attivabile tramite il metodo opportuno DONE
 	@Override
 	public void activateEffect(Game game) {
-		if(whichFamilyMember == "allColored"){
+		if(whichFamilyMember.equals( "allColored")){
 			//set every colored familyMembers (not already used) to the new DiceValue.
 			
 			for (String familyMemberColor : game.getCurrentPlayer().getFamilyMembersMap().keySet()) {
-				if( familyMemberColor != "Neutral"){
+				if( familyMemberColor.equals("Neutral")){
 					if (!game.getCurrentPlayer().getFamilyMember(familyMemberColor).isUsed()) {
 						game.getCurrentPlayer().getFamilyMember(familyMemberColor).setValueOfFamilyMember(newValue);
 					}
 				}
 			}
 			
-		}
-		else {
-			//TODO INTERAZIONE COL GIOCATORE PER CHIEDERE QUALE FAMILY MEMBER VUOLE SETTARE
 		}
 	}
 

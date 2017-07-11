@@ -115,7 +115,7 @@ public class MoveToActionSpaceAction implements Action {
 			return false;
 		
 		//Check the malus given by excommunication that avoid you to put your family member on a marketSpace
-		if(actionSpace.getType() == "Market") {
+		if(actionSpace.getType().equals("Market")) {
 			if(!(player.getGenericMalus().isEmpty()) && (player.getGenericMalus().containsKey("noMoveToMarketSpace")) ) 
 				return false;
 		}
@@ -128,7 +128,7 @@ public class MoveToActionSpaceAction implements Action {
 			
 		//If the actionSpace is the green tower, check military points liked with the number of territory cards got by the player.
 		//You can ignore this requirement if you have activated the LeaderCard effect of Cesare Borgia.
-		if (game.getBoard().getColorOfTower(actionSpace.getId()) == "green"){
+		if (game.getBoard().getColorOfTower(actionSpace.getId()).equals("green")){
 			if(!( game.getCurrentPlayer().getLeaderCards().containsKey("Cesare Borgia") || !(game.getCurrentPlayer().getLeaderCards().get("Cesare Borgia").isActive())))
 			{
 				int numberOfCards = game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().size();

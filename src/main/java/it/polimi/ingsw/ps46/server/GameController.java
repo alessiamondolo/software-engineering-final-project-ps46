@@ -355,7 +355,7 @@ public class GameController implements Observer, ViewEventVisitor {
 		for(Player player : game.getPlayers()) {
 			for (String key : player.getFamilyMembersMap().keySet()) {
 				player.getFamilyMembersMap().get(key).clearPositionOfFamilyMember();
-				if(key == "Neutral") {
+				if(key.equals("Neutral")) {
 					player.getFamilyMembersMap().get(key).setValueOfFamilyMember(new Dice(0));
 				}
 			}
@@ -430,14 +430,14 @@ public class GameController implements Observer, ViewEventVisitor {
 		if(!game.getGameState().equals(GameState.EXTRA_MOVE)) {
 			//checking if there are activated some bonus on the value of the family members (given by Sigismondo Malatesta)
 			if(game.getCurrentPlayer().getBonusMap().containsKey("NeutralFamilyMember")){
-				if(familyMember.getColor() == "Neutral"){
+				if(familyMember.getColor().equals("Neutral")){
 					familyMember.getValueFamilyMember().sumDice(game.getCurrentPlayer().getBonusMap().get("NeutralFamilyMember"));
 				}
 			}
 			
 			//checking if there are activated some bonus on the value of the family members (given by Lucrezia Borgia)
 			if(game.getCurrentPlayer().getBonusMap().containsKey("ColoredFamilyMember")){
-				if(familyMember.getColor() != "Neutral"){
+				if(!familyMember.getColor().equals( "Neutral")){
 					familyMember.getValueFamilyMember().sumDice(game.getCurrentPlayer().getBonusMap().get("ColoredFamilyMember"));
 				}
 			}
@@ -474,12 +474,12 @@ public class GameController implements Observer, ViewEventVisitor {
 		player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("Servants").sub(new Servants(servants*2));
 		
 		//check excommunication malus that give -4 on the familyMember Value if you want to collect a type of card
-		if(actionSpace.getType() == "Tower") {
+		if(actionSpace.getType().equals("Tower")) {
 			if(!player.getDiceMalus().isEmpty()) {
 				if( player.getDiceMalus().containsKey("DiceMalusEffectForCards") ) {
 					for (String string : player.getDiceMalus().keySet() ) {
 						//check if the specific malus is activated on "this type of card" and if the player wants to meve into the same type of tower
-						if( (player.getDiceMalus().get(string).getType() == "TerritoryCards") && (game.getBoard().getColorOfTower(actionSpace.getId()) == "green")) {
+						if( (player.getDiceMalus().get(string).getType().equals("TerritoryCards")) && (game.getBoard().getColorOfTower(actionSpace.getId()).equals("green"))) {
 							if( familyMember.getValueFamilyMember().greaterOrEqual(player.getDiceMalus().get(string).getMalus())) {
 								familyMember.getValueFamilyMember().subDice(player.getDiceMalus().get(string).getMalus());
 							}
@@ -487,7 +487,7 @@ public class GameController implements Observer, ViewEventVisitor {
 								familyMember.setValueOfFamilyMember(new Dice(0));
 						}
 						
-						else if( player.getDiceMalus().get(string).getType() == "BuildingCards" && (game.getBoard().getColorOfTower(actionSpace.getId()) == "yellow")) {
+						else if( player.getDiceMalus().get(string).getType().equals("BuildingCards") && (game.getBoard().getColorOfTower(actionSpace.getId()).equals("yellow"))) {
 							if( familyMember.getValueFamilyMember().greaterOrEqual(player.getDiceMalus().get(string).getMalus())) {
 								familyMember.getValueFamilyMember().subDice(player.getDiceMalus().get(string).getMalus());
 							}
@@ -495,7 +495,7 @@ public class GameController implements Observer, ViewEventVisitor {
 								familyMember.setValueOfFamilyMember(new Dice(0));
 						}
 						
-						else if( player.getDiceMalus().get(string).getType() == "VentureCards" && (game.getBoard().getColorOfTower(actionSpace.getId()) == "purple")) {
+						else if( player.getDiceMalus().get(string).getType().equals("VentureCards") && (game.getBoard().getColorOfTower(actionSpace.getId()).equals("purple"))) {
 							if( familyMember.getValueFamilyMember().greaterOrEqual(player.getDiceMalus().get(string).getMalus())) {
 								familyMember.getValueFamilyMember().subDice(player.getDiceMalus().get(string).getMalus());
 							}
@@ -503,7 +503,7 @@ public class GameController implements Observer, ViewEventVisitor {
 								familyMember.setValueOfFamilyMember(new Dice(0));
 						}
 						
-						else if( player.getDiceMalus().get(string).getType() == "CharacterCards" && (game.getBoard().getColorOfTower(actionSpace.getId()) == "blue")) {
+						else if( player.getDiceMalus().get(string).getType().equals("CharacterCards") && (game.getBoard().getColorOfTower(actionSpace.getId()).equals("blue"))) {
 							if( familyMember.getValueFamilyMember().greaterOrEqual(player.getDiceMalus().get(string).getMalus())) {
 								familyMember.getValueFamilyMember().subDice(player.getDiceMalus().get(string).getMalus());
 							}
@@ -662,7 +662,7 @@ public class GameController implements Observer, ViewEventVisitor {
 			VictoryPoints victoryPoints = new VictoryPoints(player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("VictoryPoints").getQuantity());
 			
 			//check if there are some malus effect of the type "loseOneVictoryPointEveryXResource" from victory points 
-			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom() == "VictoryPoints")) {
+			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom().equals("VictoryPoints"))) {
 				int temporaryvalue = victoryPoints.getQuantity();
 				temporaryvalue /= player.getDecreaseAtFinalMalus().getDecreasedResources().getResourcesMap().get("VictoryPoints").getQuantity();
 				victoryPoints.sub(new VictoryPoints(temporaryvalue));
@@ -672,7 +672,7 @@ public class GameController implements Observer, ViewEventVisitor {
 			//check if there are some malus effect of the type "notCountingVictoryPointsFromCards"
 			if(player.getGenericMalus().isEmpty() || (!(player.getGenericMalus().isEmpty()) && !(player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards"))) 
 					|| (!(player.getGenericMalus().isEmpty()) && (player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards")) && 
-						(player.getGenericMalus().get("notCountingVictoryPointsFromCards").getType() != "VentureCards"))) {
+						(!player.getGenericMalus().get("notCountingVictoryPointsFromCards").getType().equals( "VentureCards")))) {
 				
 					for(Card card : player.getPersonalBoard().getVentureDeck()) {
 						card.use(game);
@@ -683,14 +683,14 @@ public class GameController implements Observer, ViewEventVisitor {
 			//check if there are some malus effect of the type "notCountingVictoryPointsFromCards"
 			if(player.getGenericMalus().isEmpty() || (!(player.getGenericMalus().isEmpty()) && !(player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards"))) 
 					|| (!(player.getGenericMalus().isEmpty()) && (player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards")) && 
-						(player.getGenericMalus().get("notCountingVictoryPointsFromCards").getType() != "TerritoryCards")))
+						(!player.getGenericMalus().get("notCountingVictoryPointsFromCards").getType().equals("TerritoryCards"))))
 				victoryPoints.add(game.getVictoryPointsFromTerritoryCards().get(player.getPersonalBoard().getTerritoryDeck().size()));
 			
 			//Add final victory points from character cards
 			//check if there are some malus effect of the type "notCountingVictoryPointsFromCards"
 			if(player.getGenericMalus().isEmpty() || (!(player.getGenericMalus().isEmpty()) && !(player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards"))) 
 					|| (!(player.getGenericMalus().isEmpty()) && (player.getGenericMalus().containsKey("notCountingVictoryPointsFromCards")) && 
-							(player.getGenericMalus().get("notCountingVictoryPointsFromCards").getType() != "CharacterCards")))
+							(!player.getGenericMalus().get("notCountingVictoryPointsFromCards").getType().equals("CharacterCards"))))
 				victoryPoints.add(game.getVictoryPointsFromCharacterCards().get(player.getPersonalBoard().getCharacterDeck().size()));
 			
 			//Add final victory points from Military points based on the final placement for military points
@@ -710,12 +710,12 @@ public class GameController implements Observer, ViewEventVisitor {
 			victoryPoints.add(new VictoryPoints(resources/5));
 			
 			//check if there are some malus effect of the type "loseOneVictoryPointEveryXResource" from playerResourceSet (wood,stones,servants,money)
-			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom() == "PlayerResourceSet"))
+			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom().equals("PlayerResourceSet")))
 				victoryPoints.sub(new VictoryPoints(resources));
 			
 			
 			//check if there are some malus effect of the type "loseOneVictoryPointEveryXResource" from military points
-			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom() == "MilitaryPoints")) {
+			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom().equals("MilitaryPoints"))) {
 				int temporaryvalue = player.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints").getQuantity();
 				temporaryvalue *= player.getDecreaseAtFinalMalus().getDecreasedResources().getResourcesMap().get("MilitaryPoints").getQuantity();
 
@@ -723,7 +723,7 @@ public class GameController implements Observer, ViewEventVisitor {
 			}
 					
 			//check if there are some malus effect of the type "loseOneVictoryPointEveryXResource" from building card cost (wood, stones)
-			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom() == "BuildingCards")) {
+			if( (player.getDecreaseAtFinalMalus().getFrom() != null) && (player.getDecreaseAtFinalMalus().getFrom() .equals( "BuildingCards"))) {
 				int woodstonesCost = 0;
 				if(!(player.getPersonalBoard().getBuildingDeck().isEmpty())){
 					for (BuildingCard buildingCard : player.getPersonalBoard().getBuildingDeck()) {

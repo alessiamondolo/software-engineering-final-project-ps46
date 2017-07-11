@@ -33,13 +33,14 @@ public class Board implements Serializable {
 	}
 
 
-
-	/**
-	 * Description of the method getTower
-	 * 
-	 * @param towerIndex
-	 * @return the same floor of the index
-	 */
+	
+	public void setExcommunicationTiles(ArrayList<ExcommunicationTile> excommunicationTiles) {
+		this.excommunicationTiles = excommunicationTiles;
+	}
+	
+	///////////////GETTER METHODS//////////////////
+	//////////////////////////////////////////////
+	
 	public Tower getTower (int towerIndex){
 		
 		return towers.get(towerIndex);
@@ -48,8 +49,7 @@ public class Board implements Serializable {
 	
 
 	/**
-	 * Description of the method getBoardBox
-	 * 
+	 *  
 	 * @param boardBoxIndex
 	 * @return the same floor of the index
 	 */
@@ -82,7 +82,7 @@ public class Board implements Serializable {
 			}
 			return true;
 		}
-		else //throw exception
+		else 
 			System.out.println("Errore nella lettura delle torri, oggetto non trovato e 'return -1'");
 			return false;
 	}
@@ -95,7 +95,7 @@ public class Board implements Serializable {
 	 * @param idActionSpace
 	 * @return indexOf(tower) which contains the actionSpace
 	 */
-	private int getWhichTowerContain(int idActionSpace) { //TODO da testare
+	private int getWhichTowerContain(int idActionSpace) {
 		
 		for (Tower tower : towers) {
 			for (TowerFloor towerFloor : tower.getFloors()) {
@@ -104,7 +104,7 @@ public class Board implements Serializable {
 				}	
 			}
 		}
-		return -1; //nel caso di errore ritorna -1
+		return -1;
 	}
 	
 	
@@ -146,7 +146,7 @@ public class Board implements Serializable {
 			}
 		}
 		System.out.println("Errore nella lettura delle torri, oggetto non trovato e 'return null'");
-		return null; //nel caso di errore ritorna null 
+		return null; 
 	}
 
 
@@ -157,10 +157,6 @@ public class Board implements Serializable {
 
 	public ArrayList<ExcommunicationTile> getExcommunicationTiles() {
 		return excommunicationTiles;
-	}
-	
-	public void setExcommunicationTiles(ArrayList<ExcommunicationTile> excommunicationTiles) {
-		this.excommunicationTiles = excommunicationTiles;
 	}
 
 }

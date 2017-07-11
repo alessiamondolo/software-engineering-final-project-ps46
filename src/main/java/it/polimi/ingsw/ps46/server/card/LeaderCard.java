@@ -16,21 +16,6 @@ public class LeaderCard {
 	private boolean isActive = false;
 	private boolean isPermanent;
 	
-	
-	/*
-	 * EFFETTI DA IMPLEMENTARE:
-	 * Ludovico Ariosto: putFamilyMemberEverywhereEffect DONE
-	 * Filippo Brunelleschi: noFeeForTowerEffect DONE
-	 * Ludovico il Moro: setValueToAllColoredFamilyMemberEffect ---> DONE creato un effetto che viene attivato in gameController
-	 * Federico da Montefeltro: setValueToOneColoredFamilyMemberEffect ---> +O- TODO manca la scelta del giocatore
-	 * Lorenzo de Medici: copyOneLeaderCardEffectOnceEffect --->TODO scelta del giocatore
-	 * Cesare Borgia: NoRequiredMilitaryPointsEffect DONE
-	 * Santa Rita: ResourcesX2Effect DONE
-	 * Pico della Mirandola: CardsDiscountedEffect -3 Money DONE
-	 * ANTONIOOOOOOOOOOOOOOOOOOOO
-	 * Sisto IV da implementare con il rapporto del vaticano DONE
-	 */
-	
 	public LeaderCard (String name, Effect leaderEffect, LinkedHashMap<String,Integer> requiredCards, ResourceSet requiredResources, boolean isPermanent) {
 	
 		this.cardName = name;
@@ -45,28 +30,28 @@ public class LeaderCard {
 	
 	public boolean isActivable(Game game) {
 		if(!requiredCards.isEmpty()){
-			if (cardName != "Lucrezia Borgia"){
+			if (!(cardName.equals( "Lucrezia Borgia"))){
 				for (String string : requiredCards.keySet()) {
 					
-					if (string == "TerritoryCards"){
+					if (string.equals( "TerritoryCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().size() < requiredCards.get(string)){
 							return false;
 						}
 					}
 					
-					if (string == "BuldingCards"){
+					if (string.equals( "BuldingCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getBuildingDeck().size() < requiredCards.get(string)){
 							return false;
 						}
 					}
 					
-					if (string == "VentureCards"){
+					if (string.equals( "VentureCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getVentureDeck().size() < requiredCards.get(string)){
 							return false;
 						}
 					}
 					
-					if (string == "CharacterCards"){
+					if (string.equals( "CharacterCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getCharacterDeck().size() < requiredCards.get(string)){
 							return false;
 						}	
@@ -78,28 +63,28 @@ public class LeaderCard {
 				boolean cardOrChecked = false;
 				for (String string : requiredCards.keySet()) {
 					
-					if (string == "TerritoryCards"){
+					if (string.equals( "TerritoryCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;
 						}
 					}
 					
-					if (string == "BuldingCards"){
+					if (string.equals( "BuldingCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getBuildingDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;
 						}
 					}
 					
-					if (string == "VentureCards"){
+					if (string.equals( "VentureCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getVentureDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;
 						}
 					}
 					
-					if (string == "CharacterCards"){
+					if (string.equals( "CharacterCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getCharacterDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;
