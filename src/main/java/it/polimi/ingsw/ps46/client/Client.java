@@ -58,7 +58,6 @@ public class Client {
 			view = new ConsoleView(System.out);
 			break;
 		case "GUI" :
-			//TODO sostituire con costruttore della GUI
 			view = new GUIView();
 			break;
 		}

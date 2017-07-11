@@ -51,7 +51,6 @@ public class ConsoleView implements View {
 	 */
 	public void setGame(Game game) {
 		this.game = game;
-		System.out.println("[Game state: " + game.getGameState() + "]");
 	}
 	
 	
@@ -666,13 +665,21 @@ public class ConsoleView implements View {
 	}
 
 
+	
+	/**
+	 * Gets if the player wants or not to support the church.
+	 * 
+	 * @return choice :<br>
+	 * <ul>
+	 * <li>1, if the player wants to support the church</li>
+	 * <li>2, if the player doesn't want to support the church</li>
+	 * </ul>
+	 */
 	public int getVaticanSupport() {
-		
 		output.println("==========================================================================");
 		output.println("Do you want to support the Church?");
 		output.println("1. Yes");
 		output.println("2. No");
-
 
 		int choice = input.IntegerFromConsole(1, 2);
 		return choice;
@@ -680,7 +687,11 @@ public class ConsoleView implements View {
 
 
 
-
+	/**
+	 * Gets the ID of the action space where the client wants to move during his extra move.
+	 * 
+	 * @return move : the ID of the action space.
+	 */
 	public int getExtraMove(ExtraMoveEffect effect) {
 		int move = 0;
 		switch(effect.getType()) {
@@ -736,6 +747,12 @@ public class ConsoleView implements View {
 	}
 
 
+	
+	/**
+	 * Gets which leader cards the player wants to activate.
+	 * 
+	 * @return leaderCardsActivated : list of the indexes of the leader cards to activate
+	 */
 	public ArrayList<Integer> getActivationLeaderCards() {
 		int numberOfLeaderCardActivable = 0;
 		ArrayList<Integer> leaderCardsActivated = new ArrayList<Integer>();
@@ -782,6 +799,11 @@ public class ConsoleView implements View {
 	
 	
 
+	/**
+	 * Gets which leader cards the player wants to discard in exchange of a coucil privilege.
+	 * 
+	 * @return leaderCardsDiscarded : list of the indexes of the leader cards to discard
+	 */
 	public ArrayList<Integer> getDiscardLeaderCards(){
 		int numberOfLeaderCardCouldDiscard = 0;
 		ArrayList<Integer> leaderCardsDiscarded = new ArrayList<Integer>();
