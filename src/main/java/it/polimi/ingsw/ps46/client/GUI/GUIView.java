@@ -279,6 +279,7 @@ public class GUIView implements View {
 		}
 		
 		/* GET */
+		System.out.println("Sto inviando azione " +GUIView.action);
 		return GUIView.action;
 	}
 	
@@ -312,7 +313,7 @@ public class GUIView implements View {
 			}
 		}
 		/* GET */
-		
+		System.out.println("sto inviando" +GUIView.familyMember);
 		return GUIView.familyMember;
 	}
 
@@ -599,23 +600,25 @@ public class GUIView implements View {
 	
 	
 	
-	ArrayList<Integer> leaderCardsActivated = new ArrayList<Integer>();
+	
 	
 	@Override
 	public ArrayList<Integer> getActivationLeaderCards() {
-		
-		leaderCardsActivated.add(0);
+		ArrayList<Integer> leaderCardsActivated = new ArrayList<Integer>();
+		System.out.println("sono dentro activate leader cards");
+		leaderCardsActivated.add(new Integer(0));
 		
 		return leaderCardsActivated;
 	
 	}
 
-	ArrayList<Integer> leaderCardsDiscarded = new ArrayList<Integer>();
+	
 	
 	@Override
 	public ArrayList<Integer> getDiscardLeaderCards() {
-		
-		leaderCardsDiscarded.add(0);
+		ArrayList<Integer> leaderCardsDiscarded = new ArrayList<Integer>();
+		System.out.println("sono dentro discard leader cards");
+		leaderCardsDiscarded.add(new Integer(0));
 		
 		return leaderCardsDiscarded;
 	}
@@ -623,7 +626,7 @@ public class GUIView implements View {
 	@Override
 	public void showFinalScores() {
 		// TODO Auto-generated method stub
-		
+		printBoard();
 	}
 
 

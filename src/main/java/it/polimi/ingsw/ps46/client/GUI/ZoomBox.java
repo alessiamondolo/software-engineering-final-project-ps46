@@ -77,7 +77,7 @@ class ZoomArea extends JPanel {
 		scale = 0.35;
 		setBackground(Color.black);
 		try {
-        	image = ImageIO.read(getClass().getResource("img/leaders_card/leaders_b_c_00.jpg"));
+        	image = Token.getImagePathMode("leaders_card/leaders_b_c_00.jpg");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
