@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import it.polimi.ingsw.ps46.client.View;
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.Effect;
 import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;

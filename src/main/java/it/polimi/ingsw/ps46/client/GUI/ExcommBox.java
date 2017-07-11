@@ -9,14 +9,12 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.ExcommunicationTile;
 
 /**

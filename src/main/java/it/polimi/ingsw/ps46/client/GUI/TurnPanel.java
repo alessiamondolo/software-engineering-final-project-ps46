@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps46.client.GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
