@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps46.server;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -53,6 +52,7 @@ public class GameController implements Observer, ViewEventVisitor {
 	}
 	
 	
+	
 	public void visit(EventMessage eventMessage) {
 		switch(eventMessage.getMessage()) {
 		case ACTION_SENT :
@@ -63,6 +63,7 @@ public class GameController implements Observer, ViewEventVisitor {
 			
 		}
 	}
+	
 	
 	
 	public void visit(EventStringInput eventStringInput) {
@@ -86,6 +87,7 @@ public class GameController implements Observer, ViewEventVisitor {
 	}
 
 
+	
 	public void visit(EventIntInput eventIntInput) {
 		switch(eventIntInput.getType()) {
 		case BONUS_TILE_CHOICE :
@@ -116,35 +118,6 @@ public class GameController implements Observer, ViewEventVisitor {
 			break;
 		default:
 			break;
-		}
-	}
-	
-	
-	
-	private void discardLeaderCards(int playerChoice) {
-		int index = 1;
-		for (String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
-			if( index == playerChoice ){
-				game.getCurrentPlayer().getLeaderCards().remove(string);
-				game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(new CouncilPrivilege(1));
-			}
-			index++;
-		}
-		
-	}
-
-
-	//qui arriva già il comando " attiva la carta corrispondente all'int value "
-	//attivare gli effetti immediati delle carte
-	//metterle come attive
-	private void activationLeaderCards(int playerChoice) {
-		
-		int index = 1;
-		for (String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
-			if( index == playerChoice ){
-				game.getCurrentPlayer().getLeaderCards().get(string).use(game);
-			}
-			index++;
 		}
 	}
 
@@ -179,7 +152,6 @@ public class GameController implements Observer, ViewEventVisitor {
 
 
 
-	@Override
 	public void visit(EventExtraMove eventExtraMove) {
 		switch(eventExtraMove.getMessage()) {
 		case EXTRA_MOVE :
@@ -292,11 +264,20 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	
 	
+	/**
+	 * Gives the initial resources to the players, based on the initial game order.
+	 */
 	private void setupInitialResources() {
 		game.setGameState(GameState.SETUP_INITIAL_RESOURCES);
 		game.giveInitialResources();
 	}
 	
+	
+	
+	/**
+	 * Asks the players through the view, in the reverse order of the intial game order,
+	 *  which bonus tile they want to use during the game.
+	 */
 	private void setupBonusTiles() {
 		game.setGameState(GameState.SETUP_BONUS_TILES);
 		Collections.reverse(game.getPlayers());
@@ -308,9 +289,13 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	
 	/**
-	 * @param round 
-	 * @param period 
-	 * 
+	 * Prepares everything for the begin of the new round:<br>
+	 * <ul>
+	 * <li>Sets the value of the new round and period;</li>
+	 * <li>Puts on the tower spaces the new cards of the right period for the new round;</li>
+	 * <li>Clears the players' family members position</li>
+	 * <li>Throws the dice that will be used during the new round.</li>
+	 * </ul>
 	 */
 	private void roundSetup() {
 		
@@ -370,7 +355,7 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	
 	/**
-	 * 
+	 * Updates the game with the new value of the current turn.
 	 */
 	private void turnSetup() {
 		if(game.getCurrentPhase() == game.getPHASES_PER_ROUND()) {
@@ -385,7 +370,13 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	
 	/**
-	 * 
+	 * Handles the logic of the player's turn.<br>
+	 * First, we ask to the player if he wants to discard some of his leader cards.<br>
+	 * Second, we ask to the player if he wants to activate some of his leader cards.<br>
+	 * After this, we ask the player which action he wants to perform during his turn, 
+	 * and if he has gets some council privileges during the action, we ask him what he wants to earn from them.<br>
+	 * Finally, we ask again to the player if he wants to discard some of his leader cards and 
+	 * if he wants to activate some of his leader cards.
 	 */
 	private void newTurn(Player player) {
 		
@@ -410,8 +401,7 @@ public class GameController implements Observer, ViewEventVisitor {
 			game.setGameState(GameState.DISCARD_LEADER_CARDS);
 			game.setCurrentPlayer(player);
 			}
-		//setto qui le azioni delle carte leader
-		//se ha carte attivabili, creare un metodo che faccia il check...
+		
 		if(game.checkIfHasLeaderCardsActivable()) {
 			game.setGameState(GameState.ACTIVATION_LEADER_CARDS);
 			game.setCurrentPlayer(player);
@@ -421,8 +411,23 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	
 	
-	/*
-	 * 
+	/**
+	 * Handles the logic of the player's action:<br>
+	 * <ul>
+	 * <li>If the action is not an extra move, checks if there are activated some bonus on the value of the family members 
+	 * (given by the Leader Cards "Sigismondo Malatesta" or "Lucrezia Borgia");</li>
+	 * <li>If the player has it, activates Ludovico il Moro's effect, setting every colored familyMember (not already used) to the new DiceValue of 5;</li>
+	 * <li>Gets the action space chosen by the player for the action from the ID of the action space;</li>
+	 * <li>Saves the value of the familyMember before all the changes;</li>
+	 * <li>Increases the value of the family member with the servants, checking if the malus that doubles the number of servants required to increase 
+	 * the family members' value is activated;</li>
+	 * <li>Checks if it is active the excommunication malus that gives -4 on the familyMember Value if the player wants to collect a certain type of card. 
+	 * If so, it checks if the specific malus is activated on "this type of card" and if the player wants to move into the same type of tower;</li>
+	 * <li>If the action space in on the venture tower, checks if the card has a double choice for the cost, and in case it does, interacts with the player
+	 * to get which cost he wants to pay;</li>
+	 * <li>Finally, the action is executed. If the execution is not successful because it is a not valid move, a new action is asked to the player.</li>
+	 * <li></li>
+	 * </ul>
 	 */
 	private void startAction() {
 		Player player = game.getCurrentPlayer();
@@ -549,7 +554,12 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	
 	/**
-	 * 
+	 * Handles the excommunication of the players at the end of each game period, based on their choice:<br>
+	 * <ul>
+	 * <li>If the player wants to support the Church and has enough faith points to do it, his faith points will be set to zero, and no malus effected will be activated;</li>
+	 * <li>If he doesn't want to support the Church, or if he doesn't have enough faith points to support the Church, he will keep all of his faith points,
+	 * but he will receive the permanent malus effect of the excommunication tile corresponding to the ending period.</li>
+	 * </ul>
 	 */
 	private void vaticanReport(int playerChoice) {
 		Player player = game.getCurrentPlayer();
@@ -573,17 +583,67 @@ public class GameController implements Observer, ViewEventVisitor {
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @param familyMemberChosen
+	 */
 	private void familyMemberChosenForLeaderCard(String familyMemberChosen) {
 		// TODO Auto-generated method stub
 		//Player player = game.getCurrentPlayer();
 	}
 	
+	
+	
 	/**
+	 * Discards the leader card with the index received as parameter.
 	 * 
+	 * @param playerChoice
+	 */
+	private void discardLeaderCards(int playerChoice) {
+		int index = 1;
+		for (String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+			if( index == playerChoice ){
+				game.getCurrentPlayer().getLeaderCards().remove(string);
+				game.getCurrentPlayer().getPersonalBoard().getPlayerResourceSet().add(new CouncilPrivilege(1));
+			}
+			index++;
+		}
+		
+	}
+
+
+
+	/**
+	 * Activates the leader card with the index received as parameter.
+	 * 
+	 * @param playerChoice : the index of the Leader Card to activate
+	 */
+	private void activationLeaderCards(int playerChoice) {
+		
+		int index = 1;
+		for (String string : game.getCurrentPlayer().getLeaderCards().keySet()) {
+			if( index == playerChoice ){
+				game.getCurrentPlayer().getLeaderCards().get(string).use(game);
+			}
+			index++;
+		}
+	}
+	
+	
+	
+	/**
+	 * Clears everything before the beginning of the new round:<br>
+	 * <ul>
+	 * <li>Removes all the faceup Development Cards from the board and removes the color of the players in the towers' action spaces;</li>
+	 * <li>Remove the color of the players in all the remaining the action spaces;</li>
+	 * <li>Changes the Turn Order for the next round following the order of the Family Members placed in the Council Palace;</li>
+	 * <li>Puts face down every Leader Card of every Player.</li>
+	 * </ul>
 	 */
 	private void endRound() {
 
-		//Remove all the all the faceup Development Cards from the board and remove the color of the players in the action spaces
+		//Remove all the faceup Development Cards from the board and remove the color of the players in the towers' action spaces
 		for(int tower = 0; tower < game.getBoard().getNumberOfTowers(); tower++) {
 			for (int floor = 0; floor < game.getBoard().getTower(tower).getNumberOfFloors(); floor++) {
 				game.getBoard().getTower(tower).getTowerFloor(floor).setCard(null);
@@ -617,14 +677,28 @@ public class GameController implements Observer, ViewEventVisitor {
 	
 	
 	/**
-	 * 
+	 * Calculates the final scores of the game:<br>
+	 * <ul>
+	 * <li>Calculates the player's final rate based on the military points and creates a map with them victory points ready to be added to the final counting;</li>
+	 * <li>Adds the victory points earned based on the military points scored;</li>
+	 * <li>Gets the  Victory points earned by the player during the game;</li>
+	 * <li>Decreases the final victory points if the player has some malus effects of the type "loseOneVictoryPointEveryXResource";</li>
+	 * <li>Adds the final victory points received from venture cards, checking if there are some malus effects of the type "notCountingVictoryPointsFromCards";</li>
+	 * <li>Adds the final victory points received from territory cards, checking if there are some malus effects of the type "notCountingVictoryPointsFromCards";</li>
+	 * <li>Adds the final victory points received from character cards, checking if there are some malus effects of the type "notCountingVictoryPointsFromCards";</li>
+	 * <li>Adds the final victory points from Military points based on the final placement for military points;</li>
+	 * <li>Adds the final extra victory points based on the final number of resources of the player;</li>
+	 * <li>Checks if there are some malus effects of the type "loseOneVictoryPointEveryXResource" from playerResourceSet (wood,stones,servants,money);</li>
+	 * <li>Checks if there are some malus effects of the type "loseOneVictoryPointEveryXResource" from military points;</li>
+	 * <li>Checks if there are some malus effects of the type "loseOneVictoryPointEveryXResource" from building card cost (wood, stones).</li>
+	 * </ul>
 	 */
 	private void finalScores() {
 		Map<Integer, VictoryPoints> finalScores = game.getFinalScores();
 		
 		//calculating what is the player's final rate based on the military points and create a map with them victory points ready to be added to the final counting.
 		ArrayList<Integer> playerOrderForMilitaryPoints = new ArrayList<>(game.getNumberPlayers());
-		Map<Integer, MilitaryPoints> idPlayerAndMilitaryPointsMap = new HashMap<>();
+		Map<Integer, MilitaryPoints> idPlayerAndMilitaryPointsMap = new LinkedHashMap<>();
 		for (Player playerForIterate : game.getPlayers()) {
 			playerOrderForMilitaryPoints.add(playerForIterate.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints").getQuantity());
 			idPlayerAndMilitaryPointsMap.put(playerForIterate.getIdPlayer(), new MilitaryPoints(playerForIterate.getPersonalBoard().getPlayerResourceSet().getResourcesMap().get("MilitaryPoints").getQuantity()) );
