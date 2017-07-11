@@ -17,20 +17,14 @@ public class FamilyMember implements Serializable {
 	private int positionOfFamilyMember = 0;
 	private String color;
 	
-	/**
-	 * Description of the constructor FamilyMember.
-	 * 
-	 */
+
+	
 	public FamilyMember(String color){
 		this.color = color;
 	}
-	
-	
-	/**
-	 * Description of the method setValueOfFamilyMember.
-	 * 
-	 * @param setValue
-	 */
+
+	///////////////SETTER METHODS//////////////////
+	//////////////////////////////////////////////
 	
 	public void setValueOfFamilyMember(Dice setValue){
 		
@@ -38,75 +32,28 @@ public class FamilyMember implements Serializable {
 		
 	}
 	
-	
-	/**
-	 * Description of the method useOrSetFreeFamilyMember.
-	 * 
-	 */
-	/*
-	private boolean useOrSetFreeFamilyMember(){
-		if (isUsed = false){
-			isUsed = true;
-			return true;
-		}
-		
-		else isUsed = false;
-		return false;
-	}
-	*/
-	
 	public void use() {
 		isUsed = true;
 	}
 	
-	
-	/*
 	public void setPositionOfFamilyMember(int newPositionOfFamilyMember) {
-		
-		if (useOrSetFreeFamilyMember() == false) 
-			positionOfFamilyMember = newPositionOfFamilyMember;
-		
-		//ECCEZIONE riporto un valore intero (0) se il metodo fa il suo lavoro o serve un'eccezione?
-	}
-	
-	public void clearPositionOfFamilyMember() {
-		
-		if (useOrSetFreeFamilyMember() == true) 
-			positionOfFamilyMember = 0;
-		//ECCEZIONE riporto un valore intero (0) se il metodo fa il suo lavoro o serve un'eccezione?
-
-	}
-	*/
-	
-	public void setPositionOfFamilyMember(int newPositionOfFamilyMember) {
-		
 		positionOfFamilyMember = newPositionOfFamilyMember;
-		
-		//ECCEZIONE riporto un valore intero (0) se il metodo fa il suo lavoro o serve un'eccezione?
 	}
 	
 	public void clearPositionOfFamilyMember() {
-	
 		positionOfFamilyMember = 0;
 		isUsed = false;
-		//ECCEZIONE riporto un valore intero (0) se il metodo fa il suo lavoro o serve un'eccezione?
-
 	}
+
 	
-	
-	/**
-	 * Description of the method getIfUsed.
-	 * @return used
-	 */
+	///////////////GETTER METHODS//////////////////
+	//////////////////////////////////////////////
+
 	public boolean isUsed(){
 		return isUsed;
 	}
 	
-	
-	/**
-	 * Description of the method getValueFamilyMember.
-	 * @return value
-	 */
+
 	public Dice getValueFamilyMember(){
 		
 		return value;
@@ -121,4 +68,3 @@ public class FamilyMember implements Serializable {
 		return positionOfFamilyMember;
 	}
 }
-	
