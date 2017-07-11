@@ -63,5 +63,7 @@ public interface View {
 	public ArrayList<Integer> getActivationLeaderCards();
 
 	public ArrayList<Integer> getDiscardLeaderCards();
+
+	public void showFinalScores();
 	
 }

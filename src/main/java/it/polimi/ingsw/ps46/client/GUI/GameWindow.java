@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import it.polimi.ingsw.ps46.server.Game;
 
 /**
- * MainWindow Class is the GUI root Container for the main game screen. 
- * The main window shows two main areas, on the left a PlayerArea and on the right
+ * The GUI root Container for the main game screen. 
+ * It shows two main areas, on the left a PlayerArea and on the right
  * the game's board. These two areas contains their own sub-containers.
  * @author lorenzo
  *
@@ -25,7 +25,7 @@ public class GameWindow extends JFrame {
 	private MainBoard mainBoard;
 	private PlayerArea playerArea;
 	private Game game;
-	private int bonusTile = -1;
+
 	
 	public GameWindow(Game game) {
 		
@@ -86,6 +86,11 @@ public class GameWindow extends JFrame {
 		repaint();
 	}
 	
+	/**
+	 * Sets the title of the root frame accordingly with info provided by the client
+	 * @param username : client's username
+	 * @param color : client's color
+	 */
 	public void setPlayerInfo(String username, String color) {
 		this.setTitle("Lorenzo il Magnifico - player: " + username + " - color: " + color);
 	}

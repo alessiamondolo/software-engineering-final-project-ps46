@@ -17,8 +17,9 @@ import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
 
 /**
- * A WindowClass acts as the entry point for the game User Interface by launching the 
- * @MainWindowCLass.
+ * Graphic User Interface of the game Lorenzo il Magnifico. It implements all the methods
+ * required by the supertype View in order to display the information to the user through
+ * Swing API's containers. 
  * 
  * @author lorenzo
  *
@@ -50,56 +51,41 @@ public class GUIView implements View {
 	}
 	
 	/**
-	 *  Constructor that creates all the containers for the GUI screens. No interaction with
-	 *  the model is needed to create the framework, only then, via Controller's request,
-	 *  the containers wil be populated with model's data.
+	 *  Cascade creation of the game GUI 
+	 *  
+	 *  @param visible needed to set what the user can see at a given time
 	 */
-	
-	public GUIView (boolean b) {   //costruttore per test
-		
-		//poi qui rimarrà solo createandshowgui che sarà il metodo del costruttore per creare tutto il framework
-		
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				
-				createAndShowGUI(b);
-			}
-		});
-		
-	}
-	
-	
-	/**
-	 *  Cascade creation of the game GUI, this method displays the main JFrame 
-	 *  (MainWindow) which will contain the Board and the Users Panels.
-	 */
-	
-	// Solo per debug
+
 	private void createAndShowGUI(boolean visible) {
 		// Create and set up the window.
 		initUI(visible);
 		return;
 	}
 	
+	/**
+	 * Create and set up the game configuration window
+	 * 
+	 * @param visible
+	 */
+	
 	private void initUI(boolean visible) {
 		
-		//Create and set up the window.
 		welcomeWindow = new WelcomeWindow();
 		welcomeWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		welcomeWindow.pack();
-		welcomeWindow.setVisible(visible); //
+		welcomeWindow.setVisible(visible); 
 		welcomeWindow.repaint();
 		return;
 	}
 	
 	/**
-	 *  Central method to refresh all the game's graphical representations
+	 *  Central method called to update all GUI's children with the current game situation
 	 */
-	
 
 	@Override
 	public void printBoard() {
 		
+		// to associate a client view with its player's username and color
 		if (firstTime2) {
 			gameWindow.setPlayerInfo(this.playerUsername, this.playerColor);
 			firstTime2 = false;
@@ -112,50 +98,62 @@ public class GUIView implements View {
 		
 	}
 	
+	/**
+	 * Sets a new value for the attribute game in order to provide update info
+	 * 
+	 * @param game : the new game object that we want to assign to the attribute game.
+	 */
 	
-	//pensare quando va chiamato il metodo setPlayer delle dashboard che le associa ad un giocatore
 	@Override
 	public void setGame(Game game) {
 
 		this.game = game;
-		System.out.println("set game è stato chiamato");
-		String player = game.getCurrentPlayer().getUsername();
-		System.out.println("il current player è " +player);
 		
+		// to allocate only a single game window with updated information
 		if (firstTime) {	
-		
 		gameWindow = new GameWindow(this.game);
 		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		firstTime = false;
-		
 		}
 		firstTime = false;
 		
 	}
 
+
+	/**
+	 * 	Show the first screen of the game 
+	 */
 	
 	@Override
 	public void welcomeMessage() {
 		
 		welcomeWindow.setVisible(false);
-		System.out.println("sono welcome message");
-		
+
 	}
 	
+	/**
+	 * Show the initial order of the game
+	 */
 	
 	@Override 
 	public void showInitialOrder() {
 	
-		if (!(welcomeWindow instanceof WelcomeWindow))
-			return;
 		welcomeWindow.showInitialOrder(this.game);
 	}
+	
+	/**
+	 * Update the GUI
+	 */
 	
 	@Override
 	public void printPlayerStatus() {
 		printBoard();
 	}
 
+	/**
+	 * Show a pop-up message
+	 */ 
+	
 	@Override
 	public void printMessage(String message) {
 		JOptionPane.showMessageDialog(welcomeWindow, message);
@@ -166,13 +164,15 @@ public class GUIView implements View {
 	protected static void setUsername(String username) {
 		GUIView.username = username;
 	}
+	
+	/**
+	 * Gets the username that the client wants to use for the game.
+	 * 
+	 * @return username : the username received by input from the client.
+	 */
+	
 	@Override
 	public String getPlayerUserame() {
-		
-		if (!(welcomeWindow instanceof WelcomeWindow))
-			return "";
-		
-		System.out.println("sto chiedendo nome");
 
 		welcomeWindow.setPlayerUsername();
 		
@@ -187,12 +187,17 @@ public class GUIView implements View {
 				}
 			}
 		}	
-		System.out.println(GUIView.username);
 		this.playerUsername = GUIView.username;
-		
 		return GUIView.username;
 	}
 	
+	/**
+	 * Gets the color that the client wants to use for the game. The color can be chosen 
+	 * from a list of colors that is received as parameter.
+	 * 
+	 * @param colors : a list of colors from which the client can choose his color.
+	 * @return color : the color received by input from the client.
+	 */
 
 	private volatile static String color;
 	protected static void setColor(String color) {
@@ -200,9 +205,7 @@ public class GUIView implements View {
 	}
 	@Override
 	public String getPlayerColor(ArrayList<String> colors) {
-
 		
-		System.out.println("Sto chiedendo colore");
 		welcomeWindow.setColors(colors);
 		
 		GUIView.setColor(null);
@@ -223,17 +226,31 @@ public class GUIView implements View {
 		this.playerColor = GUIView.color;
 		return GUIView.color;
 	}
+	
+	/**
+	 * Updates the game board
+	 */
 
 	@Override
 	public void updateRoundInfo() {
 		printBoard();
 	}
+	
+	/**
+	 * Updates the game board
+	 */
 
 	@Override
 	public void printCurrentPlayer() {
 		printBoard();
 	}
-
+	
+	/**
+	 * Gets the ID of the action space where the client wants to move during his action.
+	 * 
+	 * @return action : the ID of the action space.
+	 */
+	
 	private volatile static int action = 0;
 	protected static void setAction(int action) {
 		GUIView.action = action;
@@ -260,10 +277,17 @@ public class GUIView implements View {
 				}
 			}
 		}
-		System.out.println("Ho ricevuto azione " +GUIView.action+ " da " +this.playerUsername);
+		
 		/* GET */
+		System.out.println("Sto inviando azione " +GUIView.action);
 		return GUIView.action;
 	}
+	
+	/**
+	 * Gets the family member that the client wants to move during his action.
+	 * 
+	 * @return color : the color of the family member.
+	 */
 
 	private volatile static String familyMember;
 	protected static void setFamilyMember(String familyMember) {
@@ -289,12 +313,19 @@ public class GUIView implements View {
 			}
 		}
 		/* GET */
-		
+		System.out.println("sto inviando" +GUIView.familyMember);
 		return GUIView.familyMember;
 	}
 
-
 	
+	/**
+	 * Gets the number of servants that the client wants to add to his family member for the current action.
+	 * The maximum number of servants that the player can use is taken from the number of servants that he has at the moment of the action.
+	 * Additional input control to check whether the input number is negative
+	 * 
+	 * @return servants : the number of servants that the client wants to use.
+	 */
+
 	private ImageIcon servantsIcon;
 	@Override
 	public int getServants() {
@@ -347,21 +378,32 @@ public class GUIView implements View {
 
 	}
 
+	/**
+	 * Update game board
+	 */
+	
 	@Override
 	public void printPlayerAction() {
 		printBoard();
 	}
 
+	/**
+	 * Update game board
+	 */
 	@Override
 	public void showNextTurnOrder() {
 		printBoard();
 	}
 
+	/**
+	 * Gets which of the two optional effects the player wants to activate.
+	 * 
+	 * @return choice : the effect chosen by the player.
+	 */
 
 	@Override
 	public int getEffectCoice(Effect effect1, Effect effect2) {
 
-		
 		int result;
 		final String[] effects = { "Upper Effect", "Lower Effect"};
 		String message = ("Look at the card you want to produce with. Which of the two effects you wish to activate?");
@@ -396,7 +438,13 @@ public class GUIView implements View {
 		return result;
 	}
 			
-		
+	/**
+	 * Gets which council privileges the player wants to get.
+	 * If the player has more than one council privilege, it will get all of them, excluding each time the privileges
+	 * already taken.
+	 * 
+	 * @return councilPrivileges : the list of the council privileges chosen by the player.
+	 */
 	
 	private static final String[] privilegesTypes = { "Wood: 1 - Stones: 1", "Servants: 2", 
 			 												"Money: 2", "MilitaryPoints: 2", "FaithPoints: 1" };
@@ -412,7 +460,7 @@ public class GUIView implements View {
 			
 			boolean choiceDefault = false;
 			int x = 0;
-			System.out.println("ciclo " +x);
+			
 			JFrame frame = new JFrame("Counsil Privilege");
 		    String choice = (String) JOptionPane.showInputDialog(frame, 
 		        "Select the Counsil Privilege",
@@ -423,19 +471,13 @@ public class GUIView implements View {
 		        privilegesTypes[0]);
 
 		    // choice will be null if the user clicks Cancel
-		    System.out.printf("Privilege chosen is %s.\n", choice);
+		    
 		    frame.pack();
 		    frame.setVisible(true);
 		    
 		    if (choice == null) {
 		    	getCouncilPrivilege();
 		    }
-			
-			int index = 1;
-			for(ResourceSet resourceSet : game.getCouncilPrivileges()) {
-				System.out.println(index + ". " + resourceSet.toString());
-				index++;
-			}
 			
 			Integer bonus = null;
 			
@@ -468,14 +510,12 @@ public class GUIView implements View {
 			if (choiceDefault == false) {
 			if(!councilPrivileges.contains(bonus)) {
 				councilPrivileges.add(bonus);
-				System.out.println("prima del -- ho privilegi: " +privileges);
 						
 				privileges--;
 				
 				if(privileges > 0) {
 					message = ("You still have " + privileges + " council privileges.");
 					JOptionPane.showMessageDialog(gameWindow, message);
-					System.out.println("ho ancora privilegi");
 				}
 			}
 			else {
@@ -485,8 +525,7 @@ public class GUIView implements View {
 			x++;
 			}
 		}
-		
-		
+
 		return councilPrivileges;
 		  
 	}
@@ -496,11 +535,12 @@ public class GUIView implements View {
 	protected static void setBonusTile(int bonusTile) {
 		GUIView.bonusTile = bonusTile;
 	}
+	
 	/**
 	 * Graphic implementation of the getBonusTile method. Asks the player which bonus tile
 	 * he wants to use and return an int that indicates the chosen one.
 	 * 
-	 * @return int
+	 * @return int bonus tile
 	 */
 	
 	
@@ -527,6 +567,11 @@ public class GUIView implements View {
 		return GUIView.bonusTile;
 	}
 	
+	/**
+	 * Gets whether the user wants to support the Vatican
+	 * 
+	 * @return int : to map the user input
+	 */
 
 	@Override
 	public int getVaticanSupport() {
@@ -542,24 +587,46 @@ public class GUIView implements View {
 	@Override
 	public int getCostCoice(ResourceSet cost1, ResourceSet cost2) {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
-
+	
+	
 	@Override
 	public int getExtraMove(ExtraMoveEffect effect) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	
+	
+	
+	
+	
+	@Override
 	public ArrayList<Integer> getActivationLeaderCards() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Integer> leaderCardsActivated = new ArrayList<Integer>();
+		System.out.println("sono dentro activate leader cards");
+		leaderCardsActivated.add(new Integer(0));
+		
+		return leaderCardsActivated;
+	
+	}
+
+	
+	
+	@Override
+	public ArrayList<Integer> getDiscardLeaderCards() {
+		ArrayList<Integer> leaderCardsDiscarded = new ArrayList<Integer>();
+		System.out.println("sono dentro discard leader cards");
+		leaderCardsDiscarded.add(new Integer(0));
+		
+		return leaderCardsDiscarded;
 	}
 
 	@Override
-	public ArrayList<Integer> getDiscardLeaderCards() {
+	public void showFinalScores() {
 		// TODO Auto-generated method stub
-		return null;
+		printBoard();
 	}
 
 

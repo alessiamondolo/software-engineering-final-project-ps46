@@ -1,14 +1,15 @@
 package it.polimi.ingsw.ps46.server.card;
 
 import java.util.Map;
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
 
-public class LeaderCard {
+public class LeaderCard implements Serializable {
 	
-	
+	private static final long serialVersionUID = -2466278746354123237L;
 	private String cardName;
 	private LinkedHashMap <String, Integer> requiredCards; 
 	private ResourceSet requiredResources;
@@ -39,19 +40,22 @@ public class LeaderCard {
 						}
 					}
 					
-					if (string.equals( "BuldingCards")){
+
+					if (string.equals("BuldingCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getBuildingDeck().size() < requiredCards.get(string)){
 							return false;
 						}
 					}
 					
-					if (string.equals( "VentureCards")){
+
+					if (string.equals("VentureCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getVentureDeck().size() < requiredCards.get(string)){
 							return false;
 						}
 					}
 					
-					if (string.equals( "CharacterCards")){
+
+					if (string.equals("CharacterCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getCharacterDeck().size() < requiredCards.get(string)){
 							return false;
 						}	
@@ -62,29 +66,32 @@ public class LeaderCard {
 			{
 				boolean cardOrChecked = false;
 				for (String string : requiredCards.keySet()) {
-					
-					if (string.equals( "TerritoryCards")){
+
+					if (string.equals("TerritoryCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getTerritoryDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;
 						}
 					}
 					
-					if (string.equals( "BuldingCards")){
+
+					if (string.equals("BuldingCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getBuildingDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;
 						}
 					}
 					
-					if (string.equals( "VentureCards")){
+
+					if (string.equals("VentureCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getVentureDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;
 						}
 					}
 					
-					if (string.equals( "CharacterCards")){
+
+					if (string.equals("CharacterCards")){
 						if(game.getCurrentPlayer().getPersonalBoard().getCharacterDeck().size() == requiredCards.get(string)){
 							cardOrChecked = true;
 							break;

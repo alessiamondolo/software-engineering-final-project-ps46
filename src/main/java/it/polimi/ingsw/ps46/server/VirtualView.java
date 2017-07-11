@@ -131,6 +131,11 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		case SET_NEXT_TURN_ORDER :
 			showNextTurnOrder();
 			break;	
+		case UPDATE_FINAL_SCORES :
+			showFinalScores();
+			break;
+		case END_GAME :
+			endGame();
 		default:
 			break;
 		}
@@ -162,7 +167,6 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 
 
 
-	@Override
 	public void visit(EventExtraMove eventExtraMove) {
 		switch(eventExtraMove.getMessage()) {
 		case EXTRA_MOVE :
@@ -279,7 +283,11 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
+	 * Sends to the client with the ID received as parameter a message request to get the id of the
+	 * bonus tile that the client wants to use during the game.<br>
+	 * Then, the method notifies the observers with the input received by the client.
 	 * 
+	 * @param id : the ID of the client from which we want to receive the username.
 	 */
 	public void getBonusTile(int id) {
 		int bonusTile = 0;
@@ -350,7 +358,8 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
-	 * 
+	 * Sends to the all the clients a message request to print the current player.<br>
+	 * After the message request, it sends a serialized version of the current game object.
 	 */
 	public void printCurrentPlayer() {
 		for(Socket currentSocket : clients) {
@@ -370,7 +379,7 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
-	 * 
+	 * Sends to the current client a message request to print his status.
 	 */
 	public void printPlayerStatus() {
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
@@ -386,7 +395,18 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
-	 * 
+	 * Sends to the client with the ID of the current player a message request to get the action 
+	 * that the client wants to perform during his current turn.<br>
+	 * If the model is in the game state ACTION_NOT_VALID, it will also send a message request to show
+	 * the message that the previous action wasn't valid.<br>
+	 * After the message request for the client's action, the method notifies the observers with the inputs 
+	 * received by the client:
+	 * <ul>
+	 * <li>The ID of the action space where the client wants to move;</li>
+	 * <li>The family member that he wants to use for the action;</li>
+	 * <li>The number of servants that he wants to add to the family member for the acion.</li>
+	 * </ul>
+	 * Finally, the method notifies the observers with a message saying that the action has been sent.
 	 */
 	public void getPlayerAction() {
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
@@ -422,7 +442,11 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
+	 * Sends to the client with the ID of the current player a message request to get which of the optional costs 
+	 * the client wants to activate for the card received as a parameter.<br>
+	 * Then, the method notifies the observers with the input received by the client.
 	 * 
+	 * @param card : the card for which we want to know the optional cost chosen by the client
 	 */
 	public void getCostChoice(VentureCard card) {
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
@@ -451,7 +475,11 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
+	 * Sends to the client with the ID of the current player a message request to get which of the optional effect 
+	 * the client wants to activate for the card received as a parameter.<br>
+	 * Then, the method notifies the observers with the input received by the client.
 	 * 
+	 * @param card : the card for which we want to know the optional cost chosen by the client
 	 */
 	public void getEffectChoice(BuildingCard card) {
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
@@ -480,7 +508,10 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
-	 * 
+	 * Sends to the client with the ID of the current player a message request to get which of the optional bonuses 
+	 * the client wants to activate for the council privileges that he has available.<br>
+	 * After receiving an array of integers representing the indexes of the bonuses chosen by the client, the method 
+	 * notifies the observers with the inputs received by the client, one by one.
 	 */
 	private void getCouncilPrivilege() {
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
@@ -507,7 +538,8 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 	
 	/**
-	 * 
+	 * Sends to the all the clients a message request to print the game order for the next turn.<br>
+	 * After the message request, it sends a serialized version of the current game object.
 	 */
 	public void showNextTurnOrder() {
 		for(Socket currentSocket : clients) {
@@ -526,8 +558,13 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	
 
 
+	/**
+	 * Sends to all the clients a message request to get if they want or not to support the Church.<br>
+	 * Then, the method notifies the observers with the input received by the client.
+	 * 
+	 * @param card : the card for which we want to know the optional cost chosen by the client
+	 */
 	private void getVaticanSupport() {
-		
 		int vaticanSupport = 0;
 		for(Socket currentSocket : clients) {
 			ObjectOutputStream writer = writers.get(currentSocket);
@@ -547,9 +584,15 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 			setChanged();
 			notifyObservers(new EventIntInput(vaticanSupport, InputType.VATICAN_SUPPORT_CHOICE));
 		}
-
 	}	
 	
+	
+	
+	/**
+	 * Sends to the client with the ID of the current player a message request to get which of his activable leader cards 
+	 * the client wants to activate for the current turn.<br>
+	 * Then, the method notifies the observers with the inputs received by the client, one by one.
+	 */
 	private void getActivationLeaderCard(){
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
 		ObjectOutputStream writer = writers.get(currentSocket);
@@ -577,12 +620,18 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 	}
 	
 	
+	
+	/**
+	 * Sends to the client with the ID of the current player a message request to get which of his leader cards 
+	 * the client wants to discard in exchange for a council privilege.<br>
+	 * Then, the method notifies the observers with the inputs received by the client, one by one.
+	 */
 	private void getDiscardLeaderCard(){ 
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
 		ObjectOutputStream writer = writers.get(currentSocket);
 		ObjectInputStream reader = readers.get(currentSocket);
 		try {
-			writer.writeObject("GET_ACTIVATION_LEADER_CARDS");
+			writer.writeObject("GET_DISCARD_LEADER_CARDS");
 			writer.flush();
 			writer.writeObject(game);
 			writer.flush();
@@ -603,6 +652,12 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		}
 	}
 	
+	
+	
+	/**
+	 * Sends to the all the clients a message request to print the message that he lost his first turn.<br>
+	 * After the message request, it sends a serialized version of the current game object.
+	 */
 	private void printMissingTurn() {
 		for(Socket currentSocket : writers.keySet()) {
 			ObjectOutputStream writer = writers.get(currentSocket);
@@ -620,6 +675,19 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 
 
 
+	/**
+	 * Sends to the client with the ID of the current player a message request to get the extra move 
+	 * that the client wants to perform during his current turn.<br>
+	 * After the message request, it sends a serialized version of the current game object and the effect for which
+	 * the client is doing this extra move.<br>
+	 * After this, the method notifies the observers with the inputs received by the client:
+	 * <ul>
+	 * <li>The ID of the action space where the client wants to move;</li>
+	 * <li>The number of servants that he wants to add to the family member for the action.</li>
+	 * </ul>
+	 * Finally, the method notifies the observers with an event containing the extra move effect for which
+	 * the client is doing this extra move.
+	 */
 	private void getExtraMove(ExtraMoveEffect extraMoveEffect) {
 		Socket currentSocket = clients.get((game.getCurrentPlayer().getIdPlayer())-1);
 		ObjectOutputStream writer = writers.get(currentSocket);
@@ -649,4 +717,42 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		}
 	}
 	
+	
+	
+	/**
+	 * Sends to the all the clients a message request to print the final scores.<br>
+	 * After the message request, it sends a serialized version of the current game object.
+	 */
+	public void showFinalScores() {
+		for(Socket currentSocket : clients) {
+			ObjectOutputStream writer = writers.get(currentSocket);
+			try {
+				writer.writeObject("SHOW_FINAL_SCORES");
+				writer.flush();
+				writer.writeObject(game);
+				writer.flush();
+				writer.reset();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
+	/**
+	 * Sends to the all the clients a message request to end the game.
+	 */
+	public void endGame() {
+		for(Socket currentSocket : clients) {
+			ObjectOutputStream writer = writers.get(currentSocket);
+			try {
+				writer.writeObject("END_GAME");
+				writer.flush();
+				writer.reset();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
