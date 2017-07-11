@@ -34,9 +34,11 @@ import it.polimi.ingsw.ps46.utils.MyJSONParser;
 
 
 /**
+ * This class represents the main Model class for the MVC architecture of the application.
+ * It contains all the information about the current game state.
  * 
  * @author Alessia Mondolo
- *
+ * @version 1.1
  */
 public class Game extends Observable implements Serializable {
 	
@@ -65,8 +67,8 @@ public class Game extends Observable implements Serializable {
 	
 	private ArrayList<ResourceSet> councilPrivileges;
 	
-	private LinkedHashMap<Integer, VictoryPoints> victoryPointsFromTerritoryCards = new LinkedHashMap<Integer, VictoryPoints>();
-	private LinkedHashMap<Integer, VictoryPoints> victoryPointsFromCharacterCards = new LinkedHashMap<Integer, VictoryPoints>();
+	private LinkedHashMap<Integer, VictoryPoints> victoryPointsFromTerritoryCards;
+	private LinkedHashMap<Integer, VictoryPoints> victoryPointsFromCharacterCards;
 	private Map<Integer, VictoryPoints> finalScores;
 	private LinkedHashMap<Integer, VictoryPoints> vaticanReportVictoryPoints;
 	private ArrayList <FaithPoints> faithPointsRequiredForPeriod;
@@ -77,7 +79,12 @@ public class Game extends Observable implements Serializable {
 	private String configFilesPath = "./src/main/java/it/polimi/ingsw/ps46/server/config/";
 	
 	
-		public Game(int numberPlayers) {
+	/**
+	 * Creates a new Game object.
+	 * 
+	 * @param numberPlayers : the number of players that will play the game.
+	 */
+	public Game(int numberPlayers) {
 		this.numberPlayers = numberPlayers;
 		players = new ArrayList<Player>();
 		//creates the players objects and adds them to the list of players
@@ -104,9 +111,9 @@ public class Game extends Observable implements Serializable {
 		notifyObservers(event);
 	}
 	
-//--------------------------------------------------//
-//----------BEGIN OF CONFIGURATION METHODS----------//
-//--------------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------//
+//----------------------------------------BEGIN OF CONFIGURATION METHODS----------------------------------------//
+//--------------------------------------------------------------------------------------------------------------//
 	/**
 	 * Configures the dices that will be used during the game.
 	 */
@@ -120,7 +127,9 @@ public class Game extends Observable implements Serializable {
 	
 	
 	/**
-	 * 
+	 * Configures the board, parsing from json file the Towers and the other Action Spaces.
+	 * Also, it configures the Excommunication Tiles, parsing them from json file and assigning to the board one 
+	 * tile per period.
 	 */
 	private void configBoard() {
 		FactoryBoard factoryBoard = FactoryBoard.getFactoryBoard();
@@ -180,7 +189,8 @@ public class Game extends Observable implements Serializable {
 	
 	
 	/**
-	 * 
+	 * Creates the bonus tiles, that will be used from the players during the game, by parsing them
+	 *  from a json file.
 	 * 
 	 */
 	private void configBonusTiles() {
@@ -191,7 +201,8 @@ public class Game extends Observable implements Serializable {
 	
 	
 	/**
-	 * 
+	 * Configures from a json file the bonuses between which the player can choose when he receives 
+	 * a council privilege.
 	 */
 	private void configCouncilPrivileges() {
 		councilPrivileges = new ArrayList<ResourceSet>();
@@ -220,7 +231,8 @@ public class Game extends Observable implements Serializable {
 	
 	
 	/**
-	 * 
+	 * Configures from a json file the leader cards that will be used during the game.<br>
+	 * After the parsing of the cards, it gives 4 random cards for each player.
 	 */
 	private void configLeaderCards() {
 		leaderCards = new ArrayList<LeaderCard>();
@@ -259,9 +271,12 @@ public class Game extends Observable implements Serializable {
 	
 	
 	/**
-	 * 
+	 * Configures from json files the maps that will be used at the end of the game to calculate 
+	 * the final score bonuses.
 	 */
 	private void configFinalPoints() {
+		victoryPointsFromTerritoryCards = new LinkedHashMap<Integer, VictoryPoints>();
+		victoryPointsFromCharacterCards = new LinkedHashMap<Integer, VictoryPoints>();
 		JSONParser parser = new JSONParser();
 		MyJSONParser myJSONParser = new MyJSONParser();
 
@@ -283,8 +298,13 @@ public class Game extends Observable implements Serializable {
 	}
 	
 	
-	//TODO da file
+	
+	/**
+	 * Configures from a json file the map that will be used at the end of the game to calculate 
+	 * the final score bonus from the vatican report victory points.
+	 */
 	public void configVaticanReportVictoryPoints() {
+		//TODO da file
 		vaticanReportVictoryPoints = new LinkedHashMap<>();
 		vaticanReportVictoryPoints.put(0, new VictoryPoints(0));
 		vaticanReportVictoryPoints.put(1, new VictoryPoints(1));
@@ -301,43 +321,57 @@ public class Game extends Observable implements Serializable {
 	}
 	
 	
-	//TODO da file
-		public void configFaithPointsRequiredForPeriod() {
-			faithPointsRequiredForPeriod = new ArrayList<FaithPoints>();
+	
+	/**
+	 * Configures from a json file the list of the required faith points for each period.
+	 */
+	public void configFaithPointsRequiredForPeriod() {
+		//TODO da file
+		faithPointsRequiredForPeriod = new ArrayList<FaithPoints>();
 
-			faithPointsRequiredForPeriod.add( new FaithPoints(3));
-			faithPointsRequiredForPeriod.add( new FaithPoints(4));
-			faithPointsRequiredForPeriod.add( new FaithPoints(5));
-		}
-		
-	//TODO da file
-		public void configVictoryPointsForMilitaryPoints() {
-			victoryPointsForMilitaryPoints = new ArrayList<VictoryPoints>();
+		faithPointsRequiredForPeriod.add( new FaithPoints(3));
+		faithPointsRequiredForPeriod.add( new FaithPoints(4));
+		faithPointsRequiredForPeriod.add( new FaithPoints(5));
+	}
+	
+	
+	
+	/**
+	 * Configures from a json file the map that will be used at the end of the game to calculate 
+	 * the final score bonus from the military points.
+	 */
+	public void configVictoryPointsForMilitaryPoints() {
+		//TODO da file
+		victoryPointsForMilitaryPoints = new ArrayList<VictoryPoints>();
 
-			victoryPointsForMilitaryPoints.add( new VictoryPoints(5));
-			victoryPointsForMilitaryPoints.add( new VictoryPoints(3));
-		}
-//--------------------------------------------------//
-//-----------END OF CONFIGURATION METHODS-----------//
-//--------------------------------------------------//
+		victoryPointsForMilitaryPoints.add( new VictoryPoints(5));
+		victoryPointsForMilitaryPoints.add( new VictoryPoints(3));
+	}
+
+//--------------------------------------------------------------------------------------------------------------//
+//-----------------------------------------END OF CONFIGURATION METHODS-----------------------------------------//
+//--------------------------------------------------------------------------------------------------------------//
 	
 	
 	
-//--------------------------------------------------//
-//---------------BEGIN OF GET METHODS---------------//
-//--------------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------//
+//---------------------------------------------BEGIN OF SET METHODS---------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------//
 	public Player getCurrentPlayer() {
 		return currentPlayer;		
 	}
 
+	
 	public int getCurrentPeriod() {
 		return currentPeriod;
 	}
+	
 	
 	public int getCurrentRound() {
 		return currentRound;
 	}
 
+	
 	public Dice getDice(String color) {
 		return dice.get(color);
 	}
@@ -372,6 +406,7 @@ public class Game extends Observable implements Serializable {
 		return bonusTiles;
 	}
 
+	
 	public ArrayList<TerritoryCard> getTerritoryCardsDeck() {
 		return territoryCardsDeck;
 	}
@@ -400,19 +435,82 @@ public class Game extends Observable implements Serializable {
 	public ArrayList<Player> getCouncilPalaceOrder() {
 		return councilPalaceOrder;
 	}
-//--------------------------------------------------//
-//----------------END OF GET METHODS----------------//
-//--------------------------------------------------//
+	
+	
+	public GameState getGameState() {
+		return gameState;
+	}
 
 	
-	public void startGame() {
-		newState(new EventMessage(NewStateMessage.START_GAME));
+	public void getCardCost(VentureCard card) {
+		if(card.getdoubleCostChoice()) {
+			newState(new EventCostChoice(NewStateMessage.CARD_COST_CHOICE, card));
+		}
+	}
+
+
+	public int getPHASES_PER_ROUND() {
+		return PHASES_PER_ROUND;
+	}
+
+	
+	public int getCurrentPhase() {
+		return currentPhase;
+	}
+
+	
+	public Map<Integer, VictoryPoints> getFinalScores() {
+		return finalScores;
+	}
+
+	
+	public LinkedHashMap<Integer, VictoryPoints> getVictoryPointsFromTerritoryCards() {
+		return victoryPointsFromTerritoryCards;
 	}
 	
-	public void giveBonusTile(Player player, int bonusTile) {
-		player.getPersonalBoard().setBonusTile(bonusTiles.get(bonusTile));
+
+	public LinkedHashMap<Integer, VictoryPoints> getVictoryPointsFromCharacterCards() {
+		return victoryPointsFromCharacterCards;
+	}
+
+	
+	public ArrayList<ResourceSet> getCouncilPrivileges() {
+		return councilPrivileges;
+	}
+
+	
+	public Map<Integer, VictoryPoints> getVaticanReportVictoryPoints() {
+		return vaticanReportVictoryPoints;
 	}
 	
+	
+	public ArrayList<FaithPoints> getFaithPointsRequiredForPeriod() {
+		return faithPointsRequiredForPeriod;
+	}
+
+	
+	public ArrayList<VictoryPoints> getVictoryPointsForMilitaryPoints() {
+		return victoryPointsForMilitaryPoints;
+	}
+
+	
+	public ArrayList<ExcommunicationTile> getExcommunicationTiles() {
+		return excommunicationTiles;
+	}
+
+	
+	public LinkedHashMap<Integer, ArrayList<Player>> getFinalScoresOrder() {
+		return finalScoresOrder;
+	}
+//--------------------------------------------------------------------------------------------------------------//
+//----------------------------------------------END OF GET METHODS----------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------//
+
+	
+	
+//--------------------------------------------------------------------------------------------------------------//
+//---------------------------------------------BEGIN OF SET METHODS---------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------//
 	public void setNextTurnOrder(ArrayList<Player> nextTurnOrder) {
 		players = nextTurnOrder;
 		newState(new EventMessage(NewStateMessage.SET_NEXT_TURN_ORDER));
@@ -424,11 +522,84 @@ public class Game extends Observable implements Serializable {
 		newState(new EventMessage(NewStateMessage.CHANGED_CURRENT_PLAYER));
 	}
 	
+	
 	public void setInitialOrder() {
 		Collections.shuffle(players);
 		newState(new EventMessage(NewStateMessage.SET_INITIAL_ORDER));
 	}
 	
+	
+	public void setCurrentRound(int newRound) {
+		currentRound = newRound;
+		newState(new EventMessage(NewStateMessage.UPDATE_ROUND_INFO));
+	}
+	
+	
+	public void setCurrentPeriod(int newPeriod) {
+		currentPeriod = newPeriod;
+	}
+
+	
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+	}
+
+	
+	public void setCurrentPhase(int currentPhase) {
+		this.currentPhase = currentPhase;
+		newState(new EventMessage(NewStateMessage.UPDATE_PHASE_INFO));
+	}
+
+	
+	public void setFinalScores(Map<Integer, VictoryPoints> finalScores) {
+		this.finalScores = finalScores;
+	}
+
+	
+	public void setCouncilPrivileges(ArrayList<ResourceSet> councilPrivileges) {
+		this.councilPrivileges = councilPrivileges;
+	}
+
+
+	public void setFinalScoresOrder(LinkedHashMap<Integer, ArrayList<Player>> finalScoresOrder) {
+		this.finalScoresOrder = finalScoresOrder;
+		newState(new EventMessage(NewStateMessage.UPDATE_FINAL_SCORES));
+		newState(new EventMessage(NewStateMessage.END_GAME));
+	}
+//--------------------------------------------------------------------------------------------------------------//
+//----------------------------------------------END OF SET METHODS----------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------//
+	
+	
+	
+//--------------------------------------------------------------------------------------------------------------//
+//-------------------------------------------BEGIN OF SUPPORT METHODS-------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------//
+	/**
+	 * Starts a new game, setting a new game state and notifying this to its observer. 
+	 */
+	public void startGame() {
+		newState(new EventMessage(NewStateMessage.START_GAME));
+	}
+	
+	
+	
+	/**
+	 * Assigns to the player received as parameter the bonus tile corresponding to the ID received as parameter. 
+	 * 
+	 * @param player	: the player to who assign the bonus tyle
+	 * @param bonusTile : the ID of the bonus tile to be assigned
+	 */
+	public void giveBonusTile(Player player, int bonusTile) {
+		player.getPersonalBoard().setBonusTile(bonusTiles.get(bonusTile));
+	}
+	
+	
+	
+	/**
+	 * Gives to all the player the initial set of resources, based on the initial game order.<br>
+	 * The sets of resources are configured from a json file.
+	 */
 	public void giveInitialResources() {
 		ResourceSet initialResources = null;
 		JSONParser parser = new JSONParser();
@@ -455,15 +626,11 @@ public class Game extends Observable implements Serializable {
 	    }
 	}
 	
-	public void setCurrentRound(int newRound) {
-		currentRound = newRound;
-		newState(new EventMessage(NewStateMessage.UPDATE_ROUND_INFO));
-	}
 	
-	public void setCurrentPeriod(int newPeriod) {
-		currentPeriod = newPeriod;
-	}
 	
+	/**
+	 * Throws the dice, and after this updates the family members of the players with the new values.
+	 */
 	public void throwDice() {
 		for(String key : dice.keySet()) {
 			dice.get(key).throwDice();
@@ -472,18 +639,29 @@ public class Game extends Observable implements Serializable {
 		}
 	}
 	
+	
+	
+	/**
+	 * Adds a new player to the council palace order. This method is called when a player
+	 * moves on the council palace space.<br>
+	 * The council palace order will be used to determine the next round order, at the end of the 
+	 * current round.
+	 * 
+	 * @param player : the player to be added to the council palace order
+	 */
 	public void addToCouncilPalaceOrder(Player player) {
 		councilPalaceOrder.add(player);
 	}
-
-	public void setGameState(GameState gameState) {
-		this.gameState = gameState;
-	}
 	
-	public GameState getGameState() {
-		return gameState;
-	}
 	
+	
+	/**
+	 * Activates the permanent effect of the building card received as parameter.<br>
+	 * If the card has a double choice effect, sends a notify to its observers to require
+	 * the choice of the effect from the player that is using the card.
+	 * 
+	 * @param card : the building card that has to be used
+	 */
 	public void useCard(BuildingCard card) {
 		if(!card.getDoubleChoice())
 			card.use(this);
@@ -492,65 +670,13 @@ public class Game extends Observable implements Serializable {
 		}
 	}
 	
-	public void getCardCost(VentureCard card) {
-		if(card.getdoubleCostChoice()) {
-			newState(new EventCostChoice(NewStateMessage.CARD_COST_CHOICE, card));
-		}
-	}
-
-
-	public int getPHASES_PER_ROUND() {
-		return PHASES_PER_ROUND;
-	}
-
-	public int getCurrentPhase() {
-		return currentPhase;
-	}
-
-	public void setCurrentPhase(int currentPhase) {
-		this.currentPhase = currentPhase;
-		newState(new EventMessage(NewStateMessage.UPDATE_PHASE_INFO));
-	}
-
-	public Map<Integer, VictoryPoints> getFinalScores() {
-		return finalScores;
-	}
-
-	public void setFinalScores(Map<Integer, VictoryPoints> finalScores) {
-		this.finalScores = finalScores;
-		//newState(new EventMessage(NewStateMessage.UPDATE_FINAL_SCORES));
-		//newState(new EventMessage(NewStateMessage.END_GAME));
-	}
-
-	public LinkedHashMap<Integer, VictoryPoints> getVictoryPointsFromTerritoryCards() {
-		return victoryPointsFromTerritoryCards;
-	}
-
-	public LinkedHashMap<Integer, VictoryPoints> getVictoryPointsFromCharacterCards() {
-		return victoryPointsFromCharacterCards;
-	}
-
-	public ArrayList<ResourceSet> getCouncilPrivileges() {
-		return councilPrivileges;
-	}
-
-	public void setCouncilPrivileges(ArrayList<ResourceSet> councilPrivileges) {
-		this.councilPrivileges = councilPrivileges;
-	}
-
-	public Map<Integer, VictoryPoints> getVaticanReportVictoryPoints() {
-		return vaticanReportVictoryPoints;
-	}
 	
 	
-	public ArrayList<FaithPoints> getFaithPointsRequiredForPeriod() {
-		return faithPointsRequiredForPeriod;
-	}
-
-	public ArrayList<VictoryPoints> getVictoryPointsForMilitaryPoints() {
-		return victoryPointsForMilitaryPoints;
-	}
-	
+	/**
+	 * Checks if the current player has some leader cards that can be activated.
+	 * 
+	 * @return true : if at least one leader card can be activated, otherwise false
+	 */
 	public boolean checkIfHasLeaderCardsActivable(){
 		
 		for (String string : getCurrentPlayer().getLeaderCards().keySet()) {
@@ -560,6 +686,13 @@ public class Game extends Observable implements Serializable {
 		return false;
 	}
 	
+	
+	
+	/**
+	 * Checks if the current player has some leader cards that can be discarded.
+	 * 
+	 * @return true : if at least one leader card can be discarded, otherwise false
+	 */
 	public boolean checkIfCouldDiscardLeaderCards(){
 		
 		for (String string : getCurrentPlayer().getLeaderCards().keySet()) {
@@ -568,24 +701,20 @@ public class Game extends Observable implements Serializable {
 		}
 		return false;
 	}
-
-	public ArrayList<ExcommunicationTile> getExcommunicationTiles() {
-		return excommunicationTiles;
-	}
 	
+	
+	
+	/**
+	 * Activates the extra move effect received as parameter, setting a new game state and notifying this
+	 * to its observer. 
+	 * 
+	 * @param effect : the extra move to activate
+	 */
 	public void extraMove(ExtraMoveEffect effect) {
 		setGameState(GameState.EXTRA_MOVE);
 		newState(new EventExtraMove(NewStateMessage.EXTRA_MOVE, effect));
 	}
-
-	public LinkedHashMap<Integer, ArrayList<Player>> getFinalScoresOrder() {
-		return finalScoresOrder;
-	}
-
-	public void setFinalScoresOrder(LinkedHashMap<Integer, ArrayList<Player>> finalScoresOrder) {
-		this.finalScoresOrder = finalScoresOrder;
-		newState(new EventMessage(NewStateMessage.UPDATE_FINAL_SCORES));
-		newState(new EventMessage(NewStateMessage.END_GAME));
-	}
-
+//--------------------------------------------------------------------------------------------------------------//
+//-------------------------------------------BEGIN OF SUPPORT METHODS-------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------//
 }
