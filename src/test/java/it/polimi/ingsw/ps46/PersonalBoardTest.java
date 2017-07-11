@@ -2,14 +2,12 @@ package it.polimi.ingsw.ps46;
 
 import static org.junit.Assert.*;
 
-import java.io.ObjectOutputStream.PutField;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import org.junit.Test;
 
 import it.polimi.ingsw.ps46.server.Game;
-import it.polimi.ingsw.ps46.server.PersonalBoard;
 import it.polimi.ingsw.ps46.server.Player;
 import it.polimi.ingsw.ps46.server.card.BuildingCard;
 import it.polimi.ingsw.ps46.server.card.CharacterCard;
