@@ -95,6 +95,7 @@ public class GUIView implements View {
 	 *  Central method to refresh all the game's graphical representations
 	 */
 	
+
 	@Override
 	public void printBoard() {
 		
@@ -102,7 +103,7 @@ public class GUIView implements View {
 			gameWindow.setPlayerInfo(this.playerUsername, this.playerColor);
 			firstTime2 = false;
 		}
-		
+
 		gameWindow.update(this.game);
 		gameWindow.pack();
 		gameWindow.setVisible(true);
@@ -198,9 +199,7 @@ public class GUIView implements View {
 	}
 	@Override
 	public String getPlayerColor(ArrayList<String> colors) {
-		
-		if (!(welcomeWindow instanceof WelcomeWindow))
-			return "";
+
 		
 		System.out.println("Sto chiedendo colore");
 		welcomeWindow.setColors(colors);
@@ -219,6 +218,7 @@ public class GUIView implements View {
 		}
 		
 		welcomeWindow.dispose();
+		welcomeWindow = new WelcomeWindow();
 		this.playerColor = GUIView.color;
 		return GUIView.color;
 	}
@@ -288,7 +288,7 @@ public class GUIView implements View {
 			}
 		}
 		/* GET */
-		System.out.println("Ho ricevuto FM " +GUIView.familyMember+ " da " +this.playerUsername);
+		
 		return GUIView.familyMember;
 	}
 
@@ -490,12 +490,42 @@ public class GUIView implements View {
 		  
 	}
 
-
+	
+	private volatile static int bonusTile  = -1;
+	protected static void setBonusTile(int bonusTile) {
+		GUIView.bonusTile = bonusTile;
+	}
+	/**
+	 * Graphic implementation of the getBonusTile method. Asks the player which bonus tile
+	 * he wants to use and return an int that indicates the chosen one.
+	 * 
+	 * @return int
+	 */
+	
+	
 	@Override
 	public int getBonusTile() {
 
-		return 0;
+		welcomeWindow.setBonusTile(this.game);
+		
+		GUIView.setBonusTile(-1);
+		
+		synchronized (monitor) {
+			while (bonusTile == -1) {
+				try {
+					monitor.wait();
+				} catch (InterruptedException e) {
+				
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		welcomeWindow.dispose();
+		System.out.println("gui view bonus tile scelta :" +GUIView.bonusTile);
+		return GUIView.bonusTile;
 	}
+	
 
 	@Override
 	public int getVaticanSupport() {

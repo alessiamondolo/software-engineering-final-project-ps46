@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps46.client.GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -8,11 +7,6 @@ import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.swing.SwingConstants;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout.Alignment;
 
 import it.polimi.ingsw.ps46.server.Player;
 

@@ -20,7 +20,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
+import it.polimi.ingsw.ps46.server.BonusTile;
 import it.polimi.ingsw.ps46.server.Game;
 import it.polimi.ingsw.ps46.server.Player;
 
@@ -32,13 +34,13 @@ public class WelcomeWindow extends JFrame {
 	 */
 	private JPanel panel = new JPanel();
 	private JPanel panel2 = new JPanel();
-	private JPanel gameModePanel = new JPanel();
+
 	private JTextField userText;
 	private JLabel userLabel;
+	private JLabel imageLabel;
 	private JButton okButton = new JButton("OK");
 	private String playerUsername;
 	private String playerColor;
-	private String gameMode;
 	JLabel waitLabel;
 
 	
@@ -54,30 +56,116 @@ public class WelcomeWindow extends JFrame {
 		
 		this.add(panel);
 		this.setTitle("Welcome to Lorenzo Il Magnifico");
-		this.setPreferredSize(new Dimension (510, 500));
+		this.setPreferredSize(new Dimension (700, 700));
 		panel.setLayout(new BorderLayout());
 		
 		// set image icon for the panel
-		JLabel imageLabel = new JLabel();
+		this.imageLabel = new JLabel();
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(getClass().getResource("img/dashboard_back/punchboard_b_c_03.jpg"));
 		} catch (IOException e) {	
 			e.printStackTrace();
 		}
-		Image img = image.getScaledInstance(500, 351, Image.SCALE_SMOOTH);
+		Image img = image.getScaledInstance(690, 400, Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(img);
 		imageLabel.setIcon(imageIcon);	
 		panel.add(imageLabel, BorderLayout.NORTH);
-		//this.setPlayerUsername();
-		//this.setColors(colors);
 		this.setVisible(true);
 	}
 	
-	
 
-	private JLabel mode = null;
-	private ButtonGroup modeButtonGroup;
+	
+	private int intBonusTile;
+	
+	public void setBonusTile(Game game) {
+		
+		
+		ButtonGroup bonusTilesGroup;
+		ArrayList<Integer> bonusTiles = new ArrayList<Integer>();
+		
+		JPanel panel1 = new JPanel();
+		this.setPreferredSize(new Dimension (700, 600));
+		
+		
+		panel.remove(imageLabel);
+		panel.add(panel1, BorderLayout.NORTH);
+		panel.add(panel2, BorderLayout.CENTER);
+		panel.add(okButton, BorderLayout.PAGE_END);
+		userLabel = new JLabel("Choose your bonus tile");
+		userLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		panel2.setLayout(new BorderLayout());
+		panel2.add(userLabel, BorderLayout.NORTH);
+		panel2.add(panel3, BorderLayout.CENTER);
+	
+		WelcomeWindow window = this;
+		bonusTilesGroup = new ButtonGroup();
+			
+		
+		okButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Object mon;
+				synchronized (mon = GUIView.getMonitor()) {
+					GUIView.setBonusTile(window.intBonusTile);
+					
+					mon.notifyAll();
+				}
+			}
+			
+		});
+		
+		
+		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 60, 30));
+	
+		int bTile;
+		
+		
+		for(  bTile = 1; bTile < game.getBonusTiles().size() ; bTile++ ) {
+			
+			
+			bonusTiles.add(bTile);
+			String path = "mixed/personalbonustile_" +game.getBonusTiles().get(bTile).getId() + ".png";
+			
+			BufferedImage img = null;
+			try {
+				img = Token.getImagePathMode(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			JLabel tile = new JLabel();
+			tile.setIcon(new ImageIcon(img.getScaledInstance(50, 300, Image.SCALE_SMOOTH)));
+			panel1.add(tile);
+			
+		}
+		
+	
+		for ( bTile = 1;  bTile < game.getBonusTiles().size() ; bTile++) {
+			JRadioButton button = new JRadioButton("Bonus Tile " +
+					(String.valueOf(game.getBonusTiles().get(bTile).getId())));
+			bonusTilesGroup.add(button);
+			int i = bTile;
+			
+			button.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					window.intBonusTile = i;
+				}
+				
+			});
+			
+			panel3.add(button);
+		}
+	
+		this.pack();
+		this.setVisible(true);
+		
+	}
+	
 	
 	public void setPlayerUsername() {
 		
@@ -168,6 +256,7 @@ public class WelcomeWindow extends JFrame {
 			panel3.add(colorLabel);
 		}
 		
+		panel2.remove(waitLabel);
 		
 		colorGroup = new ButtonGroup();
 	
@@ -183,6 +272,7 @@ public class WelcomeWindow extends JFrame {
 				Object mon;
 				synchronized (mon = GUIView.getMonitor()) {
 					GUIView.setColor(window.playerColor);
+					
 					mon.notifyAll();
 				}
 			}
