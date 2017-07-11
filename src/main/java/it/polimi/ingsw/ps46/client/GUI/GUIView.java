@@ -620,6 +620,12 @@ public class GUIView implements View {
 		return leaderCardsDiscarded;
 	}
 
+	@Override
+	public void showFinalScores() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	
 }

@@ -754,6 +754,7 @@ public class ConsoleView implements View {
 	 * @return leaderCardsActivated : list of the indexes of the leader cards to activate
 	 */
 	public ArrayList<Integer> getActivationLeaderCards() {
+		output.println("==========================================================================");
 		int numberOfLeaderCardActivable = 0;
 		ArrayList<Integer> leaderCardsActivated = new ArrayList<Integer>();
 		
@@ -805,6 +806,7 @@ public class ConsoleView implements View {
 	 * @return leaderCardsDiscarded : list of the indexes of the leader cards to discard
 	 */
 	public ArrayList<Integer> getDiscardLeaderCards(){
+		output.println("==========================================================================");
 		int numberOfLeaderCardCouldDiscard = 0;
 		ArrayList<Integer> leaderCardsDiscarded = new ArrayList<Integer>();
 		
@@ -846,5 +848,27 @@ public class ConsoleView implements View {
 			}
 		}
 		return leaderCardsDiscarded;
+	}
+
+
+
+	@Override
+	public void showFinalScores() {
+		output.println("==========================================================================");
+		output.println("This is the final score of the game:");
+		int index = 1;
+		int count = 1;
+		
+		for(Integer score : game.getFinalScoresOrder().keySet()) {
+			ArrayList<Player> players = game.getFinalScoresOrder().get(score);
+			while(!players.isEmpty()) {
+				Player player = players.get(0);
+				output.println(index + ". " + player.getUsername() + ": " + score.intValue());
+				players.remove(0);
+				count++;
+			}
+			index = count;
+		}
+		output.println("==========================================================================");
 	}
 }

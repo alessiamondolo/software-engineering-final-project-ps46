@@ -131,6 +131,11 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		case SET_NEXT_TURN_ORDER :
 			showNextTurnOrder();
 			break;	
+		case UPDATE_FINAL_SCORES :
+			showFinalScores();
+			break;
+		case END_GAME :
+			endGame();
 		default:
 			break;
 		}
@@ -649,4 +654,35 @@ public class VirtualView extends Observable implements Observer, EventVisitor {
 		}
 	}
 	
+	
+	
+	public void showFinalScores() {
+		for(Socket currentSocket : clients) {
+			ObjectOutputStream writer = writers.get(currentSocket);
+			try {
+				writer.writeObject("SHOW_FINAL_SCORES");
+				writer.flush();
+				writer.writeObject(game);
+				writer.flush();
+				writer.reset();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
+	public void endGame() {
+		for(Socket currentSocket : clients) {
+			ObjectOutputStream writer = writers.get(currentSocket);
+			try {
+				writer.writeObject("END_GAME");
+				writer.flush();
+				writer.reset();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
