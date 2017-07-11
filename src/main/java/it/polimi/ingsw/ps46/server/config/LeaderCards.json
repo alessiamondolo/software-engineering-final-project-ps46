@@ -11,8 +11,10 @@
 				{
 					"value" : 1
 				},
+				"additionalResources":  [],
 				"resourcesDiscounted" : false
 			},
+			"isPermanent": false,
 			
 			"requiredCards":  [	
 					{
@@ -43,6 +45,7 @@
 				"effectType": ""
 
 			},
+			"isPermanent": true,
 					
 			"requiredCards":  [	
 					{
@@ -73,6 +76,7 @@
 				"effectType": ""
 
 			},
+			"isPermanent": true,
 						
 			"requiredCards":  [	
 					{
@@ -107,6 +111,7 @@
 						 }
 
 			},
+			"isPermanent": true,
 					
 			"requiredCards":  [],
 			
@@ -186,6 +191,7 @@
 					}
 				]
 			},
+			"isPermanent": false,
 					
 			"requiredCards":  [],
 			
@@ -265,6 +271,7 @@
 					}
 				]
 			},
+			"isPermanent": false,
 						
 			"requiredCards":  [],
 					
@@ -344,6 +351,7 @@
 					}
 				]
 			},
+			"isPermanent": false,
 						
 			"requiredCards":  [],
 					
@@ -394,8 +402,10 @@
 				{
 					"value" : 0
 				},
+				"additionalResources":  [],
 				"resourcesDiscounted" : false
 			},
+			"isPermanent": false,
 						
 			"requiredCards":  [	
 					{
@@ -459,6 +469,7 @@
 					}
 				]
 			},
+			"isPermanent": false,
 						
 			"requiredCards":  [],
 					
@@ -508,6 +519,7 @@
 								"value": 5
 							}
 			},
+			"isPermanent": true,
 						
 			"requiredCards":  [	
 					{
@@ -543,6 +555,7 @@
 						 }
 
 			},
+			"isPermanent": true,
 			
 			"requiredCards":  [	
 					{
@@ -576,6 +589,7 @@
 								"value": 6
 							}
 			},
+			"isPermanent": false,
 						
 			"requiredCards":  [	
 					{
@@ -606,6 +620,7 @@
 				"effectType": ""
 
 			},
+			"isPermanent": true,
 					
 			"requiredCards":  [],
 
@@ -685,6 +700,7 @@
 					}
 				]
 			},
+			"isPermanent": true,
 					
 			"requiredCards":  [],
 			
@@ -731,6 +747,7 @@
 				"effectType": ""
 
 			},
+			"isPermanent": true,
 								
 			"requiredCards":  [	
 					{
@@ -794,6 +811,7 @@
 				"effectType": ""
 
 			},
+			"isPermanent": true,
 					
 			"requiredCards":  [],
 
@@ -873,6 +891,7 @@
 					}
 				]
 			},
+			"isPermanent": false,
 					
 			"requiredCards":  [	
 					{
@@ -936,6 +955,7 @@
 					}
 				]
 			},
+			"isPermanent": false,
 					
 			"requiredCards":  [	
 					{
@@ -999,6 +1019,7 @@
 					}
 				]
 			},
+			"isPermanent": false,
 					
 			"requiredCards":  [],
 			
@@ -1045,6 +1066,7 @@
 				"effectType": ""
 
 			},
+			"isPermanent": true,
 					
 			"requiredCards":  [	
 					{

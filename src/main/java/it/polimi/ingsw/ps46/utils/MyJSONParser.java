@@ -19,14 +19,17 @@ import it.polimi.ingsw.ps46.server.card.DecreaseResourcesMalus;
 import it.polimi.ingsw.ps46.server.card.DiceBonusEffect;
 import it.polimi.ingsw.ps46.server.card.DiceBonusEffectDiscounted;
 import it.polimi.ingsw.ps46.server.card.DiceMalusEffect;
+import it.polimi.ingsw.ps46.server.card.Effect;
 import it.polimi.ingsw.ps46.server.card.ExchageResourcesEffect;
 import it.polimi.ingsw.ps46.server.card.ExcommunicationTile;
 import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.card.GenericMalusEffect;
 import it.polimi.ingsw.ps46.server.card.IncreaseResourcesByElementsEffect;
 import it.polimi.ingsw.ps46.server.card.IncreaseResourcesEffect;
+import it.polimi.ingsw.ps46.server.card.LeaderCard;
 import it.polimi.ingsw.ps46.server.card.MalusEffect;
 import it.polimi.ingsw.ps46.server.card.PreacherEffect;
+import it.polimi.ingsw.ps46.server.card.SetValueFamilyMemberEffect;
 import it.polimi.ingsw.ps46.server.resources.MilitaryPoints;
 import it.polimi.ingsw.ps46.server.resources.Resource;
 import it.polimi.ingsw.ps46.server.resources.ResourceSet;
@@ -243,6 +246,19 @@ public class MyJSONParser {
 	
 	
 	
+	/**
+	 * 
+	 */
+	public SetValueFamilyMemberEffect buildSetValueFamilyMemberEffect(JSONObject effectJSON) {
+		String whichFamilyMember = (String) effectJSON.get("whichFamilyMember");
+		JSONObject diceJSON = (JSONObject) effectJSON.get("newValue");
+		Dice newValue = buildDice(diceJSON);
+		SetValueFamilyMemberEffect effect = new SetValueFamilyMemberEffect(whichFamilyMember, newValue);
+		return effect;
+	}
+	
+	
+	
 	public PreacherEffect buildPreacherEffect(JSONObject effectJSON) {
 		boolean malusEffect = (boolean) effectJSON.get("malusEffect");
 		PreacherEffect effect = new PreacherEffect(malusEffect);
@@ -302,8 +318,6 @@ public class MyJSONParser {
 		int era = ((Long) excommunicationTileJSON.get("Era")).intValue();
 		JSONObject permanentMalusJSON = (JSONObject) excommunicationTileJSON.get("permanentMalus");
 		String malusType = (String) permanentMalusJSON.get("malusType");
-		//TODO check doubleChoice
-		//boolean doublechoice = (boolean) permanentMalusJSON.get("doublechoice");
 		String name = (String) permanentMalusJSON.get("name");
 		MalusEffect malusEffect = null;
 		switch(malusType) {
@@ -333,6 +347,43 @@ public class MyJSONParser {
 		}
 		ExcommunicationTile excommunicationTile = new ExcommunicationTile(id, era, malusEffect);
 		return excommunicationTile;
+	}
+
+
+
+	public LeaderCard buildLeaderCard(JSONObject leaderCardJSON) {
+		String cardName = (String) leaderCardJSON.get("cardName");
+		Effect leaderEffect = null;
+		JSONObject leaderEffectJSON = (JSONObject) leaderCardJSON.get("leaderEffect");
+		String effectType = (String) leaderEffectJSON.get("effectType");
+		switch(effectType) {
+		case "ExtraMoveEffect" :
+			leaderEffect = buildExtraMoveEffect(leaderEffectJSON);
+			break;
+		case "DiceBonusEffect" :
+			leaderEffect = buildDiceBonusEffect(leaderEffectJSON);
+			break;
+		case "IncreaseResourcesEffect" :
+			leaderEffect = buildIncreaseResourcesEffect(leaderEffectJSON);
+			break;
+		case "SetValueFamilyMemberEffect" :
+			leaderEffect = buildSetValueFamilyMemberEffect(leaderEffectJSON);
+			break;
+		}
+		boolean isPermanent = (boolean) leaderCardJSON.get("isPermanent");
+		LinkedHashMap<String, Integer> requiredCards = new LinkedHashMap<String, Integer>();
+		JSONArray requiredCardsArray = (JSONArray) leaderCardJSON.get("requiredCards");
+		Iterator<?> iterator = requiredCardsArray.iterator();
+        while (iterator.hasNext()) {
+        	JSONObject requiredCardsJSON = (JSONObject) iterator.next();
+        	String cardType = (String) requiredCardsJSON.get("cardType");
+        	int quantity = ((Long) requiredCardsJSON.get("quantity")).intValue();
+        	requiredCards.put(cardType, new Integer(quantity));
+        }
+        JSONArray requiredResourcesArray = (JSONArray) leaderCardJSON.get("requiredResources");
+        ResourceSet requiredResources = buildResourceSet(requiredResourcesArray);
+        LeaderCard leaderCard = new LeaderCard(cardName, leaderEffect, requiredCards, requiredResources, isPermanent);
+		return leaderCard;
 	}
 	
 }

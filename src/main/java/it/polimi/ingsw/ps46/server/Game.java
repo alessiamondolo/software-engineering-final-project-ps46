@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Observable;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -23,6 +24,7 @@ import it.polimi.ingsw.ps46.server.card.CharacterCard;
 import it.polimi.ingsw.ps46.server.card.ExcommunicationTile;
 import it.polimi.ingsw.ps46.server.card.ExtraMoveEffect;
 import it.polimi.ingsw.ps46.server.card.FactoryCards;
+import it.polimi.ingsw.ps46.server.card.LeaderCard;
 import it.polimi.ingsw.ps46.server.card.TerritoryCard;
 import it.polimi.ingsw.ps46.server.card.VentureCard;
 import it.polimi.ingsw.ps46.server.resources.FaithPoints;
@@ -59,6 +61,7 @@ public class Game extends Observable implements Serializable {
 	private Map<String, Dice> dice;
 	private ArrayList<BonusTile> bonusTiles = new ArrayList<BonusTile>();
 	private ArrayList<ExcommunicationTile> excommunicationTiles;
+	private ArrayList<LeaderCard> leaderCards;
 	
 	private ArrayList<ResourceSet> councilPrivileges;
 	
@@ -86,6 +89,7 @@ public class Game extends Observable implements Serializable {
 		configBoard();
 		configBonusTiles();
 		configCouncilPrivileges();
+		configLeaderCards();
 		configFinalPoints();
 		configVaticanReportVictoryPoints();
 		configFaithPointsRequiredForPeriod();
@@ -210,6 +214,45 @@ public class Game extends Observable implements Serializable {
 	    } catch (ParseException e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	
+	
+	/**
+	 * 
+	 */
+	private void configLeaderCards() {
+		leaderCards = new ArrayList<LeaderCard>();
+		JSONParser parser = new JSONParser();
+		MyJSONParser myJSONParser = new MyJSONParser();
+
+		try {
+        	Object obj = parser.parse(new FileReader(configFilesPath + "LeaderCards.json"));
+        	JSONArray leaderCardsJSON = (JSONArray) obj;        	
+        	
+            Iterator<?> iterator = leaderCardsJSON.iterator();
+            while (iterator.hasNext()) {
+            	JSONObject leaderCardJSON = (JSONObject) iterator.next();
+            	leaderCards.add(myJSONParser.buildLeaderCard(leaderCardJSON));
+            }
+            
+		} catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+
+		Collections.shuffle(leaderCards);
+		int index = 0;
+		for(Player player : players) {
+			for(int i = 0; i < 4; i++) {
+				LeaderCard leaderCard = leaderCards.get(index);
+				player.getLeaderCards().put(leaderCard.getCardName(), leaderCard);
+				index++;
+			}
+		}
 	}
 	
 	
